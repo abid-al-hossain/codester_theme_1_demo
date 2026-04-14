@@ -14,9 +14,9 @@
     .db-sidebar-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
     .db-logo{padding:0 24px 24px;font-family:var(--font-accent);font-weight:800;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
     .db-sidebar-top .db-logo{padding:0;border-bottom:none;margin-bottom:0}
-    .db-nav-label{padding:16px 24px 8px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5}
-    .db-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;font-size:0.88rem;font-weight:500;opacity:0.8;cursor:pointer;transition:background 0.2s,opacity 0.2s}
-    .db-nav-item:hover,.db-nav-item.active{background:rgba(255,255,255,0.12);opacity:1}
+    .db-nav-label{padding:16px 24px 8px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.76);opacity:1}
+    .db-nav-item,.db-mobile-links a.db-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.94);opacity:1;cursor:pointer;transition:background 0.2s,color 0.2s}
+    .db-nav-item:hover,.db-nav-item.active,.db-mobile-links a.db-nav-item:hover,.db-mobile-links a.db-nav-item.active{background:rgba(255,255,255,0.16);color:#fff}
     .db-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:100vh;background:var(--color-bg-2)}
     .db-topbar{background:var(--color-bg);border-bottom:var(--border-w) solid var(--color-border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
     .db-content{flex:1;padding:32px;overflow-y:auto}
@@ -45,7 +45,7 @@
     .badge-red{background:rgba(239,68,68,0.1);color:#ef4444}
     .badge-yellow{background:rgba(245,158,11,0.1);color:#d97706}
     .db-mobile-links.chr-nav-links{display:block}
-    .db-mobile-links a{color:inherit}
+    .db-mobile-links a:not(.db-nav-item){color:inherit}
     .db-sidebar .chr-nav-toggle span{background:#fff}
     @media(max-width:768px){body{flex-direction:column}.db-sidebar{width:100%;height:auto;position:relative;padding:16px 0}.db-topbar{padding:16px 20px;height:auto;align-items:flex-start;gap:16px;flex-direction:column}.db-content{padding:20px}.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto;white-space:nowrap}.db-sidebar-top .chr-nav-toggle{display:flex}.db-mobile-links.chr-nav-links,.db-mobile-links.chr-nav-links.open{position:static;background:transparent;border-bottom:none;padding:0;flex-direction:unset}.db-mobile-links.chr-nav-links{display:none}.db-mobile-links.chr-nav-links.open{display:block}.db-nav-label{padding-top:8px}}
     @media(max-width:520px){.stat-grid,.analytics-grid,.users-grid{grid-template-columns:1fr}}
@@ -74,9 +74,9 @@
     <a href="#" class="db-nav-item" data-demo-message="Support shortcut is demo-only">Support</a>
     <div style="margin-top:auto;padding:24px">
       <div style="background:rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:16px">
-        <div style="font-size:0.72rem;opacity:0.6;text-transform:uppercase;letter-spacing:0.1em">Workspace</div>
-        <div style="font-size:0.9rem;font-weight:700;margin:4px 0">Chronos Demo</div>
-        <a href="index.html" style="font-size:0.75rem;opacity:0.7">View Layouts</a>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.78);text-transform:uppercase;letter-spacing:0.1em">Workspace</div>
+        <div style="font-size:0.9rem;font-weight:700;margin:4px 0;color:#fff">Chronos Demo</div>
+        <a href="index.html" style="font-size:0.75rem;color:rgba(255,255,255,0.88)">View Layouts</a>
       </div>
     </div>
   </div>
@@ -130,14 +130,14 @@
           </select>
         </div>
         <div style="padding:24px;display:flex;align-items:flex-end;gap:6px;height:160px">
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:45%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:60%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:40%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:75%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:55%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:80%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:65%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-          <div style="flex:1;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 12%,transparent));height:90%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:45%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:60%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:40%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:75%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:55%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:80%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:65%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+          <div style="flex:1;background:var(--color-primary);height:90%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
           <div style="flex:1;background:var(--color-primary);height:100%;border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
         </div>
       </div>
@@ -183,8 +183,8 @@
             <div style="height:68%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
             <div style="height:77%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
             <div style="height:84%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:88%;background:linear-gradient(to top,var(--color-secondary),color-mix(in srgb,var(--color-secondary) 15%,transparent));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:100%;background:linear-gradient(to top,var(--color-primary),color-mix(in srgb,var(--color-primary) 15%,transparent));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:88%;background:var(--color-secondary);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:100%;background:var(--color-primary);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
           </div>
         </div>
       </div>

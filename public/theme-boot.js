@@ -1,4 +1,17 @@
 (function () {
+  var root = document.documentElement
+  var bootAttr = 'data-chronos-booting'
+  var bootStyleId = 'chronos-boot-style'
+  var bootStyle = document.getElementById(bootStyleId)
+
+  root.setAttribute(bootAttr, '')
+  if (!bootStyle) {
+    bootStyle = document.createElement('style')
+    bootStyle.id = bootStyleId
+    bootStyle.textContent = 'html[' + bootAttr + '] body{visibility:hidden!important}'
+    document.head.appendChild(bootStyle)
+  }
+
   var DEFAULTS = {
     primary: '#2563eb',
     secondary: '#14b8a6',
@@ -66,15 +79,15 @@
 
   try {
     var prefs = JSON.parse(localStorage.getItem(getPrefsKey()))
-    var currentEra = document.documentElement.getAttribute('data-era')
-    if (currentEra && !document.documentElement.hasAttribute('data-original-era')) {
-      document.documentElement.setAttribute('data-original-era', currentEra)
+    var currentEra = root.getAttribute('data-era')
+    if (currentEra && !root.hasAttribute('data-original-era')) {
+      root.setAttribute('data-original-era', currentEra)
     }
 
     if (!prefs) return
 
     if (prefs.era) {
-      document.documentElement.setAttribute('data-era', prefs.era)
+      root.setAttribute('data-era', prefs.era)
     }
 
     if (prefs.hasCustomFonts && prefs.fonts) {
@@ -129,4 +142,20 @@
       })
     }
   } catch (error) {}
+
+  function finishBoot() {
+    root.removeAttribute(bootAttr)
+    if (bootStyle && bootStyle.parentNode) {
+      bootStyle.parentNode.removeChild(bootStyle)
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function onReady() {
+      document.removeEventListener('DOMContentLoaded', onReady)
+      requestAnimationFrame(finishBoot)
+    })
+  } else {
+    requestAnimationFrame(finishBoot)
+  }
 })()

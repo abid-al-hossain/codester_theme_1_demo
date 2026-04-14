@@ -33,7 +33,7 @@ export const CUSTOMIZER_HTML = /* html */ `
     <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" @keydown.arrow-right.prevent="$store.chr.moveTab('colors', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('colors', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" @keydown.arrow-right.prevent="$store.chr.moveTab('fonts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('fonts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
     <!-- DOWNLOAD_TAB_START -->
-    <button x-show="$store.chr.downloadAvailable" class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
+    <button class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
     <!-- DOWNLOAD_TAB_END -->
     <!-- LAYOUTS_TAB_START -->
     <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" @keydown.arrow-right.prevent="$store.chr.moveTab('layouts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('layouts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
@@ -322,14 +322,18 @@ export const CUSTOMIZER_HTML = /* html */ `
     </div>
 
     <!-- DOWNLOAD_PANEL_START -->
-    <div x-show="$store.chr.downloadAvailable && $store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
+    <div x-show="$store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
       <span class="cust-label">Layout Package</span>
       <p style="font-size:0.78rem;color:var(--color-text-2);margin-bottom:14px;line-height:1.6">
-        Build a zip from the current layout page with your current era, colors, and fonts already baked in.
+        This preview shows the package builder. Download stays disabled in the public demo, but buyers receive the full export feature.
       </p>
 
+      <div style="margin-bottom:14px;padding:12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:0.78rem;line-height:1.6;color:var(--color-text-2)">
+        <strong style="color:var(--color-text)">Demo lock:</strong> package export is visible here so users can see the workflow, but the actual download button is disabled in this public preview.
+      </div>
+
       <label class="cust-label" for="chr-package-name">Package name</label>
-      <input id="chr-package-name" type="text" x-model="$store.chr.downloadPackageName" placeholder="my-brand-site" style="width:100%;padding:11px 12px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text);font-size:0.85rem;outline:none">
+      <input id="chr-package-name" type="text" x-model="$store.chr.downloadPackageName" placeholder="my-brand-site" style="width:100%;padding:11px 12px;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text);font-size:0.85rem;outline:none" disabled aria-disabled="true">
 
       <label class="cust-label">Current layout</label>
       <div style="padding:11px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);color:var(--color-text);font-size:0.84rem;line-height:1.5">
@@ -339,8 +343,8 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <label class="cust-label">Customizer in download</label>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button type="button" class="era-card" :class="$store.chr.downloadMode==='without-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='without-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='without-customizer'">Without</button>
-        <button type="button" class="era-card" :class="$store.chr.downloadMode==='with-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='with-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='with-customizer'">With</button>
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='without-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='without-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='without-customizer'" disabled aria-disabled="true">Without</button>
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='with-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='with-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='with-customizer'" disabled aria-disabled="true">With</button>
       </div>
 
       <div style="margin-top:16px;padding:12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-md);display:grid;gap:6px">
@@ -352,8 +356,8 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <p x-show="$store.chr.downloadError" x-text="$store.chr.downloadError" style="margin:12px 0 0;color:#dc2626;font-size:0.78rem;line-height:1.5"></p>
 
-      <button class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px" :disabled="$store.chr.downloadBusy" @click="$store.chr.downloadPackage()">
-        <span x-text="$store.chr.downloadBusy ? 'Building package...' : 'Download Package'"></span>
+      <button class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px;opacity:.62;cursor:not-allowed" :disabled="true" aria-disabled="true" @click="$store.chr.downloadPackage()">
+        <span>Download Disabled In Demo</span>
       </button>
     </div>
     <!-- DOWNLOAD_PANEL_END -->

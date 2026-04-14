@@ -547,10 +547,10 @@ Alpine.store('chr', {
   surpriseFontDrafts: { ...DEFAULT_FONTS },
   surpriseColorDrafts: { ...DEFAULT_COLORS },
   // DOWNLOAD_FEATURE_START
-  currentLayout: '',
+  currentLayout: getCurrentLayoutFile(),
   downloadAvailable: false,
-  currentLayoutLabel: '',
-  downloadPackageName: '',
+  currentLayoutLabel: getLayoutMeta(getCurrentLayoutFile())?.label || '',
+  downloadPackageName: getDefaultPackageName(getCurrentLayoutFile() || 'layout-01.html'),
   downloadMode: 'without-customizer',
   downloadBusy: false,
   downloadError: '',
@@ -582,8 +582,9 @@ Alpine.store('chr', {
     }
 
     // DOWNLOAD_FEATURE_START
-    this.currentLayoutLabel = ''
-    this.downloadPackageName = getDefaultPackageName('layout-01.html')
+    this.currentLayout = getCurrentLayoutFile()
+    this.currentLayoutLabel = getLayoutMeta(this.currentLayout)?.label || 'Current layout'
+    this.downloadPackageName = getDefaultPackageName(this.currentLayout || 'layout-01.html')
     // DOWNLOAD_FEATURE_END
 
     applyEra(this.era)
@@ -603,7 +604,6 @@ Alpine.store('chr', {
   },
 
   setActiveTab(tab) {
-    if (tab === 'download' && !this.downloadAvailable) return
     this.activeTab = tab
   },
 
@@ -612,7 +612,7 @@ Alpine.store('chr', {
       'era',
       'colors',
       'fonts',
-      ...(this.downloadAvailable ? ['download'] : []),
+      'download',
       'layouts',
     ]
   },
