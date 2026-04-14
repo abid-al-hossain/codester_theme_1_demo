@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" data-era="pixelated">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 17 - Pixelated Desktop Retro Gaming Showcase.">
+  <title>Chronos | Pixelated</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{
+      background: var(--color-bg);
+      color: var(--color-text);
+      background-image: 
+        linear-gradient(rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 255, 20, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      overflow-x:hidden;
+    }
+
+    .retro-window {
+      background: var(--color-bg-2);
+      border: var(--border-w) solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .retro-titlebar {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      padding: 8px 16px;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: var(--border-w) solid var(--color-border);
+    }
+
+    .retro-controls span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: var(--color-bg);
+      border: 2px solid var(--color-border);
+      margin-left: 4px;
+    }
+
+    .retro-content {
+      padding: 32px;
+    }
+
+    .desktop-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+
+    .retro-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--color-bg);
+      color: var(--color-primary);
+      border: var(--border-w) solid var(--color-primary);
+      font-family: var(--font-accent);
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: var(--shadow-sm);
+      text-transform: uppercase;
+      transition: all 0.1s;
+    }
+
+    .retro-btn:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      box-shadow: inset 4px 4px 0 rgba(0,0,0,0.5);
+      transform: translate(2px, 2px);
+    }
+
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px dashed var(--color-border);
+      padding: 12px 0;
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+    }
+
+    .list-item:hover {
+      background: var(--color-primary);
+      color: var(--color-bg);
+    }
+
+    .marquee-container {
+      background: var(--color-primary);
+      color: var(--color-bg);
+      padding: 8px 0;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: var(--border-w) solid var(--color-border);
+      border-bottom: var(--border-w) solid var(--color-border);
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 900px) {
+      .desktop-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 720px) {
+      .retro-content {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<div class="marquee-container">
+  <div class="marquee-content">
+    SYSTEM BOOT PROTOCOL INITIATED ... LOAD LAYOUT 17 ... RUNNING CHRONOS ENGINE V2.0 ... NO ERRORS DETECTED ... 
+  </div>
+</div>
+
+<header class="chr-nav" role="banner" style="background:var(--color-bg); border-bottom: var(--border-w) solid var(--color-border);">
+  <div class="chr-container chr-nav-inner" style="flex-wrap:wrap;gap:16px;">
+    <a href="index.html" class="chr-logo" style="color:var(--color-primary); font-family:var(--font-heading);">CHRONOS.OS</a>
+    <nav class="chr-nav-links" aria-label="Pixelated navigation">
+      <a href="#desktop" style="font-family:var(--font-mono); color:var(--color-text);">SYSTEM</a>
+      <a href="#task-manager" style="font-family:var(--font-mono); color:var(--color-text);">TASKS</a>
+      <a href="#network" style="font-family:var(--font-mono); color:var(--color-text);">NETWORK</a>
+      <a href="#terminal" style="font-family:var(--font-mono); color:var(--color-text);">TERMINAL</a>
+    </nav>
+    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+  <div id="desktop" class="desktop-grid">
+    <!-- Main Window -->
+    <div data-reveal="bottom">
+      <div class="retro-window">
+        <div class="retro-titlebar">
+          <span>C:\CHRONOS\MAIN.EXE</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content">
+          <h1 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-primary); margin-bottom:24px; line-height: 1.4;">WELCOME TO THE DIRECTORY</h1>
+          <p style="font-family:var(--font-body); font-size:1.2rem; color:var(--color-text-2); margin-bottom:32px; line-height:1.6;">
+            The Pixelated aesthetic transforms Chronos into an interactive 8-bit desktop environment. CSS block shadows recreate the heavy borders of retro interfaces without images.
+          </p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="index.html" class="retro-btn">RUN: INDEX.BAT</a>
+            <a href="#" class="retro-btn" style="background:var(--color-secondary); color:var(--color-bg); border-color:var(--color-secondary);" data-demo-message="System help preview is demo-only">SYS_HELP</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Window -->
+      <div class="retro-window" data-reveal="bottom" style="margin-left: 40px;">
+        <div class="retro-titlebar" style="background:var(--color-secondary);">
+          <span>STATS_MONITOR.SYS</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content">
+          <div class="list-item"><span>CPU_USAGE</span> <span style="color:var(--color-primary)">42%</span></div>
+          <div class="list-item"><span>MEM_ALLOC</span> <span style="color:var(--color-secondary)">1.2GB</span></div>
+          <div class="list-item"><span>NET_PING</span> <span style="color:var(--color-accent)">12ms</span></div>
+          <div class="list-item" style="border-bottom:none;"><span>SYS_STATUS</span> <span style="color:var(--color-primary)">ONLINE</span></div>
+        </div>
+      </div>
+      <!-- File Explorer Window -->
+      <div class="retro-window" data-reveal="bottom" style="margin-top: 40px;">
+        <div class="retro-titlebar" style="background:var(--color-text); color:var(--color-bg);">
+          <span>FILE_EXPLORER.EXE</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content" style="padding: 0;">
+          <div style="background:var(--color-bg); padding:16px; border-bottom:var(--border-w) solid var(--color-border); font-family:var(--font-mono); font-size:0.9rem;">
+            PATH: C:\CHRONOS\SYSTEM32\DOCS\
+          </div>
+          <div style="padding:16px; background:var(--color-bg-2);">
+            <div class="list-item" style="cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-bg)'" onmouseout="this.style.background='transparent'; this.style.color='inherit'">
+              <span>[DIR] ..</span> <span>&lt;DIR&gt;</span>
+            </div>
+            <div class="list-item" style="cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-bg)'" onmouseout="this.style.background='transparent'; this.style.color='inherit'">
+              <span>[DIR] ASSETS</span> <span>&lt;DIR&gt;</span>
+            </div>
+            <div class="list-item" style="cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-bg)'" onmouseout="this.style.background='transparent'; this.style.color='inherit'">
+              <span>READ_ME.TXT</span> <span>14KB</span>
+            </div>
+            <div class="list-item" style="cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-bg)'" onmouseout="this.style.background='transparent'; this.style.color='inherit'">
+              <span>INSTALL.BAT</span> <span>2KB</span>
+            </div>
+            <div class="list-item" style="border-bottom:none; cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-bg)'" onmouseout="this.style.background='transparent'; this.style.color='inherit'">
+              <span>MEMORIES.SYS</span> <span>Hidden</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Command Line Console -->
+      <div class="retro-window" data-reveal="bottom" style="margin-top: 40px; margin-left: 20px;">
+        <div class="retro-titlebar" style="background:var(--color-primary-2);">
+          <span>COMMAND PROMPT</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content" style="background:var(--color-bg); padding:16px; min-height: 200px; font-family:var(--font-mono); font-size:1.1rem; line-height:1.5;">
+          <div style="color:var(--color-text-2);">Chronos Disk Operating System [Version 2.0.4]</div>
+          <div style="color:var(--color-text-2); margin-bottom:16px;">(c) Copyright 2026 Chronos Corp.</div>
+          <div><span style="color:var(--color-primary);">C:\></span> LOAD "THEME",8,1</div>
+          <div style="color:var(--color-secondary);">LOADING...</div>
+          <div style="color:var(--color-secondary);">READY.</div>
+          <div><span style="color:var(--color-primary);">C:\></span> RUN</div>
+          <div>Executing boot sequence... <span style="animation: blink 1s step-end infinite;">█</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Grid -->
+    <div data-reveal="right" style="display:flex; flex-direction:column; gap:40px;">
+
+      <!-- Inventory / Capabilities -->
+      <div class="retro-window">
+        <div class="retro-titlebar" style="background:var(--color-accent); color:var(--color-bg);">
+          <span>INVENTORY</span>
+        </div>
+        <div class="retro-content" style="padding:16px">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:8px;">
+            <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">HIGH<br>CONTRAST</div>
+            <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">HARD<br>BORDERS</div>
+            <div style="background:var(--color-primary); color:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">EQUIPPED<br>PIXELS</div>
+            <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; opacity:0.5;">EMPTY</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Monitor -->
+      <div class="retro-window">
+        <div class="retro-titlebar" style="background:var(--color-secondary);">
+          <span>STATS_MONITOR.SYS</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content" style="padding: 16px;">
+          <div class="list-item" style="font-size:0.9rem;"><span>CPU_USAGE</span> <span style="color:var(--color-primary)">42%</span></div>
+          <div style="margin-top:4px; height:8px; width:100%; border:1px solid var(--color-border); background:var(--color-bg);"><div style="width:42%; height:100%; background:var(--color-primary);"></div></div>
+          
+          <div class="list-item" style="font-size:0.9rem; margin-top:16px;"><span>MEM_ALLOC</span> <span style="color:var(--color-secondary)">88%</span></div>
+          <div style="margin-top:4px; height:8px; width:100%; border:1px solid var(--color-border); background:var(--color-bg);"><div style="width:88%; height:100%; background:var(--color-secondary);"></div></div>
+          
+          <div class="list-item" style="font-size:0.9rem; margin-top:16px;"><span>NET_PING</span> <span style="color:var(--color-accent)">12ms</span></div>
+          <div class="list-item" style="border-bottom:none; font-size:0.9rem; margin-top:8px;"><span>SYS_STATUS</span> <span style="color:var(--color-primary); animation: blink 2s infinite;">ONLINE</span></div>
+        </div>
+      </div>
+
+      <!-- User Profile / Avatar -->
+      <div class="retro-window">
+        <div class="retro-titlebar" style="background:var(--color-primary);">
+          <span>USER PROFILE</span>
+        </div>
+        <div class="retro-content" style="text-align:center; padding: 16px;">
+          <div style="width: 100px; height: 100px; border: var(--border-w) solid var(--color-border); margin: 0 auto 16px; background:var(--color-bg-3); display:flex; justify-content:center; align-items:center;">
+             <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="square"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div style="font-family:var(--font-heading); color:var(--color-text); font-size:1.1rem; margin-bottom:4px;">PLAYER ONE</div>
+          <div style="font-family:var(--font-mono); color:var(--color-text-2); font-size:0.9rem;">LVL 42 ADMINISTRATOR</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+  </style>
+  </div>
+  <!-- New Content Section: Task Manager -->
+  <section id="task-manager" style="padding: 80px 24px; background:var(--color-bg-2); border-top: var(--border-w) solid var(--color-border);">
+    <div class="chr-container" style="max-width: 1000px;">
+      <div class="retro-window" data-reveal="bottom">
+        <div class="retro-titlebar" style="background:var(--color-accent); color:var(--color-bg);">
+          <span>TASK_MANAGER.EXE</span>
+          <div class="retro-controls"><span></span><span></span><span></span></div>
+        </div>
+        <div class="retro-content">
+          <table style="width:100%; border-collapse: collapse; font-family:var(--font-mono); color:var(--color-text);">
+            <tr style="border-bottom: 2px solid var(--color-border); text-align:left; color:var(--color-primary);">
+              <th style="padding:12px;">NAME</th>
+              <th style="padding:12px;">PID</th>
+              <th style="padding:12px;">STATUS</th>
+              <th style="padding:12px;">MEMORY</th>
+            </tr>
+            <tr class="list-item" style="border-bottom: 1px dotted var(--color-border);">
+              <td style="padding:12px;">CHRONOS_CORE.SYS</td>
+              <td style="padding:12px;">1024</td>
+              <td style="padding:12px; color:var(--color-primary);">RUNNING</td>
+              <td style="padding:12px;">256MB</td>
+            </tr>
+            <tr class="list-item" style="border-bottom: 1px dotted var(--color-border);">
+              <td style="padding:12px;">ERA_ENGINE.DLL</td>
+              <td style="padding:12px;">2048</td>
+              <td style="padding:12px; color:var(--color-primary);">RUNNING</td>
+              <td style="padding:12px;">512MB</td>
+            </tr>
+            <tr class="list-item" style="border-bottom: 1px dotted var(--color-border);">
+              <td style="padding:12px;">PIXEL_SCAN.EXE</td>
+              <td style="padding:12px;">4096</td>
+              <td style="padding:12px; color:var(--color-secondary);">SLEEPING</td>
+              <td style="padding:12px;">64MB</td>
+            </tr>
+            <tr class="list-item">
+              <td style="padding:12px;">LEGACY_IO.SYS</td>
+              <td style="padding:12px;">8192</td>
+              <td style="padding:12px; color:var(--color-accent);">WAITING</td>
+              <td style="padding:12px;">128MB</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Content Section: Network Grid -->
+  <section id="network" style="padding: 100px 24px; background:var(--color-bg); position:relative;">
+    <div class="chr-container">
+      <div style="border: var(--border-w) solid var(--color-border); background:var(--color-bg-3); padding:40px;" data-reveal="scale">
+        <h2 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-primary); margin-bottom:40px; text-align:center;">GLOBAL_NODE_MAP.IMG</h2>
+        <div x-data="{ cells: Array.from({ length: 100 }, (_, i) => i) }" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(22px, 1fr)); gap:10px; opacity:0.6;">
+          <template x-for="cell in cells" :key="cell">
+            <div style="aspect-ratio:1; background:var(--color-bg-2); border:1px solid var(--color-border); position:relative;">
+              <div :style="cell % 11 === 0 ? 'position:absolute; inset:2px; background:var(--color-primary); animation: blink 0.5s infinite;' : (cell % 7 === 0 ? 'position:absolute; inset:6px; background:var(--color-secondary); opacity:.45;' : 'position:absolute; inset:8px; background:transparent;')"></div>
+            </div>
+          </template>
+        </div>
+        <div style="margin-top:40px; text-align:center; font-family:var(--font-mono); color:var(--color-text-2);">
+          [ ACTIVE NODES: 42 ] [ DROPPED PACKETS: 0 ] [ CONNECTION: OPTIMIZED ]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Content Section: Terminal Dump -->
+  <section id="terminal" style="padding: 120px 24px; background:var(--color-bg-3); border-top: var(--border-w) solid var(--color-border);">
+    <div class="chr-container" style="max-width: 800px;">
+      <h2 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-secondary); margin-bottom:40px;">LOG_EXPORT_FINAL.LOG</h2>
+      <div style="background:var(--color-bg); border:var(--border-w) solid var(--color-border); padding:32px; font-family:var(--font-mono); color:var(--color-text-2); line-height:1.6; height:400px; overflow-y:auto;">
+        <div style="color:var(--color-primary);">[2026-04-05 00:52:01] INFO: Initializing Chronos Architecture...</div>
+        <div>[2026-04-05 00:52:02] INFO: Loading era-specific tokens...</div>
+        <div style="color:var(--color-secondary);">[2026-04-05 00:52:03] WARN: Legacy font detected in Jurassic buffer.</div>
+        <div>[2026-04-05 00:52:04] INFO: Pixelated grid alignment successful.</div>
+        <div>[2026-04-05 00:52:05] INFO: Booting customizer mount point...</div>
+        <div style="color:var(--color-accent);">[2026-04-05 00:52:06] DEBUG: Memory allocation at 88% capacity.</div>
+        <div>[2026-04-05 00:52:07] INFO: Registering 20 layouts into Hub.</div>
+        <div>[2026-04-05 00:52:08] INFO: Syncing meta-tags for archive discovery.</div>
+        <div style="color:var(--color-primary);">[2026-04-05 00:52:09] SUCCESS: System is now fully operational.</div>
+        <div style="margin-top:20px; color:var(--color-text-3);">-- END OF LOG --</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: var(--border-w) solid var(--color-border); padding: 60px 0; background: var(--color-bg-2); text-align:center;">
+    <div class="chr-container" style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-primary);">CHRONOS // PIXELATED</div>
+      <div style="font-family:var(--font-mono); font-size:0.9rem; color:var(--color-text-3);">BUILD ID: 0xFF42 // YEAR 2026</div>
+    </div>
+  </footer>
+</main>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

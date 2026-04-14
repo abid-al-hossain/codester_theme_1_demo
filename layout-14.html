@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-era="liquid">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 14 - Travel website with destination storytelling, itinerary route, travel journal, and planning desk.">
+  <title>Chronos | Travel Explorer</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+<style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:38px;--group-reveal-distance:30px}
+    .travel-hero{padding:90px 0 36px;background:radial-gradient(circle at top left,color-mix(in srgb,var(--color-primary) 20%,transparent),transparent 30%),linear-gradient(180deg,color-mix(in srgb,var(--color-accent) 18%,transparent),transparent 60%)}
+    .travel-shell{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:start}
+    
+    .travel-glass,.route-card,.story-card,.plan-card{background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(24px) saturate(150%);border:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);box-shadow:0 4px 30px rgba(0,0,0,0.06);border-radius:24px}
+    .travel-glass,.route-card,.story-card,.plan-card{padding:30px}
+    
+    /* Parallax Hero Wrapper */
+    .hero-parallax-stage { flex:1; min-width:300px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:-5%; background:radial-gradient(circle at 22% 24%, rgba(255,255,255,0.25), transparent 18%), radial-gradient(circle at 72% 18%, rgba(125,211,252,0.45), transparent 22%), linear-gradient(150deg, #0f3b5f 0%, #176b8c 32%, #2b9fc3 58%, #86d9f7 100%); transform:translate(calc(var(--px, 0) * 1%), calc(var(--py, 0) * 1%)) scale(1.05); transition:transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); will-change:transform; }
+    
+    /* Ken Burns Destination Tiles */
+    .destination-tile{position:relative;overflow:hidden;border-radius:24px;display:flex;align-items:flex-end;padding:34px;text-decoration:none;color:#fff;background:var(--color-surface); box-shadow:0 10px 40px rgba(0,0,0,0.15);}
+    .dest-bg {position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);opacity:0.8; z-index:1;}
+    .destination-tile:hover .dest-bg { transform: scale(1.1) rotate(1deg); }
+    .destination-tile::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); z-index:2; transition:opacity 0.5s; opacity:0.9; }
+    .destination-tile:hover::after { opacity:1; }
+    .dest-content { position:relative; z-index:3; transition:transform 0.5s; transform:translateY(10px); }
+    .destination-tile:hover .dest-content { transform:translateY(0); }
+    
+    .travel-rail{position:sticky;top:100px;display:grid;gap:18px}
+    .destination-mosaic{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    .destination-stack{display:grid;gap:18px}
+    .route-grid{display:grid;gap:16px}
+    .stories-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    
+    .route-card{transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+    .route-card:hover{transform:translateX(10px) translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.08); border-color:color-mix(in srgb, var(--color-primary) 30%, transparent);}
+    
+    /* Ken Burns Story Cards */
+    .story-card{overflow:hidden; position:relative; z-index:1; border-radius:24px; padding:0; display:flex; flex-direction:column;}
+    .story-card::before { content:''; position:absolute; inset:0; background:var(--color-bg); z-index:-2; }
+    .story-img-wrap { width:100%; height:200px; overflow:hidden; position:relative; }
+    .story-img { width:100%; height:100%; background-size:cover; background-position:center; transition:transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform:scale(1.02); }
+    .story-card:hover .story-img { transform:scale(1.12); }
+    .story-content { padding:30px; display:flex; flex-direction:column; gap:16px; flex:1; background:color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter:blur(10px); }
+    .story-card:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(0,0,0,0.1); border-color:var(--color-primary);}
+    
+    .plan-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .plan-form input,.plan-form select,.plan-form textarea{width:100%;padding:18px 20px;border:1px solid color-mix(in srgb, var(--color-border) 60%, transparent);border-radius:16px;background:color-mix(in srgb, var(--color-bg) 60%, transparent);color:var(--color-text);font:inherit;outline:none; transition:all 0.3s;}
+    .plan-form input:focus, .plan-form select:focus { border-color:var(--color-primary); box-shadow:inset 0 0 0 1px var(--color-primary), 0 0 0 4px color-mix(in srgb, var(--color-primary) 15%, transparent); background:var(--color-bg); }
+    .plan-form textarea,.plan-form button{grid-column:1 / -1}
+    .plan-form textarea{min-height:140px;resize:vertical}
+    
+    @media(max-width:1040px){.travel-shell,.destination-mosaic,.stories-grid{grid-template-columns:1fr}.travel-rail{position:static}}
+    @media(max-width:720px){.plan-form{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner" style="background:transparent; border:none; padding-top:20px;">
+  <div class="chr-container chr-nav-inner travel-glass" style="border-radius:100px; padding-left:30px; padding-right:16px;">
+    <a href="index.html" class="chr-logo" style="font-weight:800; letter-spacing:-0.02em;">CHRONOS TRAVEL</a>
+    <nav aria-label="Travel navigation"><ul class="chr-nav-links"><li><a href="#destinations">Destinations</a></li><li><a href="#journey">Itinerary</a></li><li><a href="#stories">Stories</a></li><li><a href="#plan">Plan trip</a></li></ul></nav>
+    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-outline" style="padding:12px 20px;font-size:.9rem;border-radius:100px;">All layouts</a><a href="#plan" class="chr-btn-primary" style="padding:12px 26px;font-size:.9rem;border-radius:100px;box-shadow:0 4px 15px color-mix(in srgb, var(--color-primary) 30%, transparent);">Plan a trip</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </div>
+</header>
+<main id="main-content">
+  <!-- 1. SPLIT HERO & BOOKING -->
+  <section id="plan" class="travel-hero" style="padding:0;min-height:100vh;display:flex;align-items:stretch;flex-wrap:wrap; margin-top:-100px;" aria-labelledby="travel-heading">
+    <div class="hero-parallax-stage" id="hero-stage">
+      <div class="hero-bg"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1)); z-index:1;"></div>
+      <div style="position:absolute;bottom:10%;left:10%;color:#fff;max-width:550px;padding-right:20px; z-index:2;">
+        <div class="chr-badge" style="margin-bottom:1.5rem;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.2);color:#fff; border-radius:100px; padding:8px 24px;">Featured Destination</div>
+        <h1 id="travel-heading" style="font-size:clamp(3rem, 7vw, 5rem);font-weight:800;margin-bottom:1.5rem;line-height:1.05;letter-spacing:-0.03em;">The Alpine<br>Experience</h1>
+        <p style="font-size:1.2rem;line-height:1.6;opacity:0.9">Seven days of epic mountain passes, luxury cabins, and clear azure lakes.</p>
+      </div>
+    </div>
+    <div style="flex:0 1 540px;background:var(--color-bg);padding:120px 50px 80px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid color-mix(in srgb, var(--color-border) 40%, transparent); box-shadow:-20px 0 50px rgba(0,0,0,0.05); z-index:3;" data-reveal="right">
+      <h2 style="font-size:2.4rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.02em;">Plan Your Journey</h2>
+      <p style="color:var(--color-text-2);margin-bottom:40px;font-size:1.1rem;line-height:1.7;">Our experts will craft a personalized itinerary.</p>
+      <form class="plan-form" aria-label="Travel Inquiry" data-demo-message="Travel inquiry is demo-only">
+        <input type="text" placeholder="Where to?" aria-label="Destination" style="font-size:1.1rem;grid-column:1/-1;">
+        <input type="date" aria-label="Departure date" style="font-size:1.1rem;color:var(--color-text-2);">
+        <input type="number" placeholder="Guests" aria-label="Number of guests" min="1" style="font-size:1.1rem;">
+        <select aria-label="Trip style" style="font-size:1.1rem;grid-column:1/-1;appearance:none;cursor:pointer;"><option>Luxury Retreat</option><option>Adventure</option><option>Cultural Dive</option></select>
+        <button class="chr-btn-primary" style="padding:22px;font-size:1.1rem;justify-content:center;margin-top:10px;border-radius:100px;font-weight:700;">Request Proposal</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- § 2. DESTINATIONS IMAGE GRID -->
+  <section id="destinations" style="padding:120px 0;background:var(--color-bg-2)" aria-labelledby="destinations-heading">
+    <div class="chr-container">
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;flex-wrap:wrap;gap:20px" data-reveal="soft">
+        <div>
+          <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Destinations</div>
+          <h2 id="destinations-heading" style="font-size:3rem;font-weight:800;line-height:1;margin-bottom:0;letter-spacing:-0.02em;">Curated Regions</h2>
+        </div>
+        <a href="#" class="chr-btn-outline" style="border-radius:100px;padding:12px 26px;" data-demo-message="Route archive preview is demo-only">View All Routes</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:30px;grid-auto-rows:400px" data-reveal-group="zoom">
+        <a href="#" class="destination-tile" data-demo-message="Destination preview is demo-only" style="grid-column:1 / -1;background:var(--color-primary)">
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(18,58,95,0.25), rgba(1,19,34,0.78)), radial-gradient(circle at 28% 24%, rgba(255,255,255,0.28), transparent 18%), linear-gradient(135deg, #245c78 0%, #3ca6cb 42%, #7de3f7 100%);"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2.8rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;">Japanese Alps</h3>
+            <p style="opacity:0.9;font-size:1.2rem;line-height:1.6;font-weight:300;">Winter retreats and hot springs.</p>
+          </div>
+        </a>
+        <a href="#" class="destination-tile" data-demo-message="Destination preview is demo-only" style="background:var(--color-secondary)">
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(48,20,8,0.18), rgba(14,26,39,0.72)), radial-gradient(circle at 74% 28%, rgba(255,228,181,0.42), transparent 24%), linear-gradient(135deg, #52403b 0%, #8d6d52 42%, #d7a86e 100%);"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Venice</h3>
+            <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Canals and culture.</p>
+          </div>
+        </a>
+        <a href="#" class="destination-tile" data-demo-message="Destination preview is demo-only" style="background:var(--color-accent)">
+          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(22,10,32,0.16), rgba(10,18,35,0.72)), radial-gradient(circle at 32% 22%, rgba(255,205,148,0.32), transparent 20%), linear-gradient(135deg, #513a73 0%, #9571b7 45%, #e6c58a 100%);"></div>
+          <div class="dest-content">
+            <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Dubai</h3>
+            <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Desert luxury.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- § 3. ITINERARY SPLIT TIMELINE -->
+  <section id="journey" style="padding:120px 0" aria-labelledby="journey-heading">
+    <div class="chr-container" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:80px;align-items:start">
+      <div style="position:sticky;top:120px" data-reveal="left">
+        <div class="chr-heading-sm" style="color:var(--color-primary);font-weight:700;">Interactive Itinerary</div>
+        <h2 id="journey-heading" style="font-size:3rem;font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px">The Highland Passage</h2>
+        <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:40px;font-size:1.1rem;">A 4-day sample route through guided mountain paths, luxury cabins, and immersive local dining. Use this pattern to present detailed day-by-day plans without overwhelming the user.</p>
+        <div class="travel-glass" style="display:flex;gap:30px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:0.85rem;text-transform:uppercase;color:var(--color-text-3);margin-bottom:8px;font-weight:700;letter-spacing:0.05em;">Duration</div>
+            <div style="font-weight:800;font-size:1.2rem;">4 Days, 3 Nights</div>
+          </div>
+          <div style="width:1px;background:color-mix(in srgb, var(--color-border) 60%, transparent)"></div>
+          <div>
+            <div style="font-size:0.85rem;text-transform:uppercase;color:var(--color-text-3);margin-bottom:8px;font-weight:700;letter-spacing:0.05em;">Difficulty</div>
+            <div style="font-weight:800;font-size:1.2rem;">Moderate</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;padding-left:50px;border-left:2px dashed color-mix(in srgb, var(--color-border) 60%, transparent);display:grid;gap:60px;margin-left:20px" data-reveal-group="right">
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 01: Arrival & Acclimation</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">Private transfer from the airport to the lodge. Evening orientation walk and a locally sourced welcome dinner.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Transfer</span><span style="padding:6px 14px;background:var(--color-bg-2);border-radius:100px;font-size:0.85rem;border:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);font-weight:600;">Dinner included</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 02: The Ridge Walk</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">A 6-hour guided hike along the eastern ridge. Incredible panoramic views and a packed gourmet lunch.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Guided Hike</span><span style="padding:6px 14px;background:var(--color-bg-2);border-radius:100px;font-size:0.85rem;border:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);font-weight:600;">Lunch included</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-bg);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 03: Valley Descent</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:20px;font-size:1.05rem;">Explore the lower valley trails, visiting an artisan village and experiencing a traditional tea ceremony.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:6px 14px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);border-radius:100px;font-size:0.85rem;font-weight:700;">Culture</span></div>
+        </div>
+        <div class="route-card" style="position:relative">
+          <div style="position:absolute;left:-84px;top:0;width:24px;height:24px;background:var(--color-primary);border:4px solid var(--color-primary);border-radius:50%; box-shadow:0 0 0 8px var(--color-bg);"></div>
+          <h3 style="font-size:1.6rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.01em;">Day 04: Departure</h3>
+          <p style="color:var(--color-text-2);line-height:1.8;font-size:1.05rem;margin:0;">Morning at leisure before private transfer back to the airport.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EDITORIAL STORIES -->
+  <section id="stories" style="padding:120px 0;background:var(--color-bg-2);border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent)" aria-labelledby="stories-heading">
+    <div class="chr-container">
+      <div style="text-align:center;margin-bottom:70px" data-reveal="soft">
+        <h2 id="stories-heading" style="font-size:3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;">Travel Dispatches</h2>
+        <p style="color:var(--color-text-2);font-size:1.1rem;">Editorial guides, journals, and deep dives.</p>
+      </div>
+      <div class="stories-grid" data-reveal-group="zoom">
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(7,22,38,0.3), rgba(1,19,34,0.68)), radial-gradient(circle at 24% 24%, rgba(255,255,255,0.24), transparent 18%), linear-gradient(135deg, #2d6a8d 0%, #57b5d8 48%, #a7ecff 100%);"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Guide</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">When to travel the coast</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">Seasonality, pacing, and route advice for first-timers.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;" data-demo-message="Travel dispatch preview is demo-only">Read dispatch</a>
+          </div>
+        </article>
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(45,27,15,0.28), rgba(20,26,40,0.72)), radial-gradient(circle at 78% 26%, rgba(255,232,186,0.26), transparent 18%), linear-gradient(135deg, #745341 0%, #b6855f 44%, #f1c59d 100%);"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-accent);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Journal</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">A three-day city map</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">A pattern for itinerary storytelling and neighborhood notes.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;" data-demo-message="Travel dispatch preview is demo-only">Read dispatch</a>
+          </div>
+        </article>
+        <article class="story-card travel-glass">
+          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(12,25,20,0.24), rgba(11,26,22,0.72)), radial-gradient(circle at 30% 18%, rgba(229,255,235,0.2), transparent 16%), linear-gradient(135deg, #32594a 0%, #4f9c82 46%, #bce7d4 100%);"></div></div>
+          <div class="story-content">
+            <div style="font-size:0.85rem;color:var(--color-secondary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Retreat</div>
+            <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">Slow travel in the hills</h3>
+            <p style="margin:0;color:var(--color-text-2);line-height:1.7;font-size:1.05rem;">Immersive stays, wellness routes, and hospitality.</p>
+            <a href="#" style="margin-top:auto;color:var(--color-text);font-weight:700;text-decoration:none;border-bottom:2px solid var(--color-text);display:inline-block;width:max-content;padding-bottom:2px;" data-demo-message="Travel dispatch preview is demo-only">Read dispatch</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="chr-footer">
+  <div class="chr-container chr-footer-grid">
+    <div>
+      <div class="chr-logo" style="margin-bottom:14px;letter-spacing:-0.02em;">CHRONOS TRAVEL</div>
+      <p style="color:var(--color-text-2);line-height:1.7;max-width:420px;font-size:0.95rem;">Layout 14 now features profound parallax depth and smooth Ken Burns hover effects for an immersive booking interface.</p>
+    </div>
+    <div><h3 class="chr-footer-heading">Related</h3><ul class="chr-footer-list"><li><a href="layout-13.html">Education layout</a></li><li><a href="layout-15.html">Social layout</a></li></ul></div>
+    <div><h3 class="chr-footer-heading">Browse</h3><ul class="chr-footer-list"><li><a href="index.html">All layouts</a></li><li><a href="layout-08.html">Minimal journal</a></li></ul></div>
+  </div>
+</footer>
+
+<script>
+  // Hero Parallax tracking
+  const heroStage = document.getElementById('hero-stage');
+  if (heroStage) {
+    heroStage.addEventListener('mousemove', (e) => {
+      const rect = heroStage.getBoundingClientRect();
+      const xObj = (e.clientX - rect.left) / rect.width - 0.5;
+      const yObj = (e.clientY - rect.top) / rect.height - 0.5;
+      
+      // Drive CSS Custom properties (-2px to +2px range roughly)
+      heroStage.style.setProperty('--px', (xObj * -3).toFixed(2));
+      heroStage.style.setProperty('--py', (yObj * -3).toFixed(2));
+    });
+    heroStage.addEventListener('mouseleave', () => {
+      heroStage.style.setProperty('--px', 0);
+      heroStage.style.setProperty('--py', 0);
+    });
+  }
+</script>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

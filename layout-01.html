@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-era="modern">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 01 - Modern landing page for the Chronos v2 source product with accurate product counts, shared customizer messaging, and mobile-safe sections.">
+  <title>Chronos | Modern SaaS Landing</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    .hero-wrapper{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--color-bg)}
+    .hero-blob-1,.hero-blob-2{position:absolute;border-radius:9999px;filter:blur(8px)}
+    .hero-blob-1{width:560px;height:560px;background:radial-gradient(circle,var(--color-primary),transparent 70%);opacity:.12;top:-120px;right:-100px}
+    .hero-blob-2{width:420px;height:420px;background:radial-gradient(circle,var(--color-secondary),transparent 70%);opacity:.1;bottom:-40px;left:10%}
+    .hero-orb{width:480px;height:480px;border-radius:50%;background:conic-gradient(from 0deg,var(--color-primary),var(--color-secondary),var(--color-accent),var(--color-primary));opacity:.06;position:absolute;right:4%;top:50%;transform:translateY(-50%);animation:orb-spin 20s linear infinite}
+    @keyframes orb-spin{from{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(360deg)}}
+    .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:64px;align-items:center}
+    .marquee-section{background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border);padding:20px 0;overflow:hidden}
+    .mockup-screen{background:var(--color-bg-2);border:var(--border-w) solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg),var(--shadow-glow)}
+    .mockup-bar{background:var(--color-bg-3);padding:12px 20px;display:flex;gap:8px;align-items:center;border-bottom:var(--border-w) solid var(--color-border)}
+    .mockup-dot{width:10px;height:10px;border-radius:50%}
+    .feature-grid,.showcase-grid,.faq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+    .stats-row{display:flex;gap:32px;flex-wrap:wrap}
+    .stat-block{min-width:112px}
+    .process-card,.mini-card,.faq-note{padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)}
+    .newsletter-shell{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:24px;align-items:center;padding:36px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 8%,transparent),color-mix(in srgb,var(--color-secondary) 8%,transparent))}
+    .newsletter-form{display:flex;gap:12px;flex-wrap:wrap}
+    .newsletter-form input{flex:1;min-width:220px;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);outline:none}
+    @media(max-width:1120px){.hero-grid,.newsletter-shell{grid-template-columns:1fr}.process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:900px){.feature-grid,.showcase-grid,.faq-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:720px){.hero-wrapper{padding-top:88px}.feature-grid,.showcase-grid,.faq-grid,.process-grid{grid-template-columns:1fr}.stats-row{gap:20px}}
+    @media(max-width:560px){.newsletter-form{flex-direction:column}.newsletter-form input{min-width:0}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo" aria-label="Chronos home">CHRONOS</a>
+    <nav aria-label="Main navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#showcase">Layouts</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" class="chr-btn-ghost" style="padding:10px 20px;font-size:.85rem">All layouts</a>
+      <a href="#showcase" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Preview source</a>
+      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section id="hero" class="hero-wrapper" aria-labelledby="hero-heading">
+    <div class="hero-blob-1" aria-hidden="true"></div>
+    <div class="hero-blob-2" aria-hidden="true"></div>
+    <div class="hero-orb" aria-hidden="true"></div>
+
+    <div class="chr-container hero-grid">
+      <div>
+        <div class="chr-badge" data-reveal style="margin-bottom:1.5rem;display:inline-flex">20 layouts · 17 eras · 16 palettes</div>
+        <h1 id="hero-heading" data-reveal class="chr-heading-xl" style="margin-bottom:1.5rem">
+          One source product.
+          <br>
+          <span class="chr-gradient-text">Seventeen visual eras.</span>
+          <br>
+          One shared customizer.
+        </h1>
+        <p data-reveal style="font-size:1.1rem;color:var(--color-text-2);max-width:560px;margin-bottom:2rem;line-height:1.8">
+          Chronos v2 is being finalized as a multi-era HTML product. This landing page now reflects the real source scope: 20 layouts, 17 eras, 16 preset palettes, 70+ fonts, and a shared customization engine that persists across the layout set.
+        </p>
+        <div data-reveal style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <a href="index.html" class="chr-btn-primary" style="font-size:1rem;padding:16px 36px">Open layout directory</a>
+          <a href="#workflow" class="chr-btn-ghost" style="font-size:1rem;padding:16px 28px">See how it works</a>
+        </div>
+        <div class="stats-row" data-reveal style="margin-top:2.4rem">
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="20">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Layouts</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="17">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Eras</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="16">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Palettes</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="70" data-suffix="+">0+</div><div style="font-size:.8rem;color:var(--color-text-3)">Fonts</div></div>
+        </div>
+      </div>
+
+      <div data-reveal="right" style="display:flex;justify-content:center">
+        <div class="mockup-screen" style="width:100%;max-width:520px">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ff5f57"></div>
+            <div class="mockup-dot" style="background:#febc2e"></div>
+            <div class="mockup-dot" style="background:#28c840"></div>
+            <div style="flex:1;height:8px;background:var(--color-bg);border-radius:4px;margin-left:8px"></div>
+          </div>
+          <div style="padding:24px;display:grid;grid-template-columns:1fr 1.4fr;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="height:12px;background:var(--color-primary);border-radius:999px;opacity:.75;width:70%"></div>
+              <div style="height:8px;background:var(--color-border);border-radius:999px"></div>
+              <div style="height:8px;background:var(--color-border);border-radius:999px;width:84%"></div>
+              <div style="height:8px;background:var(--color-border);border-radius:999px;width:62%"></div>
+              <div style="height:70px;background:var(--color-bg-3);border-radius:var(--radius-md);border:1px solid var(--color-border)"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="height:110px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));border-radius:var(--radius-md);opacity:.18"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <div style="height:56px;background:var(--color-bg-3);border-radius:var(--radius-sm);border:1px solid var(--color-border)"></div>
+                <div style="height:56px;background:var(--color-primary);border-radius:var(--radius-sm);opacity:.15"></div>
+              </div>
+              <div style="height:74px;background:var(--color-bg);border-radius:var(--radius-md);border:1px solid var(--color-border)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="marquee-section" aria-label="Chronos features">
+    <div class="chr-marquee-track" style="font-size:.85rem;color:var(--color-text-3);font-weight:600">
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">20 layouts</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">17 eras</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">16 palettes</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">70+ fonts</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">Shared customizer</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">Package download</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">20 layouts</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">17 eras</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">16 palettes</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">70+ fonts</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">Shared customizer</span>
+      <span style="display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:0 24px">Package download</span>
+    </div>
+  </section>
+
+  <section id="features" class="chr-section" aria-labelledby="features-heading">
+    <div class="chr-container">
+      <div style="text-align:center;max-width:680px;margin:0 auto 56px" data-reveal>
+        <div class="chr-heading-sm">Core features</div>
+        <h2 id="features-heading" class="chr-heading-xl">Truthful product scope, shared behavior, reusable structure</h2>
+        <p style="color:var(--color-text-2);margin-top:1rem;font-size:1.02rem">This source page focuses on what is actually implemented now instead of marketplace promises that belong to a later shipping phase.</p>
+      </div>
+
+      <div class="feature-grid" data-reveal-group>
+        <div class="chr-feature-card">
+          <div class="chr-feature-icon" aria-hidden="true">01</div>
+          <h3 style="font-size:1.08rem;margin-bottom:.75rem">17 design eras</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Chronos currently includes Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid, Jurassic, Pixelated, Ice Age, Volcanic, and Magic eras.</p>
+        </div>
+        <div class="chr-feature-card">
+          <div class="chr-feature-icon" aria-hidden="true">02</div>
+          <h3 style="font-size:1.08rem;margin-bottom:.75rem">16 preset palettes</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">The shared customizer includes 16 preset palettes plus manual color controls, all persisted through local storage while you move between layouts.</p>
+        </div>
+        <div class="chr-feature-card">
+          <div class="chr-feature-icon" aria-hidden="true">03</div>
+          <h3 style="font-size:1.08rem;margin-bottom:.75rem">70+ fonts</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Heading, body, accent, and mono roles can be changed independently while you preview combinations in the shared customizer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="workflow-heading">
+    <div class="chr-container">
+      <div style="text-align:center;max-width:620px;margin:0 auto 56px" data-reveal>
+        <div class="chr-heading-sm">Workflow</div>
+        <h2 id="workflow-heading" class="chr-heading-xl">How this source product works today</h2>
+      </div>
+
+      <div class="process-grid" data-reveal-group>
+        <div class="process-card"><div class="chr-step-number">01</div><h3 style="margin:14px 0 10px;font-size:1.05rem">Run the source project</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">Use `npm run dev` during refinement and `npm run build` for production output testing. This page no longer claims raw source HTML is the final deliverable.</p></div>
+        <div class="process-card"><div class="chr-step-number">02</div><h3 style="margin:14px 0 10px;font-size:1.05rem">Pick a layout</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">All 20 layouts remain accessible from the layout directory, and the Vite multi-page build now includes the full expanded source set.</p></div>
+        <div class="process-card"><div class="chr-step-number">03</div><h3 style="margin:14px 0 10px;font-size:1.05rem">Adjust the customizer</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">The toggle and tabs now expose correct state, and era, font, and palette choices stay synced across the source layouts.</p></div>
+        <div class="process-card"><div class="chr-step-number">04</div><h3 style="margin:14px 0 10px;font-size:1.05rem">Refine before shipping</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7">This phase is about correctness, responsiveness, and consistency. Release packaging and marketplace delivery remain separate work for later.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="showcase" class="chr-section" aria-labelledby="showcase-heading">
+    <div class="chr-container">
+      <div style="text-align:center;max-width:640px;margin:0 auto 56px" data-reveal>
+        <div class="chr-heading-sm">Layout showcase</div>
+        <h2 id="showcase-heading" class="chr-heading-xl">A source-accurate view of the layout set</h2>
+      </div>
+
+      <div class="showcase-grid" data-reveal-group>
+        <div class="mini-card"><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">Layout 05</div><h3 style="font-size:1.05rem;margin-bottom:10px">Dashboard</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7;margin-bottom:18px">Updated date handling and less misleading KPI formatting for the app-style demo.</p><a href="layout-05.html" class="chr-btn-ghost" style="padding:12px 18px;font-size:.88rem">Open layout</a></div>
+        <div class="mini-card"><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">Layout 07</div><h3 style="font-size:1.05rem;margin-bottom:10px">Futuristic launch</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7;margin-bottom:18px">Shared countdown logic now uses a fixed launch date and falls back to a neutral completed state once that window passes.</p><a href="layout-07.html" class="chr-btn-ghost" style="padding:12px 18px;font-size:.88rem">Open layout</a></div>
+        <div class="mini-card"><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px">Layouts 09-10</div><h3 style="font-size:1.05rem;margin-bottom:10px">High-risk responsive pages</h3><p style="color:var(--color-text-2);font-size:.9rem;line-height:1.7;margin-bottom:18px">The cyberpunk and gothic pages now have real mobile fallbacks instead of desktop-only grid assumptions.</p><a href="index.html" class="chr-btn-ghost" style="padding:12px 18px;font-size:.88rem">Browse all layouts</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="source-heading">
+    <div class="chr-container">
+      <div class="newsletter-shell" data-reveal>
+        <div>
+          <div class="chr-heading-sm">Source product status</div>
+          <h2 id="source-heading" class="chr-heading-xl" style="margin-bottom:12px">Neutral demo behavior, cleaner copy, safer defaults</h2>
+          <p style="color:var(--color-text-2);line-height:1.8;max-width:620px">
+            Placeholder links and forms are now intercepted intentionally instead of causing broken reloads and jump-to-top behavior. Use this section as a source-safe call to action while the product is still being finalized.
+          </p>
+        </div>
+        <form class="newsletter-form" aria-label="Demo signup" data-demo-message="Demo signup submitted. Connect this form to your own workflow.">
+          <label for="source-email" style="display:none">Email</label>
+          <input type="email" id="source-email" placeholder="name@example.com" autocomplete="email">
+          <button type="submit" class="chr-btn-primary">Submit demo form</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="chr-section" aria-labelledby="faq-heading">
+    <div class="chr-container" style="max-width:900px">
+      <div style="text-align:center;margin-bottom:56px" data-reveal>
+        <div class="chr-heading-sm">FAQ</div>
+        <h2 id="faq-heading" class="chr-heading-xl">Current answers for the source phase</h2>
+      </div>
+
+      <div class="faq-grid" data-reveal-group>
+        <div class="faq-note"><h3 style="font-size:1rem;margin-bottom:10px">Do I need a dev server?</h3><p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Yes. This source project uses Vite module entrypoints, so development should run through `npm run dev`, and build verification should use `npm run build`.</p></div>
+        <div class="faq-note"><h3 style="font-size:1rem;margin-bottom:10px">Is the customizer shared across layouts?</h3><p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Yes. Era, font, and palette preferences are stored once and reused as you move through the layout set.</p></div>
+        <div class="faq-note"><h3 style="font-size:1rem;margin-bottom:10px">Is this the shipping package?</h3><p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">No. This phase is only for source-product finalization. Release packaging and buyer-facing delivery structure are deferred to the later shipping phase.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);padding:64px 0 36px" role="contentinfo">
+  <div class="chr-container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:36px">
+      <div>
+        <div class="chr-logo" style="margin-bottom:16px;font-size:1.5rem">CHRONOS</div>
+        <p style="font-size:.92rem;color:var(--color-text-2);max-width:360px;line-height:1.8">
+          Source-finalization landing page for Chronos v2. Truthful counts, stable demo behavior, and responsive sections come first here; release packaging comes later.
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-3);margin-bottom:16px">Explore</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="index.html" style="font-size:.9rem;color:var(--color-text-2)">Layout directory</a></li>
+          <li><a href="layout-07.html" style="font-size:.9rem;color:var(--color-text-2)">Launch page</a></li>
+          <li><a href="layout-10.html" style="font-size:.9rem;color:var(--color-text-2)">Gothic archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-3);margin-bottom:16px">Status</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="#workflow" style="font-size:.9rem;color:var(--color-text-2)">Source workflow</a></li>
+          <li><a href="#faq" style="font-size:.9rem;color:var(--color-text-2)">Source FAQ</a></li>
+          <li><a href="#" style="font-size:.9rem;color:var(--color-text-2)" data-demo-message="Demo-only documentation link. Point this to your own setup guide later.">Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="border-top:var(--border-w) solid var(--color-border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <p style="font-size:.82rem;color:var(--color-text-3)">2026 Chronos v2 - Layout 01 source landing page</p>
+      <div style="display:flex;gap:20px">
+        <a href="index.html" style="font-size:.82rem;color:var(--color-text-3)">Layouts</a>
+        <a href="#features" style="font-size:.82rem;color:var(--color-text-3)">Features</a>
+        <a href="#faq" style="font-size:.82rem;color:var(--color-text-3)">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
+
+

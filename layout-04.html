@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-era="retro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 04 - Editorial manuscript page with clean typography, source-accurate copy, and neutral product messaging.">
+  <title>Chronos | Text Manuscript</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text);--reveal-distance:14px;--group-reveal-distance:12px}
+    .ms-container{width:100%;max-width:900px;margin:0 auto;padding:0 1.5rem}
+    .ms-rule{height:1px;background:linear-gradient(to right,transparent,var(--color-border),transparent)}
+    .ms-ornament{text-align:center;font-size:1rem;letter-spacing:.28em;color:var(--color-primary)}
+    .ms-content{display:grid;gap:20px;line-height:1.95;font-size:1rem}
+    .chapter-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:12px 0}
+    .note-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+    .note-card{padding:24px;border:double var(--color-border);border-radius:var(--radius-sm);background:color-mix(in srgb,var(--color-bg-2) 85%,transparent)}
+    @media(max-width:760px){.chapter-nav,.note-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo">CHRONOS</a>
+    <nav aria-label="Manuscript navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#chapter-1">Preface</a></li>
+        <li><a href="#chapter-2">Eras</a></li>
+        <li><a href="#chapter-3">Notes</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="index.html" class="chr-btn-ghost" style="padding:10px 20px;font-size:.85rem">Directory</a>
+      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section id="chapter-1" class="chr-section" aria-labelledby="preface-heading">
+    <div class="ms-container">
+      <div class="ms-rule"></div>
+      <div style="text-align:center;padding:56px 0" data-reveal="soft">
+        <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter I</div>
+        <h1 id="preface-heading" style="font-size:clamp(2.4rem,5vw,4rem);font-style:italic;margin:12px 0 20px">A manuscript for a multi-era interface system</h1>
+        <p style="max-width:700px;margin:0 auto;color:var(--color-text-2);line-height:1.9">
+          Layout 04 frames Chronos as an editorial manuscript. The copy on this page now matches the actual source product instead of the earlier 10-era version: Chronos currently includes 20 layouts, 17 eras, 16 preset palettes, and a shared customizer that persists across the layout set.
+        </p>
+      </div>
+      <div class="ms-rule"></div>
+    </div>
+  </section>
+
+  <section id="chapter-2" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="eras-heading">
+    <div class="ms-container">
+      <div data-reveal="soft">
+        <div style="text-align:center;margin-bottom:48px">
+          <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter II</div>
+          <h2 id="eras-heading" style="font-size:2.2rem;font-style:italic;margin-top:8px">The Seventeen Eras Defined</h2>
+        </div>
+        <div class="ms-content">
+          <p>The seventeen eras of Chronos are not arbitrary aesthetic categories. Each was chosen for its distinct visual vocabulary and for the way it changes the emotional temperature of the same underlying structure.</p>
+          <div class="chapter-nav">
+            <div><strong>Modern</strong><br><span style="font-size:.82rem;color:var(--color-text-3)">Whitespace, clean geometry, software clarity</span></div>
+            <div><strong>Gothic</strong><br><span style="font-size:.82rem;color:var(--color-text-3)">Ornament, manuscript contrast, ceremonial framing</span></div>
+            <div><strong>Futuristic</strong><br><span style="font-size:.82rem;color:var(--color-text-3)">Glass surfaces, glow, and spatial motion</span></div>
+          </div>
+          <p>The remaining fourteen eras - Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid, Jurassic, Pixelated, Ice Age, Volcanic, and Magic - extend the system from historical references into speculative futures.</p>
+          <div class="ms-ornament">SECTION MARKER</div>
+          <p>What unifies all seventeen is the engine: shared CSS custom properties, shared structure, and a single customizer store that can restyle the same source layouts without rewriting their HTML foundations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chapter-3" class="chr-section" aria-labelledby="notes-heading">
+    <div class="ms-container">
+      <div data-reveal="soft">
+        <div style="text-align:center;margin-bottom:48px">
+          <div style="font-size:.74rem;text-transform:uppercase;letter-spacing:.28em;color:var(--color-text-3)">Chapter III</div>
+          <h2 id="notes-heading" style="font-size:2.2rem;font-style:italic;margin-top:8px">Technical marginalia</h2>
+        </div>
+        <div class="ms-content">
+          <p>This chapter records the implementation notes that matter in the current finalization phase.</p>
+        </div>
+        <div class="note-grid" data-reveal-group="soft">
+          <div class="note-card">
+            <h3 style="font-size:1rem;margin-bottom:8px;font-style:italic">I. The token system</h3>
+            <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">All design tokens live as CSS custom properties on the root. Eras override the token set through the <code>data-era</code> attribute.</p>
+          </div>
+          <div class="note-card">
+            <h3 style="font-size:1rem;margin-bottom:8px;font-style:italic">II. The transition layer</h3>
+            <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">Chronos transitions shared properties globally so cross-era changes feel coordinated rather than piecemeal.</p>
+          </div>
+          <div class="note-card">
+            <h3 style="font-size:1rem;margin-bottom:8px;font-style:italic">III. The font codex</h3>
+            <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">The source project ships with 70+ Google Fonts and lets heading, body, accent, and mono roles be changed independently.</p>
+          </div>
+          <div class="note-card">
+            <h3 style="font-size:1rem;margin-bottom:8px;font-style:italic">IV. The shared customizer</h3>
+            <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.7">The customizer toggle, tabs, persistence, and reset behavior are shared across layouts rather than implemented per page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chr-section-sm" style="background:var(--color-bg-2)" aria-labelledby="closing-heading">
+    <div class="ms-container" style="text-align:center" data-reveal="soft">
+      <div class="ms-ornament">CHRONOS</div>
+      <h2 id="closing-heading" style="font-size:1.8rem;font-style:italic;margin-bottom:1rem">Open the full Chronos compendium</h2>
+      <p style="color:var(--color-text-2);margin-bottom:2rem">All 20 layouts. All 17 eras. One shared customization system across the source product.</p>
+      <a href="index.html" class="chr-btn-primary" style="font-size:.95rem">View the layout directory</a>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--color-bg);border-top:double var(--color-border);padding:60px 0" role="contentinfo">
+  <div class="ms-container" style="text-align:center">
+    <div style="font-size:.8rem;color:var(--color-text-3);line-height:1.9">
+      <div class="ms-ornament" style="font-size:1rem">CHRONOS PRESS</div>
+      <p>Prepared in the digital ether as a source manuscript for Chronos v2.<br>Chronos Press archival edition.</p>
+    </div>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
+
+

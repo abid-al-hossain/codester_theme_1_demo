@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-era="modern">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 15 - Social and community website with app-like feed, side rails, creator tools, and trust messaging.">
+  <title>Chronos | Social Community</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg-2);color:var(--color-text);overflow-x:hidden;--reveal-distance:34px;--group-reveal-distance:22px}
+    .sc-shell{display:grid;grid-template-columns:250px minmax(0,1fr) 300px;min-height:100vh}
+    .sc-left,.sc-right{background:var(--color-bg);border-right:1px solid var(--color-border);padding:24px;position:sticky;top:0;height:100vh;overflow:auto}
+    .sc-right{border-right:none;border-left:1px solid var(--color-border)}
+    .sc-main{padding:24px 28px;display:grid;gap:20px}
+    .sc-card,.sc-feed-card,.sc-group-card,.sc-stat,.sc-join{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
+    .sc-card,.sc-feed-card,.sc-group-card,.sc-stat,.sc-join{padding:20px}
+    .sc-nav{display:grid;gap:8px;margin-top:18px}
+    .sc-nav a{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:var(--radius-md);color:var(--color-text-2);text-decoration:none}
+    .sc-nav a:hover,.sc-nav a.active{background:var(--color-bg-2);color:var(--color-text)}
+    .sc-composer{display:grid;gap:14px}
+    .sc-composer textarea{width:100%;min-height:96px;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;resize:vertical;outline:none}
+    .sc-feed{display:grid;gap:16px}
+    .sc-post{display:grid;grid-template-columns:auto 1fr;gap:14px}
+    .sc-avatar{width:44px;height:44px;border-radius:16px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.18}
+    .sc-meta{font-size:.78rem;color:var(--color-text-3)}
+    .sc-inline-actions{display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--color-text-2)}
+    .sc-groups{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .sc-group-card{display:grid;gap:10px}
+    .sc-triple{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .sc-feed-card,.sc-group-card,.sc-stat{transition:transform .24s var(--ease),box-shadow .24s var(--ease)}
+    .sc-feed-card:hover,.sc-group-card:hover,.sc-stat:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+    .sc-side-title{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--color-text-3);margin-bottom:12px}
+    .sc-mini-list{display:grid;gap:10px}
+    .sc-mini-row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+    .sc-pill{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:.74rem;color:var(--color-text-2)}
+    .sc-form{display:grid;gap:12px}
+    .sc-form input,.sc-form select,.sc-form textarea{width:100%;padding:13px 14px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
+    .sc-form textarea{min-height:96px;resize:vertical}
+    .sc-left-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .sc-left .sc-nav.chr-nav-links{display:grid}
+    .sc-left .chr-nav-toggle{display:none}
+    @media(max-width:1180px){.sc-shell{grid-template-columns:220px minmax(0,1fr)}.sc-right{display:none}}
+    @media(max-width:860px){.sc-shell{grid-template-columns:1fr}.sc-left{position:static;height:auto;border-right:none;border-bottom:1px solid var(--color-border)}.sc-main{padding:20px}.sc-groups,.sc-triple{grid-template-columns:1fr}.sc-left .chr-nav-toggle{display:flex}.sc-left .sc-nav.chr-nav-links,.sc-left .sc-nav.chr-nav-links.open{position:static;background:transparent;border-bottom:none;padding:0;flex-direction:unset}.sc-left .sc-nav.chr-nav-links{display:none}.sc-left .sc-nav.chr-nav-links.open{display:grid}}
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<div class="sc-shell">
+  <aside class="sc-left" aria-label="Community navigation" data-reveal="left">
+    <div class="sc-left-top">
+      <a href="index.html" class="chr-logo">CHRONOS SOCIAL</a>
+      <button class="chr-nav-toggle" aria-label="Toggle community navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <div class="sc-nav chr-nav-links">
+      <a href="#feed" class="active"><span>Feed</span><span>01</span></a>
+      <a href="#groups"><span>Groups</span><span>02</span></a>
+      <a href="#creators"><span>Creators</span><span>03</span></a>
+      <a href="#safety"><span>Safety</span><span>04</span></a>
+      <a href="#join"><span>Join</span><span>05</span></a>
+    </div>
+    <div class="sc-card" style="margin-top:24px">
+      <div class="sc-side-title">Community snapshot</div>
+      <div style="display:grid;gap:10px">
+        <div><strong>128</strong><div class="sc-meta">topic-led communities</div></div>
+        <div><strong>9.6k</strong><div class="sc-meta">active members</div></div>
+        <div><strong>99.2%</strong><div class="sc-meta">safe session rate</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="main-content" class="sc-main">
+    <section id="feed" class="sc-card" aria-labelledby="feed-heading" data-reveal="soft">
+      <div class="chr-badge" style="margin-bottom:1rem">Layout 15 · Social Website</div>
+      <h1 id="feed-heading" class="chr-heading-xl" style="margin-bottom:10px">A community layout built like a product feed, not a generic landing page.</h1>
+      <p style="color:var(--color-text-2);line-height:1.8;max-width:720px">This page now uses an app-style shell with side rails, feed cards, group discovery, creator tooling, and safety messaging so it reads like a social product rather than another card-led marketing page.</p>
+    </section>
+
+    <section class="sc-feed-card" aria-label="Composer" data-reveal="soft">
+      <div class="sc-composer">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+          <strong>Share an update</strong>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="sc-pill">Members only</span><span class="sc-pill">Events</span><span class="sc-pill">Resources</span></div>
+        </div>
+        <textarea placeholder="What would you like to share with the community?" aria-label="Compose post"></textarea>
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
+          <div class="sc-inline-actions"><span>Add resource</span><span>Tag a group</span><span>Schedule post</span></div>
+          <button class="chr-btn-primary" data-demo-message="Post composer is demo-only">Publish update</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sc-feed" aria-label="Community feed" data-reveal-group="soft">
+      <article class="sc-feed-card sc-post">
+        <div class="sc-avatar" aria-hidden="true"></div>
+        <div>
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;flex-wrap:wrap">
+            <div><strong>Design Ops Circle</strong><div class="sc-meta">12 minutes ago · Systems discussion</div></div>
+            <span class="sc-pill">Featured thread</span>
+          </div>
+          <p style="margin:12px 0 14px;color:var(--color-text-2);line-height:1.75">New discussion: what changes when a design system has to support multiple visual eras without losing coherence?</p>
+          <div class="sc-inline-actions"><span>128 replies</span><span>Save</span><span>Share</span></div>
+        </div>
+      </article>
+      <article class="sc-feed-card sc-post">
+        <div class="sc-avatar" aria-hidden="true"></div>
+        <div>
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;flex-wrap:wrap">
+            <div><strong>Campus Network</strong><div class="sc-meta">45 minutes ago · Peer connection</div></div>
+            <span class="sc-pill">Cohort space</span>
+          </div>
+          <p style="margin:12px 0 14px;color:var(--color-text-2);line-height:1.75">Introductions are open for the next cohort. Share your interests, skills, and the kind of projects you want to join.</p>
+          <div class="sc-inline-actions"><span>64 replies</span><span>Pin</span><span>Invite</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="groups" class="sc-card" aria-labelledby="groups-heading" data-reveal="left">
+      <div style="display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:16px">
+        <div>
+          <div class="chr-heading-sm">Groups</div>
+          <h2 id="groups-heading" class="chr-heading-xl">Topic-led spaces instead of a generic benefits grid.</h2>
+        </div>
+        <p style="max-width:460px;color:var(--color-text-2);line-height:1.75">These blocks are meant to feel like discoverable communities with purpose, activity, and moderation style.</p>
+      </div>
+      <div class="sc-groups" data-reveal-group="left">
+        <div class="sc-group-card"><strong>Professional circles</strong><p style="color:var(--color-text-2);line-height:1.75">Private discipline-specific groups for case discussion, peer support, and resource exchange.</p><div class="sc-meta">3.4k members · weekly live sessions</div></div>
+        <div class="sc-group-card"><strong>Interest clubs</strong><p style="color:var(--color-text-2);line-height:1.75">Public or invite-only groups for hobbies, media interests, local meetups, and event-based communities.</p><div class="sc-meta">2.1k members · curated moderation</div></div>
+      </div>
+    </section>
+
+    <section id="creators" class="sc-card" aria-labelledby="creators-heading" data-reveal="right">
+      <div class="chr-heading-sm">Creator tools</div>
+      <h2 id="creators-heading" class="chr-heading-xl" style="margin-bottom:16px">Support hosts, creators, and moderators in the same shell.</h2>
+      <div class="sc-triple" data-reveal-group="right">
+        <div class="sc-stat"><strong>Host communities</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Event prompts, gated spaces, and recurring discussion cycles.</p></div>
+        <div class="sc-stat"><strong>Publish updates</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Announcement cards, feed moments, and premium content notices.</p></div>
+        <div class="sc-stat"><strong>Grow membership</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Invite paths, onboarding flows, and creator-led retention mechanics.</p></div>
+      </div>
+    </section>
+
+    <section id="safety" class="sc-card" aria-labelledby="safety-heading" data-reveal="left">
+      <div class="chr-heading-sm">Trust and safety</div>
+      <h2 id="safety-heading" class="chr-heading-xl" style="margin-bottom:16px">A social site needs visible safety structure.</h2>
+      <div class="sc-triple" data-reveal-group="left">
+        <div class="sc-stat"><strong>Moderation paths</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Report, review, and escalation language for healthy spaces.</p></div>
+        <div class="sc-stat"><strong>Privacy controls</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Different visibility models for public, private, and cohort communities.</p></div>
+        <div class="sc-stat"><strong>Healthy prompts</strong><p style="margin-top:10px;color:var(--color-text-2);line-height:1.75">Contribution design that avoids noisy, manipulative engagement cues.</p></div>
+      </div>
+    </section>
+
+    <section id="join" class="sc-join" aria-labelledby="join-heading" data-reveal="right">
+      <div class="chr-heading-sm">Join flow</div>
+      <h2 id="join-heading" class="chr-heading-xl" style="margin-bottom:12px">A source-safe onboarding block.</h2>
+      <p style="color:var(--color-text-2);line-height:1.75;margin-bottom:16px">This stays demo-safe in source while giving you a stronger acquisition structure for social products.</p>
+      <form class="sc-form" aria-label="Community signup form" data-demo-message="Community signup submitted. Connect this form to your own onboarding system.">
+        <input type="text" placeholder="Full name" aria-label="Full name" autocomplete="name">
+        <input type="email" placeholder="Email" aria-label="Email" autocomplete="email">
+        <select aria-label="Interest"><option>Professional circle</option><option>Interest club</option><option>Cohort space</option></select>
+        <input type="text" placeholder="Username idea" aria-label="Username idea">
+        <textarea placeholder="What kind of community are you looking for?" aria-label="Community preferences"></textarea>
+        <button type="submit" class="chr-btn-primary">Join waitlist</button>
+      </form>
+    </section>
+  </main>
+
+  <aside class="sc-right" aria-label="Community side panel" data-reveal="right">
+    <div class="sc-side-title">Creator watchlist</div>
+    <div class="sc-mini-list">
+      <div class="sc-mini-row"><div class="sc-avatar" style="width:32px;height:32px;border-radius:12px"></div><div><strong>Creator Growth Lab</strong><div class="sc-meta">Workshop invite today</div></div></div>
+      <div class="sc-mini-row"><div class="sc-avatar" style="width:32px;height:32px;border-radius:12px"></div><div><strong>Systems Review</strong><div class="sc-meta">New discussion pack</div></div></div>
+    </div>
+    <div class="sc-side-title" style="margin-top:22px">Safety cues</div>
+    <div class="sc-card"><p style="font-size:.9rem;color:var(--color-text-2);line-height:1.75;margin:0">This right rail is intentionally different from the marketing-style footer CTA pattern. It helps the page feel like a product environment instead of a pitch deck.</p></div>
+    <div class="sc-side-title" style="margin-top:22px">Browse</div>
+    <div class="sc-mini-list">
+      <a href="index.html" class="sc-card" style="text-decoration:none;color:inherit">All layouts</a>
+      <a href="layout-14.html" class="sc-card" style="text-decoration:none;color:inherit">Travel Explorer</a>
+    </div>
+  </aside>
+</div>
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

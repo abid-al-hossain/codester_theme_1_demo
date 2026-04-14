@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-era="futuristic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 07 - Futuristic launch page with a fixed launch countdown, glass panels, and multi-era presentation.">
+  <title>Chronos | Futuristic Launch</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
+    .holo-blob-1{position:fixed;top:-20%;left:-10%;width:50vw;height:50vw;background:radial-gradient(circle at center, color-mix(in srgb,var(--color-primary) 15%,transparent), transparent 60%);filter:blur(60px);z-index:0;pointer-events:none;animation:holo-float-1 20s infinite alternate ease-in-out;}
+    .holo-blob-2{position:fixed;bottom:-20%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle at center, color-mix(in srgb,var(--color-secondary) 15%,transparent), transparent 60%);filter:blur(80px);z-index:0;pointer-events:none;animation:holo-float-2 25s infinite alternate ease-in-out;}
+    @keyframes holo-float-1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(5%,10%) scale(1.1)}}
+    @keyframes holo-float-2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-5%,-10%) scale(1.2)}}
+    .glow-text{text-shadow:0 0 20px color-mix(in srgb,var(--color-primary) 60%,transparent), 0 0 40px color-mix(in srgb,var(--color-secondary) 30%,transparent)}
+    .launch-shell{min-height:100vh;display:flex;align-items:center;position:relative;z-index:2;padding:120px 0 88px}
+    .launch-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.9fr);gap:40px;align-items:center}
+    .glass-card{background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));-webkit-backdrop-filter:blur(var(--blur-glass));border:1px solid var(--color-border);border-radius:var(--radius-md);padding:32px}
+    .countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:36px 0}
+    .count-item{text-align:center;padding:24px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));-webkit-backdrop-filter:blur(var(--blur-glass))}
+    .count-val{display:block;font-family:var(--font-accent);font-size:3rem;font-weight:800;color:var(--color-primary);line-height:1}
+    .count-label{margin-top:8px;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--color-text-3)}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+    .feature-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:.78rem;font-weight:700;background:var(--color-surface);text-transform:uppercase;letter-spacing:.08em}
+    .terminal{background:#020617;border:1px solid var(--color-primary);border-radius:var(--radius-sm);padding:20px;font-family:var(--font-mono);font-size:.8rem;line-height:1.8;box-shadow:0 0 0 1px var(--color-primary),0 0 24px color-mix(in srgb,var(--color-primary) 16%,transparent)}
+    .terminal .prompt{color:var(--color-primary)}
+    .terminal .output{color:var(--color-text-2)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+    .cta-form{display:flex;gap:0;overflow:hidden;border-radius:var(--radius-full);border:1px solid var(--color-border);background:var(--color-surface);backdrop-filter:blur(var(--blur-glass));-webkit-backdrop-filter:blur(var(--blur-glass))}
+    .cta-form input{flex:1;min-width:0;padding:16px 20px;background:transparent;border:none;outline:none;color:var(--color-text);font-family:var(--font-mono)}
+    .cta-form button{border:none;border-radius:0}
+    @media(max-width:1100px){.launch-grid,.chr-container[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr}}
+    @media(max-width:860px){.feature-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:700px){.launch-shell{padding-top:104px}.countdown-grid{grid-template-columns:1fr 1fr}.count-val{font-size:2.1rem}.cta-form{flex-direction:column;border-radius:var(--radius-md)}.cta-form button{border-radius:0 0 var(--radius-md) var(--radius-md)}}
+    @media(max-width:560px){.feature-grid,.stats-grid{grid-template-columns:1fr}.glass-card{padding:24px}}
+  </style>
+</head>
+<body>
+<div class="holo-blob-1" aria-hidden="true"></div>
+<div class="holo-blob-2" aria-hidden="true"></div>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo glow-text">CHRONOS</a>
+    <nav aria-label="Launch navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#launch">Launch</a></li>
+        <li><a href="#systems">Systems</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#access">Access</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#access" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Request access</a>
+      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section id="launch" class="launch-shell" aria-labelledby="launch-heading">
+    <div class="chr-container launch-grid">
+      <div>
+        <div class="chr-badge" data-reveal style="margin-bottom:24px">Futuristic launch demo for Chronos v2</div>
+        <h1 id="launch-heading" class="glow-text" style="font-family:var(--font-accent);font-size:clamp(2.6rem,8vw,6rem);font-weight:900;letter-spacing:-.03em;line-height:.92;margin-bottom:18px" data-reveal>
+          CHRONOS
+          <span style="display:block;color:var(--color-primary)">PRIME</span>
+          ONLINE
+        </h1>
+        <p style="color:var(--color-text-2);max-width:560px;font-size:1rem;line-height:1.8;margin-bottom:0" data-reveal>
+          Use this layout for launch pages, waitlists, and product reveals. The page now reflects the real Chronos product: 20 layouts, 17 eras, 16 preset palettes, and 70+ font choices managed from one shared customizer.
+        </p>
+
+        <div class="countdown-grid" data-countdown data-launch-date="2026-12-01T00:00:00Z" aria-label="Countdown to launch window" data-reveal-group>
+          <div class="count-item"><span class="count-val" data-countdown-days>00</span><div class="count-label">Days</div></div>
+          <div class="count-item"><span class="count-val" data-countdown-hours>00</span><div class="count-label">Hours</div></div>
+          <div class="count-item"><span class="count-val" data-countdown-mins>00</span><div class="count-label">Minutes</div></div>
+          <div class="count-item"><span class="count-val" data-countdown-secs>00</span><div class="count-label">Seconds</div></div>
+        </div>
+
+        <form class="cta-form" data-demo-message="Demo signup captured. Connect this form to your own waitlist endpoint." aria-label="Early access signup" data-reveal>
+          <label for="launch-email" style="display:none">Email</label>
+          <input type="email" id="launch-email" placeholder="pilot@chronos.demo" autocomplete="email">
+          <button type="submit" class="chr-btn-primary" style="padding:16px 28px;font-family:var(--font-accent)">Join queue</button>
+        </form>
+      </div>
+
+      <aside class="glass-card" data-reveal="right" aria-label="Launch summary">
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+          <span class="feature-pill">20 layouts</span>
+          <span class="feature-pill">17 eras</span>
+          <span class="feature-pill">16 palettes</span>
+          <span class="feature-pill">Vite 8</span>
+        </div>
+        <div class="terminal">
+          <div class="prompt">$ chronos --status</div>
+          <div class="output">Loading layout matrix...</div>
+          <div class="output">[ OK ] 20 layouts available</div>
+          <div class="output">[ OK ] 17 eras initialized</div>
+          <div class="output">[ OK ] 16 preset palettes mounted</div>
+          <div class="output">[ OK ] 70+ fonts indexed</div>
+          <div class="output">[ OK ] Customizer persistence online</div>
+          <div class="prompt" style="margin-top:10px">$ chronos --preview layout-07</div>
+        </div>
+        <p style="margin:22px 0 0;color:var(--color-text-2);font-size:.9rem;line-height:1.7">
+          The countdown now points to one fixed launch date, so it behaves like a real launch timer across reloads and sessions.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="systems" class="chr-section" aria-labelledby="systems-heading">
+    <div class="chr-container">
+      <div style="text-align:center;max-width:640px;margin:0 auto 56px" data-reveal>
+        <div class="chr-heading-sm" style="color:var(--color-primary)">Deployed systems</div>
+        <h2 id="systems-heading" class="chr-heading-xl glow-text">A launch page with real shared infrastructure</h2>
+        <p style="color:var(--color-text-2);margin-top:14px">Layout 07 now uses the same source runtime as the rest of the product instead of shipping page-specific stale scripts and hardcoded claims.</p>
+      </div>
+
+      <div class="feature-grid" data-reveal-group>
+        <div class="glass-card">
+          <h3 style="font-family:var(--font-accent);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase">Shared customizer engine</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Era, font, and palette changes persist across layouts through one Alpine store instead of per-page custom code.</p>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-family:var(--font-accent);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase">Launch-safe demo actions</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Placeholder forms and non-functional demo actions now behave intentionally and do not cause reloads or jump-to-top glitches.</p>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-family:var(--font-accent);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase">Responsive glass layout</h3>
+          <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">The hero, countdown blocks, and feature sections now stack and wrap cleanly on narrow widths instead of relying on desktop-only grids.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="specs-heading">
+    <div class="chr-container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+      <div data-reveal="left">
+        <div class="chr-heading-sm">System readout</div>
+        <h2 id="specs-heading" class="chr-heading-xl glow-text" style="margin-bottom:2rem">Technical profile</h2>
+        <div style="display:grid;gap:14px">
+          <div class="feature-pill">Alpine.js store for persistence</div>
+          <div class="feature-pill">Tailwind CSS v4 token pipeline</div>
+          <div class="feature-pill">Vite 8 development workflow</div>
+          <div class="feature-pill">16 preset palettes plus custom colors</div>
+          <div class="feature-pill">70+ Google Fonts on demand</div>
+          <div class="feature-pill">Semantic sections and skip link</div>
+        </div>
+      </div>
+      <div class="glass-card" data-reveal="right">
+        <div class="stats-grid">
+          <div><div style="font-family:var(--font-accent);font-size:2.5rem;font-weight:800;color:var(--color-primary)">20</div><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Layouts</div></div>
+          <div><div style="font-family:var(--font-accent);font-size:2.5rem;font-weight:800;color:var(--color-primary)">17</div><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Eras</div></div>
+          <div><div style="font-family:var(--font-accent);font-size:2.5rem;font-weight:800;color:var(--color-primary)">16</div><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Palettes</div></div>
+          <div><div style="font-family:var(--font-accent);font-size:2.5rem;font-weight:800;color:var(--color-primary)">70+</div><div style="font-size:.8rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em">Fonts</div></div>
+        </div>
+        <p style="margin:24px 0 0;color:var(--color-text-2);line-height:1.7">
+          This page intentionally avoids unverifiable promises. It demonstrates the visual system, the shared source workflow, and the reusable countdown pattern that can be connected to a real launch date later.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chr-section" aria-label="Feature highlights">
+    <div class="chr-container">
+      <div class="feature-grid" data-reveal-group>
+        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">01</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Launch headline</div></div>
+        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">02</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Fixed launch countdown</div></div>
+        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">03</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Waitlist form</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="launch-shell" style="min-height:62vh;padding-top:0" aria-labelledby="access-heading">
+    <div class="chr-container" style="text-align:center">
+      <div class="glass-card" style="max-width:760px;margin:0 auto" data-reveal>
+        <div class="chr-heading-sm">Access</div>
+        <h2 id="access-heading" class="glow-text" style="font-family:var(--font-accent);font-size:clamp(2rem,6vw,4rem);font-weight:900;margin-bottom:1rem">Preview the full layout set</h2>
+        <p style="color:var(--color-text-2);max-width:560px;margin:0 auto 2rem;line-height:1.8">
+          Move back to the layout directory to compare all 20 layouts under the same 17-era customizer, then keep refining the source before the later release-packaging phase.
+        </p>
+        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+          <a href="index.html" class="chr-btn-primary">Open layout directory</a>
+          <a href="layout-05.html" class="chr-btn-ghost">View dashboard demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--color-bg-2);border-top:var(--border-w) solid var(--color-border);padding:40px 0;position:relative;z-index:2" role="contentinfo">
+  <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <a href="index.html" class="chr-logo glow-text">CHRONOS</a>
+    <p style="font-size:.82rem;color:var(--color-text-3);font-family:var(--font-mono)">2026 Chronos - Layout 07 Futuristic Launch</p>
+    <nav aria-label="Related layouts">
+      <ul style="list-style:none;display:flex;gap:20px">
+        <li><a href="layout-05.html" style="font-size:.85rem;color:var(--color-text-2)">Dashboard</a></li>
+        <li><a href="layout-08.html" style="font-size:.85rem;color:var(--color-text-2)">Journal</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
+
+

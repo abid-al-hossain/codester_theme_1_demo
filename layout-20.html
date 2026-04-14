@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" data-era="magic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 20 - The Grand Library magic layout with a deeper midnight-academy atmosphere, portrait halls, alchemy ledgers, and spell cards.">
+  <title>Chronos | The Grand Library</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{
+      background: var(--color-bg);
+      color: var(--color-text);
+      background-image:
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--color-primary) 14%, transparent) 0%, transparent 28%),
+        radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--color-secondary) 12%, transparent) 0%, transparent 24%),
+        radial-gradient(circle at 50% 50%, var(--color-bg-2) 0%, var(--color-bg) 80%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before,
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+    }
+    body::before{
+      background:
+        radial-gradient(circle at 12% 20%, color-mix(in srgb, var(--color-primary) 28%, transparent) 0 2px, transparent 3px),
+        radial-gradient(circle at 72% 30%, color-mix(in srgb, var(--color-secondary) 20%, transparent) 0 1.5px, transparent 2.5px),
+        radial-gradient(circle at 60% 76%, color-mix(in srgb, var(--color-primary) 18%, transparent) 0 2px, transparent 3px),
+        radial-gradient(circle at 88% 60%, color-mix(in srgb, var(--color-accent) 14%, transparent) 0 1.5px, transparent 2.5px);
+      background-size: 320px 320px, 420px 420px, 360px 360px, 440px 440px;
+      opacity:.48;
+      animation: stardrift 24s linear infinite;
+      will-change: transform;
+    }
+    body::after{
+      background:
+        linear-gradient(90deg, transparent 0, color-mix(in srgb, var(--color-primary) 7%, transparent) 50%, transparent 100%),
+        linear-gradient(180deg, transparent 0, color-mix(in srgb, var(--color-secondary) 5%, transparent) 52%, transparent 100%);
+      opacity:.45;
+      mix-blend-mode:screen;
+    }
+    header,
+    main,
+    footer{
+      position:relative;
+      z-index:1;
+    }
+    .tome-container{
+      max-width:1120px;
+      margin:80px auto;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 94%, transparent), color-mix(in srgb, var(--color-bg-2) 86%, transparent)),
+        var(--color-surface);
+      border:var(--border-w) solid var(--color-border);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-lg);
+      padding:84px 80px;
+      position:relative;
+      overflow:hidden;
+    }
+    .tome-container::before{
+      content:'';
+      position:absolute;
+      top:20px;
+      right:20px;
+      bottom:20px;
+      left:20px;
+      border:1px solid var(--color-border-2);
+      border-radius:calc(var(--radius-lg) - 10px);
+      pointer-events:none;
+    }
+    .tome-container::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 42%),
+        radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent 38%);
+      pointer-events:none;
+      opacity:.8;
+    }
+    .drop-cap{
+      float:left;
+      font-family:var(--font-heading);
+      font-size:5rem;
+      line-height:.8;
+      color:var(--color-primary);
+      margin-right:16px;
+      margin-bottom:8px;
+    }
+    .magic-title{
+      font-family:var(--font-accent);
+      font-size:clamp(3.5rem, 9vw, 6.1rem);
+      line-height:.92;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      color:var(--color-primary-2);
+      text-align:center;
+      margin:18px 0 20px;
+      text-shadow:var(--shadow-glow);
+    }
+    .magic-divider{
+      text-align:center;
+      margin:48px 0;
+      color:var(--color-primary);
+      font-size:1.12rem;
+      letter-spacing:.56em;
+      text-transform:uppercase;
+      opacity:.86;
+      animation:dividerPulse 5s ease-in-out infinite;
+    }
+    .magic-columns{
+      column-count:2;
+      column-gap:60px;
+      font-family:var(--font-body);
+      font-size:1.15rem;
+      line-height:2;
+      color:var(--color-text-2);
+      text-align:justify;
+    }
+    .magic-hero{
+      position:relative;
+      padding:48px 48px 40px;
+      margin-bottom:36px;
+      border-radius:var(--radius-xl);
+      background:
+        radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--color-primary) 16%, transparent), transparent 44%),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-bg-3) 92%, transparent), color-mix(in srgb, var(--color-bg-2) 86%, transparent));
+      border:1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+      box-shadow:inset 0 0 60px color-mix(in srgb, var(--color-primary) 10%, transparent);
+      overflow:hidden;
+    }
+    .magic-hero::before{
+      content:'';
+      position:absolute;
+      inset:14px;
+      border:1px solid color-mix(in srgb, var(--color-primary) 26%, var(--color-border-2));
+      border-radius:calc(var(--radius-xl) - 10px);
+      pointer-events:none;
+    }
+    .hero-brow{
+      text-align:center;
+      letter-spacing:.45em;
+      text-transform:uppercase;
+      color:var(--color-secondary);
+      font-family:var(--font-mono);
+      font-size:.9rem;
+      margin-bottom:18px;
+      opacity:.85;
+    }
+    .hero-lead{
+      max-width:760px;
+      margin:0 auto;
+      text-align:center;
+      font-size:1.18rem;
+      line-height:1.9;
+      color:var(--color-text-2);
+    }
+    .hero-runes{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+    .hero-runes span{
+      min-width:148px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid color-mix(in srgb, var(--color-primary) 22%, var(--color-border));
+      background:color-mix(in srgb, var(--color-bg) 70%, transparent);
+      font-family:var(--font-mono);
+      font-size:.82rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      text-align:center;
+      color:var(--color-text-2);
+      box-shadow:0 0 0 1px color-mix(in srgb, var(--color-primary) 8%, transparent) inset;
+      animation:runeFloat 7s ease-in-out infinite;
+      will-change: transform;
+    }
+    .hero-runes span:nth-child(2){ animation-delay:1.1s; }
+    .hero-runes span:nth-child(3){ animation-delay:2.2s; }
+    .hero-runes span:nth-child(4){ animation-delay:3.3s; }
+    .floating-glyphs{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.55;
+    }
+    .floating-glyphs span{
+      position:absolute;
+      font-family:var(--font-heading);
+      color:color-mix(in srgb, var(--color-primary) 72%, white);
+      text-shadow:0 0 22px color-mix(in srgb, var(--color-primary) 35%, transparent);
+      animation:glyphRise linear infinite;
+      will-change: transform, opacity;
+    }
+    .chapter-panel,
+    .house-card,
+    .portrait-card,
+    .spell-card{
+      position:relative;
+      overflow:hidden;
+      min-width:0;
+    }
+    .chapter-panel{
+      padding:32px;
+      border-radius:var(--radius-lg);
+      background:linear-gradient(180deg, color-mix(in srgb, var(--color-bg-3) 94%, transparent), color-mix(in srgb, var(--color-bg-2) 84%, transparent));
+      border:1px solid var(--color-border);
+      box-shadow:inset 0 0 28px color-mix(in srgb, var(--color-primary) 8%, transparent);
+    }
+    .chapter-panel h4,
+    .house-card h4,
+    .portrait-card h4{
+      margin:0 0 12px;
+      font-family:var(--font-heading);
+      color:var(--color-text);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .chapter-panel p,
+    .house-card p,
+    .portrait-card p{
+      margin:0;
+      color:var(--color-text-2);
+      line-height:1.85;
+    }
+    .house-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:18px;
+      margin:36px 0 60px;
+    }
+    .house-card{
+      padding:26px 22px;
+      border-radius:var(--radius-lg);
+      border:1px solid var(--color-border);
+      background:linear-gradient(180deg, color-mix(in srgb, var(--color-bg-2) 88%, transparent), color-mix(in srgb, var(--color-bg-3) 92%, transparent));
+      transition:transform var(--dur), box-shadow var(--dur), border-color var(--dur);
+    }
+    .house-card:hover{
+      transform:translateY(-6px);
+      border-color:color-mix(in srgb, var(--color-primary) 45%, var(--color-border));
+      box-shadow:0 18px 50px color-mix(in srgb, var(--color-primary) 16%, transparent);
+      will-change: transform;
+    }
+    .house-sigil{
+      font-family:var(--font-accent);
+      font-size:2.2rem;
+      color:var(--color-primary);
+      margin-bottom:16px;
+      text-shadow:var(--shadow-glow);
+    }
+    .portrait-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:20px;
+      margin:38px 0 60px;
+    }
+    .portrait-card{
+      padding:28px;
+      border:1px solid var(--color-border);
+      border-radius:var(--radius-lg);
+      background:color-mix(in srgb, var(--color-bg-3) 94%, transparent);
+      transition:transform var(--dur), box-shadow var(--dur);
+    }
+    .portrait-card:hover{
+      transform:translateY(-8px) rotate(-1deg);
+      box-shadow:0 16px 40px color-mix(in srgb, var(--color-secondary) 16%, transparent);
+      will-change: transform;
+    }
+    .portrait-frame{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:190px;
+      margin-bottom:20px;
+      border-radius:calc(var(--radius-lg) - 6px);
+      border:1px solid color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+      background:
+        radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 48%),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-bg) 84%, transparent), color-mix(in srgb, var(--color-bg-2) 92%, transparent));
+      box-shadow:inset 0 0 36px color-mix(in srgb, var(--color-primary) 10%, transparent);
+      font-family:var(--font-accent);
+      font-size:2.1rem;
+      color:var(--color-primary);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      animation:portraitGlow 8s ease-in-out infinite;
+    }
+    .spell-card{
+      background:var(--color-bg-3);
+      border:var(--border-w) solid var(--color-border);
+      border-radius:var(--radius-lg);
+      padding:30px;
+      text-align:center;
+      margin-top:40px;
+      transition:transform var(--dur), box-shadow var(--dur), border-color var(--dur);
+    }
+    .spell-card:hover{
+      transform:translateY(-10px) rotate(-1deg);
+      box-shadow:var(--shadow-glow);
+      border-color:color-mix(in srgb, var(--color-primary) 42%, var(--color-border));
+      will-change: transform;
+    }
+    .spell-card::before{
+      content:'';
+      position:absolute;
+      inset:-30% 30% auto -30%;
+      height:160%;
+      background:linear-gradient(120deg, transparent, color-mix(in srgb, var(--color-primary) 24%, transparent), transparent);
+      opacity:0;
+      transform:rotate(14deg);
+      transition:opacity var(--dur), transform var(--dur);
+      pointer-events:none;
+    }
+    .spell-card:hover::before{
+      opacity:.8;
+      transform:translateX(22%) rotate(14deg);
+    }
+    .owl-strip{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:24px;
+      margin:56px 0;
+    }
+    .owl-route,
+    .lantern-panel{
+      padding:28px;
+      border-radius:var(--radius-lg);
+      background:color-mix(in srgb, var(--color-bg-3) 92%, transparent);
+      border:1px solid var(--color-border);
+      min-width:0;
+    }
+    .owl-route ul{
+      list-style:none;
+      padding:0;
+      margin:20px 0 0;
+      display:grid;
+      gap:14px;
+    }
+    .owl-route li{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      padding-bottom:12px;
+      border-bottom:1px solid var(--color-border);
+      color:var(--color-text-2);
+      flex-wrap:wrap;
+    }
+    .owl-route strong{
+      color:var(--color-text);
+      font-family:var(--font-heading);
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .lantern{
+      width:92px;
+      height:140px;
+      margin:8px auto 18px;
+      border-radius:46px 46px 28px 28px;
+      border:1px solid color-mix(in srgb, var(--color-primary) 42%, var(--color-border));
+      background:
+        radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--color-primary) 85%, white) 0 18%, color-mix(in srgb, var(--color-primary) 45%, transparent) 28%, transparent 58%),
+        linear-gradient(180deg, color-mix(in srgb, var(--color-bg-2) 78%, transparent), color-mix(in srgb, var(--color-bg) 92%, transparent));
+      box-shadow:
+        0 0 40px color-mix(in srgb, var(--color-primary) 18%, transparent),
+        inset 0 0 28px color-mix(in srgb, var(--color-primary) 12%, transparent);
+      animation:lanternFlicker 4s ease-in-out infinite;
+      will-change: transform, filter;
+    }
+    .archive-table{
+      overflow-x:auto;
+      margin-top:20px;
+    }
+    @supports (content-visibility:auto){
+      .portrait-grid,
+      .house-grid,
+      .owl-strip,
+      .archive-table,
+      #spells{
+        content-visibility:auto;
+        contain-intrinsic-size:1px 720px;
+      }
+    }
+    table{
+      min-width:640px;
+    }
+    code{
+      color:var(--color-primary);
+      background:color-mix(in srgb, var(--color-bg) 76%, transparent);
+      padding:.14em .38em;
+      border-radius:999px;
+    }
+    @keyframes stardrift{
+      from{ transform:translateY(0); }
+      50%{ transform:translateY(-14px); }
+      to{ transform:translateY(0); }
+    }
+    @keyframes dividerPulse{
+      0%,100%{ opacity:.62; letter-spacing:.5em; }
+      50%{ opacity:1; letter-spacing:.6em; }
+    }
+    @keyframes runeFloat{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-6px); }
+    }
+    @keyframes glyphRise{
+      0%{ transform:translateY(14px) scale(.92); opacity:0; }
+      10%,80%{ opacity:.65; }
+      100%{ transform:translateY(-26px) scale(1.08); opacity:0; }
+    }
+    @keyframes lanternFlicker{
+      0%,100%{ transform:translateY(0) scale(1); filter:saturate(1); }
+      30%{ transform:translateY(-2px) scale(1.02); filter:saturate(1.08); }
+      55%{ transform:translateY(1px) scale(.985); }
+      75%{ transform:translateY(-1px) scale(1.01); }
+    }
+    @keyframes portraitGlow{
+      0%,100%{ box-shadow: inset 0 0 36px color-mix(in srgb, var(--color-primary) 10%, transparent); }
+      50%{ box-shadow: inset 0 0 56px color-mix(in srgb, var(--color-primary) 16%, transparent), 0 0 26px color-mix(in srgb, var(--color-primary) 12%, transparent); }
+    }
+    @media(max-width:1100px){
+      .house-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .portrait-grid{ grid-template-columns:1fr; }
+      .owl-strip{ grid-template-columns:1fr; }
+    }
+    @media(max-width:900px){
+      .magic-split{
+        grid-template-columns:1fr !important;
+        gap:24px !important;
+      }
+    }
+    @media(max-width:800px){
+      .magic-columns{ column-count:1; }
+      .tome-container{ padding:44px 24px; }
+      .magic-hero{ padding:34px 22px; }
+      .hero-lead{ font-size:1.04rem; }
+      .hero-runes span{ min-width:100%; }
+      .house-grid{ grid-template-columns:1fr; }
+      .chapter-panel,
+      .house-card,
+      .portrait-card,
+      .owl-route,
+      .lantern-panel{ padding:22px; }
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner" style="background:transparent; border:none; padding-top:20px;">
+  <div class="chr-container chr-nav-inner" style="justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <a href="index.html" class="chr-logo" style="color:var(--color-primary); font-family:var(--font-heading); font-size:1.5rem; letter-spacing:0.2em;">Chronos Archive</a>
+    <nav class="chr-nav-links" aria-label="Magic navigation">
+      <a href="#prologue" style="font-family:var(--font-body); color:var(--color-text);">Prologue</a>
+      <a href="#constructs" style="font-family:var(--font-body); color:var(--color-text);">Constructs</a>
+      <a href="#potions" style="font-family:var(--font-body); color:var(--color-text);">Potions</a>
+      <a href="#spells" style="font-family:var(--font-body); color:var(--color-text);">Spells</a>
+    </nav>
+    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content" style="padding: 0 24px;">
+  <article class="tome-container" data-reveal="scale" id="prologue">
+    <div class="magic-hero">
+      <div class="floating-glyphs" aria-hidden="true">
+        <span style="top:14%;left:10%;font-size:1.8rem;animation-duration:9s;">&#10023;</span>
+        <span style="top:22%;right:14%;font-size:1.35rem;animation-duration:10s;animation-delay:1.3s;">&#10022;</span>
+        <span style="bottom:24%;left:18%;font-size:1.6rem;animation-duration:8.4s;animation-delay:2.2s;">&#10023;</span>
+        <span style="bottom:18%;right:20%;font-size:1.2rem;animation-duration:11s;animation-delay:3.1s;">&#10022;</span>
+      </div>
+      <div class="hero-brow">Inner Archive &bull; Portrait Hall &bull; Term XX</div>
+      <h1 class="magic-title">The Grand Library</h1>
+      <div style="font-family:var(--font-heading); text-align:center; color:var(--color-text); letter-spacing:0.3em; text-transform:uppercase; margin-bottom: 28px; font-size:0.9rem;">
+        Tome of CSS Variables &mdash; Chapter 20
+      </div>
+      <p class="hero-lead">
+        This page now leans into the feeling of a midnight castle academy: candlelit reading halls, portrait corridors,
+        courier notices, alchemy ledgers, and a heavy old tome that looks like it has been opened under torchlight.
+      </p>
+      <div class="hero-runes" aria-label="Magical atmosphere markers">
+        <span>Portrait Hall</span>
+        <span>Owl Post</span>
+        <span>Potion Ledger</span>
+        <span>Spell Chamber</span>
+      </div>
+    </div>
+
+    <div class="magic-columns">
+      <span class="drop-cap">B</span>
+      eyond the west stair and under the watch of moving frames, the library opens into a chamber of floating dust, brass lanterns, and whispering ledgers. The intention is not just fantasy dressing, but a page that feels closer to an old midnight academy archive: warm torchlight, deep wood, disciplined ornament, and slow ceremonial movement.
+      <br><br>
+      The pacing is intentionally slower and more immersive than the louder layouts. Wide margins, chapter-like breaks, layered panels, and heavier atmosphere are all here to make the layout feel like a place. It should read like an enchanted study room where each section is a chapter and every card feels like an artifact from the castle itself.
+    </div>
+
+    <div class="magic-divider">&#10023; &bull; &#10022; &bull; &#10023;</div>
+
+    <h2 id="constructs" style="font-family:var(--font-accent); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter II: Castle Constructs</h2>
+    <div class="magic-split" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:34px;">
+      <div class="chapter-panel" data-reveal="left">
+        <h4>Portrait Corridor</h4>
+        <p>The shell behaves like a framed reading hall: layered borders, drifting glyphs, slow ambient glow, and heavier chapter breaks. It should feel like turning pages inside a castle archive rather than browsing a plain article page.</p>
+      </div>
+      <div class="chapter-panel" data-reveal="right">
+        <h4>Headmaster's Notes</h4>
+        <p>The typography is still theme-driven, but the surrounding frame now has more ceremony: title glow, rune drift, lantern light, and hover states that feel magical without sacrificing readability.</p>
+      </div>
+    </div>
+
+    <div class="portrait-grid">
+      <div class="portrait-card" data-reveal="bottom">
+        <div class="portrait-frame">North Tower</div>
+        <h4>Moving Portrait Ledger</h4>
+        <p>Animated portrait frames make the page feel inhabited, as if the walls themselves are quietly observing the readers crossing the hall.</p>
+      </div>
+      <div class="portrait-card" data-reveal="bottom" style="transition-delay:.1s;">
+        <div class="portrait-frame">Astronomy</div>
+        <h4>Midnight Observatory</h4>
+        <p>Soft glow and framed panels echo stained-glass spill, moonlit windows, and the kind of late-night study atmosphere a magical school should carry.</p>
+      </div>
+      <div class="portrait-card" data-reveal="bottom" style="transition-delay:.2s;">
+        <div class="portrait-frame">Restricted</div>
+        <h4>Forbidden Stacks</h4>
+        <p>These panels read more like cabinets or alcoves within the archive. The motion stays slow and ceremonial so the mood feels enchanted, not noisy.</p>
+      </div>
+    </div>
+
+    <div style="margin:60px 0; padding:40px; border:2px dashed var(--color-border-2); background:var(--color-bg-2); border-radius:var(--radius-lg);">
+      <h3 style="font-family:var(--font-heading); color:var(--color-primary-2); text-align:center; font-size:1.8rem; margin-bottom:20px;">The Alchemist's Palette</h3>
+      <div class="archive-table">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-body); color:var(--color-text-2);">
+          <tr style="border-bottom:1px solid var(--color-border); color:var(--color-text);">
+            <th style="padding:16px; text-align:left;">Reagent</th>
+            <th style="padding:16px; text-align:left;">Property</th>
+            <th style="padding:16px; text-align:left;">Result</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:16px;">Stardust Extract</td>
+            <td style="padding:16px;">--color-primary</td>
+            <td style="padding:16px;">Warm gold used for sigils, lanterns, and chapter glow</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--color-border);">
+            <td style="padding:16px;">Nightshade Root</td>
+            <td style="padding:16px;">--color-secondary</td>
+            <td style="padding:16px;">Velvet contrast for academy trims and spell accents</td>
+          </tr>
+          <tr>
+            <td style="padding:16px;">Void Water</td>
+            <td style="padding:16px;">--color-bg</td>
+            <td style="padding:16px;">Shadowed hall backdrop beneath torchlight gradients</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="house-grid">
+      <div class="house-card" data-reveal="left">
+        <div class="house-sigil">&#10022;</div>
+        <h4>House of Embers</h4>
+        <p>Duelists, bold processionals, and red-gold hallways lit by braziers. This gives the layout a fuller house-banner world instead of a plain reading surface.</p>
+      </div>
+      <div class="house-card" data-reveal="left" style="transition-delay:.08s;">
+        <div class="house-sigil">&#10023;</div>
+        <h4>House of Thorns</h4>
+        <p>Greenhouses, herb drawers, cloister corridors, and patient discipline. The darker secondary tones help the page feel older and more scholastic.</p>
+      </div>
+      <div class="house-card" data-reveal="right" style="transition-delay:.12s;">
+        <div class="house-sigil">&#10022;</div>
+        <h4>House of Tides</h4>
+        <p>Moon-water, mirrored ink, observatory decks, and nocturnal study. This introduces a cooler side of the academy atmosphere without losing the core warmth.</p>
+      </div>
+      <div class="house-card" data-reveal="right" style="transition-delay:.18s;">
+        <div class="house-sigil">&#10023;</div>
+        <h4>House of Stone</h4>
+        <p>Archive keepers, hall wardens, ancient rulebooks, and stern staircases. These cards help the page feel like a campus, not a single chamber.</p>
+      </div>
+    </div>
+
+    <div class="magic-divider">&#10023; &bull; &#10022; &bull; &#10023;</div>
+
+    <h2 id="potions" style="font-family:var(--font-accent); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter III: Potions &amp; Owl Post</h2>
+    <div class="magic-split" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px;">
+      <div class="chapter-panel" data-reveal="left">
+        <h4>Elixir of Radiance</h4>
+        <p>Combine two parts <code>--color-primary</code> with a pinch of <code>--shadow-glow</code>. Stir under torchlight until the chamber edges begin to hum. This is the spell that gives lanterns, cards, and headings their warm arcane pull.</p>
+      </div>
+      <div class="chapter-panel" data-reveal="right">
+        <h4>Draught of Rigidity</h4>
+        <p>Boil three instances of <code>--radius-sm</code> into a stricter border tonic when a magical surface starts dissolving into mush. Useful when a whimsical theme still needs strong editorial discipline.</p>
+      </div>
+    </div>
+
+    <div class="owl-strip">
+      <div class="owl-route" data-reveal="left">
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin:0;">Owl Route Register</h3>
+        <ul>
+          <li><strong>North Dormitory</strong><span>Ink requisition, wax seal, astronomy chart</span></li>
+          <li><strong>Potion Vault</strong><span>Nightroot ledger, silver vials, cauldron timing notes</span></li>
+          <li><strong>Great Hall</strong><span>Banner revision, chorus order, candle-height draft</span></li>
+          <li><strong>Inner Archive</strong><span>Silent key transfer, catalog update, ward inspection</span></li>
+        </ul>
+      </div>
+      <div class="lantern-panel" data-reveal="right">
+        <div class="lantern" aria-hidden="true"></div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); text-align:center; margin:0 0 12px;">Night Lantern</h3>
+        <p style="text-align:center; color:var(--color-text-2); margin:0;">A small animated light source keeps the library feeling inhabited, as if the archive stays awake long after curfew.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--color-bg-3); padding:40px; border-radius:var(--radius-xl); border:1px solid var(--color-border-2); margin-bottom:60px;">
+      <h3 style="font-family:var(--font-heading); color:var(--color-text); text-align:center; margin-bottom:30px;">Scroll Archive</h3>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--color-border); padding-bottom:8px; flex-wrap:wrap;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-092]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">The Lost Alignment of Divs</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--color-border); padding-bottom:8px; flex-wrap:wrap;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-114]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">The Secret History of !important</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--color-border); padding-bottom:8px; flex-wrap:wrap;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-205]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">Transmutation of Margin into Padding</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; gap:16px; padding-bottom:8px; flex-wrap:wrap;">
+          <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-primary);">[SCR-311]</span>
+          <span style="font-family:var(--font-body); color:var(--color-text-2);">Charmed Tables for Midnight Examinations</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="spells" style="font-family:var(--font-accent); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter IV: Noteworthy Spells</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; justify-content:center;">
+      <div class="spell-card" data-reveal="bottom">
+        <div style="font-size:3rem; margin-bottom:16px;">&#10024;</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Lantern Sigil</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Ignites chapter glow inside frames, banners, cards, and lantern surfaces without flooding the page with light.</p>
+      </div>
+      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.1s;">
+        <div style="font-size:3rem; margin-bottom:16px;">&#9790;</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Castle Ward</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Keeps the atmosphere dense and nocturnal, layering the hall with dark wood, night stone, and ceremonial torchlight.</p>
+      </div>
+      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.2s;">
+        <div style="font-size:3rem; margin-bottom:16px;">&#10022;</div>
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Glyph Mending</h3>
+        <p style="font-family:var(--font-body); color:var(--color-text-3);">Restores the page from generic fantasy dressing into a proper old-academy magical environment with readable but theatrical motion.</p>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer style="padding:60px 0; text-align:center; background:transparent;">
+  <div class="chr-container">
+    <div style="font-family:var(--font-accent); font-size:2rem; color:var(--color-primary);">Chronos Archive</div>
+    <div style="font-family:var(--font-body); color:var(--color-text-3); margin-top:10px;">Preserving the Arcane Arts of CSS</div>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>

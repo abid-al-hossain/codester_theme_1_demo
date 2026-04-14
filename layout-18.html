@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-era="iceage">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 18 - Glacier Expeditions with frosted glass panels and expedition logs.">
+  <title>Chronos | Glacier Expeditions</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+  <style>
+    [x-cloak]{display:none!important}
+    body{
+      background: var(--color-bg);
+      color: var(--color-text);
+      background-image: radial-gradient(circle at 100% 0%, var(--color-bg-2) 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, var(--color-bg-3) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+    .ice-pane {
+      background: var(--color-surface);
+      backdrop-filter: blur(var(--blur-glass));
+      -webkit-backdrop-filter: blur(var(--blur-glass));
+      border: var(--border-w) solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      padding: 40px;
+      position: relative;
+    }
+    .ice-pane::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
+      pointer-events: none;
+    }
+    .grid-ice {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 80px 0;
+    }
+    .stat-block {
+      border-left: 4px solid var(--color-primary);
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<header class="chr-nav" role="banner">
+  <div class="chr-container chr-nav-inner" style="flex-wrap:wrap;gap:16px;">
+    <a href="index.html" class="chr-logo" style="color:var(--color-primary)">CHRONOS LABS</a>
+    <nav class="chr-nav-links" aria-label="Ice age navigation">
+      <a href="#data">DATA</a>
+      <a href="#logs">EXPEDITION LOGS</a>
+      <a href="#arsenal">ARSENAL</a>
+      <a href="#samples">SAMPLES</a>
+      <a href="#maintenance">MAINTENANCE</a>
+    </nav>
+    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main-content">
+  <section style="padding: 120px 24px;">
+    <div class="chr-container" style="max-width: 1000px;">
+      <div class="ice-pane" data-reveal="scale">
+        <div style="font-family:var(--font-mono); color:var(--color-secondary); letter-spacing:0.2em; margin-bottom:16px;">STATION 4 &bull; PERMAFROST CORE</div>
+        <h1 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-primary); margin-bottom:24px; text-transform:uppercase;">Glacier Expeditions</h1>
+        <p style="font-family:var(--font-body); font-size:1.2rem; line-height:1.8; color:var(--color-text-2); max-width:600px;">
+          The Ice Age aesthetic requires high negative space, sharp translucent containers, and a clinical color palette. Observe the extreme backdrop blur forcing depth into the flat page.
+        </p>
+      </div>
+
+      <div class="grid-ice" id="data">
+        <div class="ice-pane" data-reveal="bottom">
+          <div class="stat-block">
+            <div style="font-family:var(--font-mono); font-size:3rem; color:var(--color-primary); font-weight:700;">-42&deg;C</div>
+            <div style="font-family:var(--font-accent); color:var(--color-text-3);">SURFACE TEMP</div>
+          </div>
+        </div>
+        <div class="ice-pane" data-reveal="bottom" style="transition-delay:0.1s;">
+          <div class="stat-block" style="border-color:var(--color-secondary);">
+            <div style="font-family:var(--font-mono); font-size:3rem; color:var(--color-secondary); font-weight:700;">14.2M</div>
+            <div style="font-family:var(--font-accent); color:var(--color-text-3);">ICE THICKNESS (KM)</div>
+          </div>
+        </div>
+        <div class="ice-pane" data-reveal="bottom" style="transition-delay:0.2s;">
+          <div class="stat-block" style="border-color:var(--color-accent);">
+            <div style="font-family:var(--font-mono); font-size:3rem; color:var(--color-accent); font-weight:700;">STABLE</div>
+            <div style="font-family:var(--font-accent); color:var(--color-text-3);">CORE INTEGRITY</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--color-bg-2); padding: 120px 24px;" id="logs">
+    <div class="chr-container" style="max-width: 800px;">
+      <h2 style="font-family:var(--font-heading); font-size:2.5rem; color:var(--color-text); margin-bottom: 40px; text-align:center;">Deep Core Extractions</h2>
+      
+      <div style="display:flex; flex-direction:column; gap:40px;">
+        <article class="ice-pane" data-reveal="left">
+          <div style="display:flex; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:16px;">
+            <span style="font-family:var(--font-mono); color:var(--color-primary);">LOG 0041</span>
+            <span style="font-family:var(--font-accent); color:var(--color-text-3);">2026.04.05</span>
+          </div>
+          <p style="font-family:var(--font-body); line-height:1.7; color:var(--color-text-2); font-size: 1.1rem;">
+            Drill reached depth of 3km today. We have breached the sub-glacial lake layer. Sensors indicate abnormal thermal vents at the base, suggesting geothermic overlap beneath Sector B. The drill heads required three replacements due to the unexpected density of the paleocrystic ice.
+          </p>
+        </article>
+        
+        <article class="ice-pane" data-reveal="right">
+          <div style="display:flex; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:16px;">
+            <span style="font-family:var(--font-mono); color:var(--color-primary);">LOG 0042</span>
+            <span style="font-family:var(--font-accent); color:var(--color-text-3);">2026.04.06</span>
+          </div>
+          <p style="font-family:var(--font-body); line-height:1.7; color:var(--color-text-2); font-size: 1.1rem;">
+            Extracted samples from the vents. The ice surrounding them isn't melting; it has formed a pressurized diamond-lattice structure. Sending data to orbit for analysis. Preliminary results suggest this structure could only form outside of our known atmospheric pressures.
+          </p>
+        </article>
+        
+        <article class="ice-pane" data-reveal="left">
+          <div style="display:flex; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:16px;">
+            <span style="font-family:var(--font-mono); color:var(--color-primary);">LOG 0043</span>
+            <span style="font-family:var(--font-accent); color:var(--color-text-3);">2026.04.08</span>
+          </div>
+          <p style="font-family:var(--font-body); line-height:1.7; color:var(--color-text-2); font-size: 1.1rem;">
+            A severe storm has knocked out terrestrial comms array. For the next 72 hours, Station 4 relies purely on laser point-to-point via Satellite 9. The samples are emitting a faint luminescent glow in the dark, matching the `--color-secondary` CSS hex precisely.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="arsenal" style="padding: 160px 24px; position:relative; overflow:hidden;">
+    <div style="position:absolute; top: -50px; left: -50px; font-family:var(--font-heading); font-size: 18rem; color:var(--color-bg-2); opacity: 0.8; z-index:-1;">ARSENAL</div>
+    
+    <div class="chr-container">
+      <h2 style="font-family:var(--font-heading); font-size: 4rem; color:var(--color-primary); text-align:center; margin-bottom: 80px;">Hardware Roster</h2>
+      
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        <!-- Item 1 -->
+        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center;" data-reveal="bottom">
+          <div style="width: 120px; height: 120px; border-radius: 50%; background:var(--color-bg-2); border: 2px solid var(--color-primary); display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
+             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5"><polygon points="12 2 2 22 22 22 12 2"></polygon><circle cx="12" cy="14" r="3"></circle></svg>
+          </div>
+          <h3 style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-text); margin-bottom:12px;">Thermal Drill X-9</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-2); line-height:1.6; margin-bottom: 24px;">Designed to penetrate high-density frost layers without compromising core samples.</p>
+          <a href="#" style="margin-top:auto; color:var(--color-primary); font-family:var(--font-mono); text-decoration:none; border-bottom: 1px solid var(--color-primary);" data-demo-message="Equipment specification preview is demo-only">VIEW SPECS</a>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center;" data-reveal="bottom" style="transition-delay:0.1s">
+          <div style="width: 120px; height: 120px; border-radius: 50%; background:var(--color-bg-2); border: 2px solid var(--color-secondary); display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
+             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          </div>
+          <h3 style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-text); margin-bottom:12px;">Cryo Storage Units</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-2); line-height:1.6; margin-bottom: 24px;">Maintains negative 80 degrees Celsius ambient temperature indefinitely for transport back to central.</p>
+          <a href="#" style="margin-top:auto; color:var(--color-secondary); font-family:var(--font-mono); text-decoration:none; border-bottom: 1px solid var(--color-secondary);" data-demo-message="Equipment specification preview is demo-only">VIEW SPECS</a>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center;" data-reveal="bottom" style="transition-delay:0.2s">
+          <div style="width: 120px; height: 120px; border-radius: 50%; background:var(--color-bg-2); border: 2px solid var(--color-accent); display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
+             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+          </div>
+          <h3 style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-text); margin-bottom:12px;">Satellite Uplink array</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-2); line-height:1.6; margin-bottom: 24px;">Point-to-point encrypted laser comms capable of piercing severe blizzard activity over 10km.</p>
+          <a href="#" style="margin-top:auto; color:var(--color-accent); font-family:var(--font-mono); text-decoration:none; border-bottom: 1px solid var(--color-accent);" data-demo-message="Equipment specification preview is demo-only">VIEW SPECS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section style="background:var(--color-bg-3); padding: 100px 24px; border-top: 10px solid var(--color-primary);" data-reveal>
+    <div class="chr-container" style="text-align:center;">
+       <h2 style="font-family:var(--font-heading); font-size: 3rem; color:var(--color-text); margin-bottom: 30px;">JOIN EXPEDITION</h2>
+       <p style="font-family:var(--font-body); font-size: 1.2rem; color:var(--color-text-2); max-width: 600px; margin: 0 auto 40px;">
+         Requisition for assignment to Station 4 requires level 5 clearance and advanced geothermic survival training. Proceed to terminal.
+       </p>
+       <a href="index.html" style="display:inline-block; padding: 20px 60px; background:var(--color-bg); color:var(--color-primary); font-family:var(--font-mono); font-size: 1.2rem; text-decoration:none; border:2px solid var(--color-primary);">ACCESS TERMINAL</a>
+    </div>
+  </section>
+
+  <!-- New Content Section: Core Sample Gallery -->
+  <section id="samples" style="padding: 120px 24px; background:var(--color-bg); border-top: 2px solid var(--color-border);">
+    <div class="chr-container">
+      <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-primary); text-align:center; margin-bottom: 80px;">CORE SAMPLE ARCHIVE</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale">
+          <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-001</div>
+          <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
+            <div style="width:20px; height:60px; background:var(--color-accent); opacity:0.5; border-radius:10px;"></div>
+          </div>
+          <div style="font-family:var(--font-accent); color:var(--color-text);">PALEOCRYST</div>
+        </div>
+        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.1s;">
+          <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-002</div>
+           <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
+             <div style="width:20px; height:60px; background:var(--color-primary); opacity:0.5; border-radius:10px;"></div>
+          </div>
+          <div style="font-family:var(--font-accent); color:var(--color-text);">STRATA LAYER B</div>
+        </div>
+        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.2s;">
+          <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-003</div>
+           <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
+             <div style="width:20px; height:60px; background:var(--color-secondary); opacity:0.5; border-radius:10px;"></div>
+          </div>
+          <div style="font-family:var(--font-accent); color:var(--color-text);">GLACIAL ORE</div>
+        </div>
+        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.3s;">
+          <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-004</div>
+           <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
+             <div style="width:20px; height:60px; background:var(--color-primary-2); opacity:0.5; border-radius:10px;"></div>
+          </div>
+          <div style="font-family:var(--font-accent); color:var(--color-text);">ANOMALY 9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Content Section: Station Maintenance Log -->
+  <section id="maintenance" style="padding: 120px 24px; background:var(--color-bg-2);">
+    <div class="chr-container" style="max-width: 900px;">
+      <div class="ice-pane" data-reveal="bottom">
+        <h2 style="font-family:var(--font-heading); font-size:2.5rem; color:var(--color-primary); margin-bottom:40px;">STATION MAINTENANCE LOG</h2>
+        <table style="width:100%; border-collapse: collapse; font-family:var(--font-body); color:var(--color-text-2);">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--color-primary); text-align:left;">
+              <th style="padding:16px;">COMPONENT</th>
+              <th style="padding:16px;">STATUS</th>
+              <th style="padding:16px;">NEXT SERVICE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding:16px;">PERMAFROST DRILL A</td>
+              <td style="padding:16px; color:var(--color-primary);">OPTIMAL</td>
+              <td style="padding:16px;">2026.05.12</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding:16px;">THERMAL REGULATORS</td>
+              <td style="padding:16px; color:var(--color-secondary);">STABLE</td>
+              <td style="padding:16px;">2026.04.15</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding:16px;">OXYGEN SCRUBBERS</td>
+              <td style="padding:16px; color:var(--color-primary);">OPTIMAL</td>
+              <td style="padding:16px;">2026.06.01</td>
+            </tr>
+            <tr>
+              <td style="padding:16px;">POWER GENERATOR 2</td>
+              <td style="padding:16px; color:var(--color-accent);">WARNING</td>
+              <td style="padding:16px;">IMMEDIATE</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--color-bg); padding: 60px 0; border-top: 1px solid var(--color-border); text-align:center;">
+  <div class="chr-container" style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-primary);">CHRONOS RESEARCH</div>
+    <div style="font-family:var(--font-mono); font-size:0.9rem; color:var(--color-text-3);">ICE AGE EXPEDITION EXPORT &copy; 2026</div>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
+

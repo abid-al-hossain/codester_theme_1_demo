@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-era="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chronos Layout 09 - Cyberpunk agency demo with glitch typography, responsive grids, and stable placeholder behavior.">
+  <title>Chronos | Cyberpunk Agency</title>
+  <script src="./theme-boot.js"></script>
+  <script type="module" src="/src/main.js"></script>
+<style>
+    [x-cloak]{display:none!important}
+    body{background:var(--color-bg);color:var(--color-text);overflow-x:hidden;--reveal-distance:56px;--group-reveal-distance:44px}
+    
+    /* Subtle CRT Scanlines */
+    .scanlines::before { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03)); z-index: 99999; background-size: 100% 2px, 3px 100%; pointer-events: none; }
+    .scanlines::after { content:""; position:fixed; inset:0; background:transparent; pointer-events:none; z-index:99998; animation:flicker 4s infinite; }
+    @keyframes flicker { 0% { opacity: 0.98; } 1% { opacity: 0.95; } 2% { opacity: 0.98; } 3% { opacity: 1; } 100% { opacity: 1; } }
+
+    .neon-box{border:1px solid var(--color-primary);box-shadow:0 0 0 1px var(--color-primary),inset 0 0 20px color-mix(in srgb,var(--color-primary) 5%,transparent); transition: all 0.2s;}
+    .neon-box:hover { background: var(--color-primary); color: var(--color-bg) !important; box-shadow: 0 0 20px var(--color-primary), inset 0 0 10px var(--color-primary); text-shadow: none; }
+
+    .glitch-wrap{position:relative;display:inline-block}
+    .glitch-clone{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+    .glitch-wrap:hover .glitch-clone:first-child{color:var(--color-primary);animation:glitch-a .3s steps(3) infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translateX(-4px)}
+    .glitch-wrap:hover .glitch-clone:last-child{color:var(--color-secondary);animation:glitch-b .4s steps(3) infinite;clip-path:polygon(0 65%,100% 65%,100% 85%,0 85%);transform:translateX(4px)}
+    @keyframes glitch-a{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+    @keyframes glitch-b{0%,100%{transform:translateX(4px)}50%{transform:translateX(-4px)}}
+    
+    .service-block{border:1px solid var(--color-border);padding:32px;position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .25s var(--ease); background: color-mix(in srgb, var(--color-bg) 95%, var(--color-primary));}
+    .service-block::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 15%,transparent),transparent);opacity:0;transition:opacity .3s}
+    .service-block:hover{border-color:var(--color-primary);box-shadow:0 0 40px color-mix(in srgb,var(--color-primary) 30%,transparent);transform:translateX(15px) skewX(-4deg); z-index: 10;}
+    .service-block:hover::before{opacity:1}
+    
+    .work-item{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:24px;border-bottom:1px solid var(--color-border);transition:all .3s var(--ease);cursor:pointer; background: transparent;}
+    .work-item:hover{background:color-mix(in srgb,var(--color-primary) 10%,transparent);padding-left:50px;transform:translateX(10px); border-color: var(--color-primary); box-shadow: inset 4px 0 0 var(--color-primary);}
+    .work-num{font-family:var(--font-mono);font-size:.85rem;color:var(--color-text-3);min-width:32px; transition: color 0.3s;}
+    .work-item:hover .work-num { color: var(--color-primary); }
+    .work-arrow{color:var(--color-primary);opacity:0;transform:translateX(-20px);transition:all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+    .work-item:hover .work-arrow{opacity:1;transform:translateX(0); text-shadow: 0 0 8px var(--color-primary);}
+    
+    .ticker{overflow:hidden;border-top:1px solid var(--color-primary);border-bottom:1px solid var(--color-primary);background:color-mix(in srgb,var(--color-primary) 15%,transparent);padding:14px 0; box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 10%, transparent);}
+    
+    .hero-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--color-border)}
+    .clients-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;text-align:center}
+    
+    input:focus, textarea:focus { border-color: var(--color-primary) !important; box-shadow: 0 10px 30px color-mix(in srgb, var(--color-primary) 20%, transparent); transform: translateY(-2px); }
+
+    @media(max-width:980px){.hero-grid,.contact-grid{grid-template-columns:1fr}.clients-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:768px){.work-item{grid-template-columns:auto 1fr}.services-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){.clients-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.clients-grid{grid-template-columns:1fr}.work-item{gap:14px;padding:18px}.work-item:hover{padding-left:24px}}
+  </style>
+</head>
+<body class="scanlines">
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700;font-family:var(--font-mono)" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+
+<header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 80%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);">
+  <div class="chr-container chr-nav-inner">
+    <a href="index.html" class="chr-logo" style="text-shadow: 0 0 10px var(--color-primary);">CHRONOS[SYS]</a>
+    <nav aria-label="Agency navigation">
+      <ul class="chr-nav-links">
+        <li><a href="#system" style="transition: text-shadow 0.2s;" onmouseover="this.style.textShadow='0 0 8px var(--color-text)'" onmouseout="this.style.textShadow='none'">System</a></li>
+        <li><a href="#chronolog">Chronolog</a></li>
+        <li><a href="#network">Network</a></li>
+        <li><a href="#uplink">Uplink</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#uplink" class="chr-btn-primary neon-box" style="padding:10px 22px;font-size:.85rem;font-family:var(--font-mono)">[UPLINK]</a>
+      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <section id="hero" style="min-height:90vh;display:flex;align-items:center;padding:100px 0;position:relative;overflow:hidden" aria-labelledby="cyber-heading">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,color-mix(in srgb,var(--color-primary) 5%,transparent) 2px,color-mix(in srgb,var(--color-primary) 5%,transparent) 4px);pointer-events:none;z-index:0;" aria-hidden="true"></div>
+    <div style="position:absolute; inset:0; background: radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--color-secondary) 15%, transparent), transparent 50%); z-index:1;"></div>
+    <div class="chr-container" style="position:relative;z-index:2">
+      <div data-reveal="left">
+        <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--color-primary);margin-bottom:24px;letter-spacing:.15em;text-shadow: 0 0 10px var(--color-primary);">&gt; CHRONOS agency mode online...</div>
+        <h1 id="cyber-heading" style="font-size:clamp(3.5rem,12vw,9.5rem);font-weight:900;text-transform:uppercase;line-height:.85;margin-bottom:32px;letter-spacing:-0.02em;">
+          <span class="glitch-wrap">NEURAL<span class="glitch-clone" aria-hidden="true">NEURAL</span><span class="glitch-clone" aria-hidden="true">NEURAL</span></span>
+          <br>
+          <span class="glitch-wrap" style="color:var(--color-primary);text-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 50%, transparent);">.FLUX<span class="glitch-clone" aria-hidden="true">.FLUX</span><span class="glitch-clone" aria-hidden="true">.FLUX</span></span>
+        </h1>
+        <div class="hero-grid" style="max-width:760px">
+          <p style="color:var(--color-text);line-height:1.8;font-size:1.1rem; border-left: 2px solid var(--color-primary); padding-left: 16px; background: color-mix(in srgb, var(--color-bg) 60%, transparent); backdrop-filter: blur(4px);">
+            This agency-style layout shows how Chronos can shift into a high-contrast cyberpunk voice without changing the shared source architecture.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <a href="#chronolog" class="chr-btn-primary neon-box" style="font-family:var(--font-mono);font-size:.9rem;justify-content:center;background:transparent;color:var(--color-primary)">&gt; VIEW_CHRONOLOG()</a>
+            <a href="#uplink" class="chr-btn-ghost" style="font-family:var(--font-mono);font-size:.9rem;justify-content:center;border-color:var(--color-text);color:var(--color-text);transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 0 15px var(--color-text)'" onmouseout="this.style.boxShadow='none'">&gt; OPEN_UPLINK()</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="chr-marquee-track" style="font-family:var(--font-mono);font-size:.85rem;color:var(--color-primary);font-weight:700;letter-spacing:.15em;text-shadow:0 0 8px var(--color-primary);">
+      <span style="padding:0 40px">SYSTEM READY</span><span style="padding:0 40px">LAYOUT_COUNT: 15</span><span style="padding:0 40px">ERA_COUNT: 12</span><span style="padding:0 40px">PALETTES: 16</span><span style="padding:0 40px">FONTS: 65_PLUS</span><span style="padding:0 40px">CUSTOMIZER: ONLINE</span><span style="padding:0 40px">SYSTEM READY</span><span style="padding:0 40px">LAYOUT_COUNT: 15</span><span style="padding:0 40px">ERA_COUNT: 12</span><span style="padding:0 40px">PALETTES: 16</span><span style="padding:0 40px">FONTS: 65_PLUS</span><span style="padding:0 40px">CUSTOMIZER: ONLINE</span>
+    </div>
+  </div>
+
+  <section id="system" class="chr-section-sm" aria-labelledby="sys-heading">
+    <div class="chr-container" style="display:grid;grid-template-columns:1fr;gap:40px;align-items:start">
+      <h2 id="sys-heading" class="glitch-wrap" style="font-family:var(--font-mono);font-size:1.6rem;font-weight:900;text-transform:uppercase;color:var(--color-primary);text-shadow:0 0 10px var(--color-primary)" data-reveal>SYS_DATA::STATUS<span class="glitch-clone">SYS_DATA::STATUS</span><span class="glitch-clone">SYS_DATA::STATUS</span></h2>
+      <div style="border:1px solid var(--color-primary);background:color-mix(in srgb,var(--color-primary) 5%,transparent);padding:30px;box-shadow:inset 0 0 30px color-mix(in srgb,var(--color-primary) 10%,transparent);" data-reveal>
+        <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.9rem;text-align:left">
+          <tr style="border-bottom:1px solid color-mix(in srgb,var(--color-primary) 50%,transparent)"><th style="padding:16px;width:40%">NODE</th><th style="padding:16px">STATUS</th></tr>
+          <tr style="border-bottom:1px solid color-mix(in srgb,var(--color-primary) 30%,transparent)"><td style="padding:16px">CORE_VERSION</td><td style="padding:16px;color:var(--color-primary);text-shadow:0 0 5px var(--color-primary)">v2.0.4 - ACTIVE</td></tr>
+          <tr style="border-bottom:1px solid color-mix(in srgb,var(--color-primary) 30%,transparent)"><td style="padding:16px">PROXY_SHIELD</td><td style="padding:16px;color:var(--color-secondary);text-shadow:0 0 5px var(--color-secondary)">GHOST_NET</td></tr>
+          <tr style="border-bottom:1px solid color-mix(in srgb,var(--color-primary) 30%,transparent)"><td style="padding:16px">SEC_CLEARANCE</td><td style="padding:16px;color:var(--color-text-2)">LEVEL_9</td></tr>
+          <tr><td style="padding:16px">UPTIME</td><td style="padding:16px;color:var(--color-primary);text-shadow:0 0 5px var(--color-primary)">99.999%</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="chronolog" class="chr-section" style="background:var(--color-bg-2);box-shadow:inset 0 10px 40px rgba(0,0,0,0.5)" aria-labelledby="chronolog-heading">
+    <div class="chr-container">
+      <h2 id="chronolog-heading" style="font-family:var(--font-accent);font-size:2rem;font-weight:900;text-transform:uppercase;margin-bottom:60px;text-shadow: 2px 2px 0 var(--color-primary);" data-reveal>Chronolog()</h2>
+      <div style="border-left:2px solid var(--color-primary);padding-left:40px;display:grid;gap:60px;margin-left:14px">
+        <div class="service-block" data-reveal style="position:relative; overflow:visible;">
+          <div style="position:absolute;left:-51px;top:20px;width:20px;height:20px;background:var(--color-bg-2);border:2px solid var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>
+          <div style="font-family:var(--font-mono);color:var(--color-primary);font-size:0.85rem;margin-bottom:12px;text-shadow: 0 0 5px var(--color-primary);">20:49:01 // LOG_ENTRY_001</div>
+          <h3 style="font-size:1.8rem;font-weight:900;text-transform:uppercase;margin-bottom:16px">Framework Initialization</h3>
+          <p style="color:var(--color-text);max-width:600px;line-height:1.7;font-size:1.05rem;">Started main compiler routing sequence. Bypassed legacy subroutines securely with 256-bit hash verification.</p>
+        </div>
+        <div class="service-block" data-reveal style="position:relative; overflow:visible;">
+          <div style="position:absolute;left:-51px;top:20px;width:20px;height:20px;background:var(--color-bg-2);border:2px solid var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>
+          <div style="font-family:var(--font-mono);color:var(--color-primary);font-size:0.85rem;margin-bottom:12px;text-shadow: 0 0 5px var(--color-primary);">21:14:33 // LOG_ENTRY_002</div>
+          <h3 style="font-size:1.8rem;font-weight:900;text-transform:uppercase;margin-bottom:16px">Data Siphon Attached</h3>
+          <p style="color:var(--color-text);max-width:600px;line-height:1.7;font-size:1.05rem;">Connected zero-trust database bridges through encrypted relays. Latency sub 12ms.</p>
+        </div>
+        <div class="service-block" data-reveal style="position:relative; overflow:visible;">
+          <div style="position:absolute;left:-51px;top:20px;width:20px;height:20px;background:var(--color-primary);box-shadow:0 0 20px var(--color-primary)"></div>
+          <div style="font-family:var(--font-mono);color:var(--color-primary);font-size:0.85rem;margin-bottom:12px;text-shadow: 0 0 5px var(--color-primary);">23:00:59 // LOG_ENTRY_003</div>
+          <h3 style="font-size:1.8rem;font-weight:900;text-transform:uppercase;margin-bottom:16px">Ghost Grid Deployed</h3>
+          <p style="color:var(--color-text);max-width:600px;line-height:1.7;font-size:1.05rem;">Front-end layout materialized on client side successfully. Final neural handshake completed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="network" class="chr-section-sm" aria-labelledby="network-heading">
+    <div class="chr-container">
+      <h2 id="network-heading" style="font-family:var(--font-mono);font-size:1.2rem;font-weight:900;text-transform:uppercase;color:var(--color-primary);margin-bottom:50px;text-align:center;text-shadow: 0 0 10px var(--color-primary);" data-reveal>Active_Nodes</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center" data-reveal>
+        <div class="neon-box" style="padding:14px 24px;background:var(--color-bg-2);border-left:4px solid var(--color-primary);font-family:var(--font-mono);font-size:1rem;cursor:default;">SECTOR_A</div>
+        <div class="neon-box" style="padding:14px 24px;background:var(--color-bg-2);border-left:4px solid var(--color-secondary);font-family:var(--font-mono);font-size:1rem;cursor:default;border-color:var(--color-secondary);box-shadow: 0 0 10px color-mix(in srgb, var(--color-secondary) 20%, transparent);">SECTOR_B</div>
+        <div class="neon-box" style="padding:14px 24px;background:var(--color-bg-2);border-left:4px solid var(--color-accent);font-family:var(--font-mono);font-size:1rem;cursor:default;border-color:var(--color-accent);box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 20%, transparent);">SECTOR_C</div>
+        <div class="neon-box" style="padding:14px 24px;background:var(--color-bg-2);border-left:4px solid var(--color-primary);font-family:var(--font-mono);font-size:1rem;cursor:default;">SECTOR_D</div>
+        <div style="padding:14px 24px;background:var(--color-bg-2);border-left:4px solid color-mix(in srgb,var(--color-text) 40%, transparent);font-family:var(--font-mono);font-size:1rem;opacity:0.4;border: 1px solid var(--color-border);">[OFFLINE]</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="uplink" class="chr-section" style="background:var(--color-bg-2);border-top:1px solid var(--color-primary);box-shadow: 0 -20px 50px color-mix(in srgb, var(--color-primary) 5%, transparent);" aria-labelledby="uplink-heading">
+    <div class="chr-container contact-grid" style="align-items:center">
+      <div data-reveal="left">
+        <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--color-primary);margin-bottom:20px;text-shadow: 0 0 8px var(--color-primary);">&gt; INITIATE_HANDSHAKE</div>
+        <h2 id="uplink-heading" style="font-size:clamp(3.5rem,8vw,6.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;line-height:0.9">Establish<br><span class="glitch-wrap" style="color:var(--color-primary)">Uplink<span class="glitch-clone">Uplink</span><span class="glitch-clone">Uplink</span></span></h2>
+        <p style="color:var(--color-text);line-height:1.8;margin-bottom:2.5rem;font-size:1.1rem">Secure communication channel bypassing regional firewalls.</p>
+        <div style="font-family:var(--font-mono);font-size:1rem;color:var(--color-bg);background:var(--color-primary);padding:12px 24px;display:inline-block;box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 40%, transparent);">// CONNECTION ENCRYPTED</div>
+      </div>
+      <div data-reveal="right" style="border:1px solid var(--color-primary);padding:50px;background:var(--color-bg);position:relative;box-shadow: inset 0 0 30px color-mix(in srgb, var(--color-primary) 10%, transparent), 0 20px 40px rgba(0,0,0,0.4);">
+        <div style="position:absolute;top:-2px;left:-2px;width:16px;height:16px;background:var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>
+        <div style="position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;background:var(--color-secondary);box-shadow:0 0 15px var(--color-secondary)"></div>
+        <form style="display:flex;flex-direction:column;gap:30px" aria-label="Uplink form">
+          <div>
+            <input type="text" placeholder="ID_TOKEN" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;transition:all 0.3s;" autocomplete="name">
+          </div>
+          <div>
+            <textarea rows="4" placeholder="TRANSMISSION" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;resize:vertical;transition:all 0.3s;"></textarea>
+          </div>
+          <button type="submit" class="chr-btn-primary neon-box" style="font-family:var(--font-mono);justify-content:center;padding:24px;font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border-radius:0;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);cursor:pointer;">&gt; TRANSMIT()</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="background:var(--color-bg);border-top:1px solid var(--color-primary);box-shadow:0 -4px 40px color-mix(in srgb,var(--color-primary) 10%,transparent);padding:40px 0" role="contentinfo">
+  <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <a href="index.html" class="chr-logo" style="font-family:var(--font-mono)">CHRONOS[SYS]</a>
+    <p style="font-size:.78rem;color:var(--color-text-3);font-family:var(--font-mono)">2026 Chronos - Layout 09 Cyberpunk Agency</p>
+    <nav aria-label="Related layouts">
+      <ul style="list-style:none;display:flex;gap:20px">
+        <li><a href="layout-08.html" style="font-size:.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Minimal</a></li>
+        <li><a href="layout-10.html" style="font-size:.82rem;color:var(--color-text-2);font-family:var(--font-mono)">Gothic</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<div id="chr-customizer-mount"></div>
+</body>
+</html>
+
+
