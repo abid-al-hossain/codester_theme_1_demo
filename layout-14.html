@@ -82,11 +82,15 @@
       <h2 style="font-size:2.4rem;font-weight:800;margin-bottom:14px;letter-spacing:-0.02em;">Plan Your Journey</h2>
       <p style="color:var(--color-text-2);margin-bottom:40px;font-size:1.1rem;line-height:1.7;">Our experts will craft a personalized itinerary.</p>
       <form class="plan-form" aria-label="Travel Inquiry" data-demo-message="Travel inquiry is demo-only">
-        <input type="text" placeholder="Where to?" style="font-size:1.1rem;grid-column:1/-1;">
-        <input type="date" style="font-size:1.1rem;color:var(--color-text-2);">
-        <input type="number" placeholder="Guests" min="1" style="font-size:1.1rem;">
-        <select style="font-size:1.1rem;grid-column:1/-1;appearance:none;cursor:pointer;"><option>Luxury Retreat</option><option>Adventure</option><option>Cultural Dive</option></select>
-        <button class="chr-btn-primary" style="padding:22px;font-size:1.1rem;justify-content:center;margin-top:10px;border-radius:100px;font-weight:700;">Request Proposal</button>
+        <label for="travel-destination" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Where to?</label>
+        <input id="travel-destination" type="text" placeholder="Where to?" style="font-size:1.1rem;grid-column:1/-1;">
+        <label for="travel-date" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Departure date</label>
+        <input id="travel-date" type="date" style="font-size:1.1rem;color:var(--color-text-2);">
+        <label for="travel-guests" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Guests</label>
+        <input id="travel-guests" type="number" placeholder="Guests" min="1" style="font-size:1.1rem;">
+        <label for="travel-style" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Travel style</label>
+        <select id="travel-style" style="font-size:1.1rem;grid-column:1/-1;appearance:none;cursor:pointer;"><option>Luxury Retreat</option><option>Adventure</option><option>Cultural Dive</option></select>
+        <button type="submit" class="chr-btn-primary" style="padding:22px;font-size:1.1rem;justify-content:center;margin-top:10px;border-radius:100px;font-weight:700;">Request Proposal</button>
       </form>
     </div>
   </section>

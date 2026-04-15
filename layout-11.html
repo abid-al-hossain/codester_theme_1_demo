@@ -172,11 +172,16 @@
             <p style="color:var(--color-text-2);line-height:1.75">This remains demo-safe in source, but the shape is ready for enterprise qualification and briefing requests.</p>
           </div>
           <form class="eb-form" aria-label="Enterprise inquiry form" data-demo-message="Enterprise inquiry submitted. Connect this form to your own workflow.">
-            <input type="text" placeholder="Full name" autocomplete="name">
-            <input type="email" placeholder="Work email" autocomplete="email">
-            <input type="text" placeholder="Company" autocomplete="organization">
-            <select aria-label="Engagement type"><option>Transformation program</option><option>Advisory mandate</option><option>Operating model redesign</option></select>
-            <textarea placeholder="Describe the business context, stakeholders, and timeline."></textarea>
+            <label for="eb-full-name" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Full name</label>
+            <input id="eb-full-name" type="text" placeholder="Full name" autocomplete="name">
+            <label for="eb-work-email" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Work email</label>
+            <input id="eb-work-email" type="email" placeholder="Work email" autocomplete="email">
+            <label for="eb-company" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Company</label>
+            <input id="eb-company" type="text" placeholder="Company" autocomplete="organization">
+            <label for="eb-engagement-type" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Engagement type</label>
+            <select id="eb-engagement-type"><option>Transformation program</option><option>Advisory mandate</option><option>Operating model redesign</option></select>
+            <label for="eb-context" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Describe the business context, stakeholders, and timeline.</label>
+            <textarea id="eb-context" placeholder="Describe the business context, stakeholders, and timeline."></textarea>
             <button type="submit" class="chr-btn-primary">Submit inquiry</button>
           </form>
         </div>

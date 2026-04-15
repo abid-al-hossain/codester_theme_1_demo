@@ -226,32 +226,39 @@
       </div>
       <div class="glass-panel care-panel" data-reveal="right">
         <form class="care-form" aria-label="Appointment request" data-demo-message="Appointment request is demo-only">
-          <input type="text" placeholder="Full name" autocomplete="name">
-          <input type="email" placeholder="Email address" autocomplete="email">
+          <label for="care-full-name" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Full name</label>
+          <input id="care-full-name" type="text" placeholder="Full name" autocomplete="name">
+          <label for="care-email" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Email address</label>
+          <input id="care-email" type="email" placeholder="Email address" autocomplete="email">
           <div class="care-grid-two">
-            <select>
+            <label for="care-department" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Choose department</label>
+            <select id="care-department">
               <option>Choose department</option>
               <option>Cardiology</option>
               <option>Orthopedics</option>
               <option>Neurology</option>
               <option>Internal Medicine</option>
             </select>
-            <input type="date">
+            <label for="care-date" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Preferred appointment date</label>
+            <input id="care-date" type="date">
           </div>
           <div class="care-grid-two">
-            <select>
+            <label for="care-visit-type" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Visit type</label>
+            <select id="care-visit-type">
               <option>Visit type</option>
               <option>New consultation</option>
               <option>Follow-up</option>
               <option>Diagnostics</option>
             </select>
-            <select>
+            <label for="care-format" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Preferred format</label>
+            <select id="care-format">
               <option>Preferred format</option>
               <option>In person</option>
               <option>Virtual</option>
             </select>
           </div>
-          <textarea rows="5" placeholder="Symptoms, goals, or insurance notes"></textarea>
+          <label for="care-notes" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Symptoms, goals, or insurance notes</label>
+          <textarea id="care-notes" rows="5" placeholder="Symptoms, goals, or insurance notes"></textarea>
           <button type="submit" class="chr-btn-primary">Request appointment</button>
         </form>
       </div>
