@@ -1,5 +1,4 @@
 (function () {
-
   var DEFAULTS = {
     primary: '#2563eb',
     secondary: '#14b8a6',
@@ -130,5 +129,4 @@
       })
     }
   } catch (error) {}
-
 })()

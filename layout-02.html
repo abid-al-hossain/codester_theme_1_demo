@@ -10,24 +10,15 @@
   <style>
     [x-cloak]{display:none!important}
     .split-hero{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-    .split-hero > *{min-width:0}
-    .split-left{background:var(--color-primary);padding:80px 80px 48px;display:flex;flex-direction:column;justify-content:space-between;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
-    .split-right{padding:80px;overflow-y:auto;min-width:0}
+    .split-left{background:var(--color-primary);padding:80px;display:flex;flex-direction:column;justify-content:space-between;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
+    .split-right{padding:80px;overflow-y:auto}
     .project-item{padding:48px 0;border-bottom:var(--border-w) solid var(--color-border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
     .project-img{aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;position:relative}
     .project-img-inner{width:100%;height:100%;transition:transform 0.5s var(--ease)}
     .project-item:hover .project-img-inner{transform:scale(1.05)}
     .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-    .split-stats{margin-top:auto;padding-top:40px;padding-bottom:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
-    .split-stat{min-width:0}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-    .about-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .services-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-    .process-step{display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0}
-    .reviews-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
     .service-tag{padding:12px 20px;border:var(--border-w) solid rgba(255,255,255,0.3);border-radius:var(--radius-full);color:rgba(255,255,255,0.8);font-size:0.82rem;font-weight:600;text-align:center}
-    @media(max-width:1024px){.split-hero{grid-template-columns:1fr}.split-left{position:relative;height:auto;min-height:60vh;padding:56px 32px 40px}.split-right{padding:40px 20px}.project-item,.about-grid,.services-three,.reviews-grid{grid-template-columns:1fr}}
-    @media(max-width:720px){.split-stats,.about-cards{grid-template-columns:1fr}.process-step{grid-template-columns:56px 1fr;gap:20px;padding:28px 0}}
+    @media(max-width:1024px){.split-hero{grid-template-columns:1fr}.split-left{position:relative;height:auto;min-height:60vh}.split-right{padding:40px 20px}.project-item{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -70,10 +61,10 @@
         <div class="service-tag">Motion</div>
       </div>
     </div>
-    <div class="split-stats">
-      <div class="split-stat"><div style="font-size:2rem;font-weight:800;color:#fff" data-count="80" data-suffix="+">0+</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Projects</div></div>
-      <div class="split-stat"><div style="font-size:2rem;font-weight:800;color:#fff" data-count="6">0</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Years</div></div>
-      <div class="split-stat"><div style="font-size:2rem;font-weight:800;color:#fff" data-count="100" data-suffix="%">0%</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Satisfaction</div></div>
+    <div style="margin-top:auto;padding-top:40px;display:flex;gap:24px">
+      <div><div style="font-size:2rem;font-weight:800;color:#fff" data-count="80" data-suffix="+">0+</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Projects</div></div>
+      <div><div style="font-size:2rem;font-weight:800;color:#fff" data-count="6">0</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Years</div></div>
+      <div><div style="font-size:2rem;font-weight:800;color:#fff" data-count="100" data-suffix="%">0%</div><div style="font-size:0.78rem;color:rgba(255,255,255,0.6)">Satisfaction</div></div>
     </div>
   </aside>
 
@@ -134,14 +125,14 @@
 
 <!-- § 2. ABOUT -->
 <section id="about" class="chr-section" style="background:var(--color-bg-2)" aria-labelledby="about-heading">
-  <div class="chr-container about-grid">
+  <div class="chr-container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
     <div data-reveal="left">
       <div class="chr-heading-sm">About the Studio</div>
       <h2 id="about-heading" class="chr-heading-xl" style="margin-bottom:1.5rem">We don't just build websites. We design legacies.</h2>
       <p style="color:var(--color-text-2);line-height:1.8;margin-bottom:1.5rem">Founded in 2020, our studio has worked across every design era — from the clean lines of Modernism to the raw energy of Brutalism and the digital fever dreams of Cyberpunk.</p>
       <p style="color:var(--color-text-2);line-height:1.8">Chronos is our opus: a single theme bundle that encapsulates everything we've learned across design history.</p>
     </div>
-    <div data-reveal="right" class="about-cards">
+    <div data-reveal="right" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="chr-feature-card" style="text-align:center">
         <div style="font-size:2.5rem;margin-bottom:8px">🌍</div>
         <div style="font-weight:700;font-size:0.9rem">Global Clients</div>
@@ -173,7 +164,7 @@
       <div class="chr-heading-sm">Services</div>
       <h2 id="services-heading" class="chr-heading-xl">What we offer</h2>
     </div>
-    <div class="services-three" data-reveal-group>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" data-reveal-group>
       <div class="chr-feature-card">
         <div class="chr-feature-icon">🖥️</div>
         <h3 style="font-size:1.05rem;margin-bottom:0.5rem">UI/UX Design</h3>
@@ -201,28 +192,28 @@
       <h2 id="process-heading" class="chr-heading-xl">How we work</h2>
     </div>
     <div style="display:flex;flex-direction:column;gap:0">
-      <div class="process-step" style="border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
         <div style="font-size:3.5rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary);line-height:1">01</div>
         <div>
           <h3 style="font-size:1.3rem;margin-bottom:8px">Discovery & Research</h3>
           <p style="color:var(--color-text-2);line-height:1.7">We start by deeply understanding your needs, audience, and competitive landscape. No assumptions.</p>
         </div>
       </div>
-      <div class="process-step" style="border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
         <div style="font-size:3.5rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary);line-height:1">02</div>
         <div>
           <h3 style="font-size:1.3rem;margin-bottom:8px">Era Selection</h3>
           <p style="color:var(--color-text-2);line-height:1.7">We choose the right design era for your brand story. Is your product Modern, Gothic, or Futuristic? It matters.</p>
         </div>
       </div>
-      <div class="process-step" style="border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-bottom:var(--border-w) solid var(--color-border)" data-reveal>
         <div style="font-size:3.5rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary);line-height:1">03</div>
         <div>
           <h3 style="font-size:1.3rem;margin-bottom:8px">Design & Prototype</h3>
           <p style="color:var(--color-text-2);line-height:1.7">High-fidelity designs in the selected era. Iterative feedback loops until it's perfect.</p>
         </div>
       </div>
-      <div class="process-step" data-reveal>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0" data-reveal>
         <div style="font-size:3.5rem;font-weight:900;font-family:var(--font-accent);color:var(--color-primary);line-height:1">04</div>
         <div>
           <h3 style="font-size:1.3rem;margin-bottom:8px">Build & Ship</h3>
@@ -240,7 +231,7 @@
       <div class="chr-heading-sm">Client Reviews</div>
       <h2 id="reviews-heading" class="chr-heading-xl">Words from our clients</h2>
     </div>
-    <div class="reviews-grid" data-reveal-group>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px" data-reveal-group>
       <blockquote class="chr-testimonial">
         <div style="color:#f59e0b;font-size:1rem;letter-spacing:-2px" aria-label="5 stars">★★★★★</div>
         <p style="margin:12px 0 20px;color:var(--color-text-2);line-height:1.7">"Switched to the Eco era for our sustainability client and the client literally cried. It was exactly the organic warmth they wanted."</p>

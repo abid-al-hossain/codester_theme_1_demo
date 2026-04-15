@@ -77,15 +77,15 @@
         <h1 id="care-heading" style="font-size:clamp(3rem,6vw,4.5rem);line-height:1;margin-bottom:1.5rem;font-weight:700;letter-spacing:-0.03em;">Immediate access<br>to your healthcare.</h1>
         <p style="font-size:1.2rem;color:var(--color-text-2);line-height:1.7;max-width:600px;margin-bottom:2.5rem">Log in to view test results, message your doctor, or quickly find a specialist in our highly integrated network.</p>
         <div class="glass-panel" style="display:flex;gap:10px;flex-wrap:wrap; padding: 10px; border-radius: 100px;">
-          <input type="text" placeholder="Search conditions or doctors..." aria-label="Search conditions or doctors" style="flex:1;padding:16px 24px;border:none;background:transparent;outline:none;font-size:1.05rem;color:var(--color-text);" />
+          <input type="text" placeholder="Search conditions or doctors..." style="flex:1;padding:16px 24px;border:none;background:transparent;outline:none;font-size:1.05rem;color:var(--color-text);" />
           <button class="chr-btn-primary" style="padding:16px 36px; border-radius: 100px; font-weight:600;">Search</button>
         </div>
       </div>
       <div data-reveal="right" class="care-panel glass-panel">
         <h2 style="font-size:1.4rem;margin-bottom:24px;font-weight:600;">Patient Login</h2>
         <form class="care-form" aria-label="Patient Portal" data-demo-message="Patient portal login is demo-only">
-          <input type="email" placeholder="Patient ID or Email" aria-label="Patient ID or Email">
-          <input type="password" placeholder="Secure Password" aria-label="Secure Password">
+          <input type="email" placeholder="Patient ID or Email">
+          <input type="password" placeholder="Secure Password">
           <button class="chr-btn-primary">Access Records</button>
         </form>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);text-align:center">
@@ -226,32 +226,32 @@
       </div>
       <div class="glass-panel care-panel" data-reveal="right">
         <form class="care-form" aria-label="Appointment request" data-demo-message="Appointment request is demo-only">
-          <input type="text" placeholder="Full name" aria-label="Full name" autocomplete="name">
-          <input type="email" placeholder="Email address" aria-label="Email address" autocomplete="email">
+          <input type="text" placeholder="Full name" autocomplete="name">
+          <input type="email" placeholder="Email address" autocomplete="email">
           <div class="care-grid-two">
-            <select aria-label="Choose department">
+            <select>
               <option>Choose department</option>
               <option>Cardiology</option>
               <option>Orthopedics</option>
               <option>Neurology</option>
               <option>Internal Medicine</option>
             </select>
-            <input type="date" aria-label="Preferred appointment date">
+            <input type="date">
           </div>
           <div class="care-grid-two">
-            <select aria-label="Visit type">
+            <select>
               <option>Visit type</option>
               <option>New consultation</option>
               <option>Follow-up</option>
               <option>Diagnostics</option>
             </select>
-            <select aria-label="Preferred format">
+            <select>
               <option>Preferred format</option>
               <option>In person</option>
               <option>Virtual</option>
             </select>
           </div>
-          <textarea rows="5" placeholder="Symptoms, goals, or insurance notes" aria-label="Symptoms, goals, or insurance notes"></textarea>
+          <textarea rows="5" placeholder="Symptoms, goals, or insurance notes"></textarea>
           <button type="submit" class="chr-btn-primary">Request appointment</button>
         </form>
       </div>
