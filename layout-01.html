@@ -9,7 +9,7 @@
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
-    .hero-wrapper{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--color-bg)}
+    .hero-wrapper{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--color-bg);padding-top:28px}
     .hero-blob-1,.hero-blob-2{position:absolute;border-radius:9999px;filter:blur(8px)}
     .hero-blob-1{width:560px;height:560px;background:radial-gradient(circle,var(--color-primary),transparent 70%);opacity:.12;top:-120px;right:-100px}
     .hero-blob-2{width:420px;height:420px;background:radial-gradient(circle,var(--color-secondary),transparent 70%);opacity:.1;bottom:-40px;left:10%}
@@ -30,7 +30,7 @@
     .newsletter-form input{flex:1;min-width:220px;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg);color:var(--color-text);outline:none}
     @media(max-width:1120px){.hero-grid,.newsletter-shell{grid-template-columns:1fr}.process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:900px){.feature-grid,.showcase-grid,.faq-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:720px){.hero-wrapper{padding-top:88px}.feature-grid,.showcase-grid,.faq-grid,.process-grid{grid-template-columns:1fr}.stats-row{gap:20px}}
+    @media(max-width:720px){.hero-wrapper{padding-top:96px}.feature-grid,.showcase-grid,.faq-grid,.process-grid{grid-template-columns:1fr}.stats-row{gap:20px}}
     @media(max-width:560px){.newsletter-form{flex-direction:column}.newsletter-form input{min-width:0}}
   </style>
 </head>
