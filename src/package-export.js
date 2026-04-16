@@ -245,7 +245,7 @@ export default defineConfig({
 function buildReadme({ packageTitle, layoutLabel, keepCustomizer }) {
   return `# ${packageTitle}
 
-This package contains the exported ${layoutLabel} layout from Chronos v2.
+This package contains the exported ${layoutLabel} layout from Chronos.
 
 ## Getting started
 

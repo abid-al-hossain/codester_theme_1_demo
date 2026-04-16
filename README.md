@@ -1,6 +1,6 @@
-﻿# Chronos v2
+# Chronos
 
-Chronos v2 is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 20 layouts, 17 design eras, 16 preset palettes, and 70+ Google Fonts that can be mixed live through the shared customizer.
+Chronos is a multi-era HTML theme source project built around one shared customization system instead of a single fixed visual style. The current source workspace contains 20 layouts, 17 design eras, 16 preset palettes, and 70+ Google Fonts that can be mixed live through the shared customizer.
 
 This phase is the product-finalization phase. The project is being refined in source first, and release packaging is intentionally deferred to a later shipping pass.
 
@@ -72,5 +72,3 @@ Because the source project uses Vite module entrypoints, use it through the deve
 - Shared mobile-nav behavior now supports the layout-specific nav shells used by the dashboard, archive, and social layouts.
 - Countdown blocks use a fixed launch date and fall back to a neutral completed state once that launch window has passed.
 - Release packaging, buyer-facing file structure, and deployment portability are separate concerns for the shipping phase.
-
-
