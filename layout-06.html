@@ -9,6 +9,7 @@
   <style>
     [x-cloak]{display:none!important}
     body { cursor: none; background:var(--color-bg); color:var(--color-text); overflow-x:hidden; }
+    body.chr-customizer-active { cursor: auto; }
     .art-fullscreen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
     .art-title{font-size:clamp(4rem,15vw,12rem);font-weight:900;text-transform:uppercase;line-height:0.85;text-align:center;position:relative;z-index:10;mix-blend-mode:normal}
     .art-shape{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;transition:transform 0.4s cubic-bezier(0.2,0.8,0.2,1)}
@@ -19,6 +20,22 @@
     body:hover .cursor-dot { opacity: 1; }
     .hover-active .cursor-outline { width: 120px; height: 120px; background-color: var(--color-primary); mix-blend-mode: difference; opacity: 0.8; }
     .hover-active .cursor-dot { opacity: 0; }
+    body.chr-customizer-active .cursor-dot,
+    body.chr-customizer-active .cursor-outline { opacity: 0; }
+    #chr-customizer,
+    #chr-customizer * { cursor: auto !important; }
+    #chr-customizer button,
+    #chr-customizer a,
+    #chr-customizer [role="tab"],
+    #chr-customizer input[type="color"],
+    #chr-customizer select,
+    #chr-customizer .layout-list-link,
+    #chr-customizer .era-card,
+    #chr-customizer .palette-card,
+    #chr-customizer-toggle { cursor: pointer !important; }
+    #chr-customizer input[type="text"],
+    #chr-customizer input[type="search"],
+    #chr-customizer textarea { cursor: text !important; }
 
     .stroke-text { display:inline-block; -webkit-text-stroke: 2px var(--color-text); color: transparent; transition: color 0.4s ease, -webkit-text-stroke 0.4s ease; }
     .hover-word { display:inline-block; }
@@ -144,21 +161,27 @@
   
   if(cursorDot && cursorOutline) {
     window.addEventListener('mousemove', function(e) {
+      const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
+      const inCustomizer = hoveredElement?.closest('#chr-customizer, #chr-customizer-toggle');
+      document.body.classList.toggle('chr-customizer-active', Boolean(inCustomizer));
       cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       cursorOutline.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-      const hovered = document.elementFromPoint(e.clientX, e.clientY)?.closest('.link-hover') || null;
+      const hovered = inCustomizer ? null : hoveredElement?.closest('.link-hover') || null;
       setHoverTarget(hovered);
     });
 
     document.addEventListener('pointerleave', () => {
+      document.body.classList.remove('chr-customizer-active');
       setHoverTarget(null);
     });
 
     document.addEventListener('focusin', (event) => {
+      document.body.classList.toggle('chr-customizer-active', Boolean(event.target.closest('#chr-customizer, #chr-customizer-toggle')));
       setHoverTarget(event.target.closest('.link-hover'));
     });
 
     document.addEventListener('focusout', () => {
+      document.body.classList.toggle('chr-customizer-active', Boolean(document.activeElement?.closest('#chr-customizer, #chr-customizer-toggle')));
       const focused = document.activeElement?.closest('.link-hover') || null;
       setHoverTarget(focused);
     });

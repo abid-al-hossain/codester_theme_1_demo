@@ -9,6 +9,7 @@ import customizerRaw from './customizer.js?raw'
 import customizerHtmlRaw from './customizer-html.js?raw'
 import fontsRaw from './fonts.js?raw'
 import transitionsRaw from './transitions.js?raw'
+import packageNameUtilsRaw from './package-name-utils.js?raw'
 import faviconRaw from './export-assets/favicon.svg?raw'
 import iconsRaw from './export-assets/icons.svg?raw'
 import themeBootRaw from '../public/theme-boot.js?raw'
@@ -305,6 +306,7 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
   if (keepCustomizer) {
     zip.file('src/customizer.js', rewriteCustomizerSource(theme, { keepCustomizer, storageKey }))
     zip.file('src/customizer-html.js', rewriteCustomizerHtml())
+    zip.file('src/package-name-utils.js', packageNameUtilsRaw)
   }
   zip.file('public/favicon.svg', faviconRaw)
   zip.file('public/icons.svg', iconsRaw)
