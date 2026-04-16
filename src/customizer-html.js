@@ -294,11 +294,11 @@ export const CUSTOMIZER_HTML = /* html */ `
               <span style="font-size:0.6rem;opacity:0.5">v</span>
             </button>
 
-            <div x-show="open" style="position:absolute;top:calc(100% + 4px);left:0;width:100%;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);z-index:100;box-shadow:0 10px 25px rgba(0,0,0,0.2)" x-transition x-cloak>
+            <div x-show="open" style="position:absolute;top:calc(100% + 4px);left:0;width:100%;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);z-index:100;box-shadow:0 10px 25px rgba(0,0,0,0.2);cursor:pointer" x-transition x-cloak>
               <div style="padding:8px">
-                <input type="text" x-model="search" x-ref="search" placeholder="Search fonts..." style="width:100%;padding:8px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:4px;color:var(--color-text);font-size:0.8rem;outline:none">
+                <input type="text" x-model="search" x-ref="search" placeholder="Search fonts..." style="width:100%;padding:8px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:4px;color:var(--color-text);font-size:0.8rem;outline:none;cursor:text">
               </div>
-              <div style="max-height:220px;overflow-y:auto;padding-bottom:8px">
+              <div style="max-height:220px;overflow-y:auto;padding-bottom:8px;cursor:pointer">
                 <template x-for="font in filtered" :key="font">
                   <div
                     @click="selectFont(font)"
@@ -309,7 +309,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                     onmouseout="if(this.style.color==='var(--color-text)')this.style.background=''"
                   ></div>
                 </template>
-                <div x-show="filtered.length===0" class="font-empty-state" style="padding:16px;text-align:center;font-size:0.8rem">No fonts found</div>
+                <div x-show="filtered.length===0" class="font-empty-state" style="padding:16px;text-align:center;font-size:0.8rem;cursor:default">No fonts found</div>
               </div>
             </div>
           </div>
@@ -374,6 +374,9 @@ export const CUSTOMIZER_HTML = /* html */ `
     </div>
     <button class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.reset()">
       Reset Theme
+    </button>
+    <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.clearAllSavedThemeData()">
+      Clear Saved Theme Data
     </button>
   </div>
 

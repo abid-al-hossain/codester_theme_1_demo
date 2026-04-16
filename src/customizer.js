@@ -382,11 +382,26 @@ function buildBootTheme(prefs) {
 
   return {
     era: preset.era,
-    fonts: { ...eraDefaults, ...preset.fonts },
+    fonts: preset.hasCustomFonts ? { ...eraDefaults, ...preset.fonts } : { ...eraDefaults },
     colors: { ...DEFAULT_COLORS, ...preset.colors, surface: preset.colors.surface || preset.colors.bg2 || DEFAULT_COLORS.surface },
     hasCustomFonts: preset.hasCustomFonts,
     hasCustomColors: preset.hasCustomColors,
   }
+}
+
+function clearAllPrefs() {
+  if (!CUSTOMIZER_ENABLED) return
+  try {
+    const keysToRemove = []
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index)
+      if (!key) continue
+      if (key === PREFS_NAMESPACE || key.startsWith(`${PREFS_NAMESPACE}:`)) {
+        keysToRemove.push(key)
+      }
+    }
+    keysToRemove.forEach((key) => localStorage.removeItem(key))
+  } catch {}
 }
 
 function preloadFonts(fonts) {
@@ -564,7 +579,7 @@ Alpine.store('chr', {
     const eraDefaults = ERA_DEFAULT_FONTS[preset.era] || DEFAULT_THEME.fonts
 
     this.era = preset.era
-    this.fonts = { ...eraDefaults, ...preset.fonts }
+    this.fonts = preset.hasCustomFonts ? { ...eraDefaults, ...preset.fonts } : { ...eraDefaults }
     this.colors = { ...DEFAULT_COLORS, ...preset.colors, surface: preset.colors.surface || preset.colors.bg2 || DEFAULT_COLORS.surface }
     this.hasCustomFonts = preset.hasCustomFonts
     this.hasCustomColors = preset.hasCustomColors
@@ -863,9 +878,10 @@ Alpine.store('chr', {
   // DOWNLOAD_FEATURE_END
 
   save() {
+    const eraDefaults = ERA_DEFAULT_FONTS[this.era] || DEFAULT_THEME.fonts
     savePrefs({
       era: this.era,
-      fonts: this.fonts,
+      fonts: this.hasCustomFonts ? this.fonts : { ...eraDefaults },
       colors: this.colors,
       hasCustomFonts: this.hasCustomFonts,
       hasCustomColors: this.hasCustomColors,
@@ -911,6 +927,11 @@ Alpine.store('chr', {
 
     this.syncColorInputsFromComputed()
     this.save()
+  },
+
+  clearAllSavedThemeData() {
+    clearAllPrefs()
+    this.reset()
   },
 })
 
