@@ -199,6 +199,22 @@ export function initSectionJumpTransitions() {
 
   let activeCleanup = null
 
+  function moveFocusToTarget(target) {
+    const hadTabIndex = target.hasAttribute('tabindex')
+
+    if (!hadTabIndex) {
+      target.setAttribute('tabindex', '-1')
+    }
+
+    target.focus({ preventScroll: true })
+
+    if (!hadTabIndex) {
+      target.addEventListener('blur', () => {
+        target.removeAttribute('tabindex')
+      }, { once: true })
+    }
+  }
+
   function triggerSectionJump(target, direction) {
     if (activeCleanup) activeCleanup()
 
@@ -277,6 +293,7 @@ export function initSectionJumpTransitions() {
       }
 
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.setTimeout(() => moveFocusToTarget(target), 180)
     })
   })
 }

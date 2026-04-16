@@ -147,11 +147,19 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
   const singleLayoutTexts = new Map([
+    ['home', 'Back to top'],
     ['view all layouts', 'Current layout'],
     ['open layout directory', 'Current layout'],
     ['view index', 'Current layout'],
+    ['browse all layouts', 'Current layout'],
+    ['view other layouts', 'Current layout'],
+    ['layout directory', 'Current layout'],
+    ['layouts', 'Current layout'],
     ['all layouts', 'Current layout'],
     ['return to layout directory', 'Back to top'],
+    ['return to surface directory', 'Back to top'],
+    ['access terminal', 'Back to top'],
+    ['run: index.bat', 'Back to top'],
   ])
 
   doc.documentElement.setAttribute('data-era', theme.era)
@@ -172,6 +180,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   doc.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href') || ''
     const label = link.textContent?.trim().replace(/\s+/g, ' ').toLowerCase() || ''
+    const isLogoLink = link.classList.contains('chr-logo')
 
     if (/^layout-\d{2}\.html$/i.test(href)) {
       link.setAttribute('href', '#')
@@ -179,10 +188,12 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
       return
     }
 
-    if (href === 'index.html' && singleLayoutTexts.has(label)) {
+    if (href === 'index.html' && (isLogoLink || singleLayoutTexts.has(label))) {
       link.setAttribute('href', '#main-content')
       link.setAttribute('data-demo-message', currentLayoutMessage)
-      link.textContent = singleLayoutTexts.get(label)
+      if (singleLayoutTexts.has(label)) {
+        link.textContent = singleLayoutTexts.get(label)
+      }
     }
   })
 
