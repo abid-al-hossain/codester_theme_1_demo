@@ -22,7 +22,7 @@
     .fi:hover .fi-cat { background:var(--color-text); color:var(--color-bg); }
     
     /* Marquee Animation */
-    .chr-marquee-wrapper { background:var(--color-primary); padding:16px 0; overflow:hidden; border-bottom:var(--border-w) solid var(--color-border); border-top:var(--border-w) solid var(--color-border); white-space:nowrap; display:flex;}
+    .chr-marquee-wrapper { margin-top:28px; background:var(--color-primary); padding:16px 0; overflow:hidden; border-bottom:var(--border-w) solid var(--color-border); border-top:var(--border-w) solid var(--color-border); white-space:nowrap; display:flex;}
     .chr-marquee-track { display:inline-flex; width:max-content; animation:marquee-scroll 20s linear infinite; color:#fff; font-weight:900; text-transform:uppercase; font-size:1.1rem; letter-spacing:0.05em; align-items:center;}
     @keyframes marquee-scroll { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
     .chr-marquee-wrapper:hover .chr-marquee-track { animation-play-state: paused; }
