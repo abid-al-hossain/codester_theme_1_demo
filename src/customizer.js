@@ -571,6 +571,23 @@ Alpine.store('chr', {
   downloadError: '',
   // DOWNLOAD_FEATURE_END
 
+  isModified() {
+    return this.era !== DEFAULT_THEME.era
+      || this.hasCustomFonts
+      || this.hasCustomColors
+      || Boolean(this.activePalette)
+  },
+
+  getModifiedMessage() {
+    const changes = []
+    if (this.era !== DEFAULT_THEME.era) changes.push('era')
+    if (this.hasCustomColors) changes.push('colors')
+    if (this.hasCustomFonts) changes.push('fonts')
+
+    if (!changes.length) return 'Original layout defaults'
+    return `Modified from default: ${changes.join(', ')}`
+  },
+
   init() {
     const storedPrefs = loadPrefs()
     const preset = cloneThemePreset(storedPrefs || DEFAULT_THEME)

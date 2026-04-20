@@ -6,6 +6,12 @@ export const CUSTOMIZER_HTML = /* html */ `
   aria-expanded="false"
 >
   CUSTOMIZE
+  <span
+    x-show="$store.chr.isModified()"
+    x-cloak
+    aria-hidden="true"
+    style="display:inline-flex;margin-left:8px;width:8px;height:8px;border-radius:999px;background:currentColor;box-shadow:0 0 0 2px color-mix(in srgb, currentColor 18%, transparent)"
+  ></span>
 </button>
 
 <aside
@@ -20,6 +26,14 @@ export const CUSTOMIZER_HTML = /* html */ `
       <div style="font-family:var(--font-accent);font-weight:800;font-size:1.1rem;color:var(--color-primary)">CHRONOS</div>
       <div class="cust-subtitle">Preview styles here. Demo mode keeps export disabled while you explore the layouts.</div>
       <div style="margin-top:8px;font-size:0.75rem;line-height:1.5;color:var(--color-text-2);font-weight:600;">Demo Mode: export and package download are disabled in this public preview.</div>
+      <div
+        x-show="$store.chr.isModified()"
+        x-cloak
+        style="margin-top:10px;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:color-mix(in srgb, var(--color-primary) 10%, transparent);border:1px solid color-mix(in srgb, var(--color-primary) 24%, transparent);font-size:0.72rem;font-weight:700;color:var(--color-text)"
+      >
+        <span aria-hidden="true" style="width:8px;height:8px;border-radius:999px;background:var(--color-primary)"></span>
+        <span x-text="$store.chr.getModifiedMessage()"></span>
+      </div>
     </div>
     <button
       @click="$store.chr.close()"
