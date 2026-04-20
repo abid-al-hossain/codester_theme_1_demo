@@ -249,10 +249,7 @@ This package contains the exported ${layoutLabel} layout from Chronos.
 
 ## Getting started
 
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
+Install dependencies, then start the local preview server.
 
 ## Included
 
@@ -263,7 +260,7 @@ npm run dev
 
 ## Notes
 
-- The downloaded package is source-first and runs through Vite.
+- The downloaded package runs through Vite.
 - Links to other Chronos layouts are stripped or converted because this export contains one layout only.
 - Update the exported content, links, and demo actions as needed for your own project.
 `

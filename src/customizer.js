@@ -850,7 +850,7 @@ Alpine.store('chr', {
   },
 
   async downloadPackage() {
-    this.downloadError = 'Download is disabled in the public demo.'
+        this.downloadError = 'Download is not available in this preview.'
     return
 
     /*

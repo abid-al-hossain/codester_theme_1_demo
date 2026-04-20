@@ -10,8 +10,12 @@ import {
   initMobileNav,
 } from './transitions.js'
 
-const DEFAULT_LAUNCH_DATE = '2026-12-01T00:00:00Z'
+const DEFAULT_LAUNCH_OFFSET_DAYS = 45
 const DEFAULT_COUNTDOWN_COMPLETE_MESSAGE = 'Launch window completed'
+
+function getDefaultLaunchDate() {
+  return new Date(Date.now() + DEFAULT_LAUNCH_OFFSET_DAYS * 86400000).toISOString()
+}
 
 function showDemoToast(message) {
   let toast = document.getElementById('chr-demo-toast')
@@ -65,9 +69,10 @@ function initCurrentDate() {
 
 function initCountdowns() {
   document.querySelectorAll('[data-countdown]').forEach((countdown) => {
-    const launchDate = countdown.dataset.launchDate || DEFAULT_LAUNCH_DATE
+    const fallbackLaunchDate = getDefaultLaunchDate()
+    const launchDate = countdown.dataset.launchDate || fallbackLaunchDate
     const parsedTarget = Date.parse(launchDate)
-    const targetTime = Number.isNaN(parsedTarget) ? Date.parse(DEFAULT_LAUNCH_DATE) : parsedTarget
+    const targetTime = Number.isNaN(parsedTarget) ? Date.parse(fallbackLaunchDate) : parsedTarget
     const daysNode = countdown.querySelector('[data-countdown-days]')
     const hoursNode = countdown.querySelector('[data-countdown-hours]')
     const minsNode = countdown.querySelector('[data-countdown-mins]')
