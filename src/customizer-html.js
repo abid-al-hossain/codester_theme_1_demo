@@ -365,7 +365,11 @@ export const CUSTOMIZER_HTML = /* html */ `
         <div style="font-size:0.74rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.08em">Package preview</div>
         <div style="font-size:0.84rem;color:var(--color-text)"><strong>Zip:</strong> <span x-text="$store.chr.getDownloadFileName()"></span></div>
         <div style="font-size:0.84rem;color:var(--color-text-2)"><strong>Starts with:</strong> current page as <code style="font-family:var(--font-mono)">index.html</code></div>
-        <div style="font-size:0.84rem;color:var(--color-text-2)"><strong>Ready for:</strong> local preview after dependencies are installed</div>
+        <div style="font-size:0.84rem;color:var(--color-text-2);line-height:1.6">
+          <strong>Run in terminal:</strong><br>
+          <code style="font-family:var(--font-mono);display:block;margin-top:6px">npm install</code>
+          <code style="font-family:var(--font-mono);display:block">npm run dev</code>
+        </div>
       </div>
 
       <p x-show="$store.chr.downloadError" x-text="$store.chr.downloadError" style="margin:12px 0 0;color:#dc2626;font-size:0.78rem;line-height:1.5"></p>

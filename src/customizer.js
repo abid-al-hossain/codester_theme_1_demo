@@ -181,6 +181,12 @@ function rgbToHex({ r, g, b }) {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`
 }
 
+function getReadableOnColor(background) {
+  const whiteContrast = contrastRatio(background, '#ffffff')
+  const darkContrast = contrastRatio(background, '#0b0b0b')
+  return whiteContrast >= darkContrast ? '#ffffff' : '#0b0b0b'
+}
+
 function hslToHex(h, s, l) {
   const hue = ((h % 360) + 360) % 360
   const sat = clamp(s, 0, 100) / 100
@@ -341,6 +347,7 @@ function buildDerivedColorTokens(colors) {
     'color-primary-2': mixHex(primary, shadeTarget, 0.12),
     'color-secondary': secondary,
     'color-accent': accent,
+    'color-on-primary': getReadableOnColor(primary),
     'color-text': text,
     'color-text-2': mixHex(text, bg, secondaryTextMix),
     'color-text-3': mixHex(text, bg, tertiaryTextMix),
@@ -431,6 +438,9 @@ function applyBootTheme(prefs) {
     Object.entries(tokens).forEach(([token, value]) => {
       setVar(token, value)
     })
+  } else {
+    const primary = colorValueToHex(getComputedStyle(document.documentElement).getPropertyValue('--color-primary'), DEFAULT_COLORS.primary)
+    setVar('color-on-primary', getReadableOnColor(primary))
   }
 }
 
@@ -440,6 +450,8 @@ async function applyEra(era) {
   if (eraFonts) {
     Promise.all(Object.values(eraFonts).map(loadGoogleFont)).catch(() => {})
   }
+  const primary = colorValueToHex(getComputedStyle(document.documentElement).getPropertyValue('--color-primary'), DEFAULT_COLORS.primary)
+  setVar('color-on-primary', getReadableOnColor(primary))
 }
 
 async function applyFont(role, fontName) {
