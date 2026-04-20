@@ -325,11 +325,11 @@ export const CUSTOMIZER_HTML = /* html */ `
     <div x-show="$store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
       <span class="cust-label">Layout Package</span>
       <p style="font-size:0.78rem;color:var(--color-text-2);margin-bottom:14px;line-height:1.6">
-        This preview shows the package builder. Export is visible here so visitors can see the workflow, while the full package includes the working download action.
+        This panel shows the package builder interface so visitors can review the export setup.
       </p>
 
       <div style="margin-bottom:14px;padding:12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:0.78rem;line-height:1.6;color:var(--color-text-2)">
-        <strong style="color:var(--color-text)">Preview only:</strong> package export is visible here so visitors can see the workflow, but the actual download button is disabled in this public preview.
+        <strong style="color:var(--color-text)">Preview only:</strong> the export controls are visible here, but the actual download button is disabled in this preview.
       </div>
 
       <label class="cust-label" for="chr-package-name">Package name</label>
