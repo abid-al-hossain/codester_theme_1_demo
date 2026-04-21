@@ -78,7 +78,7 @@
         </p>
       </div>
 
-      <div class="grid-ice" id="data">
+      <section class="grid-ice" id="data" style="scroll-margin-top: 96px;" aria-label="Expedition data">
         <div class="ice-pane" data-reveal="bottom">
           <div class="stat-block">
             <div style="font-family:var(--font-mono); font-size:3rem; color:var(--color-primary); font-weight:700;">-42&deg;C</div>
@@ -97,7 +97,7 @@
             <div style="font-family:var(--font-accent); color:var(--color-text-3);">CORE INTEGRITY</div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </section>
 
@@ -140,7 +140,7 @@
   </section>
 
   <section id="arsenal" style="padding: 160px 24px; position:relative; overflow:hidden;">
-    <div style="position:absolute; top: -50px; left: -50px; font-family:var(--font-heading); font-size: 18rem; color:var(--color-bg-2); opacity: 0.8; z-index:-1;">ARSENAL</div>
+    <div aria-hidden="true" style="position:absolute; top: 12px; left: 50%; transform: translateX(-50%); font-family:var(--font-heading); font-size: clamp(8rem, 18vw, 14rem); color:var(--color-bg-2); opacity: 0.46; z-index:-1; white-space:nowrap; pointer-events:none;">ARSENAL</div>
     
     <div class="chr-container">
       <h2 style="font-family:var(--font-heading); font-size: 4rem; color:var(--color-primary); text-align:center; margin-bottom: 80px;">Hardware Roster</h2>
@@ -157,7 +157,7 @@
         </div>
         
         <!-- Item 2 -->
-        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center;" data-reveal="bottom" style="transition-delay:0.1s">
+        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center; transition-delay:0.1s;" data-reveal="bottom">
           <div style="width: 120px; height: 120px; border-radius: 50%; background:var(--color-bg-2); border: 2px solid var(--color-secondary); display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
              <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
           </div>
@@ -167,7 +167,7 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center;" data-reveal="bottom" style="transition-delay:0.2s">
+        <div class="ice-pane" style="display:flex; flex-direction:column; align-items:center; text-align:center; transition-delay:0.2s;" data-reveal="bottom">
           <div style="width: 120px; height: 120px; border-radius: 50%; background:var(--color-bg-2); border: 2px solid var(--color-accent); display:flex; justify-content:center; align-items:center; margin-bottom: 20px;">
              <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg>
           </div>
@@ -201,21 +201,21 @@
           </div>
           <div style="font-family:var(--font-accent); color:var(--color-text);">PALEOCRYST</div>
         </div>
-        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.1s;">
+        <div class="ice-pane" style="padding:20px; text-align:center; transition-delay:0.1s;" data-reveal="scale">
           <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-002</div>
            <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
              <div style="width:20px; height:60px; background:var(--color-primary); opacity:0.5; border-radius:10px;"></div>
           </div>
           <div style="font-family:var(--font-accent); color:var(--color-text);">STRATA LAYER B</div>
         </div>
-        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.2s;">
+        <div class="ice-pane" style="padding:20px; text-align:center; transition-delay:0.2s;" data-reveal="scale">
           <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-003</div>
            <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
              <div style="width:20px; height:60px; background:var(--color-secondary); opacity:0.5; border-radius:10px;"></div>
           </div>
           <div style="font-family:var(--font-accent); color:var(--color-text);">GLACIAL ORE</div>
         </div>
-        <div class="ice-pane" style="padding:20px; text-align:center;" data-reveal="scale" style="transition-delay:0.3s;">
+        <div class="ice-pane" style="padding:20px; text-align:center; transition-delay:0.3s;" data-reveal="scale">
           <div style="font-family:var(--font-mono); color:var(--color-secondary); font-size:0.8rem; margin-bottom:10px;">ID: CS-004</div>
            <div style="height:100px; background:rgba(255,255,255,0.1); border:1px solid var(--color-border); margin-bottom:10px; display:flex; align-items:center; justify-content:center;">
              <div style="width:20px; height:60px; background:var(--color-primary-2); opacity:0.5; border-radius:10px;"></div>

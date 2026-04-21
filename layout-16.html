@@ -194,7 +194,7 @@
 
   <!-- New Content Section: Species Registry -->
   <section id="registry" style="padding: 120px 24px; background:var(--color-bg-3); position:relative; border-top: 10px solid var(--color-primary);">
-    <div style="position:absolute; top: -20px; right: 40px; font-family:var(--font-heading); font-size: 10rem; color:var(--color-bg-2); opacity: 0.2; z-index:0;">SPECIES</div>
+    <div aria-hidden="true" style="position:absolute; top: 20px; left: 50%; transform: translateX(-50%); font-family:var(--font-heading); font-size: clamp(6rem, 14vw, 10rem); color:var(--color-bg-2); opacity: 0.16; z-index:0; white-space:nowrap; pointer-events:none;">SPECIES</div>
     <div class="chr-container" style="position:relative; z-index:1;">
       <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-text); text-align:center; margin-bottom: 60px;">REGISTRY OF THE OLD WORLD</h2>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
@@ -202,11 +202,11 @@
           <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-primary); margin-bottom:12px;">THEROPODA</h4>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Bipedal saurischian dinosaurs. Characterized by hollow bones and three-toed limbs. Includes the most fearsome predators of the Mesozoic.</p>
         </div>
-        <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-secondary);" data-reveal="bottom" style="transition-delay:0.1s;">
+        <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-secondary); transition-delay:0.1s;" data-reveal="bottom">
           <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-secondary); margin-bottom:12px;">SAUROPODA</h4>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Long-necked, multi-ton herbivores. The largest land animals to ever exist. Their sheer scale defined the Jurassic environment.</p>
         </div>
-        <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-accent);" data-reveal="bottom" style="transition-delay:0.2s;">
+        <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-accent); transition-delay:0.2s;" data-reveal="bottom">
           <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-accent); margin-bottom:12px;">ORNITHISCHIA</h4>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Bird-hipped herbivores. Highly diverse group including armored Ankylosaurs and horned Ceratopsians.</p>
         </div>
@@ -262,7 +262,7 @@
 <a href="#" style="color:var(--color-primary); font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.1em; text-decoration:none;" data-demo-message="Specimen preview. Connect this link to the full archive entry.">Research further →</a>
         </article>
 
-        <article class="specimen-card" style="border:none; border-left: 10px solid var(--color-primary);" data-reveal="left" style="transition-delay:0.1s;">
+        <article class="specimen-card" style="border:none; border-left: 10px solid var(--color-primary); transition-delay:0.1s;" data-reveal="left">
           <div style="height: 240px; background:var(--color-bg-2); display:flex; justify-content:center; align-items:center; margin-bottom: 24px; border: var(--border-w) solid var(--color-border);">
              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="square"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           </div>
@@ -276,7 +276,7 @@
 
   <!-- New Content Section: Deep History Lore -->
   <section style="padding: 140px 24px; background:var(--color-bg-2); position:relative;" id="history">
-    <div style="position:absolute; top:40px; left:-60px; font-family:var(--font-heading); font-size: 15rem; color:var(--color-bg-3); opacity: 0.3; transform:rotate(-10deg);">HISTORY</div>
+    <div aria-hidden="true" style="position:absolute; top: 28px; left: 50%; transform: translateX(-50%) rotate(-6deg); font-family:var(--font-heading); font-size: clamp(7rem, 16vw, 13rem); color:var(--color-bg-3); opacity: 0.22; white-space:nowrap; pointer-events:none;">HISTORY</div>
     <div class="chr-container" style="position:relative; z-index:2; max-width:800px; display:flex; flex-direction:column; gap:40px;">
       <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary-2); text-align:center;">THE PANGEA DIVIDE</h2>
       
@@ -303,8 +303,8 @@
   </section>
 
   <!-- Original Footer Action -->
-  <section style="padding: 180px 24px; background:var(--color-bg); position:relative; overflow:hidden;" data-reveal="scale">
-    <div style="position:absolute; top: 0px; right: 0px; font-family:var(--font-heading); font-size: 20vw; color:var(--color-bg-2); opacity: 0.5; line-height: 0.8;">RAW</div>
+  <section id="footer" style="padding: 180px 24px; background:var(--color-bg); position:relative; overflow:hidden; scroll-margin-top: 96px;" data-reveal="scale">
+    <div aria-hidden="true" style="position:absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family:var(--font-heading); font-size: clamp(7rem, 18vw, 16rem); color:var(--color-bg-2); opacity: 0.34; line-height: 0.8; white-space:nowrap; pointer-events:none;">RAW</div>
     <div style="position:absolute; top: 0; left: 0; width:100%; height:80px; background:var(--color-bg-2); clip-path: polygon(0 0, 100% 0, 100% 30%, 85% 90%, 70% 20%, 55% 80%, 40% 10%, 25% 60%, 10% 20%, 0 70%);"></div>
 
     <div class="chr-container" style="position:relative; z-index:2; text-align:center; margin-top:80px;">
@@ -314,7 +314,7 @@
   </section>
 </main>
 
-<footer class="primal-footer" id="footer" style="border-top: 10px solid var(--color-border-2);">
+<footer class="primal-footer" style="border-top: 10px solid var(--color-border-2);">
   <div class="chr-container" style="display:flex; justify-content:space-between; align-items:center;">
     <div style="text-align:left;">
       <div style="font-family:var(--font-heading); font-size:2rem; color:var(--color-text);">CHRONOS</div>
