@@ -112,7 +112,7 @@ export function initNavHighlight() {
         link.removeAttribute('aria-current')
       }
 
-      if (link.closest('.chr-nav-links')) {
+      if (link.closest('.chr-nav-links') && !link.classList.contains('db-nav-item')) {
         link.style.color = isActive ? 'var(--color-primary)' : ''
       }
     })

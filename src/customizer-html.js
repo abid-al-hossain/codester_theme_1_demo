@@ -61,7 +61,7 @@ export const CUSTOMIZER_HTML = /* html */ `
         Theme Layouts
         <a href="index.html" style="font-size:0.7rem;font-weight:normal;color:var(--color-primary);text-decoration:underline">View Index</a>
       </span>
-      <div style="display:flex;flex-direction:column;gap:8px;max-height:450px;overflow-y:auto;padding-right:4px">
+      <div style="display:flex;flex-direction:column;gap:8px">
         <a href="layout-01.html" class="layout-list-link">
           <div class="layout-thumb-frame layout-mini-thumb"><svg viewBox="0 0 160 100" preserveAspectRatio="none" class="layout-thumb-svg"><defs><linearGradient id="l01" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2563eb"/><stop offset="1" stop-color="#14b8a6"/></linearGradient></defs><rect width="160" height="100" fill="#f8fbff"/><rect width="160" height="12" fill="#eaf1f8"/><rect x="12" y="23" width="56" height="6" rx="3" fill="#14213d"/><rect x="12" y="33" width="46" height="4" rx="2" fill="#7c8fa5"/><rect x="12" y="40" width="50" height="4" rx="2" fill="#7c8fa5"/><rect x="12" y="50" width="26" height="8" rx="4" fill="#2563eb"/><rect x="42" y="50" width="22" height="8" rx="4" fill="#cfe0ff"/><rect x="89" y="22" width="58" height="42" rx="6" fill="#fff" stroke="#d6e3f0"/><rect x="96" y="28" width="44" height="18" rx="4" fill="url(#l01)" opacity=".85"/><rect x="96" y="52" width="20" height="6" rx="3" fill="#d9e4f2"/><rect x="120" y="52" width="20" height="6" rx="3" fill="#2563eb" opacity=".18"/></svg></div>
           <div style="display:flex;flex-direction:column;gap:2px">

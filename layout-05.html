@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Chronos Layout 05 - Enterprise Dashboard with sidebar navigation, data tables, and stat cards.">
-  <title>Chronos | Enterprise Dashboard</title>
-  <script src="./theme-boot.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chronos | Enterprise Dashboard">
+  <meta property="og:description" content="Chronos Layout 05 - Enterprise Dashboard with sidebar navigation, data tables, and stat cards.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chronos | Enterprise Dashboard">
+  <meta name="twitter:description" content="Chronos Layout 05 - Enterprise Dashboard with sidebar navigation, data tables, and stat cards.">
+  <script type="module" src="./src/theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
@@ -15,8 +22,9 @@
     .db-logo{padding:0 24px 24px;font-family:var(--font-accent);font-weight:800;font-size:1.2rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px}
     .db-sidebar-top .db-logo{padding:0;border-bottom:none;margin-bottom:0}
     .db-nav-label{padding:16px 24px 8px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.76);opacity:1}
-    .db-nav-item,.db-mobile-links a.db-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.94);opacity:1;cursor:pointer;transition:background 0.2s,color 0.2s}
-    .db-nav-item:hover,.db-nav-item.active,.db-mobile-links a.db-nav-item:hover,.db-mobile-links a.db-nav-item.active{background:rgba(255,255,255,0.16);color:#fff}
+    .db-nav-item,.db-mobile-links a.db-nav-item{display:flex;align-items:center;gap:12px;padding:10px 24px;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.94);opacity:1;cursor:pointer;transition:background 0.2s,color 0.2s,box-shadow 0.2s,opacity 0.2s}
+    .db-nav-item:hover,.db-mobile-links a.db-nav-item:hover{background:color-mix(in srgb,#ffffff 10%,var(--color-primary));color:#fff}
+    .db-nav-item.active,.db-mobile-links a.db-nav-item.active{background:color-mix(in srgb,#ffffff 16%,var(--color-primary));color:#fff;box-shadow:inset 3px 0 0 var(--color-secondary)}
     .db-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:100vh;background:var(--color-bg-2)}
     .db-topbar{background:var(--color-bg);border-bottom:var(--border-w) solid var(--color-border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
     .db-content{flex:1;padding:32px;overflow-y:auto}
@@ -178,11 +186,11 @@
             <span style="font-size:0.76rem;color:var(--color-text-3)">Weekly active cohort</span>
           </div>
           <div style="padding:24px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:flex-end;height:190px">
-            <div style="height:62%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:71%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:68%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:77%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
-            <div style="height:84%;background:var(--color-bg-2);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:62%;background:color-mix(in srgb,var(--color-primary) 22%,var(--color-bg-2));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:71%;background:color-mix(in srgb,var(--color-primary) 30%,var(--color-bg-2));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:68%;background:color-mix(in srgb,var(--color-secondary) 26%,var(--color-bg-2));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:77%;background:color-mix(in srgb,var(--color-primary) 38%,var(--color-bg-2));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
+            <div style="height:84%;background:color-mix(in srgb,var(--color-secondary) 42%,var(--color-bg-2));border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
             <div style="height:88%;background:var(--color-secondary);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
             <div style="height:100%;background:var(--color-primary);border-radius:var(--radius-sm) var(--radius-sm) 0 0"></div>
           </div>
@@ -334,3 +342,4 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
+

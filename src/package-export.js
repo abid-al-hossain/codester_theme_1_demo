@@ -12,7 +12,7 @@ import transitionsRaw from './transitions.js?raw'
 import packageNameUtilsRaw from './package-name-utils.js?raw'
 import faviconRaw from './export-assets/favicon.svg?raw'
 import iconsRaw from './export-assets/icons.svg?raw'
-import themeBootRaw from '../public/theme-boot.js?raw'
+import themeBootRaw from './theme-boot.js?raw'
 import { sanitizePackageName, sanitizeArchiveName } from './package-name-utils.js'
 import layout01Raw from '../layout-01.html?raw'
 import layout02Raw from '../layout-02.html?raw'
@@ -307,7 +307,7 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
   }
   zip.file('public/favicon.svg', faviconRaw)
   zip.file('public/icons.svg', iconsRaw)
-  zip.file('public/theme-boot.js', themeBootRaw)
+  zip.file('src/theme-boot.js', themeBootRaw)
 
   const blob = await zip.generateAsync({ type: 'blob' })
   downloadBlob(blob, `${archiveName}.zip`)
