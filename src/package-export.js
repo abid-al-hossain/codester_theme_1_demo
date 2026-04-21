@@ -249,7 +249,10 @@ This package contains the exported ${layoutLabel} layout from Chronos.
 
 ## Getting started
 
-Install dependencies, then start the local preview server.
+Run these commands in your terminal:
+
+    npm install
+    npm run dev
 
 ## Included
 
