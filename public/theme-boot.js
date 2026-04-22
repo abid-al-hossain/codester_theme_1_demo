@@ -53,6 +53,34 @@
     return ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000 < 150
   }
 
+  function relativeLuminance(color) {
+    var rgb = hexToRgb(color, color)
+
+    function normalize(channel) {
+      var value = channel / 255
+      return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4)
+    }
+
+    var rr = normalize(rgb.r)
+    var gg = normalize(rgb.g)
+    var bb = normalize(rgb.b)
+    return (0.2126 * rr) + (0.7152 * gg) + (0.0722 * bb)
+  }
+
+  function contrastRatio(colorA, colorB) {
+    var l1 = relativeLuminance(colorA)
+    var l2 = relativeLuminance(colorB)
+    var lighter = Math.max(l1, l2)
+    var darker = Math.min(l1, l2)
+    return (lighter + 0.05) / (darker + 0.05)
+  }
+
+  function getReadableOnColor(background) {
+    var whiteContrast = contrastRatio(background, '#ffffff')
+    var darkContrast = contrastRatio(background, '#0b0b0b')
+    return whiteContrast >= darkContrast ? '#ffffff' : '#0b0b0b'
+  }
+
   function getCurrentPageKey() {
     return window.location.pathname.split('/').pop() || 'index.html'
   }
@@ -117,6 +145,7 @@
         ['color-surface', withAlpha(surface, dark ? 0.82 : 0.78)],
         ['color-primary', primary],
         ['color-primary-2', mixHex(primary, dark ? '#ffffff' : '#000000', 0.12)],
+        ['color-on-primary', getReadableOnColor(primary)],
         ['color-secondary', secondary],
         ['color-accent', accent],
         ['color-text', text],

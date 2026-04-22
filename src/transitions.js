@@ -40,17 +40,6 @@ export function revealAboveFold() {
 }
 
 /**
- * Stagger-reveal a list of elements manually (e.g. after era switch)
- */
-export function staggerReveal(selector, baseDelay = 0, step = 80) {
-  const els = document.querySelectorAll(selector)
-  els.forEach((el, i) => {
-    el.style.transitionDelay = `${baseDelay + i * step}ms`
-    el.classList.add('visible')
-  })
-}
-
-/**
  * Number counter animation for stat sections.
  * Usage: <span data-count="10000" data-suffix="+">0</span>
  */

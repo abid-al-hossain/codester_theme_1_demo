@@ -12,6 +12,7 @@ import {
 
 const DEFAULT_LAUNCH_OFFSET_DAYS = 45
 const DEFAULT_COUNTDOWN_COMPLETE_MESSAGE = 'Launch window completed'
+const countdownIntervals = []
 
 function getDefaultLaunchDate() {
   return new Date(Date.now() + DEFAULT_LAUNCH_OFFSET_DAYS * 86400000).toISOString()
@@ -68,6 +69,7 @@ function initCurrentDate() {
 }
 
 function initCountdowns() {
+  countdownIntervals.splice(0).forEach((intervalId) => window.clearInterval(intervalId))
   document.querySelectorAll('[data-countdown]').forEach((countdown) => {
     const fallbackLaunchDate = getDefaultLaunchDate()
     const launchDate = countdown.dataset.launchDate || fallbackLaunchDate
@@ -100,9 +102,13 @@ function initCountdowns() {
     }
 
     tick()
-    window.setInterval(tick, 1000)
+    countdownIntervals.push(window.setInterval(tick, 1000))
   })
 }
+
+window.addEventListener('pagehide', () => {
+  countdownIntervals.splice(0).forEach((intervalId) => window.clearInterval(intervalId))
+}, { once: true })
 
 document.addEventListener('DOMContentLoaded', () => {
   initDemoActions()

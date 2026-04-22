@@ -575,9 +575,9 @@ Alpine.store('chr', {
   surpriseColorDrafts: { ...DEFAULT_COLORS },
   // DOWNLOAD_FEATURE_START
   currentLayout: getCurrentLayoutFile(),
-  downloadAvailable: false,
-  currentLayoutLabel: getLayoutMeta(getCurrentLayoutFile())?.label || '',
-  downloadPackageName: getDefaultPackageName(getCurrentLayoutFile() || 'layout-01.html'),
+  downloadAvailable: Boolean(getCurrentLayoutFile()),
+  currentLayoutLabel: '',
+  downloadPackageName: '',
   downloadMode: 'without-customizer',
   downloadBusy: false,
   downloadError: '',
@@ -626,9 +626,9 @@ Alpine.store('chr', {
     }
 
     // DOWNLOAD_FEATURE_START
-    this.currentLayout = getCurrentLayoutFile()
-    this.currentLayoutLabel = getLayoutMeta(this.currentLayout)?.label || 'Current layout'
-    this.downloadPackageName = getDefaultPackageName(this.currentLayout || 'layout-01.html')
+    const currentLayoutMeta = getLayoutMeta(this.currentLayout)
+    this.currentLayoutLabel = currentLayoutMeta?.label || ''
+    this.downloadPackageName = getDefaultPackageName(this.currentLayout)
     // DOWNLOAD_FEATURE_END
 
     applyEra(this.era)
@@ -648,6 +648,7 @@ Alpine.store('chr', {
   },
 
   setActiveTab(tab) {
+    if (tab === 'download' && !this.downloadAvailable) return
     this.activeTab = tab
   },
 
@@ -656,7 +657,7 @@ Alpine.store('chr', {
       'era',
       'colors',
       'fonts',
-      'download',
+      ...(this.downloadAvailable ? ['download'] : []),
       'layouts',
     ]
   },
@@ -814,6 +815,7 @@ Alpine.store('chr', {
 
     this.applyColorTheme()
     this.activeTab = 'fonts'
+    this.save()
   },
 
   toggle() {
@@ -879,10 +881,6 @@ Alpine.store('chr', {
   },
 
   async downloadPackage() {
-        this.downloadError = 'Download is not available in this preview.'
-    return
-
-    /*
     this.downloadBusy = true
     this.downloadError = ''
 
@@ -902,7 +900,6 @@ Alpine.store('chr', {
     } finally {
       this.downloadBusy = false
     }
-    */
   },
   // DOWNLOAD_FEATURE_END
 
