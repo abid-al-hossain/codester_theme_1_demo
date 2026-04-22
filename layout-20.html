@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 20 - The Grand Library magic layout with a deeper midnight-academy atmosphere, portrait halls, alchemy ledgers, and spell cards.">
+  <meta name="description" content="Chronos Layout 20 - The Grand Library archive layout with candlelit reading halls, portrait corridors, courier ledgers, and coded relic cards.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronos | The Grand Library">
-  <meta property="og:description" content="Chronos Layout 20 - The Grand Library magic layout with a deeper midnight-academy atmosphere, portrait halls, alchemy ledgers, and spell cards.">
+  <meta property="og:description" content="Chronos Layout 20 - The Grand Library archive layout with candlelit reading halls, portrait corridors, courier ledgers, and coded relic cards.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronos | The Grand Library">
-  <meta name="twitter:description" content="Chronos Layout 20 - The Grand Library magic layout with a deeper midnight-academy atmosphere, portrait halls, alchemy ledgers, and spell cards.">
-  <script type="module" src="./src/theme-boot.js"></script>
+  <meta name="twitter:description" content="Chronos Layout 20 - The Grand Library archive layout with candlelit reading halls, portrait corridors, courier ledgers, and coded relic cards.">
+  <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
     [x-cloak]{display:none!important}
@@ -213,7 +213,7 @@
     .chapter-panel,
     .house-card,
     .portrait-card,
-    .spell-card{
+    .cipher-card{
       position:relative;
       overflow:hidden;
       min-width:0;
@@ -260,7 +260,7 @@
       box-shadow:0 18px 50px color-mix(in srgb, var(--color-primary) 16%, transparent);
       will-change: transform;
     }
-    .house-sigil{
+    .order-sigil{
       font-family:var(--font-accent);
       font-size:2.2rem;
       color:var(--color-primary);
@@ -304,7 +304,7 @@
       text-transform:uppercase;
       animation:portraitGlow 8s ease-in-out infinite;
     }
-    .spell-card{
+    .cipher-card{
       background:var(--color-bg-3);
       border:var(--border-w) solid var(--color-border);
       border-radius:var(--radius-lg);
@@ -313,13 +313,13 @@
       margin-top:40px;
       transition:transform var(--dur), box-shadow var(--dur), border-color var(--dur);
     }
-    .spell-card:hover{
+    .cipher-card:hover{
       transform:translateY(-10px) rotate(-1deg);
       box-shadow:var(--shadow-glow);
       border-color:color-mix(in srgb, var(--color-primary) 42%, var(--color-border));
       will-change: transform;
     }
-    .spell-card::before{
+    .cipher-card::before{
       content:'';
       position:absolute;
       inset:-30% 30% auto -30%;
@@ -330,17 +330,17 @@
       transition:opacity var(--dur), transform var(--dur);
       pointer-events:none;
     }
-    .spell-card:hover::before{
+    .cipher-card:hover::before{
       opacity:.8;
       transform:translateX(22%) rotate(14deg);
     }
-    .owl-strip{
+    .courier-strip{
       display:grid;
       grid-template-columns:1.3fr .7fr;
       gap:24px;
       margin:56px 0;
     }
-    .owl-route,
+    .courier-route,
     .lantern-panel{
       padding:28px;
       border-radius:var(--radius-lg);
@@ -348,14 +348,14 @@
       border:1px solid var(--color-border);
       min-width:0;
     }
-    .owl-route ul{
+    .courier-route ul{
       list-style:none;
       padding:0;
       margin:20px 0 0;
       display:grid;
       gap:14px;
     }
-    .owl-route li{
+    .courier-route li{
       display:flex;
       justify-content:space-between;
       gap:14px;
@@ -364,7 +364,7 @@
       color:var(--color-text-2);
       flex-wrap:wrap;
     }
-    .owl-route strong{
+    .courier-route strong{
       color:var(--color-text);
       font-family:var(--font-heading);
       letter-spacing:.04em;
@@ -392,9 +392,9 @@
     @supports (content-visibility:auto){
       .portrait-grid,
       .house-grid,
-      .owl-strip,
+      .courier-strip,
       .archive-table,
-      #spells{
+      #ciphers{
         content-visibility:auto;
         contain-intrinsic-size:1px 720px;
       }
@@ -439,7 +439,7 @@
     @media(max-width:1100px){
       .house-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
       .portrait-grid{ grid-template-columns:1fr; }
-      .owl-strip{ grid-template-columns:1fr; }
+      .courier-strip{ grid-template-columns:1fr; }
     }
     @media(max-width:900px){
       .magic-split{
@@ -457,7 +457,7 @@
       .chapter-panel,
       .house-card,
       .portrait-card,
-      .owl-route,
+      .courier-route,
       .lantern-panel{ padding:22px; }
     }
   </style>
@@ -471,8 +471,8 @@
     <nav class="chr-nav-links" aria-label="Magic navigation">
       <a href="#prologue" style="font-family:var(--font-body); color:var(--color-text);">Prologue</a>
       <a href="#constructs" style="font-family:var(--font-body); color:var(--color-text);">Constructs</a>
-      <a href="#potions" style="font-family:var(--font-body); color:var(--color-text);">Potions</a>
-      <a href="#spells" style="font-family:var(--font-body); color:var(--color-text);">Spells</a>
+      <a href="#alchemy" style="font-family:var(--font-body); color:var(--color-text);">Alchemy</a>
+      <a href="#ciphers" style="font-family:var(--font-body); color:var(--color-text);">Ciphers</a>
     </nav>
     <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -493,14 +493,14 @@
         Grand Archive Ledger &mdash; Chapter 20
       </div>
       <p class="hero-lead">
-        Enter a midnight academy of candlelit reading halls, portrait corridors, courier notices, alchemy ledgers,
+        Enter a midnight archive of candlelit reading halls, portrait corridors, courier notices, alchemy ledgers,
         and a heavy old tome opened under torchlight.
       </p>
       <div class="hero-runes" aria-label="Magical atmosphere markers">
         <span>Portrait Hall</span>
-        <span>Owl Post</span>
-        <span>Potion Ledger</span>
-        <span>Spell Chamber</span>
+        <span>Courier Post</span>
+        <span>Alchemy Ledger</span>
+        <span>Cipher Chamber</span>
       </div>
     </div>
 
@@ -508,7 +508,7 @@
       <span class="drop-cap">B</span>
       eyond the west stair and under the watch of moving frames, the library opens into a chamber of floating dust, brass lanterns, and whispering ledgers. Warm torchlight, deep wood, disciplined ornament, and slow ceremonial movement turn the archive into a place you can almost hear breathing.
       <br><br>
-      The rhythm here is slower, quieter, and more ceremonial. Wide margins, chapter-like breaks, layered panels, and drifting glow make each section feel like another room inside the castle archive.
+      The rhythm here is slower, quieter, and more ceremonial. Wide margins, chapter-like breaks, layered panels, and drifting glow make each section feel like another room inside the inner archive.
     </div>
 
     <div class="magic-divider">&#10023; &bull; &#10022; &bull; &#10023;</div>
@@ -521,7 +521,7 @@
         <p>Layered borders, drifting glyphs, slow ambient glow, and deeper chapter breaks turn the hall into a procession of frames, lanterns, and old ceremonial rooms.</p>
       </div>
       <div class="chapter-panel" data-reveal="right">
-        <h4>Headmaster's Notes</h4>
+        <h4>Archivist's Notes</h4>
         <p>Title glow, rune drift, and lantern light carry the mood of a headmaster's archive while keeping every note clear enough to read at a glance.</p>
       </div>
     </div>
@@ -535,11 +535,11 @@
       <div class="portrait-card" data-reveal="bottom" style="transition-delay:.1s;">
         <div class="portrait-frame">Astronomy</div>
         <h4>Midnight Observatory</h4>
-        <p>Soft glow and framed panels echo stained-glass spill, moonlit windows, and the kind of late-night study atmosphere a magical school should carry.</p>
+        <p>Soft glow and framed panels echo stained-glass spill, moonlit windows, and the kind of late-night study atmosphere a scholarly citadel should carry.</p>
       </div>
       <div class="portrait-card" data-reveal="bottom" style="transition-delay:.2s;">
         <div class="portrait-frame">Restricted</div>
-        <h4>Forbidden Stacks</h4>
+        <h4>Sealed Stacks</h4>
         <p>These panels read more like cabinets or alcoves within the archive. The motion stays slow and ceremonial so the mood feels enchanted, not noisy.</p>
       </div>
     </div>
@@ -574,22 +574,22 @@
 
     <div class="house-grid">
       <div class="house-card" data-reveal="left">
-        <div class="house-sigil">&#10022;</div>
-        <h4>House of Embers</h4>
+        <div class="order-sigil">&#10022;</div>
+        <h4>Order of Embers</h4>
         <p>Duelists, bold processionals, and red-gold hallways lit by braziers. Their banners turn the academy into a fuller world instead of a single reading surface.</p>
       </div>
       <div class="house-card" data-reveal="left" style="transition-delay:.08s;">
-        <div class="house-sigil">&#10023;</div>
-        <h4>House of Thorns</h4>
+        <div class="order-sigil">&#10023;</div>
+        <h4>Order of Thorns</h4>
         <p>Greenhouses, herb drawers, cloister corridors, and patient discipline. The darker secondary tones help the page feel older and more scholastic.</p>
       </div>
       <div class="house-card" data-reveal="right" style="transition-delay:.12s;">
-        <div class="house-sigil">&#10022;</div>
+        <div class="order-sigil">&#10022;</div>
         <h4>House of Tides</h4>
         <p>Moon-water, mirrored ink, observatory decks, and nocturnal study. This introduces a cooler side of the academy atmosphere without losing the core warmth.</p>
       </div>
       <div class="house-card" data-reveal="right" style="transition-delay:.18s;">
-        <div class="house-sigil">&#10023;</div>
+        <div class="order-sigil">&#10023;</div>
         <h4>House of Stone</h4>
         <p>Archive keepers, hall wardens, ancient rulebooks, and stern staircases. These cards help the page feel like a campus, not a single chamber.</p>
       </div>
@@ -599,8 +599,8 @@
 
     <div class="magic-divider">&#10023; &bull; &#10022; &bull; &#10023;</div>
 
-    <section id="potions" style="scroll-margin-top: 96px;">
-    <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter III: Potions &amp; Owl Post</h2>
+    <section id="alchemy" style="scroll-margin-top: 96px;">
+    <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter III: Alchemy &amp; Courier Post</h2>
     <div class="magic-split" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px;">
       <div class="chapter-panel" data-reveal="left">
         <h4>Elixir of Radiance</h4>
@@ -612,12 +612,12 @@
       </div>
     </div>
 
-    <div class="owl-strip">
-      <div class="owl-route" data-reveal="left">
-        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin:0;">Owl Route Register</h3>
+    <div class="courier-strip">
+      <div class="courier-route" data-reveal="left">
+        <h3 style="font-family:var(--font-heading); color:var(--color-text); margin:0;">Courier Route Register</h3>
         <ul>
           <li><strong>North Dormitory</strong><span>Ink requisition, wax seal, astronomy chart</span></li>
-          <li><strong>Potion Vault</strong><span>Nightroot ledger, silver vials, cauldron timing notes</span></li>
+          <li><strong>Alchemy Vault</strong><span>Nightroot ledger, silver vials, cauldron timing notes</span></li>
           <li><strong>Great Hall</strong><span>Banner revision, chorus order, candle-height draft</span></li>
           <li><strong>Inner Archive</strong><span>Silent key transfer, catalog update, ward inspection</span></li>
         </ul>
@@ -653,20 +653,20 @@
 
     </section>
 
-    <section id="spells" style="scroll-margin-top: 96px;">
-    <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter IV: Noteworthy Spells</h2>
+    <section id="ciphers" style="scroll-margin-top: 96px;">
+    <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter IV: Noteworthy Ciphers</h2>
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; justify-content:center;">
-      <div class="spell-card" data-reveal="bottom">
+      <div class="cipher-card" data-reveal="bottom">
         <div style="font-size:3rem; margin-bottom:16px;">&#10024;</div>
         <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Lantern Sigil</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3);">Ignites chapter glow inside frames, banners, cards, and lantern surfaces without flooding the page with light.</p>
       </div>
-      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.1s;">
+      <div class="cipher-card" data-reveal="bottom" style="transition-delay:0.1s;">
         <div style="font-size:3rem; margin-bottom:16px;">&#9790;</div>
         <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Castle Ward</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3);">Keeps the atmosphere dense and nocturnal, layering the hall with dark wood, night stone, and ceremonial torchlight.</p>
       </div>
-      <div class="spell-card" data-reveal="bottom" style="transition-delay:0.2s;">
+      <div class="cipher-card" data-reveal="bottom" style="transition-delay:0.2s;">
         <div style="font-size:3rem; margin-bottom:16px;">&#10022;</div>
         <h3 style="font-family:var(--font-heading); color:var(--color-text); margin-bottom:10px; font-size:1.4rem;">Glyph Mending</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3);">Restores the chamber to a proper old-academy magical environment with readable but theatrical motion.</p>

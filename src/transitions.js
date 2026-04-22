@@ -184,6 +184,10 @@ function getSectionMotionProfile() {
   if (path.includes('layout-02') || path.includes('layout-06')) return 'creative'
   if (path.includes('layout-03') || path.includes('layout-10')) return 'editorial'
   if (path.includes('layout-07')) return 'launch'
+  if (path.includes('layout-16') || path.includes('layout-18')) return 'soft'
+  if (path.includes('layout-17')) return 'cyber'
+  if (path.includes('layout-19')) return 'launch'
+  if (path.includes('layout-20')) return 'editorial'
   return 'default'
 }
 
