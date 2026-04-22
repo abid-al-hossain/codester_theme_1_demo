@@ -163,15 +163,15 @@
       <p style="color:var(--color-text-2);line-height:1.75;margin-bottom:16px">Choose the communities you care about, claim your profile, and start connecting with the people already inside.</p>
       <form class="sc-form" aria-label="Community signup form" data-demo-message="Community signup submitted. Connect this form to your own onboarding system.">
         <label for="sc-full-name" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Full name</label>
-        <input id="sc-full-name" type="text" placeholder="Full name" autocomplete="name">
+        <input id="sc-full-name" name="full_name" type="text" placeholder="Full name" autocomplete="name">
         <label for="sc-email" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Email</label>
-        <input id="sc-email" type="email" placeholder="Email" autocomplete="email">
+        <input id="sc-email" name="email" type="email" placeholder="Email" autocomplete="email">
         <label for="sc-interest" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Interest</label>
-        <select id="sc-interest"><option>Professional circle</option><option>Interest club</option><option>Cohort space</option></select>
+        <select id="sc-interest" name="interest"><option>Professional circle</option><option>Interest club</option><option>Cohort space</option></select>
         <label for="sc-username" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Username idea</label>
-        <input id="sc-username" type="text" placeholder="Username idea">
+        <input id="sc-username" name="username" type="text" placeholder="Username idea">
         <label for="sc-community-goals" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">What kind of community are you looking for?</label>
-        <textarea id="sc-community-goals" placeholder="What kind of community are you looking for?"></textarea>
+        <textarea id="sc-community-goals" name="community_goals" placeholder="What kind of community are you looking for?"></textarea>
         <button type="submit" class="chr-btn-primary">Join waitlist</button>
       </form>
     </section>

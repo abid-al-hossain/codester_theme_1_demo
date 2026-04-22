@@ -6,12 +6,6 @@ export const CUSTOMIZER_HTML = /* html */ `
   aria-expanded="false"
 >
   CUSTOMIZE
-  <span
-    x-show="$store.chr.isModified()"
-    x-cloak
-    aria-hidden="true"
-    style="display:inline-flex;margin-left:8px;width:8px;height:8px;border-radius:999px;background:currentColor;box-shadow:0 0 0 2px color-mix(in srgb, currentColor 18%, transparent)"
-  ></span>
 </button>
 
 <aside

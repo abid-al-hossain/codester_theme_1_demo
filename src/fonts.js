@@ -62,7 +62,7 @@ export function loadGoogleFont(name) {
 
 export const ERA_DEFAULT_FONTS = {
   modern:     { heading: 'Plus Jakarta Sans', body: 'Inter', mono: 'JetBrains Mono', accent: 'Space Grotesk' },
-  gothic:     { heading: 'Cinzel', body: 'Crimson Pro', mono: 'UnifrakturMaguntia', accent: 'UnifrakturMaguntia' },
+  gothic:     { heading: 'Cinzel', body: 'Crimson Pro', mono: 'Courier Prime', accent: 'UnifrakturMaguntia' },
   futuristic: { heading: 'Space Grotesk', body: 'Plus Jakarta Sans', mono: 'Space Mono', accent: 'Orbitron' },
   retro:      { heading: 'Playfair Display', body: 'Crimson Pro', mono: 'Inconsolata', accent: 'EB Garamond' },
   cyberpunk:  { heading: 'Orbitron', body: 'Tektur', mono: 'Space Mono', accent: 'Audiowide' },

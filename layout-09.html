@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 09 - Cyberpunk agency demo with glitch typography, responsive grids, and stable placeholder behavior.">
+  <meta name="description" content="Chronos Layout 09 - Cyberpunk agency layout with glitch typography, responsive grids, and a neon contact flow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronos | Cyberpunk Agency">
-  <meta property="og:description" content="Chronos Layout 09 - Cyberpunk agency demo with glitch typography, responsive grids, and stable placeholder behavior.">
+  <meta property="og:description" content="Chronos Layout 09 - Cyberpunk agency layout with glitch typography, responsive grids, and a neon contact flow.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronos | Cyberpunk Agency">
-  <meta name="twitter:description" content="Chronos Layout 09 - Cyberpunk agency demo with glitch typography, responsive grids, and stable placeholder behavior.">
+  <meta name="twitter:description" content="Chronos Layout 09 - Cyberpunk agency layout with glitch typography, responsive grids, and a neon contact flow.">
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
 <style>
@@ -178,10 +178,10 @@
         <div style="position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;background:var(--color-secondary);box-shadow:0 0 15px var(--color-secondary)"></div>
         <form style="display:flex;flex-direction:column;gap:30px" aria-label="Uplink form">
           <div>
-            <input type="text" placeholder="ID_TOKEN" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;transition:all 0.3s;" autocomplete="name">
+            <input type="text" name="id_token" aria-label="ID token" placeholder="ID_TOKEN" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;transition:all 0.3s;" autocomplete="name">
           </div>
           <div>
-            <textarea rows="4" placeholder="TRANSMISSION" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;resize:vertical;transition:all 0.3s;"></textarea>
+            <textarea rows="4" name="transmission" aria-label="Transmission" placeholder="TRANSMISSION" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;resize:vertical;transition:all 0.3s;"></textarea>
           </div>
           <button type="submit" class="chr-btn-primary neon-box" style="font-family:var(--font-mono);justify-content:center;padding:24px;font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border-radius:0;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);cursor:pointer;">&gt; TRANSMIT()</button>
         </form>

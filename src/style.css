@@ -78,7 +78,7 @@
   --color-border-2:  #3d3018;
   --font-heading:    'Cinzel', serif;
   --font-body:       'Crimson Pro', serif;
-  --font-mono:       'UnifrakturMaguntia', cursive;
+  --font-mono:       'Courier Prime', monospace;
   --font-accent:     'UnifrakturMaguntia', cursive;
   --radius-sm:       0px;
   --radius-md:       0px;
@@ -723,17 +723,18 @@ img { max-width: 100%; height: auto; display: block; }
 
 [data-reveal].visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
+  transform: none;
+  will-change: auto;
 }
 
 [data-reveal="left"] { transform: translate3d(calc(var(--reveal-distance) * -1), 0, 0); }
-[data-reveal="left"].visible { transform: translate3d(0, 0, 0); }
+[data-reveal="left"].visible { transform: none; }
 
 [data-reveal="right"] { transform: translate3d(var(--reveal-distance), 0, 0); }
-[data-reveal="right"].visible { transform: translate3d(0, 0, 0); }
+[data-reveal="right"].visible { transform: none; }
 
 [data-reveal="scale"] { transform: scale(0.92); }
-[data-reveal="scale"].visible { transform: scale(1); }
+[data-reveal="scale"].visible { transform: none; }
 
 [data-reveal="soft"] {
   --reveal-distance: 16px;
@@ -778,7 +779,11 @@ img { max-width: 100%; height: auto; display: block; }
 [data-reveal-group].visible > *:nth-child(6) { transition-delay: 400ms; }
 [data-reveal-group].visible > *:nth-child(7) { transition-delay: 480ms; }
 [data-reveal-group].visible > *:nth-child(8) { transition-delay: 560ms; }
-[data-reveal-group].visible > * { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+[data-reveal-group].visible > * {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
 
 /* Section jump transitions for in-page navigation */
 section.chr-section-jump-target {

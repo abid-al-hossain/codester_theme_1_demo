@@ -1,7 +1,6 @@
 import JSZip from 'jszip'
 
 import packageJsonRaw from '../package.json?raw'
-import packageLockRaw from '../package-lock.json?raw'
 import gitignoreRaw from '../.gitignore?raw'
 import styleRaw from './style.css?raw'
 import mainRaw from './main.js?raw'
@@ -119,6 +118,10 @@ function rewriteCustomizerSource(theme, { keepCustomizer, storageKey }) {
     /\/\/ EXPORT_DEFAULT_THEME_START[\s\S]*?\/\/ EXPORT_DEFAULT_THEME_END/,
     `// EXPORT_DEFAULT_THEME_START\n${buildThemeLiteral(theme)}\n// EXPORT_DEFAULT_THEME_END`
   )
+  source = source.replace(
+    /getAvailableTabs\(\)\s*\{\s*return\s*\[\s*'era',\s*'colors',\s*'fonts',\s*\.\.\.\(this\.downloadAvailable \? \['download'\] : \[\]\),\s*'layouts',\s*\]\s*\}/,
+    `getAvailableTabs() {\n    return [\n      'era',\n      'colors',\n      'fonts',\n      ...(this.downloadAvailable ? ['download'] : []),\n    ]\n  }`
+  )
 
   return source
 }
@@ -147,6 +150,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
+  const currentLayoutTarget = doc.getElementById('main-content') ? '#main-content' : '#'
   const singleLayoutTexts = new Map([
     ['home', 'Back to top'],
     ['view all layouts', 'Current layout'],
@@ -181,7 +185,6 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   doc.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href') || ''
     const label = link.textContent?.trim().replace(/\s+/g, ' ').toLowerCase() || ''
-    const isLogoLink = link.classList.contains('chr-logo')
 
     if (/^layout-\d{2}\.html$/i.test(href)) {
       link.setAttribute('href', '#')
@@ -189,9 +192,11 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
       return
     }
 
-    if (href === 'index.html' && (isLogoLink || singleLayoutTexts.has(label))) {
-      link.setAttribute('href', '#main-content')
-      link.setAttribute('data-demo-message', currentLayoutMessage)
+    if (href === 'index.html') {
+      link.setAttribute('href', currentLayoutTarget)
+      if (currentLayoutTarget === '#') {
+        link.setAttribute('data-demo-message', currentLayoutMessage)
+      }
       if (singleLayoutTexts.has(label)) {
         link.textContent = singleLayoutTexts.get(label)
       }
@@ -215,18 +220,6 @@ function rewritePackageJson(name) {
   json.name = name
   if (json.dependencies?.jszip) {
     delete json.dependencies.jszip
-  }
-  return `${JSON.stringify(json, null, 2)}\n`
-}
-
-function rewritePackageLock(name) {
-  const json = JSON.parse(packageLockRaw)
-  json.name = name
-  if (json.packages?.['']) {
-    json.packages[''].name = name
-    if (json.packages[''].dependencies?.jszip) {
-      delete json.packages[''].dependencies.jszip
-    }
   }
   return `${JSON.stringify(json, null, 2)}\n`
 }
@@ -295,7 +288,6 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
 
   zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme }))
   zip.file('package.json', rewritePackageJson(slug))
-  zip.file('package-lock.json', rewritePackageLock(slug))
   zip.file('vite.config.js', buildViteConfig())
   zip.file('.gitignore', gitignoreRaw)
   zip.file('README.md', buildReadme({ packageTitle: archiveName, layoutLabel: selectedLayout.label, keepCustomizer }))

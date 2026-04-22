@@ -46,6 +46,13 @@ function initDemoActions() {
     })
   })
 
+  document.querySelectorAll('button[data-demo-message]:not([type="submit"])').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      showDemoToast(button.dataset.demoMessage || 'Demo action only')
+    })
+  })
+
   document.querySelectorAll('form:not([action]), form[action=""], form[action="#"]').forEach((form) => {
     form.setAttribute('data-demo-form', 'true')
     form.addEventListener('submit', (event) => {

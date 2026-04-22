@@ -127,6 +127,10 @@
       letter-spacing: 0.2em;
       box-shadow: var(--shadow-glow);
     }
+    @keyframes flash {
+      0% { opacity: 1; }
+      100% { opacity: 0.5; }
+    }
   </style>
 </head>
 <body>
@@ -258,17 +262,10 @@
   </div>
 </main>
 
-<style>
-  @keyframes flash {
-    0% { opacity: 1; }
-    100% { opacity: 0.5; }
-  }
-</style>
-
 <footer style="border-top:2px solid var(--color-border); padding:40px 0; background:var(--color-bg-2);">
   <div class="chr-container" style="display:flex; justify-content:space-between; align-items:center;">
     <div style="font-family:var(--font-heading); font-size:1.5rem; color:var(--color-text-2);">CRATER ZERO</div>
-    <div style="font-family:var(--font-mono); font-size:0.9rem; color:var(--color-text-3);">INTERNAL METRICS DASHBOARD // TERMINAL V.CURRENT</div>
+    <div style="font-family:var(--font-mono); font-size:0.9rem; color:var(--color-text-3);">LIVE TELEMETRY DASHBOARD // TERMINAL V.CURRENT</div>
   </div>
 </footer>
 
