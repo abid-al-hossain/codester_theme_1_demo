@@ -1,13 +1,4 @@
 export const CUSTOMIZER_HTML = /* html */ `
-<button
-  id="chr-customizer-toggle"
-  onclick="Alpine.store('chr').toggle()"
-  aria-label="Open theme customizer"
-  aria-expanded="false"
->
-  CUSTOMIZE
-</button>
-
 <aside
   id="chr-customizer"
   role="complementary"
@@ -15,6 +6,21 @@ export const CUSTOMIZER_HTML = /* html */ `
   x-data
   :class="$store.chr.open ? 'open' : ''"
 >
+  <button
+    id="chr-customizer-toggle"
+    onclick="Alpine.store('chr').toggle()"
+    x-data
+    :aria-label="$store.chr.open ? 'Close theme customizer' : 'Open theme customizer'"
+    :aria-expanded="$store.chr.open ? 'true' : 'false'"
+  >
+    <span class="cust-toggle-label">CUSTOMIZE</span>
+    <span class="cust-toggle-cue" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none" focusable="false">
+        <path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </button>
+
   <div class="cust-header">
     <div>
       <div style="font-family:var(--font-accent);font-weight:800;font-size:1.1rem;color:var(--color-primary)">CHRONOS</div>
@@ -29,11 +35,6 @@ export const CUSTOMIZER_HTML = /* html */ `
         <span x-text="$store.chr.getModifiedMessage()"></span>
       </div>
     </div>
-    <button
-      @click="$store.chr.close()"
-      class="cust-close"
-      aria-label="Close customizer"
-    >X</button>
   </div>
 
   <div class="cust-tabs" role="tablist">
