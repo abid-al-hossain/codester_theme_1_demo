@@ -42,14 +42,14 @@ export const CUSTOMIZER_HTML = /* html */ `
     <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" @keydown.arrow-right.prevent="$store.chr.moveTab('colors', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('colors', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
     <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" @keydown.arrow-right.prevent="$store.chr.moveTab('fonts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('fonts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
     <!-- DOWNLOAD_TAB_START -->
-    <button class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
+    <button x-show="$store.chr.downloadAvailable" class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
     <!-- DOWNLOAD_TAB_END -->
     <!-- LAYOUTS_TAB_START -->
     <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" @keydown.arrow-right.prevent="$store.chr.moveTab('layouts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('layouts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
     <!-- LAYOUTS_TAB_END -->
   </div>
 
-  <div class="cust-body">
+  <div class="cust-body">
     <div x-show="$store.chr.activeTab==='era'" x-cloak role="tabpanel" id="chr-panel-era" aria-labelledby="chr-tab-era">
       <span class="cust-label">Select Era</span>
       <div class="era-grid">
@@ -106,32 +106,32 @@ export const CUSTOMIZER_HTML = /* html */ `
       <span class="cust-label">Fine Tune Colors</span>
       <div>
         <div class="color-row">
-          <label>Primary</label>
-          <input type="color" :value="$store.chr.colors.primary" @input="$store.chr.setColor('primary',$event.target.value)">
+          <label for="chr-color-primary">Primary</label>
+          <input id="chr-color-primary" type="color" :value="$store.chr.colors.primary" @input="$store.chr.setColor('primary',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Secondary</label>
-          <input type="color" :value="$store.chr.colors.secondary" @input="$store.chr.setColor('secondary',$event.target.value)">
+          <label for="chr-color-secondary">Secondary</label>
+          <input id="chr-color-secondary" type="color" :value="$store.chr.colors.secondary" @input="$store.chr.setColor('secondary',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Accent</label>
-          <input type="color" :value="$store.chr.colors.accent" @input="$store.chr.setColor('accent',$event.target.value)">
+          <label for="chr-color-accent">Accent</label>
+          <input id="chr-color-accent" type="color" :value="$store.chr.colors.accent" @input="$store.chr.setColor('accent',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Background</label>
-          <input type="color" :value="$store.chr.colors.bg" @input="$store.chr.setColor('bg',$event.target.value)">
+          <label for="chr-color-bg">Background</label>
+          <input id="chr-color-bg" type="color" :value="$store.chr.colors.bg" @input="$store.chr.setColor('bg',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Section</label>
-          <input type="color" :value="$store.chr.colors.bg2" @input="$store.chr.setColor('bg2',$event.target.value)">
+          <label for="chr-color-bg2">Section</label>
+          <input id="chr-color-bg2" type="color" :value="$store.chr.colors.bg2" @input="$store.chr.setColor('bg2',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Surface</label>
-          <input type="color" :value="$store.chr.colors.surface" @input="$store.chr.setColor('surface',$event.target.value)">
+          <label for="chr-color-surface">Surface</label>
+          <input id="chr-color-surface" type="color" :value="$store.chr.colors.surface" @input="$store.chr.setColor('surface',$event.target.value)">
         </div>
         <div class="color-row">
-          <label>Text</label>
-          <input type="color" :value="$store.chr.colors.text" @input="$store.chr.setColor('text',$event.target.value)">
+          <label for="chr-color-text">Text</label>
+          <input id="chr-color-text" type="color" :value="$store.chr.colors.text" @input="$store.chr.setColor('text',$event.target.value)">
         </div>
       </div>
     </div>
@@ -142,25 +142,27 @@ export const CUSTOMIZER_HTML = /* html */ `
           <span class="cust-label" x-text="f.label + ' Font'"></span>
 
           <div x-data="chrFontDropdown(f.id)" @click.outside="open = false" style="position:relative">
-            <button @click="toggle()" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--color-bg);border:1px solid var(--color-border);padding:10px 14px;border-radius:var(--radius-sm);color:var(--color-text);font-size:0.85rem;cursor:pointer;" aria-label="Select font">
+            <button type="button" @click="toggle()" :aria-expanded="open ? 'true' : 'false'" :aria-controls="'chr-font-list-' + f.id" :aria-label="'Select ' + f.label + ' font'" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--color-bg);border:1px solid var(--color-border);padding:10px 14px;border-radius:var(--radius-sm);color:var(--color-text);font-size:0.85rem;cursor:pointer;">
               <span x-text="$store.chr.fonts[f.id]" :style="'font-family:' + $store.chr.fonts[f.id]"></span>
               <span style="font-size:0.6rem;opacity:0.5">v</span>
             </button>
 
-            <div x-show="open" style="position:absolute;top:calc(100% + 4px);left:0;width:100%;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);z-index:100;box-shadow:0 10px 25px rgba(0,0,0,0.2);cursor:pointer" x-transition x-cloak>
+            <div x-show="open" :id="'chr-font-list-' + f.id" role="listbox" :aria-label="f.label + ' font options'" style="position:absolute;top:calc(100% + 4px);left:0;width:100%;background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-sm);z-index:100;box-shadow:0 10px 25px rgba(0,0,0,0.2)" x-transition x-cloak>
               <div style="padding:8px">
-                <input type="text" x-model="search" x-ref="search" placeholder="Search fonts..." style="width:100%;padding:8px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:4px;color:var(--color-text);font-size:0.8rem;outline:none;cursor:text">
+                <input type="text" x-model="search" x-ref="search" :aria-label="'Search ' + f.label + ' fonts'" @input="activeIndex = 0" @keydown.arrow-down.prevent="move(1)" @keydown.arrow-up.prevent="move(-1)" @keydown.enter.prevent="selectActive()" placeholder="Search fonts..." style="width:100%;padding:8px 12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:4px;color:var(--color-text);font-size:0.8rem;outline:none;cursor:text">
               </div>
-              <div style="max-height:220px;overflow-y:auto;padding-bottom:8px;cursor:pointer">
-                <template x-for="font in filtered" :key="font">
-                  <div
+              <div style="max-height:220px;overflow-y:auto;padding-bottom:8px">
+                <template x-for="(font, index) in filtered" :key="font">
+                  <button
+                    type="button"
+                    role="option"
+                    :aria-selected="$store.chr.fonts[f.id] === font ? 'true' : 'false'"
                     @click="selectFont(font)"
-                    style="padding:8px 16px;font-size:0.9rem;cursor:pointer"
-                    :style="\`font-family:\${font};\` + ($store.chr.fonts[f.id] === font ? 'background:var(--color-primary);color:#fff' : 'color:var(--color-text)')"
+                    @mouseenter="activeIndex = index"
+                    style="display:block;width:100%;padding:8px 16px;font-size:0.9rem;text-align:left;cursor:pointer;background:transparent;border:0"
+                    :style="\`font-family:\${font};\` + (($store.chr.fonts[f.id] === font || activeIndex === index) ? 'background:var(--color-bg-2);color:var(--color-text)' : 'color:var(--color-text)')"
                     x-text="font"
-                    onmouseover="if(this.style.background==='')this.style.background='var(--color-bg-2)'"
-                    onmouseout="if(this.style.color==='var(--color-text)')this.style.background=''"
-                  ></div>
+                  ></button>
                 </template>
                 <div x-show="filtered.length===0" class="font-empty-state" style="padding:16px;text-align:center;font-size:0.8rem;cursor:default">No fonts found</div>
               </div>
@@ -175,7 +177,7 @@ export const CUSTOMIZER_HTML = /* html */ `
     </div>
 
     <!-- DOWNLOAD_PANEL_START -->
-    <div x-show="$store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
+    <div x-show="$store.chr.downloadAvailable && $store.chr.activeTab==='download'" x-cloak role="tabpanel" id="chr-panel-download" aria-labelledby="chr-tab-download">
       <span class="cust-label">Layout Package</span>
       <p style="font-size:0.78rem;color:var(--color-text-2);margin-bottom:14px;line-height:1.6">
         This panel shows the package builder interface so visitors can review the export setup.
@@ -404,26 +406,31 @@ export const CUSTOMIZER_HTML = /* html */ `
     x-transition:leave="surprise-fade-leave"
     x-transition:leave-start="surprise-fade-leave-start"
     x-transition:leave-end="surprise-fade-leave-end"
-    @click.self="$store.chr.toggleSurpriseSettings()"
-    @keydown.escape.window="$store.chr.surpriseSettingsOpen && $store.chr.toggleSurpriseSettings()"
+    @click.self="$store.chr.closeSurpriseSettings()"
+    @keydown.escape.window="$store.chr.surpriseSettingsOpen && $store.chr.closeSurpriseSettings()"
   >
     <div
+      id="chr-surprise-dialog"
       class="surprise-modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="chr-surprise-title"
       x-transition:enter="surprise-card-enter"
       x-transition:enter-start="surprise-card-enter-start"
       x-transition:enter-end="surprise-card-enter-end"
       x-transition:leave="surprise-card-leave"
       x-transition:leave-start="surprise-card-leave-start"
       x-transition:leave-end="surprise-card-leave-end"
+      @keydown.tab="$store.chr.handleSurpriseDialogTab($event)"
     >
       <div class="surprise-settings-head">
         <div>
-          <div class="cust-label" style="margin:0 0 4px">Surprise Me Settings</div>
+          <div class="cust-label" id="chr-surprise-title" style="margin:0 0 4px">Surprise Me Settings</div>
           <div class="surprise-settings-note">Exclude exact fonts and swatches from future surprises.</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div class="surprise-settings-count" x-text="$store.chr.getSurpriseExclusionCount() + ' exclusions'"></div>
-          <button type="button" class="cust-close" @click="$store.chr.toggleSurpriseSettings()" aria-label="Close surprise settings">X</button>
+          <button type="button" data-surprise-initial-focus="true" @click="$store.chr.closeSurpriseSettings()" aria-label="Close surprise settings" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text);font-size:0.9rem;cursor:pointer">X</button>
         </div>
       </div>
 
@@ -436,6 +443,7 @@ export const CUSTOMIZER_HTML = /* html */ `
               <div class="surprise-setting-row">
                 <select
                   class="surprise-select"
+                  :aria-label="'Choose a ' + role.label + ' font to exclude'"
                   :value="$store.chr.surpriseFontDrafts[role.id]"
                   @change="$store.chr.surpriseFontDrafts[role.id] = $event.target.value"
                 >
@@ -449,7 +457,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                 <template x-for="font in $store.chr.surpriseSettings.fonts[role.id]" :key="role.id + '-chip-' + font">
                   <button type="button" class="surprise-chip" @click="$store.chr.removeSurpriseFontExclusion(role.id, font)">
                     <span x-text="font"></span>
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">x</span>
                   </button>
                 </template>
                 <div x-show="$store.chr.surpriseSettings.fonts[role.id].length === 0" class="surprise-empty">Nothing excluded</div>
@@ -467,6 +475,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                 <input
                   class="surprise-color-input"
                   type="color"
+                  :aria-label="'Choose a ' + slot.label + ' color to exclude'"
                   :value="$store.chr.surpriseColorDrafts[slot.id]"
                   @input="$store.chr.setSurpriseColorDraft(slot.id, $event.target.value)"
                 >
@@ -477,7 +486,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                   <button type="button" class="surprise-chip surprise-color-chip" @click="$store.chr.removeSurpriseColorExclusion(slot.id, color)">
                     <span class="surprise-color-swatch" :style="'background:' + color"></span>
                     <span x-text="color.toUpperCase()"></span>
-                    <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">x</span>
                   </button>
                 </template>
                 <div x-show="$store.chr.surpriseSettings.colors[slot.id].length === 0" class="surprise-empty">Nothing excluded</div>

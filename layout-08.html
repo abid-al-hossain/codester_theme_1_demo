@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="minimalist">
+<html lang="en" data-era="minimalist" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronos | Minimal Journal</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 08 - Minimal Journal. Quiet typography, long-form reading, notes, and archive access.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,31 +26,31 @@
     .j-container{max-width:800px;margin:0 auto;padding:0 2rem}
     .j-header{border-bottom:1px solid var(--color-border);padding:20px 0;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:80px}
     .j-issue{font-size:0.75rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:0.3em;font-weight:600;}
-    
+
     .j-body-first::first-letter { font-size: 5.5rem; float: left; line-height: 0.8; padding-right: 12px; font-weight: 400; color: var(--color-primary); font-family: var(--font-heading); margin-top: 4px; }
     .j-body p{font-size:1.35rem;line-height:2.1;margin-bottom:2.5rem;color:var(--color-text);opacity:0.9}
     .j-body h2{font-size:2.2rem;font-weight:400;margin:4rem 0 1.5rem;letter-spacing:-0.03em; font-family:var(--font-heading)}
     .j-body h3{font-size:1.4rem;font-weight:400;margin:2rem 0 1rem;font-family:var(--font-heading)}
-    
+
     .j-pull-quote{margin:4rem 0;padding: 40px; border-left:4px solid var(--color-primary);font-size:2.2rem;line-height:1.4;font-style:italic;color:var(--color-text-2); background: color-mix(in srgb, var(--color-bg-2) 50%, transparent); font-family: var(--font-heading); letter-spacing:-0.02em;}
     .j-rule{border:none;border-top:1px solid var(--color-border);margin:4rem auto;width: 50%; opacity: 0.5;}
     .j-tags{display:flex;gap:8px;flex-wrap:wrap;margin:1.5rem 0}
     .j-tag{padding:6px 16px;border:1px solid var(--color-border);border-radius:var(--radius-full);font-size:0.8rem;color:var(--color-text-2); transition: all 0.3s;}
     .j-tag:hover { background: var(--color-text); color: var(--color-bg); }
-    
+
     .j-post-card{border-bottom:1px solid var(--color-border);padding:40px 0;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start; transition: padding 0.4s ease, opacity 0.4s;}
     .j-post-card:hover { padding-left: 20px; opacity: 1; border-color: var(--color-primary); }
     .j-post-card h3 { transition: color 0.3s; }
     .j-post-card:hover h3 { color: var(--color-primary); }
-    
+
     .j-reading-time{font-size:0.8rem;color:var(--color-text-3);white-space:nowrap;margin-top:8px}
     .j-post-image{width:120px;height:100px;background:var(--color-bg-2);border-radius:var(--radius-none);flex-shrink:0;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:400;color:var(--color-text-3);font-family:var(--font-heading); transition: transform 0.5s ease;}
     .j-post-card:hover .j-post-image { transform: scale(1.05); border-color: var(--color-primary); }
-    
+
     .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
     .note-card{padding:40px;border:1px solid var(--color-border);border-radius:var(--radius-none);background:var(--color-bg);transition: transform 0.4s ease, box-shadow 0.4s ease;}
     .note-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--color-primary); }
-    
+
     .progress{position:fixed;top:0;left:0;height:4px;background:var(--color-primary);z-index:9999;width:0;transition:width 0.1s linear}
     @media(max-width:720px){.j-post-card,.note-grid{grid-template-columns:1fr}}
   </style>
@@ -201,4 +204,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="minimalist">
+<html lang="en" data-era="minimalist" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronos | Medical Care</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 12 - Medical and healthcare website with triage rail, departments, doctors, and appointment flow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +20,7 @@
 <style>
     [x-cloak]{display:none!important}
     body{background:var(--color-bg);color:var(--color-text);--reveal-distance:18px;--group-reveal-distance:14px; position:relative; z-index:0;}
-    
+
     /* Ambient Bioluminescent Background */
     .ambient-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; background: var(--color-bg); }
     .ambient-bg::before, .ambient-bg::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; animation: float-bg 25s infinite alternate ease-in-out; }
@@ -33,7 +36,7 @@
     .care-intro{padding:100px 0 60px; position:relative; overflow:hidden;}
     .care-shell{display:grid;grid-template-columns:minmax(300px,.6fr) minmax(0,1.4fr);gap:40px;align-items:start}
     .care-rail{position:sticky;top:100px;display:grid;gap:20px}
-    
+
     .care-panel { padding: 32px; border-radius: 24px; }
     .care-block { padding: 24px 32px; cursor: pointer; border-radius: 16px; margin-bottom: 12px; }
     .dept-summary { font-size: 1.3rem; font-weight: 600; outline: none; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
@@ -44,14 +47,14 @@
     .doctor-card { background: color-mix(in srgb, var(--color-bg) 85%, transparent); backdrop-filter: blur(12px); border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent); border-radius: 20px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
     .doctor-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-color: var(--color-primary); }
     .doctor-avatar{width:90px;height:90px;border-radius:24px;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));opacity:.8; margin:0 auto 20px; box-shadow: 0 10px 20px color-mix(in srgb, var(--color-primary) 30%, transparent);}
-    
+
     .dept-stack,.path-grid{display:grid;gap:18px}
     .care-grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
     .care-form{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px}
     .care-form input,.care-form select,.care-form textarea{width:100%;padding:16px 20px;border:1px solid color-mix(in srgb, var(--color-border) 60%, transparent);border-radius:12px;background:color-mix(in srgb, var(--color-bg) 50%, transparent);color:var(--color-text);font:inherit;outline:none; transition: all 0.3s; backdrop-filter: blur(4px);}
     .care-form input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 15%, transparent); background: var(--color-bg); }
     .care-form button { margin-top: 10px; border-radius: 12px; padding: 18px; font-weight: 600; font-size: 1rem;}
-    
+
     @media(max-width:1040px){.care-shell,.care-grid-two{grid-template-columns:1fr}.care-rail{position:static}}
     @media(max-width:720px){.care-form,.doctor-row{grid-template-columns:1fr}.doctor-row{justify-items:start}}
   </style>
@@ -62,8 +65,8 @@
 
 <div class="care-strip">
   <div class="chr-container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;">
-    <div style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--color-secondary);box-shadow:0 0 8px var(--color-secondary);"></span> 24/7 urgent line | Diagnostics | Specialist consultations</div>
-    <div style="opacity:0.8;">Ambient Care Network</div>
+    <div style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--color-secondary);box-shadow:0 0 8px var(--color-secondary);"></span> Care pathways | Diagnostics | Specialist directory</div>
+    <div style="opacity:0.8;">Care interface preview</div>
   </div>
 </div>
 
@@ -76,15 +79,15 @@
 </header>
 
 <main id="main-content">
-  <!-- § 1. PORTAL HERO / PATIENT LOGIN -->
+  <!-- SECTION 1. PORTAL HERO / PATIENT LOGIN -->
   <section class="care-intro" aria-labelledby="care-heading">
     <div class="chr-container" style="display:grid;grid-template-columns:1.5fr 1fr;gap:60px;align-items:center">
       <div data-reveal="left">
         <div class="chr-badge glass-panel" style="margin-bottom:1.5rem; display:inline-flex; align-items:center; gap:8px; font-weight:600;"><span style="color:var(--color-primary);font-size:1.2rem;">&plus;</span> Medical Portal</div>
         <h1 id="care-heading" style="font-size:clamp(3rem,6vw,4.5rem);line-height:1;margin-bottom:1.5rem;font-weight:700;letter-spacing:-0.03em;">Immediate access<br>to your healthcare.</h1>
-        <p style="font-size:1.2rem;color:var(--color-text-2);line-height:1.7;max-width:600px;margin-bottom:2.5rem">Log in to view test results, message your doctor, or quickly find a specialist in our highly integrated network.</p>
+        <p style="font-size:1.2rem;color:var(--color-text-2);line-height:1.7;max-width:600px;margin-bottom:2.5rem">Explore a polished care portal concept with service discovery, appointment routing, and patient-style account screens.</p>
         <div class="glass-panel" style="display:flex;gap:10px;flex-wrap:wrap; padding: 10px; border-radius: 100px;">
-          <input type="text" placeholder="Search conditions or doctors..." style="flex:1;padding:16px 24px;border:none;background:transparent;outline:none;font-size:1.05rem;color:var(--color-text);" />
+          <input type="text" name="care_search" aria-label="Search conditions or doctors" placeholder="Search conditions or doctors..." style="flex:1;padding:16px 24px;border:none;background:transparent;outline:none;font-size:1.05rem;color:var(--color-text);" />
           <button class="chr-btn-primary" style="padding:16px 36px; border-radius: 100px; font-weight:600;">Search</button>
         </div>
       </div>
@@ -96,13 +99,13 @@
           <button type="submit" class="chr-btn-primary">Access Records</button>
         </form>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);text-align:center">
-<a href="#" style="color:var(--color-secondary);font-weight:600;text-decoration:none;font-size:0.95rem;display:inline-flex;align-items:center;gap:6px;" data-demo-message="Emergency triage preview. Connect this shortcut to your own support path."><span style="display:inline-block;width:10px;height:10px;background:var(--color-secondary);border-radius:50%;box-shadow:0 0 10px var(--color-secondary);"></span> Emergency Triage (24/7)</a>
+<a href="#" style="color:var(--color-secondary);font-weight:600;text-decoration:none;font-size:0.95rem;display:inline-flex;align-items:center;gap:6px;" data-demo-message="Priority support preview. Connect this shortcut to your own support path."><span style="display:inline-block;width:10px;height:10px;background:var(--color-secondary);border-radius:50%;box-shadow:0 0 10px var(--color-secondary);"></span> Priority Support Flow</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- § 2. DEPARTMENTS ACCORDION -->
+  <!-- SECTION 2. DEPARTMENTS ACCORDION -->
   <section id="departments" style="padding:100px 0" aria-labelledby="departments-heading">
     <div class="chr-container care-shell">
       <div data-reveal="left" style="position:sticky;top:120px;">
@@ -285,4 +288,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

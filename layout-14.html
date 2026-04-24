@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="liquid">
+<html lang="en" data-era="liquid" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronos | Travel Explorer</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 14 - Travel website with destination storytelling, itinerary route, travel journal, and planning desk.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +22,14 @@
     body{background:var(--color-bg);color:var(--color-text);--reveal-distance:38px;--group-reveal-distance:30px}
     .travel-hero{padding:90px 0 36px;background:radial-gradient(circle at top left,color-mix(in srgb,var(--color-primary) 20%,transparent),transparent 30%),linear-gradient(180deg,color-mix(in srgb,var(--color-accent) 18%,transparent),transparent 60%)}
     .travel-shell{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:start}
-    
+
     .travel-glass,.route-card,.story-card,.plan-card{background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(24px) saturate(150%);border:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);box-shadow:0 4px 30px rgba(0,0,0,0.06);border-radius:24px}
     .travel-glass,.route-card,.story-card,.plan-card{padding:30px}
-    
+
     /* Parallax Hero Wrapper */
     .hero-parallax-stage { flex:1; min-width:300px; position:relative; overflow:hidden; }
     .hero-bg { position:absolute; inset:-5%; background:radial-gradient(circle at 22% 24%, rgba(255,255,255,0.25), transparent 18%), radial-gradient(circle at 72% 18%, rgba(125,211,252,0.45), transparent 22%), linear-gradient(150deg, #0f3b5f 0%, #176b8c 32%, #2b9fc3 58%, #86d9f7 100%); transform:translate(calc(var(--px, 0) * 1%), calc(var(--py, 0) * 1%)) scale(1.05); transition:transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); will-change:transform; }
-    
+
     /* Ken Burns Destination Tiles */
     .destination-tile{position:relative;overflow:hidden;border-radius:24px;display:flex;align-items:flex-end;padding:34px;text-decoration:none;color:#fff;background:var(--color-surface); box-shadow:0 10px 40px rgba(0,0,0,0.15);}
     .dest-bg {position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);opacity:0.8; z-index:1;}
@@ -35,16 +38,16 @@
     .destination-tile:hover::after { opacity:1; }
     .dest-content { position:relative; z-index:3; transition:transform 0.5s; transform:translateY(10px); }
     .destination-tile:hover .dest-content { transform:translateY(0); }
-    
+
     .travel-rail{position:sticky;top:100px;display:grid;gap:18px}
     .destination-mosaic{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
     .destination-stack{display:grid;gap:18px}
     .route-grid{display:grid;gap:16px}
     .stories-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-    
+
     .route-card{transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
     .route-card:hover{transform:translateX(10px) translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.08); border-color:color-mix(in srgb, var(--color-primary) 30%, transparent);}
-    
+
     /* Ken Burns Story Cards */
     .story-card{overflow:hidden; position:relative; z-index:1; border-radius:24px; padding:0; display:flex; flex-direction:column;}
     .story-card::before { content:''; position:absolute; inset:0; background:var(--color-bg); z-index:-2; }
@@ -53,13 +56,13 @@
     .story-card:hover .story-img { transform:scale(1.12); }
     .story-content { padding:30px; display:flex; flex-direction:column; gap:16px; flex:1; background:color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter:blur(10px); }
     .story-card:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(0,0,0,0.1); border-color:var(--color-primary);}
-    
+
     .plan-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .plan-form input,.plan-form select,.plan-form textarea{width:100%;padding:18px 20px;border:1px solid color-mix(in srgb, var(--color-border) 60%, transparent);border-radius:16px;background:color-mix(in srgb, var(--color-bg) 60%, transparent);color:var(--color-text);font:inherit;outline:none; transition:all 0.3s;}
     .plan-form input:focus, .plan-form select:focus { border-color:var(--color-primary); box-shadow:inset 0 0 0 1px var(--color-primary), 0 0 0 4px color-mix(in srgb, var(--color-primary) 15%, transparent); background:var(--color-bg); }
     .plan-form textarea,.plan-form button{grid-column:1 / -1}
     .plan-form textarea{min-height:140px;resize:vertical}
-    
+
     @media(max-width:1040px){.travel-shell,.destination-mosaic,.stories-grid{grid-template-columns:1fr}.travel-rail{position:static}}
     @media(max-width:720px){.plan-form{grid-template-columns:1fr}}
   </style>
@@ -102,7 +105,7 @@
     </div>
   </section>
 
-  <!-- § 2. DESTINATIONS IMAGE GRID -->
+  <!-- SECTION 2. DESTINATIONS IMAGE GRID -->
   <section id="destinations" style="padding:120px 0;background:var(--color-bg-2)" aria-labelledby="destinations-heading">
     <div class="chr-container">
       <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;flex-wrap:wrap;gap:20px" data-reveal="soft">
@@ -138,7 +141,7 @@
     </div>
   </section>
 
-  <!-- § 3. ITINERARY SPLIT TIMELINE -->
+  <!-- SECTION 3. ITINERARY SPLIT TIMELINE -->
   <section id="journey" style="padding:120px 0" aria-labelledby="journey-heading">
     <div class="chr-container" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:80px;align-items:start">
       <div style="position:sticky;top:120px" data-reveal="left">
@@ -243,7 +246,7 @@
       const rect = heroStage.getBoundingClientRect();
       const xObj = (e.clientX - rect.left) / rect.width - 0.5;
       const yObj = (e.clientY - rect.top) / rect.height - 0.5;
-      
+
       // Drive CSS Custom properties (-2px to +2px range roughly)
       heroStage.style.setProperty('--px', (xObj * -3).toFixed(2));
       heroStage.style.setProperty('--py', (yObj * -3).toFixed(2));
@@ -257,4 +260,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

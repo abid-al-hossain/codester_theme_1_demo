@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="eco">
+<html lang="en" data-era="eco" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronos | Education Campus</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 13 - Education website with program explorer, admissions board, faculty spotlight, and campus structure.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +22,7 @@
     body{background:var(--color-bg);color:var(--color-text)}
     .edu-banner{padding:12px 0;border-bottom:1px solid color-mix(in srgb, var(--color-border) 40%, transparent);background:var(--color-bg-2);font-size:0.78rem;color:var(--color-text-2)}
     .edu-hero{padding:88px 0 54px}
-    
+
     /* Apple-style Bento Cards with Mouse Tracking */
     .bento-card {
       background: color-mix(in srgb, var(--color-bg) 70%, transparent);
@@ -41,22 +44,22 @@
       z-index: 0;
       pointer-events: none;
     }
-    .bento-card:hover { 
-      transform: scale(1.01) translateY(-2px); 
+    .bento-card:hover {
+      transform: scale(1.01) translateY(-2px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.06), inset 0 0 0 1px color-mix(in srgb, var(--color-bg) 30%, transparent);
       border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
     }
     .bento-card:hover::before { opacity: 1; }
     .bento-content { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
-    
+
     .apply-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
     .apply-form input,.apply-form select,.apply-form textarea{width:100%;padding:18px 20px;border:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);border-radius:16px;background:color-mix(in srgb, var(--color-bg) 50%, transparent);color:var(--color-text);font:inherit;outline:none; transition: all 0.3s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
     .apply-form input:focus, .apply-form select:focus, .apply-form textarea:focus { border-color: var(--color-primary); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02), 0 0 0 4px color-mix(in srgb, var(--color-primary) 15%, transparent); background: var(--color-bg); }
     .apply-form textarea,.apply-form button{grid-column:1 / -1}
     .apply-form textarea{min-height:140px;resize:vertical}
-    
+
     .path-bubble { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-bg); position: absolute; left: -61px; top: -4px; box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent); z-index: 2;}
-    
+
     @media(max-width:1040px){.faculty-grid,.deadline-grid{grid-template-columns:1fr}}
     @media(max-width:720px){.apply-form,.edu-metrics{grid-template-columns:1fr}}
   </style>
@@ -77,7 +80,7 @@
   </div>
 </header>
 <main id="main-content">
-  <!-- § 1. CAMPUS HERO -->
+  <!-- SECTION 1. CAMPUS HERO -->
   <section class="edu-hero" aria-labelledby="edu-heading" style="position:relative;height:90vh;display:flex;align-items:center;justify-content:center;overflow:hidden">
     <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 70%);"></div>
     <div class="chr-container" style="position:relative;z-index:2;text-align:center">
@@ -267,7 +270,7 @@
           <div style="display:flex;justify-content:space-between;border-bottom:1px solid color-mix(in srgb, var(--color-border) 50%, transparent);padding-bottom:30px;margin-bottom:40px;flex-wrap:wrap;gap:20px;position:relative;">
             <div style="position:absolute; top:20px; left:10%; right:10%; height:2px; background:color-mix(in srgb, var(--color-border) 50%, transparent); z-index:0;"></div>
             <div style="position:absolute; top:20px; left:10%; width:0; height:2px; background:var(--color-primary); z-index:0;"></div>
-            
+
             <div style="text-align:center;flex:1;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-primary);color:var(--color-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem;box-shadow:0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent);">1</div><div style="font-size:0.95rem;font-weight:700">Profile</div></div>
             <div style="text-align:center;flex:1;opacity:0.5;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-bg);color:var(--color-text);border-radius:50%;border:2px solid color-mix(in srgb, var(--color-border) 80%, transparent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem">2</div><div style="font-size:0.95rem;font-weight:700">Transcripts</div></div>
             <div style="text-align:center;flex:1;opacity:0.5;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-bg);color:var(--color-text);border-radius:50%;border:2px solid color-mix(in srgb, var(--color-border) 80%, transparent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem">3</div><div style="font-size:0.95rem;font-weight:700">Essay</div></div>
@@ -312,4 +315,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="volcanic">
+<html lang="en" data-era="volcanic" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronos | Geothermic Console</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 19 - Geothermic Console with volcanic telemetry, personnel tracking, and emergency purge controls.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -254,8 +257,8 @@
       <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-accent); margin-bottom:20px;">INITIATE PURGE SEQUENCE</h2>
       <p style="font-family:var(--font-body); font-size:1.2rem; color:var(--color-text-2); margin-bottom:40px;">ENTER EMERGENCY OVERRIDE CODE TO RELEASE PRESSURE EXHAUST TO SURFACE.</p>
       <div class="magma-purge-row">
-        <input type="text" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
-        <input type="text" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
+        <input type="text" name="override_code_alpha" aria-label="Enter first override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
+        <input type="text" name="override_code_beta" aria-label="Enter second override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
         <button style="padding:16px 40px; background:var(--color-primary); border:none; color:var(--color-bg); font-family:var(--font-heading); font-size:1.5rem; cursor:pointer; box-shadow:var(--shadow-glow);">CONFIRM</button>
       </div>
     </section>
@@ -270,4 +273,3 @@
 </footer>
 
 <div id="chr-customizer-mount"></div>
-

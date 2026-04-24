@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="corporate">
+<html lang="en" data-era="corporate" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronos | Enterprise Dashboard</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos Layout 05 - Enterprise Dashboard with sidebar navigation, data tables, and stat cards.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -97,7 +100,7 @@
       <p data-current-date style="font-size:0.78rem;color:var(--color-text-3)">Today</p>
     </div>
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-      <input type="search" placeholder="Search..." style="padding:8px 16px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-full);background:var(--color-bg-2);color:var(--color-text);font-family:var(--font-body);font-size:0.85rem;outline:none">
+      <input type="search" name="dashboard_search" aria-label="Search dashboard records" placeholder="Search..." style="padding:8px 16px;border:var(--border-w) solid var(--color-border);border-radius:var(--radius-full);background:var(--color-bg-2);color:var(--color-text);font-family:var(--font-body);font-size:0.85rem;outline:none">
       <a href="index.html" class="chr-btn-primary" style="padding:8px 20px;font-size:0.82rem">All Layouts</a>
     </div>
   </header>
@@ -342,4 +345,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

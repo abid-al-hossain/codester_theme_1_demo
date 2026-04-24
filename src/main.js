@@ -115,7 +115,11 @@ function initCountdowns() {
 
 window.addEventListener('pagehide', () => {
   countdownIntervals.splice(0).forEach((intervalId) => window.clearInterval(intervalId))
-}, { once: true })
+})
+
+window.addEventListener('pageshow', () => {
+  initCountdowns()
+})
 
 document.addEventListener('DOMContentLoaded', () => {
   initDemoActions()

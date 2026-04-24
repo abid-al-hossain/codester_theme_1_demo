@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-era="modern">
+<html lang="en" data-era="modern" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronos | Layout Directory</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="description" content="Chronos layout directory with 20 layouts, 17 eras, 16 preset palettes, and a shared live customizer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +21,7 @@
 <body style="background:var(--color-bg);color:var(--color-text);min-height:100vh;overflow-x:hidden">
   <a href="#layout-grid" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to layouts</a>
 
-  <div style="padding:96px 20px 80px">
+  <main style="padding:96px 20px 80px">
     <div style="max-width:1200px;margin:0 auto">
       <header style="text-align:center;margin-bottom:56px" data-reveal>
         <div style="font-family:var(--font-accent);font-weight:800;color:var(--color-primary);font-size:1.1rem;letter-spacing:.12em;margin-bottom:16px">CHRONOS</div>
@@ -118,9 +121,8 @@
         </a>
       </section>
     </div>
-  </div>
+  </main>
 
   <div id="chr-customizer-mount"></div>
 </body>
 </html>
-

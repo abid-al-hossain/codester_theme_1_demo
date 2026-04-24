@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-era="artistic">
+<html lang="en" data-era="artistic" data-download-enabled="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chronos Layout 06 — Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
+<title>Chronos | Artistic Studio</title>
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Chronos Layout 06 - Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronos | Artistic Studio">
-  <meta property="og:description" content="Chronos Layout 06 — Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
+  <meta property="og:description" content="Chronos Layout 06 - Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronos | Artistic Studio">
-  <meta name="twitter:description" content="Chronos Layout 06 — Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
+  <meta name="twitter:description" content="Chronos Layout 06 - Artistic Studio. Immersive scroll, parallax shapes, oversized typography.">
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
@@ -21,7 +24,7 @@
     .art-fullscreen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
     .art-title{font-size:clamp(4rem,15vw,12rem);font-weight:900;text-transform:uppercase;line-height:0.85;text-align:center;position:relative;z-index:10;mix-blend-mode:normal}
     .art-shape{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;transition:transform 0.4s cubic-bezier(0.2,0.8,0.2,1)}
-    
+
     .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; border-radius: 50%; transform: translate(-50%, -50%); transition: all 0.1s ease; mix-blend-mode: difference; }
     .cursor-dot { width: 12px; height: 12px; background-color: var(--color-primary); }
     .cursor-outline { width: 60px; height: 60px; border: 2px solid var(--color-primary); transition: width 0.2s, height 0.2s, background-color 0.2s; }
@@ -67,30 +70,30 @@
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <header class="chr-nav" role="banner" style="backdrop-filter: blur(20px); background: color-mix(in srgb, var(--color-bg) 70%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);">
   <div class="chr-container chr-nav-inner">
-    <a href="#main-content" class="chr-logo link-hover">✦ CHRONOS</a>
+    <a href="#main-content" class="chr-logo link-hover">* CHRONOS</a>
     <nav><ul class="chr-nav-links"><li><a href="#work" class="link-hover">Work</a></li><li><a href="#exhibition" class="link-hover">Studio</a></li><li><a href="#manifesto" class="link-hover">Manifesto</a></li><li><a href="#contact" class="link-hover">Contact</a></li></ul></nav>
-    <div style="display:flex;gap:12px;align-items:center"><a href="#contact" class="chr-btn-primary link-hover" style="padding:10px 22px;font-size:0.85rem;border-radius:var(--radius-full)">Collaborate →</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#contact" class="chr-btn-primary link-hover" style="padding:10px 22px;font-size:0.85rem;border-radius:var(--radius-full)">Collaborate -></a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
 <main id="main-content">
-<!-- § 1. HERO (Interactive) -->
+<!-- SECTION 1. HERO (Interactive) -->
 <section id="hero" class="art-fullscreen" aria-labelledby="art-heading" style="padding-left:10vw">
   <div id="blob1" class="art-shape" style="width:600px;height:600px;background:var(--color-primary);opacity:0.25;top:-100px;right:-50px;"></div>
   <div id="blob2" class="art-shape" style="width:450px;height:450px;background:var(--color-secondary);opacity:0.2;bottom:-50px;left:5%;"></div>
   <div style="z-index:10;max-width:800px">
     <h1 id="art-heading" class="link-hover" style="font-size:clamp(3.5rem,10vw,10rem);font-weight:900;text-transform:uppercase;line-height:0.85;position:relative;z-index:10" data-reveal="soft">
-      <span class="stroke-text">ART</span><span style="color:var(--color-primary)">⁕</span><br>IS THE<br><span class="stroke-text">CORE.</span>
+      <span class="stroke-text">ART</span><span style="color:var(--color-primary)"> / </span><br>IS THE<br><span class="stroke-text">CORE.</span>
     </h1>
     <p data-reveal="soft" style="font-size:1.3rem;color:var(--color-text-2);max-width:500px;margin:40px 0;line-height:1.7;mix-blend-mode:difference">A creative studio that designs at the intersection of technology and artistic experience. Every era is a canvas.</p>
   </div>
 </section>
 
-<!-- § 2. MASONRY GALLERY -->
+<!-- SECTION 2. MASONRY GALLERY -->
 <section id="work" style="padding: 100px 0" aria-labelledby="work-heading">
   <div class="chr-container">
     <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;border-bottom:1px solid var(--color-border);padding-bottom:30px" data-reveal="soft">
       <h2 id="work-heading" class="link-hover" style="font-size:clamp(2rem,6vw,4rem);font-weight:900;text-transform:uppercase;margin:0;line-height:1">Selected <span class="stroke-text">Works</span></h2>
-      <a href="#" class="link-hover" style="font-weight:900;text-transform:uppercase;color:var(--color-text)" data-demo-message="Archive preview. Connect this link to your own archive index.">View All Archive →</a>
+      <a href="#" class="link-hover" style="font-weight:900;text-transform:uppercase;color:var(--color-text)" data-demo-message="Archive preview. Connect this link to your own archive index.">View All Archive -></a>
     </div>
     <div style="columns: 2 350px; gap: 40px;" id="masonry-work" data-reveal-group="soft">
       <!-- MASONRY CARDS -->
@@ -118,7 +121,7 @@
   </div>
 </section>
 
-<!-- § 3. EXHIBITION -->
+<!-- SECTION 3. EXHIBITION -->
 <section id="exhibition" style="background:var(--color-primary);position:relative;padding:240px 0;overflow:hidden" aria-labelledby="studio-heading">
   <div style="position:absolute;inset:0;background:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.15%22/%3E%3C/svg%3E'); mix-blend-mode: overlay;"></div>
   <div style="position:relative;z-index:2;color:var(--color-bg);text-align:center" data-reveal="soft">
@@ -127,7 +130,7 @@
   </div>
 </section>
 
-<!-- § 4. MANIFESTO (Ticker) -->
+<!-- SECTION 4. MANIFESTO (Ticker) -->
 <section id="manifesto" style="padding:160px 0;background:var(--color-bg);overflow:hidden" aria-labelledby="manifesto-heading">
   <div style="transform:rotate(-4deg) scale(1.1);background:var(--color-text);padding:60px 0;box-shadow: 0 40px 100px rgba(0,0,0,0.2)">
     <div class="chr-marquee-track" style="color:var(--color-bg);font-size:clamp(4rem,8vw,8rem);font-weight:900;text-transform:uppercase;margin:0" aria-label="Manifesto statement">
@@ -135,11 +138,11 @@
     </div>
   </div>
   <div class="chr-container" style="text-align:center;margin-top:120px" data-reveal="soft">
-    <p style="font-size:1.6rem;color:var(--color-text);max-width:800px;margin:0 auto;line-height:1.7;font-weight:600">Gothic is not dead. Brutalism is not over. The Futuristic has already arrived. Every era speaks to a different truth — and Chronos lets you <span style="color:var(--color-primary);text-decoration:underline">speak all of them</span>.</p>
+    <p style="font-size:1.6rem;color:var(--color-text);max-width:800px;margin:0 auto;line-height:1.7;font-weight:600">Gothic is not dead. Brutalism is not over. The Futuristic has already arrived. Every era speaks to a different truth - and Chronos lets you <span style="color:var(--color-primary);text-decoration:underline">speak all of them</span>.</p>
   </div>
 </section>
 
-<!-- § 5. IMMERSIVE INQUIRIES -->
+<!-- SECTION 5. IMMERSIVE INQUIRIES -->
 <section id="contact" style="min-height:80vh;display:flex;align-items:center;justify-content:center;background:var(--color-bg-2);position:relative;overflow:hidden" aria-labelledby="contact-heading">
   <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-primary) 15%, transparent), transparent 60%);"></div>
   <div data-reveal="soft" style="text-align:center;padding:40px;position:relative;z-index:2">
@@ -150,9 +153,9 @@
 </main>
 <footer style="background:var(--color-bg);border-top:1px solid var(--color-border);padding:60px 0" role="contentinfo">
   <div class="chr-container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
-    <a href="#main-content" class="chr-logo link-hover" style="font-size:1.2rem">✦ CHRONOS</a>
-      <p style="font-size:0.9rem;color:var(--color-text-3);font-weight:600">Chronos · Artistic Studio</p>
-    <nav><ul style="list-style:none;display:flex;gap:30px"><li><a href="layout-07.html" class="link-hover" style="font-size:0.95rem;color:var(--color-text-2);font-weight:700">Futuristic →</a></li><li><a href="layout-09.html" class="link-hover" style="font-size:0.95rem;color:var(--color-text-2);font-weight:700">Cyberpunk →</a></li></ul></nav>
+    <a href="#main-content" class="chr-logo link-hover" style="font-size:1.2rem">* CHRONOS</a>
+      <p style="font-size:0.9rem;color:var(--color-text-3);font-weight:600">Chronos - Artistic Studio</p>
+    <nav><ul style="list-style:none;display:flex;gap:30px"><li><a href="layout-07.html" class="link-hover" style="font-size:0.95rem;color:var(--color-text-2);font-weight:700">Futuristic -></a></li><li><a href="layout-09.html" class="link-hover" style="font-size:0.95rem;color:var(--color-text-2);font-weight:700">Cyberpunk -></a></li></ul></nav>
   </div>
 </footer>
 <script>
@@ -166,7 +169,7 @@
     activeHover = nextTarget;
     document.body.classList.toggle('hover-active', Boolean(nextTarget));
   };
-  
+
   if(cursorDot && cursorOutline) {
     window.addEventListener('mousemove', function(e) {
       const hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
@@ -198,12 +201,12 @@
   // Hero Parallax Blobs
   const blob1 = document.getElementById('blob1');
   const blob2 = document.getElementById('blob2');
-  
+
   if (blob1 && blob2) {
     document.addEventListener('mousemove', (e) => {
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
-      
+
       blob1.style.transform = `translate(${x * 80}px, ${y * 80}px)`;
       blob2.style.transform = `translate(${x * -60}px, ${y * -60}px)`;
     });
@@ -212,5 +215,3 @@
 <div id="chr-customizer-mount"></div>
 </body>
 </html>
-
-

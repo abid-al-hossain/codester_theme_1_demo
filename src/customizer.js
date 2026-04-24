@@ -147,6 +147,8 @@ function getCurrentLayoutFile() {
 function getLayoutMeta(layoutFile) {
   return DOWNLOAD_LAYOUT_OPTIONS.find((option) => option.file === layoutFile) || null
 }
+
+const DOWNLOAD_ENABLED = document.documentElement.getAttribute('data-download-enabled') !== 'false'
 // DOWNLOAD_FEATURE_END
 
 function setVar(name, value) {
@@ -377,10 +379,16 @@ function getCurrentPageKey() {
   return window.location.pathname.split('/').pop()?.toLowerCase() || 'index.html'
 }
 
+function getPrefsScopeKey() {
+  const parts = window.location.pathname.split('/').filter(Boolean)
+  if (parts.length <= 1) return 'root'
+  return parts.slice(0, -1).join('/').toLowerCase()
+}
+
 function getPrefsKey() {
   return document.documentElement.hasAttribute('data-prefs-key')
     ? PREFS_NAMESPACE
-    : `${PREFS_NAMESPACE}:${getCurrentPageKey()}`
+    : `${PREFS_NAMESPACE}:${getPrefsScopeKey()}:${getCurrentPageKey()}`
 }
 
 function buildBootTheme(prefs) {
@@ -400,10 +408,13 @@ function clearAllPrefs() {
   if (!CUSTOMIZER_ENABLED) return
   try {
     const keysToRemove = []
+    const currentScopePrefix = document.documentElement.hasAttribute('data-prefs-key')
+      ? PREFS_NAMESPACE
+      : `${PREFS_NAMESPACE}:${getPrefsScopeKey()}:`
     for (let index = 0; index < localStorage.length; index += 1) {
       const key = localStorage.key(index)
       if (!key) continue
-      if (key === PREFS_NAMESPACE || key.startsWith(`${PREFS_NAMESPACE}:`)) {
+      if (key === currentScopePrefix || key.startsWith(currentScopePrefix)) {
         keysToRemove.push(key)
       }
     }
@@ -571,11 +582,12 @@ Alpine.store('chr', {
   colorRoleOptions: COLOR_ROLE_OPTIONS,
   surpriseSettings: createEmptySurpriseSettings(),
   surpriseSettingsOpen: false,
+  lastSurpriseFocus: null,
   surpriseFontDrafts: { ...DEFAULT_FONTS },
   surpriseColorDrafts: { ...DEFAULT_COLORS },
   // DOWNLOAD_FEATURE_START
   currentLayout: getCurrentLayoutFile(),
-  downloadAvailable: Boolean(getCurrentLayoutFile()),
+  downloadAvailable: DOWNLOAD_ENABLED && Boolean(getCurrentLayoutFile()),
   currentLayoutLabel: '',
   downloadPackageName: '',
   downloadMode: 'without-customizer',
@@ -704,10 +716,9 @@ Alpine.store('chr', {
     this.hasCustomFonts = false
     this.hasCustomColors = false
     this.activePalette = ''
-    this.save()
-
     window.setTimeout(() => {
       this.syncColorInputsFromComputed()
+      this.save()
     }, 50)
   },
 
@@ -829,7 +840,52 @@ Alpine.store('chr', {
   },
 
   toggleSurpriseSettings() {
-    this.surpriseSettingsOpen = !this.surpriseSettingsOpen
+    if (this.surpriseSettingsOpen) {
+      this.closeSurpriseSettings()
+      return
+    }
+    this.openSurpriseSettings()
+  },
+
+  openSurpriseSettings() {
+    this.lastSurpriseFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    this.surpriseSettingsOpen = true
+    window.requestAnimationFrame(() => {
+      document.querySelector('[data-surprise-initial-focus="true"]')?.focus()
+    })
+  },
+
+  closeSurpriseSettings() {
+    this.surpriseSettingsOpen = false
+    window.requestAnimationFrame(() => {
+      this.lastSurpriseFocus?.focus?.()
+    })
+  },
+
+  getSurpriseDialogFocusables() {
+    return [...document.querySelectorAll('#chr-surprise-dialog button, #chr-surprise-dialog input, #chr-surprise-dialog select, #chr-surprise-dialog textarea, #chr-surprise-dialog [href], #chr-surprise-dialog [tabindex]:not([tabindex="-1"])')]
+      .filter((element) => !element.hasAttribute('disabled'))
+  },
+
+  handleSurpriseDialogTab(event) {
+    if (!this.surpriseSettingsOpen || event.key !== 'Tab') return
+    const focusables = this.getSurpriseDialogFocusables()
+    if (!focusables.length) return
+    const currentIndex = focusables.indexOf(document.activeElement)
+    const lastIndex = focusables.length - 1
+
+    if (event.shiftKey) {
+      if (currentIndex <= 0) {
+        event.preventDefault()
+        focusables[lastIndex].focus()
+      }
+      return
+    }
+
+    if (currentIndex === lastIndex) {
+      event.preventDefault()
+      focusables[0].focus()
+    }
   },
 
   addSurpriseFontExclusion(role) {
@@ -885,6 +941,9 @@ Alpine.store('chr', {
     this.downloadError = ''
 
     try {
+      if (!DOWNLOAD_ENABLED) {
+        throw new Error('Package export is disabled in this preview.')
+      }
       if (!this.downloadAvailable || !this.currentLayout) {
         throw new Error('Open a layout page before downloading a package.')
       }
@@ -964,6 +1023,7 @@ Alpine.store('chr', {
 Alpine.data('chrFontDropdown', (role) => ({
   open: false,
   search: '',
+  activeIndex: 0,
   get filtered() {
     if (!this.search) return ALL_FONTS_FLAT
     const query = this.search.toLowerCase()
@@ -974,9 +1034,19 @@ Alpine.data('chrFontDropdown', (role) => ({
     this.open = false
     this.search = ''
   },
+  move(step) {
+    if (!this.filtered.length) return
+    this.activeIndex = (this.activeIndex + step + this.filtered.length) % this.filtered.length
+  },
+  selectActive() {
+    if (!this.filtered.length) return
+    this.selectFont(this.filtered[this.activeIndex])
+  },
   toggle() {
     this.open = !this.open
     if (this.open) {
+      const currentIndex = this.filtered.indexOf(this.$store.chr.fonts[role])
+      this.activeIndex = currentIndex >= 0 ? currentIndex : 0
       window.setTimeout(() => this.$refs.search.focus(), 50)
     }
   },

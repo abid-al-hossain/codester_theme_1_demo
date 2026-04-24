@@ -46,6 +46,7 @@
   --radius-md:  14px;
   --radius-lg:  24px;
   --radius-xl:  40px;
+  --radius-none: 0px;
   --radius-full: 9999px;
 
   /* Transition */

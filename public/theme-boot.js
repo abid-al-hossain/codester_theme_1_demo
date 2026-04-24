@@ -85,11 +85,17 @@
     return window.location.pathname.split('/').pop() || 'index.html'
   }
 
+  function getPrefsScopeKey() {
+    var parts = window.location.pathname.split('/').filter(Boolean)
+    if (parts.length <= 1) return 'root'
+    return parts.slice(0, -1).join('/').toLowerCase()
+  }
+
   function getPrefsKey() {
     var namespace = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
     return document.documentElement.hasAttribute('data-prefs-key')
       ? namespace
-      : namespace + ':' + getCurrentPageKey()
+      : namespace + ':' + getPrefsScopeKey() + ':' + getCurrentPageKey()
   }
 
   try {
