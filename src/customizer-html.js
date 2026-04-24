@@ -159,8 +159,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                     :aria-selected="$store.chr.fonts[f.id] === font ? 'true' : 'false'"
                     @click="selectFont(font)"
                     @mouseenter="activeIndex = index"
-                    style="display:block;width:100%;padding:8px 16px;font-size:0.9rem;text-align:left;cursor:pointer;background:transparent;border:0"
-                    :style="\`font-family:\${font};\` + (($store.chr.fonts[f.id] === font || activeIndex === index) ? 'background:var(--color-bg-2);color:var(--color-text)' : 'color:var(--color-text)')"
+                    :style="\`display:block;width:100%;padding:8px 16px;font-size:0.9rem;text-align:left;cursor:pointer;border:0;font-family:\${font};\` + (($store.chr.fonts[f.id] === font || activeIndex === index) ? 'background:var(--color-bg-2);color:var(--color-text)' : 'background:transparent;color:var(--color-text)')"
                     x-text="font"
                   ></button>
                 </template>

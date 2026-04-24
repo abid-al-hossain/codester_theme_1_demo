@@ -41,6 +41,8 @@
     .btn-brutalist { background:var(--color-primary); color:var(--color-bg); padding:16px 32px; font-weight:900; text-transform:uppercase; border:2px solid transparent; transition:all 0.15s; outline:none; cursor:pointer;}
     .btn-brutalist:hover { background:var(--color-bg); color:var(--color-text); border:2px solid var(--color-text); transform:translate(-4px, -4px); box-shadow:6px 6px 0px var(--color-primary); }
     .btn-brutalist:active { transform:translate(0, 0); box-shadow:0px 0px 0px var(--color-primary); }
+    .feed-stat-value{font-family:var(--font-heading);font-size:4rem;font-weight:900}
+    .feed-stat-label{font-family:var(--font-body);font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700}
 
     @media(max-width:768px){.fi,.fi.wide,.fi.full{grid-column:span 12}.feed-grid{grid-template-columns:1fr !important;}}
   </style>
@@ -159,10 +161,10 @@
 <section class="chr-section-sm" style="background:var(--color-primary);color:var(--color-bg);border-top:var(--border-w) solid var(--color-border);border-bottom:var(--border-w) solid var(--color-border)">
   <div class="chr-container">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center" data-reveal-group>
-      <div><div style="font-size:4rem;font-weight:900;font-family:var(--font-heading);" data-count="17">0</div><div style="font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Design Eras</div></div>
-      <div><div style="font-size:4rem;font-weight:900;font-family:var(--font-heading);" data-count="70" data-suffix="+">0+</div><div style="font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Fonts</div></div>
-      <div><div style="font-size:4rem;font-weight:900;font-family:var(--font-heading);" data-count="20">0</div><div style="font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Layouts</div></div>
-      <div><div style="font-size:4rem;font-weight:900;font-family:var(--font-heading);" data-count="0">0</div><div style="font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;">Framework Deps.</div></div>
+      <div><div class="feed-stat-value" data-count="17">0</div><div class="feed-stat-label">Design Eras</div></div>
+      <div><div class="feed-stat-value" data-count="70" data-suffix="+">0+</div><div class="feed-stat-label">Fonts</div></div>
+      <div><div class="feed-stat-value" data-count="20">0</div><div class="feed-stat-label">Layouts</div></div>
+      <div><div class="feed-stat-value" data-count="0">0</div><div class="feed-stat-label">Framework Deps.</div></div>
     </div>
   </div>
 </section>

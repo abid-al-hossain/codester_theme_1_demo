@@ -34,6 +34,8 @@
     .process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
     .stats-row{display:flex;gap:32px;flex-wrap:wrap}
     .stat-block{min-width:112px}
+    .stat-block .chr-stat-number{font-family:var(--font-heading)}
+    .stat-block .stat-label{font-family:var(--font-body);font-size:.8rem;color:var(--color-text-3)}
     .process-card,.mini-card,.faq-note{padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2)}
     .newsletter-shell{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:24px;align-items:center;padding:36px;border:1px solid var(--color-border);border-radius:var(--radius-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--color-primary) 8%,transparent),color-mix(in srgb,var(--color-secondary) 8%,transparent))}
     .newsletter-form{display:flex;gap:12px;flex-wrap:wrap}
@@ -74,7 +76,7 @@
 
     <div class="chr-container hero-grid">
       <div>
-        <div class="chr-badge" data-reveal style="margin-bottom:1.5rem;display:inline-flex">20 layouts ï¿½ 17 eras ï¿½ 16 palettes</div>
+        <div class="chr-badge" data-reveal style="margin-bottom:1.5rem;display:inline-flex">20 layouts - 17 eras - 16 palettes</div>
         <h1 id="hero-heading" data-reveal class="chr-heading-xl" style="margin-bottom:1.5rem">
           One flexible product.
           <br>
@@ -90,10 +92,10 @@
           <a href="#workflow" class="chr-btn-ghost" style="font-size:1rem;padding:16px 28px">See how it works</a>
         </div>
         <div class="stats-row" data-reveal style="margin-top:2.4rem">
-          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="20">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Layouts</div></div>
-          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="17">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Eras</div></div>
-          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="16">0</div><div style="font-size:.8rem;color:var(--color-text-3)">Palettes</div></div>
-          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="70" data-suffix="+">0+</div><div style="font-size:.8rem;color:var(--color-text-3)">Fonts</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="20">0</div><div class="stat-label">Layouts</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="17">0</div><div class="stat-label">Eras</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="16">0</div><div class="stat-label">Palettes</div></div>
+          <div class="stat-block"><div class="chr-stat-number" style="font-size:2rem" data-count="70" data-suffix="+">0+</div><div class="stat-label">Fonts</div></div>
         </div>
       </div>
 

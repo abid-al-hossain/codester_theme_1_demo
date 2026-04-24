@@ -27,6 +27,9 @@
     .eb-panel,.eb-metric,.eb-case,.eb-sector,.eb-row,.eb-form-shell{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
     .eb-panel,.eb-case,.eb-sector,.eb-row,.eb-form-shell{padding:24px}
     .eb-metric{padding:20px}
+    .eb-metric-value{font-family:var(--font-heading);font-size:2.1rem;font-weight:800;color:var(--color-primary)}
+    .eb-metric-label{font-family:var(--font-body);font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+    .eb-metric-caption{font-family:var(--font-body);font-size:.8rem;color:var(--color-text-3)}
     .eb-main{display:grid;gap:28px}
     .eb-mast{padding:56px 0 28px;border-bottom:1px solid var(--color-border)}
     .eb-headline{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:end}
@@ -86,16 +89,16 @@
         <p style="font-size:.9rem;color:var(--color-text-2);line-height:1.75">A front-door brief for firms that need board-level language, operational clarity, and a confident decision-making posture.</p>
       </div>
       <div class="eb-metric">
-        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Programs led</div>
-        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="240">0</div>
+        <div class="eb-metric-label">Programs led</div>
+        <div class="eb-metric-value" data-count="240">0</div>
       </div>
       <div class="eb-metric">
-        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Markets</div>
-        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="38">0</div>
+        <div class="eb-metric-label">Markets</div>
+        <div class="eb-metric-value" data-count="38">0</div>
       </div>
       <div class="eb-metric">
-        <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px">Portfolio value</div>
-        <div style="font-size:2.1rem;font-weight:800;color:var(--color-primary)" data-count="15" data-prefix="$">$0</div>
+        <div class="eb-metric-label">Portfolio value</div>
+        <div class="eb-metric-value" data-count="15" data-prefix="$">$0</div>
       </div>
     </aside>
 
@@ -143,9 +146,9 @@
           <div class="eb-panel">
             <div style="font-size:.72rem;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px">Delivery confidence</div>
             <div class="eb-kpi-grid">
-              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">92%</div><div style="font-size:.8rem;color:var(--color-text-3)">Program confidence</div></div>
-              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">31%</div><div style="font-size:.8rem;color:var(--color-text-3)">Cycle-time gain</div></div>
-              <div class="eb-metric"><div style="font-size:1.6rem;font-weight:800;color:var(--color-primary)">11</div><div style="font-size:.8rem;color:var(--color-text-3)">Steering tracks</div></div>
+              <div class="eb-metric"><div class="eb-metric-value" style="font-size:1.6rem">92%</div><div class="eb-metric-caption">Program confidence</div></div>
+              <div class="eb-metric"><div class="eb-metric-value" style="font-size:1.6rem">31%</div><div class="eb-metric-caption">Cycle-time gain</div></div>
+              <div class="eb-metric"><div class="eb-metric-value" style="font-size:1.6rem">11</div><div class="eb-metric-caption">Steering tracks</div></div>
             </div>
           </div>
         </div>
