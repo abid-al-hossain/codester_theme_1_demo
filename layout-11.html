@@ -52,7 +52,7 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <div class="eb-topline">
   <div class="chr-container" style="display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 0;font-size:.76rem;color:var(--color-text-2);text-transform:uppercase;letter-spacing:.08em">
@@ -65,7 +65,7 @@
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo">CHRONOS ADVISORY</a>
     <nav aria-label="Enterprise navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-11-nav" class="chr-nav-links">
         <li><a href="#priorities">Priorities</a></li>
         <li><a href="#sectors">Sectors</a></li>
         <li><a href="#cases">Cases</a></li>
@@ -75,7 +75,7 @@
     <div style="display:flex;align-items:center;gap:12px">
       <a href="index.html" class="chr-btn-ghost" style="padding:10px 18px;font-size:.85rem">All layouts</a>
       <a href="#briefing" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Request briefing</a>
-      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-11-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>

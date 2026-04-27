@@ -57,12 +57,12 @@
 </head>
 <body>
 <div class="progress" id="reading-progress" aria-hidden="true"></div>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo" style="font-weight:400;letter-spacing:0.1em;">CHRONOS.</a>
-    <nav><ul class="chr-nav-links"><li><a href="#essays" style="font-weight:400;">Essays</a></li><li><a href="#notes" style="font-weight:400;">Notes</a></li><li><a href="#reading" style="font-weight:400;">Reading</a></li><li><a href="#archive" style="font-weight:400;">Archive</a></li></ul></nav>
-    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-outline" style="padding:10px 22px;font-size:0.85rem;border-radius:0;">Subscribe</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <nav><ul id="chr-layout-08-nav" class="chr-nav-links"><li><a href="#essays" style="font-weight:400;">Essays</a></li><li><a href="#notes" style="font-weight:400;">Notes</a></li><li><a href="#reading" style="font-weight:400;">Reading</a></li><li><a href="#archive" style="font-weight:400;">Archive</a></li></ul></nav>
+    <div style="display:flex;gap:12px;align-items:center"><a href="#subscribe" class="chr-btn-outline" style="padding:10px 22px;font-size:0.85rem;border-radius:0;">Subscribe</a><button aria-controls="chr-layout-08-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
 <main id="main-content">
@@ -181,7 +181,7 @@
     <p style="color:var(--color-text-2);margin-bottom:50px;font-size:1.15rem;line-height:1.7">Long-form design thinking, monthly. Quiet editing, stronger systems, and no hype theater.</p>
 <form class="chr-newsletter-form" style="display:flex;flex-direction:row;gap:0;border:1px solid var(--color-primary);" aria-label="Subscribe" data-demo-message="Journal subscription captured. Connect this form to your own list.">
       <input type="email" id="j-email" name="email" aria-label="Email address" placeholder="Your email address" autocomplete="email" style="flex:1;padding:24px;border:none;background:var(--color-bg);outline:none;font-size:1rem;color:var(--color-text)">
-      <button type="submit" style="padding:24px 40px;background:var(--color-primary);color:var(--color-bg);border:none;cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;transition:opacity 0.2s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Submit</button>
+      <button type="submit" style="padding:24px 40px;background:var(--color-primary);color:var(--color-on-primary);border:none;cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;transition:opacity 0.2s" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Submit</button>
     </form>
   </div>
 </section>

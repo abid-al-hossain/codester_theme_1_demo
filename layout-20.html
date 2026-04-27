@@ -228,9 +228,9 @@
       border:1px solid var(--color-border);
       box-shadow:inset 0 0 28px color-mix(in srgb, var(--color-primary) 8%, transparent);
     }
-    .chapter-panel h4,
+    .chapter-panel h3,
     .house-card h4,
-    .portrait-card h4{
+    .portrait-card h3{
       margin:0 0 12px;
       font-family:var(--font-heading);
       color:var(--color-text);
@@ -466,18 +466,18 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner" style="background:transparent; border:none; padding-top:20px;">
   <div class="chr-container chr-nav-inner" style="justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <a href="#main-content" class="chr-logo" style="color:var(--color-primary); font-family:var(--font-heading); font-size:1.5rem; letter-spacing:0.2em;">Chronos Archive</a>
-    <nav class="chr-nav-links" aria-label="Archive navigation">
+    <nav id="chr-layout-20-nav" class="chr-nav-links" aria-label="Archive navigation">
       <a href="#prologue" style="font-family:var(--font-body); color:var(--color-text);">Prologue</a>
       <a href="#constructs" style="font-family:var(--font-body); color:var(--color-text);">Constructs</a>
       <a href="#alchemy" style="font-family:var(--font-body); color:var(--color-text);">Alchemy</a>
       <a href="#ciphers" style="font-family:var(--font-body); color:var(--color-text);">Ciphers</a>
     </nav>
-    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button aria-controls="chr-layout-20-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -520,11 +520,11 @@
     <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter II: Castle Constructs</h2>
     <div class="magic-split" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:34px;">
       <div class="chapter-panel" data-reveal="left">
-        <h4>Portrait Corridor</h4>
+        <h3>Portrait Corridor</h3>
         <p>Layered borders, drifting glyphs, slow ambient glow, and deeper chapter breaks turn the hall into a procession of frames, lanterns, and old ceremonial rooms.</p>
       </div>
       <div class="chapter-panel" data-reveal="right">
-        <h4>Archivist's Notes</h4>
+        <h3>Archivist's Notes</h3>
         <p>Title glow, rune drift, and lantern light carry the mood of a headmaster's archive while keeping every note clear enough to read at a glance.</p>
       </div>
     </div>
@@ -532,17 +532,17 @@
     <div class="portrait-grid">
       <div class="portrait-card" data-reveal="bottom">
         <div class="portrait-frame">North Tower</div>
-        <h4>Moving Portrait Ledger</h4>
+        <h3>Moving Portrait Ledger</h3>
         <p>Animated portrait frames make the page feel inhabited, as if the walls themselves are quietly observing the readers crossing the hall.</p>
       </div>
       <div class="portrait-card" data-reveal="bottom" style="transition-delay:.1s;">
         <div class="portrait-frame">Astronomy</div>
-        <h4>Midnight Observatory</h4>
+        <h3>Midnight Observatory</h3>
         <p>Soft glow and framed panels echo stained-glass spill, moonlit windows, and the kind of late-night study atmosphere a scholarly citadel should carry.</p>
       </div>
       <div class="portrait-card" data-reveal="bottom" style="transition-delay:.2s;">
         <div class="portrait-frame">Restricted</div>
-        <h4>Sealed Stacks</h4>
+        <h3>Sealed Stacks</h3>
         <p>These panels read more like cabinets or alcoves within the archive. The motion stays slow and ceremonial so the mood feels enchanted, not noisy.</p>
       </div>
     </div>
@@ -606,11 +606,11 @@
     <h2 style="font-family:var(--font-heading); font-size:3rem; color:var(--color-primary); text-align:center; margin-bottom:30px;">Chapter III: Alchemy &amp; Courier Post</h2>
     <div class="magic-split" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px;">
       <div class="chapter-panel" data-reveal="left">
-        <h4>Elixir of Radiance</h4>
+        <h3>Elixir of Radiance</h3>
         <p>Combine two parts lantern-gold extract with a pinch of ember dust. Stir under torchlight until the chamber edges begin to hum. This is the draught that gives cards, headings, and sconces their warm arcane pull.</p>
       </div>
       <div class="chapter-panel" data-reveal="right">
-        <h4>Draught of Rigidity</h4>
+        <h3>Draught of Rigidity</h3>
         <p>Boil three cuts of stone bark into a stricter border tonic when a magical surface starts dissolving into fog. Useful when a whimsical chamber still needs stern scholarly discipline.</p>
       </div>
     </div>

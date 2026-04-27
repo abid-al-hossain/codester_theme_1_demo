@@ -1,6 +1,6 @@
 # Chronos
 
-Chronos is a multi-era HTML theme built around one shared customization system instead of a single fixed visual style. The current workspace contains 20 layouts, 17 design eras, 16 preset palettes, and 70+ Google Fonts that can be mixed live through the shared customizer.
+Chronos is a multi-era HTML theme built around one shared customization system instead of a single static visual style. The current workspace contains 20 layouts, 17 design eras, 16 preset palettes, and 70+ Google Fonts that can be mixed live through the shared customizer.
 
 ## Product scope
 
@@ -45,7 +45,7 @@ Because the project uses Vite module entrypoints, use it through the development
 - `index.html` - layout directory hub
 - `layout-01.html` through `layout-20.html` - the 20 source layouts
 - `src/style.css` - global design tokens, eras, utilities, and component styles
-- `src/main.js` - shared page runtime for demo actions, date handling, and countdowns
+- `src/main.js` - shared page runtime for preview actions, date handling, and countdowns
 - `src/customizer.js` - Alpine store and customization logic
 - `src/customizer-html.js` - injected customizer markup
 - `src/fonts.js` - curated Google Font catalog and default era font mapping

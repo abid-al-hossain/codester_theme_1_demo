@@ -58,14 +58,14 @@
     .apply-form textarea,.apply-form button{grid-column:1 / -1}
     .apply-form textarea{min-height:140px;resize:vertical}
 
-    .path-bubble { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-bg); position: absolute; left: -61px; top: -4px; box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent); z-index: 2;}
+    .path-bubble { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-on-primary); position: absolute; left: -61px; top: -4px; box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent); z-index: 2;}
 
     @media(max-width:1040px){.faculty-grid,.deadline-grid{grid-template-columns:1fr}}
     @media(max-width:720px){.apply-form,.edu-metrics{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <div class="edu-banner">
   <div class="chr-container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
     <span>Admissions open | Mentorship cohorts | Campus and online options</span>
@@ -75,8 +75,8 @@
 <header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 85%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo" style="font-weight: 700; letter-spacing: -0.02em;">CHRONOS ACADEMY</a>
-    <nav aria-label="Education navigation"><ul class="chr-nav-links"><li><a href="#faculty">Faculty</a></li><li><a href="#curriculum">Programs</a></li><li><a href="#journey">Admissions</a></li><li><a href="#apply">Apply</a></li></ul></nav>
-    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-outline" style="padding:10px 18px;font-size:.85rem; border-radius:100px;">All layouts</a><a href="#apply" class="chr-btn-primary" style="padding:12px 24px;font-size:.9rem; border-radius:100px; box-shadow:0 4px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);">Start application</a><button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+    <nav aria-label="Education navigation"><ul id="chr-layout-13-nav" class="chr-nav-links"><li><a href="#faculty">Faculty</a></li><li><a href="#curriculum">Programs</a></li><li><a href="#journey">Admissions</a></li><li><a href="#apply">Apply</a></li></ul></nav>
+    <div style="display:flex;align-items:center;gap:12px"><a href="index.html" class="chr-btn-outline" style="padding:10px 18px;font-size:.85rem; border-radius:100px;">All layouts</a><a href="#apply" class="chr-btn-primary" style="padding:12px 24px;font-size:.9rem; border-radius:100px; box-shadow:0 4px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);">Start application</a><button aria-controls="chr-layout-13-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </div>
 </header>
 <main id="main-content">
@@ -108,7 +108,7 @@
         <!-- Main Feature: 2x2 -->
         <div class="bento-card" style="grid-column: span 2; grid-row: span 2; padding:40px;">
           <div class="bento-content" style="justify-content:flex-end">
-            <div style="width:60px;height:60px;background:var(--color-primary);border-radius:16px;margin-bottom:auto;display:flex;align-items:center;justify-content:center;color:var(--color-bg);font-size:1.5rem;">&#x2743;</div>
+                                <div style="width:60px;height:60px;background:var(--color-primary);border-radius:16px;margin-bottom:auto;display:flex;align-items:center;justify-content:center;color:var(--color-on-primary);font-size:1.5rem;">&#x2743;</div>
             <h3 style="font-size:2.4rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;line-height:1.1;">The Studio Arts Program</h3>
             <p style="color:var(--color-text-2);font-size:1.1rem;">Where rigorous theory meets unconstrained practice.</p>
           </div>
@@ -121,7 +121,7 @@
           </div>
         </div>
         <!-- Quote box -->
-        <div class="bento-card" style="background:var(--color-primary);color:var(--color-bg);padding:40px;grid-column:span 1; grid-row: span 2; box-shadow: 0 10px 30px color-mix(in srgb, var(--color-primary) 30%, transparent);">
+        <div class="bento-card" style="background:var(--color-primary);color:var(--color-on-primary);padding:40px;grid-column:span 1; grid-row: span 2; box-shadow: 0 10px 30px color-mix(in srgb, var(--color-primary) 30%, transparent);">
           <div class="bento-content" style="justify-content:center;">
             <div style="font-size:3rem;line-height:0;margin-bottom:20px;opacity:0.5;">&ldquo;</div>
             <h3 style="font-size:1.8rem;font-weight:700;line-height:1.4;letter-spacing:-0.01em;">I finally found my community in the open innovation lab.</h3>
@@ -271,15 +271,15 @@
             <div style="position:absolute; top:20px; left:10%; right:10%; height:2px; background:color-mix(in srgb, var(--color-border) 50%, transparent); z-index:0;"></div>
             <div style="position:absolute; top:20px; left:10%; width:0; height:2px; background:var(--color-primary); z-index:0;"></div>
 
-            <div style="text-align:center;flex:1;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-primary);color:var(--color-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem;box-shadow:0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent);">1</div><div style="font-size:0.95rem;font-weight:700">Profile</div></div>
+            <div style="text-align:center;flex:1;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-primary);color:var(--color-on-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem;box-shadow:0 0 15px color-mix(in srgb, var(--color-primary) 40%, transparent);">1</div><div style="font-size:0.95rem;font-weight:700">Profile</div></div>
             <div style="text-align:center;flex:1;opacity:0.5;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-bg);color:var(--color-text);border-radius:50%;border:2px solid color-mix(in srgb, var(--color-border) 80%, transparent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem">2</div><div style="font-size:0.95rem;font-weight:700">Transcripts</div></div>
             <div style="text-align:center;flex:1;opacity:0.5;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-bg);color:var(--color-text);border-radius:50%;border:2px solid color-mix(in srgb, var(--color-border) 80%, transparent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem">3</div><div style="font-size:0.95rem;font-weight:700">Essay</div></div>
             <div style="text-align:center;flex:1;opacity:0.5;min-width:80px;position:relative;z-index:1;"><div style="width:40px;height:40px;background:var(--color-bg);color:var(--color-text);border-radius:50%;border:2px solid color-mix(in srgb, var(--color-border) 80%, transparent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:1.1rem">4</div><div style="font-size:0.95rem;font-weight:700">Submit</div></div>
           </div>
 <form class="apply-form" aria-label="Admissions Profile Step" data-demo-message="Admissions application captured. Connect this form to your own admissions flow.">
-            <input type="text" name="first_name" aria-label="Legal First Name" placeholder="Legal First Name">
-            <input type="text" name="last_name" aria-label="Legal Last Name" placeholder="Legal Last Name">
-            <input type="email" name="email" aria-label="Email Address" placeholder="Email Address" style="grid-column:1 / -1">
+            <input type="text" name="first_name" aria-label="Legal First Name" placeholder="Legal First Name" autocomplete="given-name">
+            <input type="text" name="last_name" aria-label="Legal Last Name" placeholder="Legal Last Name" autocomplete="family-name">
+            <input type="email" name="email" aria-label="Email Address" placeholder="Email Address" autocomplete="email" style="grid-column:1 / -1">
             <select name="intended_major" aria-label="Select Intended Major" style="grid-column:1 / -1;appearance:none;cursor:pointer;"><option>Select Intended Major</option><option>Design Systems</option><option>Applied Science</option><option>Creative Technology</option></select>
             <button type="submit" class="chr-btn-primary" style="justify-content:center;grid-column: 1 / -1;padding:20px;font-size:1.1rem;border-radius:100px;font-weight:700;letter-spacing:0.02em;margin-top:10px;">Save & Continue to Transcripts</button>
           </form>
@@ -301,8 +301,9 @@
 
 <script>
   // Mouse tracking for bento cards
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bentoCards = document.querySelectorAll('.bento-card');
-  bentoCards.forEach(card => {
+  if (!reduceMotion) bentoCards.forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;

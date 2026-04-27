@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Sora:wght@300;400;600;700&family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700;800&family=Work+Sans:wght@300;400;500;600;700&family=Lexend:wght@300;400;500;600;700&family=Figtree:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Sora:wght@300;400;600;700&family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700;800&family=Work+Sans:wght@300;400;500;600;700&family=Lexend:wght@300;400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Figtree:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Syne:wght@400;700;800&family=Archivo+Black&family=Oswald:wght@300;400;500;600;700&family=Anton&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Syne:wght@400;700;800&family=Archivo+Black&family=Oswald:wght@300;400;500;600;700&family=Anton&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Changa:wght@300;400;500;600;700;800&family=Exo+2:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=UnifrakturMaguntia&family=Almendra:ital,wght@0,400;0,700;1,400&family=Uncial+Antiqua&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Tektur:wght@400;500;600;700;800;900&family=Audiowide&family=Iceland&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&family=Inconsolata:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&family=Inconsolata:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Dancing+Script:wght@400;600;700&family=Sacramento&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap');
 @import "tailwindcss";
@@ -70,6 +70,7 @@
   --color-surface:   rgba(10,8,0,0.85);
   --color-primary:   #d4af37;
   --color-primary-2: #b8972e;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #800020;
   --color-accent:    #c0392b;
   --color-text:      #f5f0e8;
@@ -97,6 +98,7 @@
   --color-surface:   rgba(15,23,42,0.6);
   --color-primary:   #06b6d4;
   --color-primary-2: #0891b2;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #a855f7;
   --color-accent:    #10b981;
   --color-text:      #e2e8f0;
@@ -113,6 +115,7 @@
   --radius-lg:       28px;
   --radius-xl:       48px;
   --blur-glass:      24px;
+  --border-w:        1px;
   --shadow-glow:     0 0 80px rgba(6,182,212,0.3);
 }
 
@@ -124,6 +127,7 @@
   --color-surface:   rgba(245,240,228,0.9);
   --color-primary:   #8b4513;
   --color-primary-2: #7a3c10;
+  --color-on-primary:#ffffff;
   --color-secondary: #556b2f;
   --color-accent:    #a0522d;
   --color-text:      #1c1410;
@@ -152,6 +156,7 @@
   --color-surface:   rgba(5,5,5,0.85);
   --color-primary:   #ff0080;
   --color-primary-2: #cc0066;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #00ffff;
   --color-accent:    #ffff00;
   --color-text:      #00ffff;
@@ -179,6 +184,7 @@
   --color-surface:   rgba(245,245,245,0.95);
   --color-primary:   #ff3300;
   --color-primary-2: #cc2900;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #000000;
   --color-accent:    #ffcc00;
   --color-text:      #000000;
@@ -208,6 +214,7 @@
   --color-surface:   rgba(252,252,251,0.92);
   --color-primary:   #111111;
   --color-primary-2: #000000;
+  --color-on-primary:#ffffff;
   --color-secondary: #5f5f5a;
   --color-accent:    #a8a29e;
   --color-text:      #111111;
@@ -238,6 +245,7 @@
   --color-surface:   rgba(247,250,245,0.85);
   --color-primary:   #3d6e3e;
   --color-primary-2: #2e5430;
+  --color-on-primary:#ffffff;
   --color-secondary: #7aaa5b;
   --color-accent:    #b5d89e;
   --color-text:      #1a2e1b;
@@ -266,6 +274,7 @@
   --color-surface:   rgba(255,255,255,0.92);
   --color-primary:   #1e3a6e;
   --color-primary-2: #162c54;
+  --color-on-primary:#ffffff;
   --color-secondary: #2563eb;
   --color-accent:    #dbeafe;
   --color-text:      #1a2035;
@@ -294,6 +303,7 @@
   --color-surface:   rgba(10,10,10,0.9);
   --color-primary:   #f5e642;
   --color-primary-2: #e3d62e;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #e040fb;
   --color-accent:    #00e5ff;
   --color-text:      #ffffff;
@@ -321,6 +331,7 @@
   --color-surface:   rgba(5,0,0,0.92);
   --color-primary:   #dc2626;
   --color-primary-2: #b91c1c;
+  --color-on-primary:#ffffff;
   --color-secondary: #7f1d1d;
   --color-accent:    #f87171;
   --color-text:      #fecaca;
@@ -349,6 +360,7 @@
   --color-surface:   rgba(255,255,255,0.4);
   --color-primary:   #00a6fb;
   --color-primary-2: #0086d1;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #7c3aed;
   --color-accent:    #2dd4bf;
   --color-text:      #083344;
@@ -370,10 +382,6 @@
   --shadow-glow:     0 0 96px rgba(0,166,251,0.22);
 }
 
-/* ============================================================
-   GLOBAL BASE STYLES
-   ============================================================ */
-
 /* ── JURASSIC ERA (Primal / Museum) ─────────────────────── */
 [data-era="jurassic"] {
   --color-bg:        #181510;
@@ -382,6 +390,7 @@
   --color-surface:   rgba(24,21,16,0.9);
   --color-primary:   #c19a6b;
   --color-primary-2: #8c7355;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #5a6438;
   --color-accent:    #ab906e;
   --color-text:      #e6dfd1;
@@ -409,6 +418,7 @@
   --color-surface:   rgba(0,0,0,1);
   --color-primary:   #39ff14;
   --color-primary-2: #0fd600;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #ff00ff;
   --color-accent:    #00ffff;
   --color-text:      #e0e0e0;
@@ -440,6 +450,7 @@
   --color-surface:   rgba(255, 255, 255, 0.4);
   --color-primary:   #006064;
   --color-primary-2: #00838f;
+  --color-on-primary:#ffffff;
   --color-secondary: #00acc1;
   --color-accent:    #4dd0e1;
   --color-text:      #00363a;
@@ -471,6 +482,7 @@
   --color-surface:   rgba(10,5,0,0.85);
   --color-primary:   #ff3d00;
   --color-primary-2: #dd2c00;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #ff9100;
   --color-accent:    #ffc400;
   --color-text:      #ffe0b2;
@@ -501,6 +513,7 @@
   --color-surface:   rgba(17, 21, 34, 0.6);
   --color-primary:   #d4af37;
   --color-primary-2: #e8c678;
+  --color-on-primary:#0b0b0b;
   --color-secondary: #673ab7;
   --color-accent:    #00bcd4;
   --color-text:      #e4dfca;
@@ -523,6 +536,10 @@
   --shadow-lg:       0 20px 60px rgba(0,0,0,0.9);
   --shadow-glow:     0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(103, 58, 183, 0.3);
 }
+
+/* ============================================================
+   GLOBAL BASE STYLES
+   ============================================================ */
 
 /* FOUC prevention: hide body until era class applied */
 [data-era-loading] body { opacity: 0; }
@@ -563,7 +580,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
+  background-color: var(--color-on-primary);
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -579,6 +596,11 @@ h1, h2, h3, h4, h5, h6 {
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; }
 img { max-width: 100%; height: auto; display: block; }
+
+section[id],
+#layout-grid {
+  scroll-margin-top: 96px;
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -646,7 +668,7 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 8px;
   padding: 14px 32px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   border-radius: var(--radius-md);
   font-weight: 700;
   font-size: 0.95rem;
@@ -989,7 +1011,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   transform: translateY(-50%);
   z-index: 1;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   padding: 14px 10px;
   border-radius: var(--radius-md) 0 0 var(--radius-md);
   border: var(--border-w) solid color-mix(in srgb, var(--color-primary) 35%, transparent);
@@ -1128,7 +1150,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 .era-card.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
 }
 
 /* Color swatches */
@@ -1546,7 +1568,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   bottom: 24px;
   transform: translateX(-50%) translateY(16px);
   background: var(--color-text);
-  color: var(--color-bg);
+  color: var(--color-on-primary);
   padding: 12px 18px;
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-lg);
@@ -1691,7 +1713,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 .chr-pricing-card.featured {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   transform: scale(1.03);
   box-shadow: var(--shadow-glow);
 }
@@ -1744,7 +1766,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   transform: rotate(45deg);
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
 }
 
 .chr-faq-body {
@@ -1836,7 +1858,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 .chr-newsletter-form button {
   padding: 14px 24px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font-weight: 700;
   font-size: 0.85rem;
   border: none;

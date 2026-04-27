@@ -52,13 +52,13 @@
 <body>
 <div class="holo-blob-1" aria-hidden="true"></div>
 <div class="holo-blob-2" aria-hidden="true"></div>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo glow-text">CHRONOS</a>
     <nav aria-label="Launch navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-07-nav" class="chr-nav-links">
         <li><a href="#launch">Launch</a></li>
         <li><a href="#systems">Systems</a></li>
         <li><a href="#specs">Specs</a></li>
@@ -67,7 +67,7 @@
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <a href="#access" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Request access</a>
-      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-07-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -76,7 +76,7 @@
   <section id="launch" class="launch-shell" aria-labelledby="launch-heading">
     <div class="chr-container launch-grid">
       <div>
-        <div class="chr-badge" data-reveal style="margin-bottom:24px">Futuristic launch demo for Chronos</div>
+        <div class="chr-badge" data-reveal style="margin-bottom:24px">Futuristic launch system for Chronos</div>
         <h1 id="launch-heading" class="glow-text" style="font-family:var(--font-heading);font-size:clamp(2.6rem,8vw,6rem);font-weight:900;letter-spacing:-.03em;line-height:.92;margin-bottom:18px" data-reveal>
           CHRONOS
           <span style="display:block;color:var(--color-primary)">PRIME</span>
@@ -93,9 +93,9 @@
           <div class="count-item"><span class="count-val" data-countdown-secs>00</span><div class="count-label">Seconds</div></div>
         </div>
 
-        <form class="cta-form" data-demo-message="Demo signup captured. Connect this form to your own waitlist endpoint." aria-label="Early access signup" data-reveal>
+        <form class="cta-form" data-demo-message="Signup preview captured. Connect this form to your own waitlist endpoint." aria-label="Early access signup" data-reveal>
           <label for="launch-email" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Email</label>
-          <input type="email" id="launch-email" name="email" aria-label="Email" placeholder="pilot@chronos.demo" autocomplete="email">
+          <input type="email" id="launch-email" name="email" aria-label="Email" placeholder="pilot@example.com" autocomplete="email">
           <button type="submit" class="chr-btn-primary" style="padding:16px 28px">Join queue</button>
         </form>
       </div>
@@ -138,7 +138,7 @@
           <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Era, font, and palette changes persist across layouts through one shared store, keeping the whole collection feeling connected.</p>
         </div>
         <div class="glass-card">
-          <h3 style="font-family:var(--font-heading);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase">Launch-safe demo actions</h3>
+          <h3 style="font-family:var(--font-heading);font-size:1.05rem;margin-bottom:10px;text-transform:uppercase">Launch-safe interaction states</h3>
           <p style="color:var(--color-text-2);font-size:.92rem;line-height:1.7">Calls to action, form moments, and quick interactions stay controlled and deliberate throughout the page.</p>
         </div>
         <div class="glass-card">
@@ -181,7 +181,7 @@
     <div class="chr-container">
       <div class="feature-grid" data-reveal-group>
         <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">01</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Launch headline</div></div>
-        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">02</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Fixed launch countdown</div></div>
+                        <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">02</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Reliable launch countdown</div></div>
         <div class="glass-card" style="text-align:center"><div style="font-family:var(--font-accent);font-size:1.8rem;color:var(--color-primary);margin-bottom:14px">03</div><div style="font-family:var(--font-accent);font-weight:700;font-size:.95rem;text-transform:uppercase">Waitlist form</div></div>
       </div>
     </div>
@@ -197,7 +197,7 @@
         </p>
         <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
           <a href="index.html" class="chr-btn-primary">Open layout directory</a>
-          <a href="layout-05.html" class="chr-btn-ghost">View dashboard demo</a>
+          <a href="layout-05.html" class="chr-btn-ghost">View dashboard layout</a>
         </div>
       </div>
     </div>

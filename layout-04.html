@@ -31,13 +31,13 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo">CHRONOS</a>
     <nav aria-label="Manuscript navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-04-nav" class="chr-nav-links">
         <li><a href="#chapter-1">Preface</a></li>
         <li><a href="#chapter-2">Eras</a></li>
         <li><a href="#chapter-3">Notes</a></li>
@@ -45,7 +45,7 @@
     </nav>
     <div style="display:flex;align-items:center;gap:12px">
       <a href="index.html" class="chr-btn-ghost" style="padding:10px 20px;font-size:.85rem">Directory</a>
-      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-04-nav" class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>

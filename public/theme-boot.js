@@ -91,6 +91,8 @@
     return parts.slice(0, -1).join('/').toLowerCase()
   }
 
+  // NOTE: This key scheme is intentionally mirrored in src/customizer.js.
+  // Update both files if the localStorage scope changes.
   function getPrefsKey() {
     var namespace = document.documentElement.getAttribute('data-prefs-key') || 'chronos-prefs-v3'
     return document.documentElement.hasAttribute('data-prefs-key')
@@ -158,7 +160,8 @@
         ['color-text-2', mixHex(text, bg, dark ? 0.16 : 0.22)],
         ['color-text-3', mixHex(text, bg, dark ? 0.32 : 0.42)],
         ['color-border', mixHex(bg2, text, dark ? 0.22 : 0.14)],
-        ['color-border-2', mixHex(bg2, primary, 0.28)]
+        ['color-border-2', mixHex(bg2, primary, 0.28)],
+        ['shadow-glow', '0 0 52px ' + withAlpha(primary, dark ? 0.32 : 0.2)]
       ].forEach(function (pair) {
         setVar(pair[0], pair[1])
       })

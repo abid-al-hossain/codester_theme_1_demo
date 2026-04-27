@@ -63,13 +63,13 @@
   </style>
 </head>
 <body class="scanlines">
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700;font-family:var(--font-mono)" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700;font-family:var(--font-mono)" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner" style="background: color-mix(in srgb, var(--color-bg) 80%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo" style="text-shadow: 0 0 10px var(--color-primary);">CHRONOS[SYS]</a>
     <nav aria-label="Agency navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-09-nav" class="chr-nav-links">
         <li><a href="#system" style="transition: text-shadow 0.2s;" onmouseover="this.style.textShadow='0 0 8px var(--color-text)'" onmouseout="this.style.textShadow='none'">System</a></li>
         <li><a href="#chronolog">Chronolog</a></li>
         <li><a href="#network">Network</a></li>
@@ -78,7 +78,7 @@
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <a href="#uplink" class="chr-btn-primary neon-box" style="padding:10px 22px;font-size:.85rem;font-family:var(--font-mono)">[UPLINK]</a>
-      <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-09-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -174,7 +174,7 @@
         <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--color-primary);margin-bottom:20px;text-shadow: 0 0 8px var(--color-primary);">&gt; INITIATE_HANDSHAKE</div>
         <h2 id="uplink-heading" style="font-size:clamp(3.5rem,8vw,6.5rem);font-weight:900;text-transform:uppercase;margin-bottom:1.5rem;line-height:0.9">Establish<br><span class="glitch-wrap" style="color:var(--color-primary)">Uplink<span class="glitch-clone">Uplink</span><span class="glitch-clone">Uplink</span></span></h2>
         <p style="color:var(--color-text);line-height:1.8;margin-bottom:2.5rem;font-size:1.1rem">Secure communication channel bypassing regional firewalls.</p>
-        <div style="font-family:var(--font-mono);font-size:1rem;color:var(--color-bg);background:var(--color-primary);padding:12px 24px;display:inline-block;box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 40%, transparent);">// CONNECTION ENCRYPTED</div>
+        <div style="font-family:var(--font-mono);font-size:1rem;color:var(--color-on-primary);background:var(--color-primary);padding:12px 24px;display:inline-block;box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 40%, transparent);">// CONNECTION ENCRYPTED</div>
       </div>
       <div data-reveal="right" style="border:1px solid var(--color-primary);padding:50px;background:var(--color-bg);position:relative;box-shadow: inset 0 0 30px color-mix(in srgb, var(--color-primary) 10%, transparent), 0 20px 40px rgba(0,0,0,0.4);">
         <div style="position:absolute;top:-2px;left:-2px;width:16px;height:16px;background:var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>

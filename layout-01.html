@@ -47,13 +47,13 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo" aria-label="Chronos home">CHRONOS</a>
     <nav aria-label="Main navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-01-nav" class="chr-nav-links">
         <li><a href="#features">Features</a></li>
         <li><a href="#workflow">Workflow</a></li>
         <li><a href="#showcase">Layouts</a></li>
@@ -63,7 +63,7 @@
     <div style="display:flex;align-items:center;gap:12px">
       <a href="index.html" class="chr-btn-ghost" style="padding:10px 20px;font-size:.85rem">All layouts</a>
       <a href="#showcase" class="chr-btn-primary" style="padding:10px 22px;font-size:.85rem">Preview source</a>
-      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-01-nav" class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -215,7 +215,7 @@
             A newsletter signup, launch waitlist, or concise call to action fits naturally here when the page needs one clear next step.
           </p>
         </div>
-        <form class="newsletter-form" aria-label="Demo signup" data-demo-message="Demo signup submitted. Connect this form to your own workflow.">
+        <form class="newsletter-form" aria-label="Newsletter signup" data-demo-message="Newsletter signup submitted. Connect this form to your own workflow.">
           <label for="hero-email" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Email</label>
           <input type="email" id="hero-email" name="email" aria-label="Email" placeholder="name@example.com" autocomplete="email">
           <button type="submit" class="chr-btn-primary">Submit</button>

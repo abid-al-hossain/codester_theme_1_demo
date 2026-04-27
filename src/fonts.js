@@ -38,7 +38,7 @@ export function loadGoogleFont(name) {
   if (loadingFonts.has(name)) return loadingFonts.get(name)
 
   const encoded = name.replace(/ /g, '+')
-  const href = `https://fonts.googleapis.com/css2?family=${encoded}:wght@300;400;500;600;700;800;900&display=swap`
+  const href = `https://fonts.googleapis.com/css2?family=${encoded}&display=swap`
 
   const request = new Promise((resolve) => {
     const link = document.createElement('link')

@@ -123,7 +123,7 @@
     }
     .warning-bar {
       background: var(--color-primary);
-      color: var(--color-bg);
+      color: var(--color-on-primary);
       font-family: var(--font-heading);
       padding: 10px;
       text-align: center;
@@ -137,26 +137,26 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <div class="warning-bar">WARNING: EXTREME TEMPERATURES DETECTED</div>
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner" style="flex-wrap:wrap;gap:16px;">
     <a href="#main-content" class="chr-logo magma-text-glow" style="font-family:var(--font-heading)">CRATER ZERO</a>
-    <nav class="chr-nav-links" aria-label="Volcanic navigation">
+    <nav id="chr-layout-19-nav" class="chr-nav-links" aria-label="Volcanic navigation">
       <a href="#console">CONSOLE</a>
       <a href="#metrics">METRICS</a>
       <a href="#personnel">PERSONNEL</a>
       <a href="#purge">PURGE</a>
     </nav>
-    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button aria-controls="chr-layout-19-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main id="main-content" class="volcanic-grid">
   <section id="console" data-reveal="left" style="scroll-margin-top: 96px;" aria-label="Console telemetry">
     <div class="magma-block" style="padding:20px;">
-      <h3 style="font-family:var(--font-heading); color:var(--color-secondary); margin-bottom: 20px;">LIVE TELEMETRY</h3>
+      <div style="font-family:var(--font-heading); color:var(--color-secondary); margin-bottom: 20px; font-weight:700;">LIVE TELEMETRY</div>
       <div style="font-family:var(--font-mono); font-size: 1.2rem; color:var(--color-text-2); display:flex; flex-direction:column; gap:16px;">
         <div style="display:flex; justify-content:space-between; border-bottom: 1px dashed var(--color-border); padding-bottom:8px;">
           <span>SEISMIC</span> <span class="magma-text-glow">HIGH</span>
@@ -205,15 +205,15 @@
     <!-- Alert Blocks Grid -->
     <div class="magma-alert-grid">
       <div class="magma-block" data-reveal="bottom" style="transition-delay:0.1s;">
-        <h4 style="font-family:var(--font-heading); color:var(--color-secondary); font-size:1.5rem; margin-bottom:10px;">VENT 1 STATUS</h4>
+        <h3 style="font-family:var(--font-heading); color:var(--color-secondary); font-size:1.5rem; margin-bottom:10px;">VENT 1 STATUS</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Opening aperture to 40%. Magma flow stabilizing. Awaiting pressure release from the secondary valve core. Do not exceed flow limit of 500 liters/second.</p>
       </div>
       <div class="magma-block" data-reveal="bottom" style="transition-delay:0.2s;">
-        <h4 style="font-family:var(--font-heading); color:var(--color-primary-2); font-size:1.5rem; margin-bottom:10px; animation: flash 2s infinite alternate;">VENT 2 STATUS</h4>
+        <h3 style="font-family:var(--font-heading); color:var(--color-primary-2); font-size:1.5rem; margin-bottom:10px; animation: flash 2s infinite alternate;">VENT 2 STATUS</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Warning: Lava tube obstruction detected. Thermal readings rising rapidly above 3,200K. Evacuation protocols on standby. Immediate cooling flush required.</p>
       </div>
       <div class="magma-block" data-reveal="bottom" style="transition-delay:0.3s; grid-column: span 2;">
-        <h4 style="font-family:var(--font-heading); color:var(--color-accent); font-size:1.5rem; margin-bottom:10px;">COOLANT RESERVOIR</h4>
+        <h3 style="font-family:var(--font-heading); color:var(--color-accent); font-size:1.5rem; margin-bottom:10px;">COOLANT RESERVOIR</h3>
         <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Levels currently nominal at 85%. Pumping nitrogen mix into Vent 2 access tube. Estimated temperature drop 300K over the next 4 minutes. Awaiting manual override.</p>
       </div>
     </div>
@@ -259,7 +259,7 @@
       <div class="magma-purge-row">
         <input type="text" name="override_code_alpha" aria-label="Enter first override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
         <input type="text" name="override_code_beta" aria-label="Enter second override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
-        <button style="padding:16px 40px; background:var(--color-primary); border:none; color:var(--color-bg); font-family:var(--font-heading); font-size:1.5rem; cursor:pointer; box-shadow:var(--shadow-glow);">CONFIRM</button>
+                            <button style="padding:16px 40px; background:var(--color-primary); border:none; color:var(--color-on-primary); font-family:var(--font-heading); font-size:1.5rem; cursor:pointer; box-shadow:var(--shadow-glow);">CONFIRM</button>
       </div>
     </section>
   </div>

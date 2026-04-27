@@ -20,29 +20,29 @@
   <style>
     [x-cloak]{display:none!important}
     .split-hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 68px)}
-    .split-left{background:var(--color-primary);padding:clamp(40px,4vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;position:sticky;top:68px;height:calc(100vh - 68px);overflow:hidden}
+    .split-left{background:var(--color-primary);color:var(--color-on-primary);padding:clamp(40px,4vw,64px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;position:sticky;top:68px;height:calc(100vh - 68px);overflow:hidden}
     .split-left h1{font-size:clamp(2.35rem,4.4vw,3.65rem)!important}
     .split-right{padding:clamp(48px,5vw,72px);min-height:calc(100vh - 68px)}
-    .portfolio-stat-value{font-family:var(--font-heading);font-size:2rem;font-weight:800;color:#fff}
-    .portfolio-stat-label{font-family:var(--font-body);font-size:0.78rem;color:rgba(255,255,255,0.6)}
+    .portfolio-stat-value{font-family:var(--font-heading);font-size:2rem;font-weight:800;color:var(--color-on-primary)}
+    .portfolio-stat-label{font-family:var(--font-body);font-size:0.78rem;color:color-mix(in srgb,var(--color-on-primary) 64%,transparent)}
     .project-item{padding:48px 0;border-bottom:var(--border-w) solid var(--color-border);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
     .project-img{aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;position:relative}
     .project-img-inner{width:100%;height:100%;transition:transform 0.5s var(--ease)}
     .project-item:hover .project-img-inner{transform:scale(1.05)}
     .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-    .service-tag{padding:10px 18px;border:var(--border-w) solid rgba(255,255,255,0.3);border-radius:var(--radius-full);color:rgba(255,255,255,0.8);font-size:0.82rem;font-weight:600;text-align:center}
+    .service-tag{padding:10px 18px;border:var(--border-w) solid color-mix(in srgb,var(--color-on-primary) 32%,transparent);border-radius:var(--radius-full);color:color-mix(in srgb,var(--color-on-primary) 84%,transparent);font-size:0.82rem;font-weight:600;text-align:center}
     @media(max-width:1024px){.split-hero{grid-template-columns:1fr}.split-left{position:relative;height:auto;min-height:60vh;overflow:visible}.split-right{padding:40px 20px}.project-item{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:var(--radius-sm);font-weight:700;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700;transition:top 0.2s" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
     <a href="#main-content" class="chr-logo">* CHRONOS</a>
     <nav role="navigation" aria-label="Layout navigation">
-      <ul class="chr-nav-links">
+      <ul id="chr-layout-02-nav" class="chr-nav-links">
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -53,7 +53,7 @@
     </nav>
     <div style="display:flex;gap:12px;align-items:center">
       <a href="#contact" class="chr-btn-primary" style="padding:10px 22px;font-size:0.85rem">Let's Talk -></a>
-      <button class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button aria-controls="chr-layout-02-nav" class="chr-nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -64,9 +64,9 @@
 <section id="hero" class="split-hero" aria-labelledby="portfolio-heading">
   <aside class="split-left" aria-label="Studio info">
     <div data-reveal="left">
-      <div class="chr-badge" style="background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.3);margin-bottom:24px">Portfolio  -  Current Work</div>
-      <h1 id="portfolio-heading" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1.5rem">We craft digital experiences that transcend eras.</h1>
-      <p style="color:rgba(255,255,255,0.7);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem">A multi-era design studio. From Gothic manuscripts to Cyberpunk interfaces - we build with Chronos.</p>
+      <div class="chr-badge" style="background:color-mix(in srgb,var(--color-on-primary) 20%,transparent);color:var(--color-on-primary);border-color:color-mix(in srgb,var(--color-on-primary) 30%,transparent);margin-bottom:24px">Portfolio  -  Current Work</div>
+      <h1 id="portfolio-heading" style="font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:var(--color-on-primary);line-height:1.1;margin-bottom:1.5rem">We craft digital experiences that transcend eras.</h1>
+      <p style="color:color-mix(in srgb,var(--color-on-primary) 72%,transparent);font-size:1.05rem;line-height:1.7;margin-bottom:2.5rem">A multi-era design studio. From Gothic manuscripts to Cyberpunk interfaces - we build with Chronos.</p>
       <div class="services-grid">
         <div class="service-tag">UI Design</div>
         <div class="service-tag">Development</div>
@@ -85,7 +85,7 @@
     <!-- Project 1 -->
     <article class="project-item" data-reveal>
       <div class="project-img">
-        <div class="project-img-inner" style="background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:#fff">ECO</div>
+        <div class="project-img-inner" style="background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:var(--color-on-primary)">ECO</div>
       </div>
       <div>
         <div class="chr-heading-sm">Branding  -  Identity System</div>
@@ -266,14 +266,14 @@
 </section>
 
 <!-- SECTION 6. CONTACT / CTA -->
-<section id="contact" class="chr-section" style="background:var(--color-primary)" aria-labelledby="contact-heading">
+<section id="contact" class="chr-section" style="background:var(--color-primary);color:var(--color-on-primary)" aria-labelledby="contact-heading">
   <div class="chr-container" style="text-align:center">
     <div data-reveal>
-      <h2 id="contact-heading" style="font-size:clamp(2rem,5vw,4rem);font-weight:800;color:#fff;margin-bottom:1.5rem;line-height:1.1">Ready to start a project<br>across any era?</h2>
-      <p style="color:rgba(255,255,255,0.7);font-size:1.1rem;margin-bottom:2.5rem">Let's build something that will still look extraordinary centuries from now.</p>
+      <h2 id="contact-heading" style="font-size:clamp(2rem,5vw,4rem);font-weight:800;color:var(--color-on-primary);margin-bottom:1.5rem;line-height:1.1">Ready to start a project<br>across any era?</h2>
+      <p style="color:color-mix(in srgb,var(--color-on-primary) 72%,transparent);font-size:1.1rem;margin-bottom:2.5rem">Let's build something that will still look extraordinary centuries from now.</p>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="mailto:hello@chronos.io" style="background:#fff;color:var(--color-primary);padding:16px 40px;border-radius:var(--radius-md);font-weight:700;font-size:1rem;display:inline-block">Start a Project -></a>
-        <a href="index.html" style="background:transparent;color:#fff;padding:16px 40px;border-radius:var(--radius-md);font-weight:700;font-size:1rem;border:2px solid rgba(255,255,255,0.4);display:inline-block">View Other Layouts</a>
+        <a href="mailto:hello@chronos.io" style="background:var(--color-on-primary);color:var(--color-primary);padding:16px 40px;border-radius:var(--radius-md);font-weight:700;font-size:1rem;display:inline-block">Start a Project -></a>
+        <a href="index.html" style="background:transparent;color:var(--color-on-primary);padding:16px 40px;border-radius:var(--radius-md);font-weight:700;font-size:1rem;border:2px solid color-mix(in srgb,var(--color-on-primary) 42%,transparent);display:inline-block">View Other Layouts</a>
       </div>
     </div>
   </div>

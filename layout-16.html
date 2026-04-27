@@ -6,15 +6,15 @@
 <title>Chronos | Jurassic</title>
   <meta name="theme-color" content="#2563eb">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta name="description" content="Chronos Layout 16 - Jurassic Museum Showcase.">
+  <meta name="description" content="Chronos Layout 16 - Jurassic Museum with fossil exhibit cards, deep-earth color palette, prehistoric timeline, and species archive.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronos | Jurassic">
-  <meta property="og:description" content="Chronos Layout 16 - Jurassic Museum Showcase.">
+  <meta property="og:description" content="Chronos Layout 16 - Jurassic Museum with fossil exhibit cards, deep-earth color palette, prehistoric timeline, and species archive.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronos | Jurassic">
-  <meta name="twitter:description" content="Chronos Layout 16 - Jurassic Museum Showcase.">
+  <meta name="twitter:description" content="Chronos Layout 16 - Jurassic Museum with fossil exhibit cards, deep-earth color palette, prehistoric timeline, and species archive.">
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
@@ -143,19 +143,19 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <header class="chr-nav" role="banner" style="background:transparent;border:0;">
   <div class="chr-container chr-nav-inner" style="justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <a href="#main-content" class="chr-logo" style="color:var(--color-primary); letter-spacing:0.2em; font-size:1.5rem;">C H R O N O S</a>
-    <nav class="chr-nav-links" aria-label="Jurassic navigation">
+    <nav id="chr-layout-16-nav" class="chr-nav-links" aria-label="Jurassic navigation">
       <a href="#timeline" style="color:var(--color-text);">TIMELINE</a>
       <a href="#registry" style="color:var(--color-text);">REGISTRY</a>
       <a href="#intro" style="color:var(--color-text);">INTRO</a>
       <a href="#gallery" style="color:var(--color-text);">GALLERY</a>
       <a href="#history" style="color:var(--color-text);">HISTORY</a>
     </nav>
-    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button aria-controls="chr-layout-16-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -202,15 +202,15 @@
       <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-text); text-align:center; margin-bottom: 60px;">REGISTRY OF THE OLD WORLD</h2>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
         <div class="specimen-card" style="padding: 40px 30px;" data-reveal="bottom">
-          <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-primary); margin-bottom:12px;">THEROPODA</h4>
+          <h3 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-primary); margin-bottom:12px;">THEROPODA</h3>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Bipedal saurischian dinosaurs. Characterized by hollow bones and three-toed limbs. Includes the most fearsome predators of the Mesozoic.</p>
         </div>
         <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-secondary); transition-delay:0.1s;" data-reveal="bottom">
-          <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-secondary); margin-bottom:12px;">SAUROPODA</h4>
+          <h3 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-secondary); margin-bottom:12px;">SAUROPODA</h3>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Long-necked, multi-ton herbivores. The largest land animals to ever exist. Their sheer scale defined the Jurassic environment.</p>
         </div>
         <div class="specimen-card" style="padding: 40px 30px; border-top-color:var(--color-accent); transition-delay:0.2s;" data-reveal="bottom">
-          <h4 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-accent); margin-bottom:12px;">ORNITHISCHIA</h4>
+          <h3 style="font-family:var(--font-heading); font-size:1.8rem; color:var(--color-accent); margin-bottom:12px;">ORNITHISCHIA</h3>
           <p style="font-family:var(--font-body); color:var(--color-text-2); font-size:0.95rem;">Bird-hipped herbivores. Highly diverse group including armored Ankylosaurs and horned Ceratopsians.</p>
         </div>
       </div>
@@ -260,7 +260,7 @@
           <div style="height: 240px; background:var(--color-bg-3); display:flex; justify-content:center; align-items:center; margin-bottom: 24px; border: var(--border-w) solid var(--color-border);">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="1.5" stroke-linecap="square"><polygon points="12 2 2 22 22 22 12 2"></polygon><circle cx="12" cy="14" r="3"></circle></svg>
           </div>
-          <h4 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-text); margin-bottom:12px;">The Rosetta Stone</h4>
+          <h3 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-text); margin-bottom:12px;">The Rosetta Stone</h3>
           <p style="font-family:var(--font-body); color:var(--color-text-2); line-height:1.6; margin-bottom: 24px;">Unearthed in sector 7, this fragment carries the cipher once used to stabilize the observatory vaults. The rough geometric indentations suggest heavy kinetic tools were used in its creation over 40 million years ago.</p>
 <a href="#" style="color:var(--color-primary); font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.1em; text-decoration:none;" data-demo-message="Specimen preview. Connect this link to the full archive entry.">Research further -></a>
         </article>
@@ -269,7 +269,7 @@
           <div style="height: 240px; background:var(--color-bg-2); display:flex; justify-content:center; align-items:center; margin-bottom: 24px; border: var(--border-w) solid var(--color-border);">
              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="square"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           </div>
-          <h4 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-text); margin-bottom:12px;">Tectonic Sphere</h4>
+          <h3 style="font-family:var(--font-heading); font-size:2rem; color:var(--color-text); margin-bottom:12px;">Tectonic Sphere</h3>
           <p style="font-family:var(--font-body); color:var(--color-text-2); line-height:1.6; margin-bottom: 24px;">An anomalous reading triggered the excavation of this perfectly smooth, highly dense globe. Magnetic poles frequently switch within its immediate vicinity, indicating unstable geothermic materials housed within the core.</p>
 <a href="#" style="color:var(--color-primary); font-family:var(--font-accent); text-transform:uppercase; letter-spacing:0.1em; text-decoration:none;" data-demo-message="Specimen preview. Connect this link to the full archive entry.">Research further -></a>
         </article>
@@ -312,7 +312,7 @@
 
     <div class="chr-container" style="position:relative; z-index:2; text-align:center; margin-top:80px;">
       <h2 style="font-family:var(--font-heading); font-size: clamp(3rem, 10vw, 5rem); color:var(--color-primary); margin-bottom:40px; text-shadow: var(--shadow-glow);">EXCAVATE LAYOUTS</h2>
-      <a href="index.html" style="display:inline-block; padding: 20px 40px; background:var(--color-primary); color:var(--color-bg); font-family:var(--font-accent); font-size:1.5rem; text-decoration:none; letter-spacing:0.1em; transition:transform 0.3s, background 0.3s;">RETURN TO SURFACE DIRECTORY</a>
+                    <a href="index.html" style="display:inline-block; padding: 20px 40px; background:var(--color-primary); color:var(--color-on-primary); font-family:var(--font-accent); font-size:1.5rem; text-decoration:none; letter-spacing:0.1em; transition:transform 0.3s, background 0.3s;">RETURN TO SURFACE DIRECTORY</a>
     </div>
   </section>
 </main>

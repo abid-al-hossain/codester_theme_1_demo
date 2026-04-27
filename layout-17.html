@@ -6,15 +6,15 @@
 <title>Chronos | Pixelated</title>
   <meta name="theme-color" content="#2563eb">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta name="description" content="Chronos Layout 17 - Pixelated Desktop Retro Gaming Showcase.">
+  <meta name="description" content="Chronos Layout 17 - Pixelated Desktop with retro 8-bit UI, scanline animations, pixel-art cards, and a chiptune aesthetic.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chronos | Pixelated">
-  <meta property="og:description" content="Chronos Layout 17 - Pixelated Desktop Retro Gaming Showcase.">
+  <meta property="og:description" content="Chronos Layout 17 - Pixelated Desktop with retro 8-bit UI, scanline animations, pixel-art cards, and a chiptune aesthetic.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronos | Pixelated">
-  <meta name="twitter:description" content="Chronos Layout 17 - Pixelated Desktop Retro Gaming Showcase.">
+  <meta name="twitter:description" content="Chronos Layout 17 - Pixelated Desktop with retro 8-bit UI, scanline animations, pixel-art cards, and a chiptune aesthetic.">
   <script src="./theme-boot.js"></script>
   <script type="module" src="/src/main.js"></script>
   <style>
@@ -39,7 +39,7 @@
 
     .retro-titlebar {
       background: var(--color-primary);
-      color: var(--color-bg);
+      color: var(--color-on-primary);
       padding: 8px 16px;
       font-family: var(--font-heading);
       font-size: 0.8rem;
@@ -108,7 +108,7 @@
 
     .marquee-container {
       background: var(--color-primary);
-      color: var(--color-bg);
+      color: var(--color-on-primary);
       padding: 8px 0;
       font-family: var(--font-heading);
       font-size: 0.8rem;
@@ -145,7 +145,7 @@
   </style>
 </head>
 <body>
-<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-bg);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
+<a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 <div class="marquee-container">
   <div class="marquee-content">
     SYSTEM BOOT PROTOCOL INITIATED ... LOAD LAYOUT 17 ... RUNNING CHRONOS ENGINE ACTIVE ... NO ERRORS DETECTED ...
@@ -155,13 +155,13 @@
 <header class="chr-nav" role="banner" style="background:var(--color-bg); border-bottom: var(--border-w) solid var(--color-border);">
   <div class="chr-container chr-nav-inner" style="flex-wrap:wrap;gap:16px;">
     <a href="#main-content" class="chr-logo" style="color:var(--color-primary); font-family:var(--font-heading);">CHRONOS.OS</a>
-    <nav class="chr-nav-links" aria-label="Pixelated navigation">
+    <nav id="chr-layout-17-nav" class="chr-nav-links" aria-label="Pixelated navigation">
       <a href="#desktop" style="font-family:var(--font-mono); color:var(--color-text);">SYSTEM</a>
       <a href="#task-manager" style="font-family:var(--font-mono); color:var(--color-text);">TASKS</a>
       <a href="#network" style="font-family:var(--font-mono); color:var(--color-text);">NETWORK</a>
       <a href="#terminal" style="font-family:var(--font-mono); color:var(--color-text);">TERMINAL</a>
     </nav>
-    <button class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button aria-controls="chr-layout-17-nav" class="chr-nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -259,7 +259,7 @@
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:8px;">
             <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">HIGH<br>CONTRAST</div>
             <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">HARD<br>BORDERS</div>
-            <div style="background:var(--color-primary); color:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">EQUIPPED<br>PIXELS</div>
+                            <div style="background:var(--color-primary); color:var(--color-on-primary); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; text-align:center; padding:8px;">EQUIPPED<br>PIXELS</div>
             <div style="background:var(--color-bg); border:2px solid var(--color-border); height:80px; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:0.7rem; opacity:0.5;">EMPTY</div>
           </div>
         </div>

@@ -42,14 +42,14 @@ function initDemoActions() {
   document.querySelectorAll('a[href="#"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault()
-      showDemoToast(link.dataset.demoMessage || 'Demo action only')
+      showDemoToast(link.dataset.demoMessage || 'Preview action only')
     })
   })
 
   document.querySelectorAll('button[data-demo-message]:not([type="submit"])').forEach((button) => {
     button.addEventListener('click', (event) => {
       event.preventDefault()
-      showDemoToast(button.dataset.demoMessage || 'Demo action only')
+      showDemoToast(button.dataset.demoMessage || 'Preview action only')
     })
   })
 
@@ -57,7 +57,7 @@ function initDemoActions() {
     form.setAttribute('data-demo-form', 'true')
     form.addEventListener('submit', (event) => {
       event.preventDefault()
-      showDemoToast(form.dataset.demoMessage || 'Demo form submitted')
+      showDemoToast(form.dataset.demoMessage || 'Preview form submitted')
     })
   })
 }
