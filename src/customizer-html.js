@@ -6,7 +6,7 @@ export const CUSTOMIZER_HTML = /* html */ `
   x-data
   :class="$store.chr.open ? 'open' : ''"
 >
-  <button
+  <button type="button"
     id="chr-customizer-toggle"
     onclick="Alpine.store('chr').toggle()"
     x-data
@@ -38,14 +38,14 @@ export const CUSTOMIZER_HTML = /* html */ `
   </div>
 
   <div class="cust-tabs" role="tablist">
-    <button class="cust-tab" :class="$store.chr.activeTab==='era'?'active':''" @click="$store.chr.setActiveTab('era')" @keydown.arrow-right.prevent="$store.chr.moveTab('era', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('era', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-era" :aria-selected="$store.chr.activeTab==='era' ? 'true' : 'false'" aria-controls="chr-panel-era">Eras</button>
-    <button class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" @keydown.arrow-right.prevent="$store.chr.moveTab('colors', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('colors', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
-    <button class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" @keydown.arrow-right.prevent="$store.chr.moveTab('fonts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('fonts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
+    <button type="button" class="cust-tab" :class="$store.chr.activeTab==='era'?'active':''" @click="$store.chr.setActiveTab('era')" @keydown.arrow-right.prevent="$store.chr.moveTab('era', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('era', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-era" :aria-selected="$store.chr.activeTab==='era' ? 'true' : 'false'" aria-controls="chr-panel-era">Eras</button>
+    <button type="button" class="cust-tab" :class="$store.chr.activeTab==='colors'?'active':''" @click="$store.chr.setActiveTab('colors')" @keydown.arrow-right.prevent="$store.chr.moveTab('colors', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('colors', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-colors" :aria-selected="$store.chr.activeTab==='colors' ? 'true' : 'false'" aria-controls="chr-panel-colors">Colors</button>
+    <button type="button" class="cust-tab" :class="$store.chr.activeTab==='fonts'?'active':''" @click="$store.chr.setActiveTab('fonts')" @keydown.arrow-right.prevent="$store.chr.moveTab('fonts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('fonts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-fonts" :aria-selected="$store.chr.activeTab==='fonts' ? 'true' : 'false'" aria-controls="chr-panel-fonts">Fonts</button>
     <!-- DOWNLOAD_TAB_START -->
-    <button x-show="$store.chr.downloadAvailable" class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
+    <button type="button" x-show="$store.chr.downloadAvailable" class="cust-tab" :class="$store.chr.activeTab==='download'?'active':''" @click="$store.chr.setActiveTab('download')" @keydown.arrow-right.prevent="$store.chr.moveTab('download', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('download', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-download" :aria-selected="$store.chr.activeTab==='download' ? 'true' : 'false'" aria-controls="chr-panel-download">Download</button>
     <!-- DOWNLOAD_TAB_END -->
     <!-- LAYOUTS_TAB_START -->
-    <button class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" @keydown.arrow-right.prevent="$store.chr.moveTab('layouts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('layouts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
+    <button type="button" class="cust-tab" :class="$store.chr.activeTab==='layouts'?'active':''" @click="$store.chr.setActiveTab('layouts')" @keydown.arrow-right.prevent="$store.chr.moveTab('layouts', 1)" @keydown.arrow-left.prevent="$store.chr.moveTab('layouts', -1)" @keydown.home.prevent="$store.chr.focusFirstTab()" @keydown.end.prevent="$store.chr.focusLastTab()" role="tab" id="chr-tab-layouts" :aria-selected="$store.chr.activeTab==='layouts' ? 'true' : 'false'" aria-controls="chr-panel-layouts">Layouts</button>
     <!-- LAYOUTS_TAB_END -->
   </div>
 
@@ -53,23 +53,23 @@ export const CUSTOMIZER_HTML = /* html */ `
     <div x-show="$store.chr.activeTab==='era'" x-cloak role="tabpanel" id="chr-panel-era" aria-labelledby="chr-tab-era">
       <span class="cust-label">Select Era</span>
       <div class="era-grid">
-        <button class="era-card" :class="$store.chr.era==='modern'?'active':''" @click="$store.chr.setEra('modern')">Modern</button>
-        <button class="era-card" :class="$store.chr.era==='gothic'?'active':''" @click="$store.chr.setEra('gothic')">Gothic</button>
-        <button class="era-card" :class="$store.chr.era==='futuristic'?'active':''" @click="$store.chr.setEra('futuristic')">Futuristic</button>
-        <button class="era-card" :class="$store.chr.era==='retro'?'active':''" @click="$store.chr.setEra('retro')">Retro</button>
-        <button class="era-card" :class="$store.chr.era==='cyberpunk'?'active':''" @click="$store.chr.setEra('cyberpunk')">Cyberpunk</button>
-        <button class="era-card" :class="$store.chr.era==='brutalist'?'active':''" @click="$store.chr.setEra('brutalist')">Brutalist</button>
-        <button class="era-card" :class="$store.chr.era==='minimalist'?'active':''" @click="$store.chr.setEra('minimalist')">Minimalist</button>
-        <button class="era-card" :class="$store.chr.era==='eco'?'active':''" @click="$store.chr.setEra('eco')">Eco</button>
-        <button class="era-card" :class="$store.chr.era==='corporate'?'active':''" @click="$store.chr.setEra('corporate')">Corporate</button>
-        <button class="era-card" :class="$store.chr.era==='artistic'?'active':''" @click="$store.chr.setEra('artistic')">Artistic</button>
-        <button class="era-card" :class="$store.chr.era==='apocalyptic'?'active':''" @click="$store.chr.setEra('apocalyptic')">Apocalyptic</button>
-        <button class="era-card" :class="$store.chr.era==='liquid'?'active':''" @click="$store.chr.setEra('liquid')">Liquid</button>
-        <button class="era-card" :class="$store.chr.era==='jurassic'?'active':''" @click="$store.chr.setEra('jurassic')">Jurassic</button>
-        <button class="era-card" :class="$store.chr.era==='pixelated'?'active':''" @click="$store.chr.setEra('pixelated')">Pixelated</button>
-        <button class="era-card" :class="$store.chr.era==='iceage'?'active':''" @click="$store.chr.setEra('iceage')">Ice Age</button>
-        <button class="era-card" :class="$store.chr.era==='volcanic'?'active':''" @click="$store.chr.setEra('volcanic')">Volcanic</button>
-        <button class="era-card" :class="$store.chr.era==='magic'?'active':''" @click="$store.chr.setEra('magic')">Magic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='modern'?'active':''" @click="$store.chr.setEra('modern')">Modern</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='gothic'?'active':''" @click="$store.chr.setEra('gothic')">Gothic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='futuristic'?'active':''" @click="$store.chr.setEra('futuristic')">Futuristic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='retro'?'active':''" @click="$store.chr.setEra('retro')">Retro</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='cyberpunk'?'active':''" @click="$store.chr.setEra('cyberpunk')">Cyberpunk</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='brutalist'?'active':''" @click="$store.chr.setEra('brutalist')">Brutalist</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='minimalist'?'active':''" @click="$store.chr.setEra('minimalist')">Minimalist</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='eco'?'active':''" @click="$store.chr.setEra('eco')">Eco</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='corporate'?'active':''" @click="$store.chr.setEra('corporate')">Corporate</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='artistic'?'active':''" @click="$store.chr.setEra('artistic')">Artistic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='apocalyptic'?'active':''" @click="$store.chr.setEra('apocalyptic')">Apocalyptic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='liquid'?'active':''" @click="$store.chr.setEra('liquid')">Liquid</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='jurassic'?'active':''" @click="$store.chr.setEra('jurassic')">Jurassic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='pixelated'?'active':''" @click="$store.chr.setEra('pixelated')">Pixelated</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='iceage'?'active':''" @click="$store.chr.setEra('iceage')">Ice Age</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='volcanic'?'active':''" @click="$store.chr.setEra('volcanic')">Volcanic</button>
+        <button type="button" class="era-card" :class="$store.chr.era==='magic'?'active':''" @click="$store.chr.setEra('magic')">Magic</button>
       </div>
 
       <span class="cust-label" style="margin-top:20px">Era Status</span>
@@ -83,7 +83,7 @@ export const CUSTOMIZER_HTML = /* html */ `
       <span class="cust-label">Preset Palettes</span>
       <div class="palette-grid" style="margin-bottom:18px">
         <template x-for="palette in $store.chr.paletteOptions" :key="palette.id">
-          <button
+          <button type="button"
             class="palette-card"
             :class="$store.chr.activePalette === palette.id ? 'active' : ''"
             @click="$store.chr.applyPalette(palette.id)"
@@ -214,7 +214,7 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <p x-show="$store.chr.downloadError" x-text="$store.chr.downloadError" style="margin:12px 0 0;color:#dc2626;font-size:0.78rem;line-height:1.5"></p>
 
-      <button class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px;opacity:.62;cursor:not-allowed" :disabled="true" aria-disabled="true" @click="$store.chr.downloadPackage()">
+      <button type="button" class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px;opacity:.62;cursor:not-allowed" :disabled="true" aria-disabled="true" @click="$store.chr.downloadPackage()">
         <span>Download Disabled In Demo</span>
       </button>
     </div>
@@ -380,14 +380,14 @@ export const CUSTOMIZER_HTML = /* html */ `
 
   <div class="cust-footer" style="padding:16px;border-top:1px solid var(--color-border);background:var(--color-bg);flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
     <div class="surprise-action-row">
-      <button class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;justify-content:center;flex:1" @click="$store.chr.surpriseMe()">
+      <button type="button" class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;justify-content:center;flex:1" @click="$store.chr.surpriseMe()">
         Surprise Me
       </button>
       <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 14px;justify-content:center;min-width:98px" @click="$store.chr.toggleSurpriseSettings()">
         Settings
       </button>
     </div>
-    <button class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.reset()">
+    <button type="button" class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.reset()">
       Reset Theme
     </button>
     <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.clearAllSavedThemeData()">

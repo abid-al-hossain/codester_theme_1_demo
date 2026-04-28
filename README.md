@@ -8,7 +8,7 @@ Chronos is a multi-era HTML theme built around one shared customization system i
 - 17 eras: Modern, Gothic, Futuristic, Retro, Cyberpunk, Brutalist, Minimalist, Eco, Corporate, Artistic, Apocalyptic, Liquid, Jurassic, Pixelated, Ice Age, Volcanic, Magic
 - 16 preset palettes plus custom color controls
 - 70+ Google Fonts with separate heading, body, accent, and mono roles
-- Shared customizer with per-layout persistence, reset, current-layout package download, and Surprise Me randomization with exclusions
+- Shared customizer with per-layout persistence, reset, and Surprise Me randomization with exclusions
 - Vite 8 development and build workflow
 
 ## Tech stack
@@ -52,7 +52,7 @@ Because the project uses Vite module entrypoints, use it through the development
 
 ## Notes
 
-- On any layout page, the customizer can generate a one-layout Vite package zip from that current page with the active era, colors, and fonts baked in, with or without the live customizer panel.
+- This demo keeps package export disabled for public preview. The source project includes the one-layout Vite package export workflow.
 - Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or exact color swatches from future surprises.
 - Shared mobile-nav behavior now supports the layout-specific nav shells used by the dashboard, archive, and social layouts.
 - Countdown blocks use either the layout-provided launch date or a rolling future fallback date, and switch to a neutral completed state once the launch window has passed.
