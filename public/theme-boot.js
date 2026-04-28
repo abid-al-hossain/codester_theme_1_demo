@@ -53,6 +53,77 @@
     return ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000 < 150
   }
 
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value))
+  }
+
+  function wrapHue(hue) {
+    return ((hue % 360) + 360) % 360
+  }
+
+  function hueDistance(a, b) {
+    var distance = Math.abs(wrapHue(a) - wrapHue(b))
+    return Math.min(distance, 360 - distance)
+  }
+
+  function hslToHex(h, s, l) {
+    var hue = wrapHue(h)
+    var sat = clamp(s, 0, 100) / 100
+    var light = clamp(l, 0, 100) / 100
+    var c = (1 - Math.abs((2 * light) - 1)) * sat
+    var x = c * (1 - Math.abs(((hue / 60) % 2) - 1))
+    var m = light - (c / 2)
+    var r = 0
+    var g = 0
+    var b = 0
+
+    if (hue < 60) { r = c; g = x; b = 0 }
+    else if (hue < 120) { r = x; g = c; b = 0 }
+    else if (hue < 180) { r = 0; g = c; b = x }
+    else if (hue < 240) { r = 0; g = x; b = c }
+    else if (hue < 300) { r = x; g = 0; b = c }
+    else { r = c; g = 0; b = x }
+
+    return '#' + [r, g, b].map(function (channel) {
+      return clamp(Math.round((channel + m) * 255), 0, 255).toString(16).padStart(2, '0')
+    }).join('')
+  }
+
+  function hexToHsl(color) {
+    var rgb = hexToRgb(color, color)
+    var rr = rgb.r / 255
+    var gg = rgb.g / 255
+    var bb = rgb.b / 255
+    var max = Math.max(rr, gg, bb)
+    var min = Math.min(rr, gg, bb)
+    var delta = max - min
+    var h = 0
+
+    if (delta !== 0) {
+      if (max === rr) h = 60 * (((gg - bb) / delta) % 6)
+      else if (max === gg) h = 60 * (((bb - rr) / delta) + 2)
+      else h = 60 * (((rr - gg) / delta) + 4)
+    }
+
+    var light = (max + min) / 2
+    var saturation = delta === 0 ? 0 : delta / (1 - Math.abs((2 * light) - 1))
+    return { h: wrapHue(h), s: saturation * 100, l: light * 100 }
+  }
+
+  function tuneBackgroundTone(color, primary, darkTheme, limits) {
+    var tone = hexToHsl(color)
+    var primaryTone = hexToHsl(primary)
+    var hue = tone.s < 18 || hueDistance(tone.h, primaryTone.h) < 18
+      ? wrapHue(primaryTone.h + (darkTheme ? -34 : 34))
+      : tone.h
+    var saturation = clamp(tone.s * 0.72, darkTheme ? 22 : 18, darkTheme ? 42 : 36)
+    var lightness = darkTheme
+      ? clamp(tone.l, limits.darkMin, limits.darkMax)
+      : clamp(tone.l, limits.lightMin, limits.lightMax)
+
+    return hslToHex(hue, saturation, lightness)
+  }
+
   function relativeLuminance(color) {
     var rgb = hexToRgb(color, color)
 
@@ -180,14 +251,16 @@
       var colors = Object.assign({}, DEFAULTS, prefs.colors, {
         surface: prefs.colors.surface || prefs.colors.bg2 || DEFAULTS.surface
       })
-      var bg = normalizeHex(colors.bg, DEFAULTS.bg)
-      var bg2 = normalizeHex(colors.bg2, DEFAULTS.bg2)
-      var surface = normalizeHex(colors.surface, bg2)
-      var primary = improveContrastAcross(normalizeHex(colors.primary, DEFAULTS.primary), [bg, bg2, surface], 4.5)
+      var rawPrimary = normalizeHex(colors.primary, DEFAULTS.primary)
+      var rawBg = normalizeHex(colors.bg, DEFAULTS.bg)
+      var dark = isDarkColor(rawBg)
+      var bg = tuneBackgroundTone(rawBg, rawPrimary, dark, { darkMin: 30, darkMax: 40, lightMin: 78, lightMax: 88 })
+      var bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULTS.bg2), rawPrimary, dark, { darkMin: 38, darkMax: 48, lightMin: 70, lightMax: 80 })
+      var surface = tuneBackgroundTone(normalizeHex(colors.surface, bg2), rawPrimary, dark, { darkMin: 42, darkMax: 54, lightMin: 74, lightMax: 86 })
+      var primary = improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5)
       var secondary = improveContrastAcross(normalizeHex(colors.secondary, DEFAULTS.secondary), [bg, bg2, surface], 3.5)
       var accent = improveContrastAcross(normalizeHex(colors.accent, DEFAULTS.accent), [bg, bg2, surface], 3.5)
       var text = improveContrastAcross(normalizeHex(colors.text, DEFAULTS.text), [bg, bg2, surface], 7)
-      var dark = isDarkColor(bg)
       var secondaryText = mixReadableText(text, bg, dark ? 0.16 : 0.22, 5.2)
       var tertiaryText = mixReadableText(text, bg, dark ? 0.32 : 0.42, 4.5)
 
