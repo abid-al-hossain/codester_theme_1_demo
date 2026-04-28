@@ -81,6 +81,49 @@
     return whiteContrast >= darkContrast ? '#ffffff' : '#0b0b0b'
   }
 
+  function improveContrast(color, background, minRatio) {
+    if (contrastRatio(color, background) >= minRatio) return color
+
+    var target = isDarkColor(background) ? '#ffffff' : '#000000'
+    var candidate = color
+
+    for (var step = 1; step <= 10; step += 1) {
+      candidate = mixHex(color, target, step * 0.1)
+      if (contrastRatio(candidate, background) >= minRatio) return candidate
+    }
+
+    return target
+  }
+
+  function improveContrastAcross(color, backgrounds, minRatio) {
+    var candidate = color
+
+    for (var attempt = 0; attempt < 4; attempt += 1) {
+      candidate = backgrounds.reduce(function (next, background) {
+        return improveContrast(next, background, minRatio)
+      }, candidate)
+
+      if (backgrounds.every(function (background) {
+        return contrastRatio(candidate, background) >= minRatio
+      })) {
+        return candidate
+      }
+    }
+
+    return backgrounds.some(function (background) {
+      return isDarkColor(background)
+    }) ? '#ffffff' : '#0b0b0b'
+  }
+
+  function mixReadableText(text, background, weight, minRatio) {
+    for (var step = weight; step >= 0; step -= 0.06) {
+      var candidate = mixHex(text, background, step)
+      if (contrastRatio(candidate, background) >= minRatio) return candidate
+    }
+
+    return improveContrast(text, background, minRatio)
+  }
+
   function getCurrentPageKey() {
     return window.location.pathname.split('/').pop() || 'index.html'
   }
@@ -140,11 +183,13 @@
       var bg = normalizeHex(colors.bg, DEFAULTS.bg)
       var bg2 = normalizeHex(colors.bg2, DEFAULTS.bg2)
       var surface = normalizeHex(colors.surface, bg2)
-      var primary = normalizeHex(colors.primary, DEFAULTS.primary)
-      var secondary = normalizeHex(colors.secondary, DEFAULTS.secondary)
-      var accent = normalizeHex(colors.accent, DEFAULTS.accent)
-      var text = normalizeHex(colors.text, DEFAULTS.text)
+      var primary = improveContrastAcross(normalizeHex(colors.primary, DEFAULTS.primary), [bg, bg2, surface], 4.5)
+      var secondary = improveContrastAcross(normalizeHex(colors.secondary, DEFAULTS.secondary), [bg, bg2, surface], 3.5)
+      var accent = improveContrastAcross(normalizeHex(colors.accent, DEFAULTS.accent), [bg, bg2, surface], 3.5)
+      var text = improveContrastAcross(normalizeHex(colors.text, DEFAULTS.text), [bg, bg2, surface], 7)
       var dark = isDarkColor(bg)
+      var secondaryText = mixReadableText(text, bg, dark ? 0.16 : 0.22, 5.2)
+      var tertiaryText = mixReadableText(text, bg, dark ? 0.32 : 0.42, 4.5)
 
       ;[
         ['color-bg', bg],
@@ -157,8 +202,8 @@
         ['color-secondary', secondary],
         ['color-accent', accent],
         ['color-text', text],
-        ['color-text-2', mixHex(text, bg, dark ? 0.16 : 0.22)],
-        ['color-text-3', mixHex(text, bg, dark ? 0.32 : 0.42)],
+        ['color-text-2', secondaryText],
+        ['color-text-3', tertiaryText],
         ['color-border', mixHex(bg2, text, dark ? 0.22 : 0.14)],
         ['color-border-2', mixHex(bg2, primary, 0.28)],
         ['shadow-glow', '0 0 52px ' + withAlpha(primary, dark ? 0.32 : 0.2)]

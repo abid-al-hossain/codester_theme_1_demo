@@ -653,12 +653,12 @@ section[id],
   gap: 6px;
   padding: 6px 16px;
   border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-bg));
   color: var(--color-primary);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
 }
 
 /* Buttons */
@@ -1805,8 +1805,8 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   width: 52px;
   height: 52px;
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--color-primary) 15%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 14%, var(--color-bg-2));
+  border: 1px solid color-mix(in srgb, var(--color-primary) 36%, var(--color-border));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1818,7 +1818,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 
 .chr-feature-card:hover .chr-feature-icon {
   transform: scale(1.1) rotate(5deg);
-  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 24%, var(--color-bg-2));
 }
 
 /* ── Process steps ────────────────────────────────────── */
@@ -1827,7 +1827,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   font-size: 5rem;
   font-weight: 900;
   line-height: 1;
-  color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: color-mix(in srgb, var(--color-primary) 58%, var(--color-text));
   margin-bottom: -1rem;
   position: relative;
   z-index: 1;

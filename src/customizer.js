@@ -242,44 +242,93 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min
 }
 
+function wrapHue(hue) {
+  return ((hue % 360) + 360) % 360
+}
+
+const HARMONY_RECIPES = [
+  { secondary: [18, 34], accent: [-28, -14] },
+  { secondary: [-34, -18], accent: [14, 30] },
+  { secondary: [28, 48], accent: [172, 194] },
+  { secondary: [-48, -28], accent: [166, 188] },
+  { secondary: [112, 132], accent: [228, 248] },
+]
+
+function improveContrast(color, background, minRatio) {
+  if (contrastRatio(color, background) >= minRatio) return color
+
+  const target = isDarkColor(background) ? '#ffffff' : '#000000'
+  let candidate = color
+
+  for (let step = 1; step <= 10; step += 1) {
+    candidate = mixHex(color, target, step * 0.1)
+    if (contrastRatio(candidate, background) >= minRatio) return candidate
+  }
+
+  return target
+}
+
+function improveContrastAcross(color, backgrounds, minRatio) {
+  let candidate = color
+
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    candidate = backgrounds.reduce((next, background) => improveContrast(next, background, minRatio), candidate)
+    if (backgrounds.every((background) => contrastRatio(candidate, background) >= minRatio)) return candidate
+  }
+
+  const darkestBackground = backgrounds.some((background) => isDarkColor(background))
+  return darkestBackground ? '#ffffff' : '#0b0b0b'
+}
+
+function mixReadableText(text, background, weight, minRatio) {
+  for (let step = weight; step >= 0; step -= 0.06) {
+    const candidate = mixHex(text, background, step)
+    if (contrastRatio(candidate, background) >= minRatio) return candidate
+  }
+
+  return improveContrast(text, background, minRatio)
+}
+
 function generateSurpriseColors() {
   const darkTheme = Math.random() < 0.5
-  const baseHue = randomInt(0, 359)
-  const primaryHue = baseHue
-  const secondaryHue = (baseHue + randomInt(38, 112)) % 360
-  const accentHue = (baseHue + randomInt(165, 245)) % 360
+  const primaryHue = randomInt(0, 359)
+  const recipe = HARMONY_RECIPES[randomInt(0, HARMONY_RECIPES.length - 1)]
+  const secondaryHue = wrapHue(primaryHue + randomInt(recipe.secondary[0], recipe.secondary[1]))
+  const accentHue = wrapHue(primaryHue + randomInt(recipe.accent[0], recipe.accent[1]))
+  const neutralHue = wrapHue(primaryHue + randomInt(-8, 8))
+
+  const primarySaturation = darkTheme ? randomInt(62, 78) : randomInt(58, 74)
+  const secondarySaturation = Math.max(42, primarySaturation - randomInt(8, 18))
+  const accentSaturation = Math.min(82, primarySaturation + randomInt(4, 12))
 
   const bg = darkTheme
-    ? hslToHex(baseHue, randomInt(18, 34), randomInt(7, 12))
-    : hslToHex(baseHue, randomInt(28, 58), randomInt(95, 98))
+    ? hslToHex(neutralHue, randomInt(18, 28), randomInt(7, 11))
+    : hslToHex(neutralHue, randomInt(22, 34), randomInt(96, 98))
   const bg2 = darkTheme
-    ? hslToHex(baseHue + randomInt(-12, 12), randomInt(18, 30), randomInt(12, 18))
-    : hslToHex(baseHue + randomInt(-12, 12), randomInt(24, 46), randomInt(88, 94))
+    ? hslToHex(neutralHue + randomInt(-4, 4), randomInt(20, 32), randomInt(13, 18))
+    : hslToHex(neutralHue + randomInt(-4, 4), randomInt(24, 38), randomInt(90, 94))
   const surface = darkTheme
-    ? hslToHex(baseHue + randomInt(-8, 8), randomInt(16, 28), randomInt(16, 22))
-    : hslToHex(baseHue + randomInt(-8, 8), randomInt(18, 40), randomInt(92, 97))
+    ? hslToHex(neutralHue + randomInt(-3, 3), randomInt(18, 30), randomInt(16, 22))
+    : hslToHex(neutralHue + randomInt(-3, 3), randomInt(18, 32), randomInt(93, 97))
 
-  const primary = darkTheme
-    ? hslToHex(primaryHue, randomInt(72, 92), randomInt(58, 72))
-    : hslToHex(primaryHue, randomInt(66, 90), randomInt(42, 56))
-  const secondary = darkTheme
-    ? hslToHex(secondaryHue, randomInt(58, 84), randomInt(54, 68))
-    : hslToHex(secondaryHue, randomInt(52, 78), randomInt(36, 50))
-  const accent = darkTheme
-    ? hslToHex(accentHue, randomInt(72, 94), randomInt(72, 84))
-    : hslToHex(accentHue, randomInt(70, 94), randomInt(58, 72))
+  let primary = darkTheme
+    ? hslToHex(primaryHue, primarySaturation, randomInt(58, 66))
+    : hslToHex(primaryHue, primarySaturation, randomInt(42, 50))
+  let secondary = darkTheme
+    ? hslToHex(secondaryHue, secondarySaturation, randomInt(54, 64))
+    : hslToHex(secondaryHue, secondarySaturation, randomInt(38, 48))
+  let accent = darkTheme
+    ? hslToHex(accentHue, accentSaturation, randomInt(68, 78))
+    : hslToHex(accentHue, accentSaturation, randomInt(56, 66))
 
   let text = darkTheme
-    ? hslToHex(baseHue + randomInt(-10, 10), randomInt(14, 26), randomInt(91, 96))
-    : hslToHex(baseHue + randomInt(-10, 10), randomInt(12, 24), randomInt(10, 18))
+    ? hslToHex(neutralHue + randomInt(-4, 4), randomInt(10, 18), randomInt(91, 96))
+    : hslToHex(neutralHue + randomInt(-4, 4), randomInt(12, 20), randomInt(10, 16))
 
-  if (
-    contrastRatio(text, bg) < 5.5 ||
-    contrastRatio(text, bg2) < 5 ||
-    contrastRatio(text, surface) < 4.8
-  ) {
-    text = darkTheme ? '#f8f4ea' : '#101217'
-  }
+  text = improveContrastAcross(text, [bg, bg2, surface], 7)
+  primary = improveContrastAcross(primary, [bg, bg2, surface], 4.5)
+  secondary = improveContrastAcross(secondary, [bg, bg2, surface], 3.5)
+  accent = improveContrastAcross(accent, [bg, bg2, surface], 3.5)
 
   return {
     primary,
@@ -332,14 +381,14 @@ function buildDerivedColorTokens(colors) {
   const bg = normalizeHex(colors.bg, DEFAULT_COLORS.bg)
   const bg2 = normalizeHex(colors.bg2, DEFAULT_COLORS.bg2)
   const surface = normalizeHex(colors.surface || colors.bg2, bg2)
-  const primary = normalizeHex(colors.primary, DEFAULT_COLORS.primary)
-  const secondary = normalizeHex(colors.secondary, DEFAULT_COLORS.secondary)
-  const accent = normalizeHex(colors.accent, DEFAULT_COLORS.accent)
-  const text = normalizeHex(colors.text, DEFAULT_COLORS.text)
+  const primary = improveContrastAcross(normalizeHex(colors.primary, DEFAULT_COLORS.primary), [bg, bg2, surface], 4.5)
+  const secondary = improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5)
+  const accent = improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5)
+  const text = improveContrastAcross(normalizeHex(colors.text, DEFAULT_COLORS.text), [bg, bg2, surface], 7)
   const darkTheme = isDarkColor(bg)
   const shadeTarget = darkTheme ? '#ffffff' : '#000000'
-  const secondaryTextMix = darkTheme ? 0.16 : 0.22
-  const tertiaryTextMix = darkTheme ? 0.32 : 0.42
+  const secondaryText = mixReadableText(text, bg, darkTheme ? 0.16 : 0.22, 5.2)
+  const tertiaryText = mixReadableText(text, bg, darkTheme ? 0.32 : 0.42, 4.5)
 
   return {
     'color-bg': bg,
@@ -352,8 +401,8 @@ function buildDerivedColorTokens(colors) {
     'color-accent': accent,
     'color-on-primary': getReadableOnColor(primary),
     'color-text': text,
-    'color-text-2': mixHex(text, bg, secondaryTextMix),
-    'color-text-3': mixHex(text, bg, tertiaryTextMix),
+    'color-text-2': secondaryText,
+    'color-text-3': tertiaryText,
     'color-border': mixHex(bg2, text, darkTheme ? 0.22 : 0.14),
     'color-border-2': mixHex(bg2, primary, 0.28),
     'shadow-glow': `0 0 52px ${withAlpha(primary, darkTheme ? 0.32 : 0.2)}`,
