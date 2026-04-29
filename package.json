@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "previews": "node scripts/generate-layout-previews.js"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "playwright": "^1.59.1",
     "tailwindcss": "^4.2.2",
     "vite": "^8.0.8"
   },

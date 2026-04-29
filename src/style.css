@@ -1550,6 +1550,14 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   height: 100%;
 }
 
+.layout-preview-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
 /* Color picker row*/
 .color-row {
   display: flex;

@@ -38,6 +38,12 @@ Build the project:
 npm run build
 ```
 
+Regenerate the layout directory previews after changing hero sections:
+
+```bash
+npm run previews
+```
+
 Because the project uses Vite module entrypoints, use it through the development server or the production build.
 
 ## Project structure
@@ -49,6 +55,8 @@ Because the project uses Vite module entrypoints, use it through the development
 - `src/customizer.js` - Alpine store and customization logic
 - `src/customizer-html.js` - injected customizer markup
 - `src/fonts.js` - curated Google Font catalog and default era font mapping
+- `public/previews/` - generated hero preview images used by the layout directory
+- `scripts/generate-layout-previews.js` - Playwright-based preview generator for the directory cards
 
 ## Notes
 
