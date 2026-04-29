@@ -1498,6 +1498,47 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
+.layout-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.layout-panel-header .cust-label {
+  margin-bottom: 0;
+}
+
+.layout-index-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 48%, var(--color-border));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-bg));
+  color: var(--color-primary);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.layout-index-link:hover,
+.layout-index-link:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
 .layout-list-link:hover {
   border-color: var(--color-primary);
   transform: translateX(4px);
@@ -1534,20 +1575,14 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 }
 
 .layout-mini-thumb {
-  width: 68px;
-  height: 54px;
+  width: 96px;
+  aspect-ratio: 16 / 10;
   border-radius: calc(var(--radius-sm) + 2px);
 }
 
 .layout-card-thumb {
   height: 180px;
   border-bottom: 1px solid var(--color-border);
-}
-
-.layout-thumb-svg {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .layout-preview-img {
