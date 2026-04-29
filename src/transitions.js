@@ -188,6 +188,7 @@ export function initSectionJumpTransitions() {
   })
   if (!sectionList.length || !links.length) return
 
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   document.body.dataset.sectionMotion = getSectionMotionProfile()
 
   let activeCleanup = null
@@ -208,16 +209,65 @@ export function initSectionJumpTransitions() {
     }
   }
 
+  function focusTargetWhenVisible(target) {
+    if (reduceMotion) {
+      window.requestAnimationFrame(() => moveFocusToTarget(target))
+      return
+    }
+
+    const rect = target.getBoundingClientRect()
+    const isVisible = rect.top < window.innerHeight * 0.82 && rect.bottom > window.innerHeight * 0.12
+
+    if (isVisible) {
+      window.requestAnimationFrame(() => moveFocusToTarget(target))
+      return
+    }
+
+    let observer = null
+    let fallbackId = null
+
+    const cleanup = () => {
+      observer?.disconnect()
+      observer = null
+      if (fallbackId) {
+        window.clearTimeout(fallbackId)
+        fallbackId = null
+      }
+    }
+
+    observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        cleanup()
+        window.requestAnimationFrame(() => moveFocusToTarget(target))
+      }
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -18% 0px',
+    })
+
+    observer.observe(target)
+    fallbackId = window.setTimeout(() => {
+      cleanup()
+      moveFocusToTarget(target)
+    }, 900)
+  }
+
   function triggerSectionJump(target, direction) {
     if (activeCleanup) activeCleanup()
 
     const classNames = ['chr-section-jump-target', `chr-section-jump-${direction}`]
     let observer = null
+    let fallbackId = null
 
     const cleanup = () => {
       classNames.forEach((className) => target.classList.remove(className))
       observer?.disconnect()
       observer = null
+      target.removeEventListener('animationend', cleanup)
+      if (fallbackId) {
+        window.clearTimeout(fallbackId)
+        fallbackId = null
+      }
       if (activeCleanup === cleanup) activeCleanup = null
     }
 
@@ -226,7 +276,8 @@ export function initSectionJumpTransitions() {
       // Force a reflow so repeated jumps retrigger the animation.
       void target.offsetWidth
       classNames.forEach((className) => target.classList.add(className))
-      window.setTimeout(cleanup, 720)
+      target.addEventListener('animationend', cleanup, { once: true })
+      fallbackId = window.setTimeout(cleanup, 900)
     }
 
     const rect = target.getBoundingClientRect()
@@ -286,7 +337,7 @@ export function initSectionJumpTransitions() {
       }
 
       target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      window.setTimeout(() => moveFocusToTarget(target), 180)
+      focusTargetWhenVisible(target)
     })
   })
 }

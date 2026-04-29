@@ -150,7 +150,7 @@ function rewriteCustomizerHtml() {
 
 function rewriteMainSource(keepCustomizer) {
   if (keepCustomizer) return mainRaw
-  return mainRaw.replace("import './customizer.js'\r\n", '').replace("import './customizer.js'\n", '')
+  return mainRaw.replace(/^\s*import\s+['"]\.\/customizer\.js['"];?\r?\n/m, '')
 }
 
 function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {

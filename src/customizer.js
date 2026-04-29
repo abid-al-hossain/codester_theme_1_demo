@@ -818,10 +818,12 @@ Alpine.store('chr', {
     this.hasCustomFonts = false
     this.hasCustomColors = false
     this.activePalette = ''
-    window.setTimeout(() => {
-      this.syncColorInputsFromComputed()
-      this.save()
-    }, 50)
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        this.syncColorInputsFromComputed()
+        this.save()
+      })
+    })
   },
 
   syncColorInputsFromComputed() {
@@ -1137,7 +1139,9 @@ Alpine.data('chrFontDropdown', (role) => ({
     if (this.open) {
       const currentIndex = this.filtered.indexOf(this.$store.chr.fonts[role])
       this.activeIndex = currentIndex >= 0 ? currentIndex : 0
-      window.setTimeout(() => this.$refs.search.focus(), 50)
+      this.$nextTick(() => {
+        window.requestAnimationFrame(() => this.$refs.search?.focus())
+      })
     }
   },
 }))
