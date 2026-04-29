@@ -84,7 +84,7 @@ export function initNavHighlight() {
     'header nav a[href^="#"], nav[role="navigation"] a[href^="#"], aside a[href^="#"]'
   )).filter((link) => {
     const href = link.getAttribute('href') || ''
-    return href.startsWith('#') && href !== '#main-content' && href !== '#' && document.querySelector(href)
+    return href.startsWith('#') && href !== '#main-content' && href !== '#page-top' && href !== '#' && document.querySelector(href)
   })
   if (!sections.length || !links.length) return
 
@@ -184,7 +184,7 @@ export function initSectionJumpTransitions() {
   const sectionList = Array.from(document.querySelectorAll('section[id]'))
   const links = Array.from(document.querySelectorAll('a[href^="#"]')).filter((link) => {
     const href = link.getAttribute('href') || ''
-    return href.startsWith('#') && href !== '#' && href !== '#main-content' && document.querySelector(href)
+    return href.startsWith('#') && href !== '#' && href !== '#main-content' && href !== '#page-top' && document.querySelector(href)
   })
   if (!sectionList.length || !links.length) return
 

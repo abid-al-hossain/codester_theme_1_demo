@@ -23,7 +23,7 @@
     .eb-topline{border-bottom:1px solid var(--color-border);background:var(--color-bg-2)}
     .eb-hero{padding:0 0 80px}
     .eb-frame{display:grid;grid-template-columns:280px minmax(0,1fr);gap:32px}
-    .eb-rail{position:sticky;top:96px;align-self:start;display:grid;gap:16px}
+    .eb-rail{position:sticky;top:96px;align-self:start;display:grid;gap:16px;padding-top:28px}
     .eb-panel,.eb-metric,.eb-case,.eb-sector,.eb-row,.eb-form-shell{background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm)}
     .eb-panel,.eb-case,.eb-sector,.eb-row,.eb-form-shell{padding:24px}
     .eb-metric{padding:20px}
@@ -47,11 +47,12 @@
     .eb-form input,.eb-form select,.eb-form textarea{width:100%;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-bg-2);color:var(--color-text);font:inherit;outline:none}
     .eb-form textarea,.eb-form button{grid-column:1 / -1}
     .eb-form textarea{min-height:120px;resize:vertical}
-    @media(max-width:1120px){.eb-frame,.eb-headline,.eb-advisory{grid-template-columns:1fr}.eb-rail{position:static}.eb-kpi-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:1120px){.eb-frame,.eb-headline,.eb-advisory{grid-template-columns:1fr}.eb-rail{position:static;padding-top:0}.eb-kpi-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:760px){.eb-kpi-grid,.eb-form{grid-template-columns:1fr}.eb-sector,.eb-case{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
+<div id="page-top"></div>
 <a href="#main-content" style="position:fixed;top:-400px;left:1rem;z-index:99999;padding:8px 16px;background:var(--color-primary);color:var(--color-on-primary);border-radius:var(--radius-sm);font-weight:700" onfocus="this.style.top='1rem'" onblur="this.style.top='-400px'">Skip to content</a>
 
 <div class="eb-topline">
@@ -63,7 +64,7 @@
 
 <header class="chr-nav" role="banner">
   <div class="chr-container chr-nav-inner">
-    <a href="#main-content" class="chr-logo">CHRONOS ADVISORY</a>
+    <a href="#page-top" class="chr-logo">CHRONOS ADVISORY</a>
     <nav aria-label="Enterprise navigation">
       <ul id="chr-layout-11-nav" class="chr-nav-links">
         <li><a href="#priorities">Priorities</a></li>

@@ -245,10 +245,13 @@ function hexToHsl(color) {
 function tuneBackgroundTone(color, primary, darkTheme, limits) {
   const tone = hexToHsl(color)
   const primaryTone = hexToHsl(primary)
-  const hue = tone.s < 18 || hueDistance(tone.h, primaryTone.h) < 18
-    ? wrapHue(primaryTone.h + (darkTheme ? -34 : 34))
+  const neutralRest = tone.s < 14
+  const hue = !neutralRest && hueDistance(tone.h, primaryTone.h) < 24
+    ? wrapHue(primaryTone.h + (darkTheme ? -56 : 56))
     : tone.h
-  const saturation = clamp(tone.s * 0.72, darkTheme ? 22 : 18, darkTheme ? 42 : 36)
+  const saturation = neutralRest
+    ? clamp(tone.s * 0.5, darkTheme ? 5 : 4, darkTheme ? 12 : 10)
+    : clamp(tone.s * 0.42, darkTheme ? 7 : 5, darkTheme ? 22 : 18)
   const lightness = darkTheme
     ? clamp(tone.l, limits.darkMin, limits.darkMax)
     : clamp(tone.l, limits.lightMin, limits.lightMax)
@@ -340,13 +343,13 @@ function generateSurpriseColors() {
   const recipe = HARMONY_RECIPES[randomInt(0, HARMONY_RECIPES.length - 1)]
   const secondaryHue = wrapHue(primaryHue + randomInt(recipe.secondary[0], recipe.secondary[1]))
   const accentHue = wrapHue(primaryHue + randomInt(recipe.accent[0], recipe.accent[1]))
-  const backgroundOffset = pickRandom([-46, -38, -30, 30, 38, 46])
+  const backgroundOffset = pickRandom([-90, -76, -62, 62, 76, 90])
   const neutralHue = wrapHue(primaryHue + backgroundOffset + randomInt(-5, 5))
 
   const primarySaturation = darkTheme ? randomInt(62, 78) : randomInt(58, 74)
   const secondarySaturation = Math.max(42, primarySaturation - randomInt(8, 18))
   const accentSaturation = Math.min(82, primarySaturation + randomInt(4, 12))
-  const backgroundSaturation = darkTheme ? randomInt(24, 38) : randomInt(20, 34)
+  const backgroundSaturation = darkTheme ? randomInt(10, 18) : randomInt(8, 16)
 
   const bg = darkTheme
     ? hslToHex(neutralHue, backgroundSaturation, randomInt(30, 38))

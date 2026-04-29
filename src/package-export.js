@@ -157,7 +157,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
-  const currentLayoutTarget = doc.getElementById('main-content') ? '#main-content' : '#'
+  const currentLayoutTarget = doc.getElementById('page-top') ? '#page-top' : doc.getElementById('main-content') ? '#main-content' : '#'
   const singleLayoutTexts = new Map([
     ['home', 'Back to top'],
     ['view all layouts', 'Current layout'],

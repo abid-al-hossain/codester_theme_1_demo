@@ -113,10 +113,13 @@
   function tuneBackgroundTone(color, primary, darkTheme, limits) {
     var tone = hexToHsl(color)
     var primaryTone = hexToHsl(primary)
-    var hue = tone.s < 18 || hueDistance(tone.h, primaryTone.h) < 18
-      ? wrapHue(primaryTone.h + (darkTheme ? -34 : 34))
+    var neutralRest = tone.s < 14
+    var hue = !neutralRest && hueDistance(tone.h, primaryTone.h) < 24
+      ? wrapHue(primaryTone.h + (darkTheme ? -56 : 56))
       : tone.h
-    var saturation = clamp(tone.s * 0.72, darkTheme ? 22 : 18, darkTheme ? 42 : 36)
+    var saturation = neutralRest
+      ? clamp(tone.s * 0.5, darkTheme ? 5 : 4, darkTheme ? 12 : 10)
+      : clamp(tone.s * 0.42, darkTheme ? 7 : 5, darkTheme ? 22 : 18)
     var lightness = darkTheme
       ? clamp(tone.l, limits.darkMin, limits.darkMax)
       : clamp(tone.l, limits.lightMin, limits.lightMax)
