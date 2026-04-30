@@ -217,6 +217,18 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
     })
   } else {
     doc.getElementById('chr-customizer-mount')?.remove()
+    doc.querySelectorAll('meta[content]').forEach((meta) => {
+      const content = meta.getAttribute('content') || ''
+      meta.setAttribute('content', content
+        .replace(/\s*(?:,?\s*and\s+)?the full Chronos customizer\.?/gi, '.')
+        .replace(/\s+with the full Chronos customizer\.?/gi, '.')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/\.\./g, '.')
+        .trim())
+    })
+    doc.body.innerHTML = doc.body.innerHTML
+      .replace(/shared customizer runtime/gi, 'shared front-end runtime')
+      .replace(/full Chronos customizer/gi, 'responsive Chronos system')
   }
 
   return `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`
