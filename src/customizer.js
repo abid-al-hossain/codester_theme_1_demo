@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs'
-import { FONTS, loadGoogleFont, ERA_DEFAULT_FONTS } from './fonts.js'
+import { FONTS, loadGoogleFont, ERA_DEFAULT_FONTS, getGoogleFontFamilyParam } from './fonts.js'
 import { CUSTOMIZER_HTML } from './customizer-html.js'
 import { sanitizePackageName, sanitizeArchiveName } from './package-name-utils.js'
 
@@ -250,8 +250,8 @@ function tuneBackgroundTone(color, primary, darkTheme, limits) {
     ? wrapHue(primaryTone.h + (darkTheme ? -56 : 56))
     : tone.h
   const saturation = neutralRest
-    ? clamp(tone.s * 0.5, darkTheme ? 5 : 4, darkTheme ? 12 : 10)
-    : clamp(tone.s * 0.42, darkTheme ? 7 : 5, darkTheme ? 22 : 18)
+    ? clamp(tone.s * 0.5, darkTheme ? 5 : 2, darkTheme ? 12 : 8)
+    : clamp(tone.s * 0.42, darkTheme ? 7 : 3, darkTheme ? 22 : 12)
   const lightness = darkTheme
     ? clamp(tone.l, limits.darkMin, limits.darkMax)
     : clamp(tone.l, limits.lightMin, limits.lightMax)
@@ -328,6 +328,13 @@ function improveContrastAcross(color, backgrounds, minRatio) {
   return darkestBackground ? '#ffffff' : '#0b0b0b'
 }
 
+function softenExtremeAccent(color, background, darkTheme) {
+  const tone = hexToHsl(color)
+  if (darkTheme && tone.l > 86) return mixHex(color, background, 0.18)
+  if (!darkTheme && tone.l < 14) return mixHex(color, background, 0.1)
+  return color
+}
+
 function mixReadableText(text, background, weight, minRatio) {
   for (let step = weight; step >= 0; step -= 0.06) {
     const candidate = mixHex(text, background, step)
@@ -349,17 +356,17 @@ function generateSurpriseColors() {
   const primarySaturation = darkTheme ? randomInt(62, 78) : randomInt(58, 74)
   const secondarySaturation = Math.max(42, primarySaturation - randomInt(8, 18))
   const accentSaturation = Math.min(82, primarySaturation + randomInt(4, 12))
-  const backgroundSaturation = darkTheme ? randomInt(10, 18) : randomInt(8, 16)
+  const backgroundSaturation = darkTheme ? randomInt(10, 18) : randomInt(4, 10)
 
   const bg = darkTheme
     ? hslToHex(neutralHue, backgroundSaturation, randomInt(30, 38))
-    : hslToHex(neutralHue, backgroundSaturation, randomInt(80, 88))
+    : hslToHex(neutralHue, backgroundSaturation, randomInt(94, 98))
   const bg2 = darkTheme
     ? hslToHex(neutralHue + randomInt(-4, 4), backgroundSaturation + randomInt(-4, 6), randomInt(38, 46))
-    : hslToHex(neutralHue + randomInt(-4, 4), backgroundSaturation + randomInt(-4, 6), randomInt(70, 80))
+    : hslToHex(neutralHue + randomInt(-4, 4), backgroundSaturation + randomInt(-3, 4), randomInt(90, 96))
   const surface = darkTheme
     ? hslToHex(neutralHue + randomInt(-3, 3), backgroundSaturation + randomInt(-6, 4), randomInt(42, 52))
-    : hslToHex(neutralHue + randomInt(-3, 3), backgroundSaturation + randomInt(-6, 4), randomInt(74, 86))
+    : hslToHex(neutralHue + randomInt(-3, 3), backgroundSaturation + randomInt(-4, 3), randomInt(92, 98))
 
   let primary = darkTheme
     ? hslToHex(primaryHue, primarySaturation, randomInt(58, 66))
@@ -431,12 +438,12 @@ function buildDerivedColorTokens(colors) {
   const rawPrimary = normalizeHex(colors.primary, DEFAULT_COLORS.primary)
   const rawBg = normalizeHex(colors.bg, DEFAULT_COLORS.bg)
   const darkTheme = isDarkColor(rawBg)
-  const bg = tuneBackgroundTone(rawBg, rawPrimary, darkTheme, { darkMin: 30, darkMax: 40, lightMin: 78, lightMax: 88 })
-  const bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULT_COLORS.bg2), rawPrimary, darkTheme, { darkMin: 38, darkMax: 48, lightMin: 70, lightMax: 80 })
-  const surface = tuneBackgroundTone(normalizeHex(colors.surface || colors.bg2, bg2), rawPrimary, darkTheme, { darkMin: 42, darkMax: 54, lightMin: 74, lightMax: 86 })
-  const primary = improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5)
-  const secondary = improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5)
-  const accent = improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5)
+  const bg = tuneBackgroundTone(rawBg, rawPrimary, darkTheme, { darkMin: 30, darkMax: 40, lightMin: 94, lightMax: 98 })
+  const bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULT_COLORS.bg2), rawPrimary, darkTheme, { darkMin: 38, darkMax: 48, lightMin: 90, lightMax: 96 })
+  const surface = tuneBackgroundTone(normalizeHex(colors.surface || colors.bg2, bg2), rawPrimary, darkTheme, { darkMin: 42, darkMax: 54, lightMin: 92, lightMax: 98 })
+  const primary = softenExtremeAccent(improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5), bg, darkTheme)
+  const secondary = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5), bg, darkTheme)
+  const accent = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5), bg, darkTheme)
   const text = improveContrastAcross(normalizeHex(colors.text, DEFAULT_COLORS.text), [bg, bg2, surface], 7)
   const shadeTarget = darkTheme ? '#ffffff' : '#000000'
   const secondaryText = mixReadableText(text, bg, darkTheme ? 0.16 : 0.22, 5.2)
@@ -534,7 +541,7 @@ function preloadFonts(fonts) {
   const link = document.createElement('link')
   link.rel = 'stylesheet'
   link.dataset.chronosPreloadFonts = 'true'
-  link.href = `https://fonts.googleapis.com/css2?display=swap&family=${families.map((font) => encodeURIComponent(font).replace(/%20/g, '+')).join('&family=')}`
+  link.href = `https://fonts.googleapis.com/css2?display=swap&family=${families.map(getGoogleFontFamilyParam).join('&family=')}`
   document.head.appendChild(link)
 }
 

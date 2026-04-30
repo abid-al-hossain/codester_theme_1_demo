@@ -118,8 +118,8 @@
       ? wrapHue(primaryTone.h + (darkTheme ? -56 : 56))
       : tone.h
     var saturation = neutralRest
-      ? clamp(tone.s * 0.5, darkTheme ? 5 : 4, darkTheme ? 12 : 10)
-      : clamp(tone.s * 0.42, darkTheme ? 7 : 5, darkTheme ? 22 : 18)
+      ? clamp(tone.s * 0.5, darkTheme ? 5 : 2, darkTheme ? 12 : 8)
+      : clamp(tone.s * 0.42, darkTheme ? 7 : 3, darkTheme ? 22 : 12)
     var lightness = darkTheme
       ? clamp(tone.l, limits.darkMin, limits.darkMax)
       : clamp(tone.l, limits.lightMin, limits.lightMax)
@@ -189,6 +189,13 @@
     }) ? '#ffffff' : '#0b0b0b'
   }
 
+  function softenExtremeAccent(color, background, darkTheme) {
+    var tone = hexToHsl(color)
+    if (darkTheme && tone.l > 86) return mixHex(color, background, 0.18)
+    if (!darkTheme && tone.l < 14) return mixHex(color, background, 0.1)
+    return color
+  }
+
   function mixReadableText(text, background, weight, minRatio) {
     for (var step = weight; step >= 0; step -= 0.06) {
       var candidate = mixHex(text, background, step)
@@ -217,6 +224,30 @@
       : namespace + ':' + getPrefsScopeKey() + ':' + getCurrentPageKey()
   }
 
+  var SINGLE_WEIGHT_FONTS = [
+    'Anton',
+    'Archivo Black',
+    'Audiowide',
+    'Bebas Neue',
+    'Creepster',
+    'Electrolize',
+    'Iceland',
+    'MedievalSharp',
+    'Pacifico',
+    'Press Start 2P',
+    'Sacramento',
+    'Uncial Antiqua',
+    'UnifrakturMaguntia',
+    'VT323'
+  ]
+
+  function getGoogleFontFamilyParam(font) {
+    var encoded = encodeURIComponent(font).replace(/%20/g, '+')
+    return SINGLE_WEIGHT_FONTS.indexOf(font) === -1
+      ? encoded + ':wght@400;700'
+      : encoded
+  }
+
   try {
     var prefs = JSON.parse(localStorage.getItem(getPrefsKey()))
     var currentEra = document.documentElement.getAttribute('data-era')
@@ -239,9 +270,7 @@
         var link = document.createElement('link')
         link.rel = 'stylesheet'
         link.dataset.chronosPreloadFonts = 'true'
-        link.href = 'https://fonts.googleapis.com/css2?display=swap&family=' + families.map(function (font) {
-          return encodeURIComponent(font).replace(/%20/g, '+')
-        }).join('&family=')
+        link.href = 'https://fonts.googleapis.com/css2?display=swap&family=' + families.map(getGoogleFontFamilyParam).join('&family=')
         document.head.appendChild(link)
       }
 
@@ -257,12 +286,12 @@
       var rawPrimary = normalizeHex(colors.primary, DEFAULTS.primary)
       var rawBg = normalizeHex(colors.bg, DEFAULTS.bg)
       var dark = isDarkColor(rawBg)
-      var bg = tuneBackgroundTone(rawBg, rawPrimary, dark, { darkMin: 30, darkMax: 40, lightMin: 78, lightMax: 88 })
-      var bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULTS.bg2), rawPrimary, dark, { darkMin: 38, darkMax: 48, lightMin: 70, lightMax: 80 })
-      var surface = tuneBackgroundTone(normalizeHex(colors.surface, bg2), rawPrimary, dark, { darkMin: 42, darkMax: 54, lightMin: 74, lightMax: 86 })
-      var primary = improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5)
-      var secondary = improveContrastAcross(normalizeHex(colors.secondary, DEFAULTS.secondary), [bg, bg2, surface], 3.5)
-      var accent = improveContrastAcross(normalizeHex(colors.accent, DEFAULTS.accent), [bg, bg2, surface], 3.5)
+      var bg = tuneBackgroundTone(rawBg, rawPrimary, dark, { darkMin: 30, darkMax: 40, lightMin: 94, lightMax: 98 })
+      var bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULTS.bg2), rawPrimary, dark, { darkMin: 38, darkMax: 48, lightMin: 90, lightMax: 96 })
+      var surface = tuneBackgroundTone(normalizeHex(colors.surface, bg2), rawPrimary, dark, { darkMin: 42, darkMax: 54, lightMin: 92, lightMax: 98 })
+      var primary = softenExtremeAccent(improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5), bg, dark)
+      var secondary = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary, DEFAULTS.secondary), [bg, bg2, surface], 3.5), bg, dark)
+      var accent = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent, DEFAULTS.accent), [bg, bg2, surface], 3.5), bg, dark)
       var text = improveContrastAcross(normalizeHex(colors.text, DEFAULTS.text), [bg, bg2, surface], 7)
       var secondaryText = mixReadableText(text, bg, dark ? 0.16 : 0.22, 5.2)
       var tertiaryText = mixReadableText(text, bg, dark ? 0.32 : 0.42, 4.5)

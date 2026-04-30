@@ -110,7 +110,7 @@ function buildStorageKey(slug) {
 }
 
 function buildThemeBootScript({ storageKey, theme, useStorage }) {
-  return `<script>(function(){const base=${JSON.stringify(theme)};const key='${storageKey}';const setVar=(name,value)=>document.documentElement.style.setProperty(name,value);const normalizeHex=(value,fallback)=>{const raw=String(value||'').trim();if(/^#[0-9a-f]{6}$/i.test(raw))return raw.toLowerCase();if(/^#[0-9a-f]{3}$/i.test(raw))return'#'+raw[1]+raw[1]+raw[2]+raw[2]+raw[3]+raw[3];return fallback};const hexToRgb=(value,fallback)=>{const hex=normalizeHex(value,fallback);return{r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16)}};const rgbToHex=({r,g,b})=>'#'+[r,g,b].map((channel)=>Math.max(0,Math.min(255,Math.round(channel))).toString(16).padStart(2,'0')).join('');const mixHex=(baseColor,targetColor,weight)=>{const a=hexToRgb(baseColor,baseColor);const b=hexToRgb(targetColor,targetColor);return rgbToHex({r:a.r+((b.r-a.r)*weight),g:a.g+((b.g-a.g)*weight),b:a.b+((b.b-a.b)*weight)})};const withAlpha=(color,alpha)=>{const rgb=hexToRgb(color,color);return'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+alpha+')'};const isDarkColor=(color)=>{const rgb=hexToRgb(color,color);return((rgb.r*299)+(rgb.g*587)+(rgb.b*114))/1000<150};const relativeLuminance=(color)=>{const {r,g,b}=hexToRgb(color,color);const normalize=(channel)=>{const value=channel/255;return value<=0.03928?value/12.92:((value+0.055)/1.055)**2.4};const rr=normalize(r);const gg=normalize(g);const bb=normalize(b);return(0.2126*rr)+(0.7152*gg)+(0.0722*bb)};const contrastRatio=(colorA,colorB)=>{const l1=relativeLuminance(colorA);const l2=relativeLuminance(colorB);const lighter=Math.max(l1,l2);const darker=Math.min(l1,l2);return(lighter+0.05)/(darker+0.05)};const getReadableOnColor=(background)=>contrastRatio(background,'#ffffff')>=contrastRatio(background,'#0b0b0b')?'#ffffff':'#0b0b0b';let state=base;if(${useStorage ? 'true' : 'false'}){try{const saved=JSON.parse(localStorage.getItem(key));if(saved){state={...base,...saved,fonts:{...base.fonts,...saved.fonts},colors:{...base.colors,...saved.colors}}}}catch(error){}}if(state.era)document.documentElement.setAttribute('data-era',state.era);if(state.hasCustomFonts&&state.fonts){const families=[...new Set(Object.values(state.fonts).filter(Boolean))];if(families.length){const link=document.createElement('link');link.rel='stylesheet';link.dataset.chronosPreloadFonts='true';link.href='https://fonts.googleapis.com/css2?display=swap&family='+families.map((font)=>encodeURIComponent(font).replace(/%20/g,'+')).join('&family=');document.head.appendChild(link)}Object.entries(state.fonts).forEach(([role,font])=>{setVar('--font-'+role,\"'\"+font+\"', sans-serif\")})}if(state.hasCustomColors&&state.colors){const colors={...base.colors,...state.colors,surface:(state.colors&&state.colors.surface)||(state.colors&&state.colors.bg2)||base.colors.surface};const bg=normalizeHex(colors.bg,base.colors.bg);const bg2=normalizeHex(colors.bg2,base.colors.bg2);const surface=normalizeHex(colors.surface,bg2);const primary=normalizeHex(colors.primary,base.colors.primary);const secondary=normalizeHex(colors.secondary,base.colors.secondary);const accent=normalizeHex(colors.accent,base.colors.accent);const text=normalizeHex(colors.text,base.colors.text);const dark=isDarkColor(bg);[['--color-bg',bg],['--color-bg-2',bg2],['--color-bg-3',mixHex(bg2,text,dark?0.08:0.06)],['--color-surface',withAlpha(surface,dark?0.82:0.78)],['--color-primary',primary],['--color-primary-2',mixHex(primary,dark?'#ffffff':'#000000',0.12)],['--color-on-primary',getReadableOnColor(primary)],['--color-secondary',secondary],['--color-accent',accent],['--color-text',text],['--color-text-2',mixHex(text,bg,dark?0.16:0.22)],['--color-text-3',mixHex(text,bg,dark?0.32:0.42)],['--color-border',mixHex(bg2,text,dark?0.22:0.14)],['--color-border-2',mixHex(bg2,primary,0.28)],['--shadow-glow','0 0 52px '+withAlpha(primary,dark?0.32:0.2)]].forEach(([name,value])=>setVar(name,value))}})()</script>`
+  return `<script>(function(){const base=${JSON.stringify(theme)};const key='${storageKey}';const setVar=(name,value)=>document.documentElement.style.setProperty(name,value);const normalizeHex=(value,fallback)=>{const raw=String(value||'').trim();if(/^#[0-9a-f]{6}$/i.test(raw))return raw.toLowerCase();if(/^#[0-9a-f]{3}$/i.test(raw))return'#'+raw[1]+raw[1]+raw[2]+raw[2]+raw[3]+raw[3];return fallback};const hexToRgb=(value,fallback)=>{const hex=normalizeHex(value,fallback);return{r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16)}};const rgbToHex=({r,g,b})=>'#'+[r,g,b].map((channel)=>Math.max(0,Math.min(255,Math.round(channel))).toString(16).padStart(2,'0')).join('');const mixHex=(baseColor,targetColor,weight)=>{const a=hexToRgb(baseColor,baseColor);const b=hexToRgb(targetColor,targetColor);return rgbToHex({r:a.r+((b.r-a.r)*weight),g:a.g+((b.g-a.g)*weight),b:a.b+((b.b-a.b)*weight)})};const withAlpha=(color,alpha)=>{const rgb=hexToRgb(color,color);return'rgba('+rgb.r+','+rgb.g+','+rgb.b+','+alpha+')'};const isDarkColor=(color)=>{const rgb=hexToRgb(color,color);return((rgb.r*299)+(rgb.g*587)+(rgb.b*114))/1000<150};const relativeLuminance=(color)=>{const {r,g,b}=hexToRgb(color,color);const normalize=(channel)=>{const value=channel/255;return value<=0.03928?value/12.92:((value+0.055)/1.055)**2.4};const rr=normalize(r);const gg=normalize(g);const bb=normalize(b);return(0.2126*rr)+(0.7152*gg)+(0.0722*bb)};const contrastRatio=(colorA,colorB)=>{const l1=relativeLuminance(colorA);const l2=relativeLuminance(colorB);const lighter=Math.max(l1,l2);const darker=Math.min(l1,l2);return(lighter+0.05)/(darker+0.05)};const getReadableOnColor=(background)=>contrastRatio(background,'#ffffff')>=contrastRatio(background,'#0b0b0b')?'#ffffff':'#0b0b0b';const singleWeightFonts=['Anton','Archivo Black','Audiowide','Bebas Neue','Creepster','Electrolize','Iceland','MedievalSharp','Pacifico','Press Start 2P','Sacramento','Uncial Antiqua','UnifrakturMaguntia','VT323'];const getGoogleFontFamilyParam=(font)=>{const encoded=encodeURIComponent(font).replace(/%20/g,'+');return singleWeightFonts.includes(font)?encoded:encoded+':wght@400;700'};let state=base;if(${useStorage ? 'true' : 'false'}){try{const saved=JSON.parse(localStorage.getItem(key));if(saved){state={...base,...saved,fonts:{...base.fonts,...saved.fonts},colors:{...base.colors,...saved.colors}}}}catch(error){}}if(state.era)document.documentElement.setAttribute('data-era',state.era);if(state.hasCustomFonts&&state.fonts){const families=[...new Set(Object.values(state.fonts).filter(Boolean))];if(families.length){const link=document.createElement('link');link.rel='stylesheet';link.dataset.chronosPreloadFonts='true';link.href='https://fonts.googleapis.com/css2?display=swap&family='+families.map(getGoogleFontFamilyParam).join('&family=');document.head.appendChild(link)}Object.entries(state.fonts).forEach(([role,font])=>{setVar('--font-'+role,\"'\"+font+\"', sans-serif\")})}if(state.hasCustomColors&&state.colors){const colors={...base.colors,...state.colors,surface:(state.colors&&state.colors.surface)||(state.colors&&state.colors.bg2)||base.colors.surface};const bg=normalizeHex(colors.bg,base.colors.bg);const bg2=normalizeHex(colors.bg2,base.colors.bg2);const surface=normalizeHex(colors.surface,bg2);const primary=normalizeHex(colors.primary,base.colors.primary);const secondary=normalizeHex(colors.secondary,base.colors.secondary);const accent=normalizeHex(colors.accent,base.colors.accent);const text=normalizeHex(colors.text,base.colors.text);const dark=isDarkColor(bg);[['--color-bg',bg],['--color-bg-2',bg2],['--color-bg-3',mixHex(bg2,text,dark?0.08:0.06)],['--color-surface',withAlpha(surface,dark?0.82:0.78)],['--color-primary',primary],['--color-primary-2',mixHex(primary,dark?'#ffffff':'#000000',0.12)],['--color-on-primary',getReadableOnColor(primary)],['--color-secondary',secondary],['--color-accent',accent],['--color-text',text],['--color-text-2',mixHex(text,bg,dark?0.16:0.22)],['--color-text-3',mixHex(text,bg,dark?0.32:0.42)],['--color-border',mixHex(bg2,text,dark?0.22:0.14)],['--color-border-2',mixHex(bg2,primary,0.28)],['--shadow-glow','0 0 52px '+withAlpha(primary,dark?0.32:0.2)]].forEach(([name,value])=>setVar(name,value))}})()</script>`
 }
 
 function rewriteCustomizerSource(theme, { keepCustomizer, storageKey }) {
@@ -153,7 +153,41 @@ function rewriteMainSource(keepCustomizer) {
   return mainRaw.replace(/^\s*import\s+['"]\.\/customizer\.js['"];?\r?\n/m, '')
 }
 
-function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
+function setMetaContent(doc, selector, createAttrs, content) {
+  let meta = doc.head.querySelector(selector)
+  if (!meta) {
+    meta = doc.createElement('meta')
+    Object.entries(createAttrs).forEach(([name, value]) => meta.setAttribute(name, value))
+    doc.head.appendChild(meta)
+  }
+  meta.setAttribute('content', content)
+}
+
+function updateSocialPreviewMeta(doc, previewImagePath) {
+  if (!previewImagePath) {
+    doc.head.querySelectorAll('meta[property="og:image"], meta[name="twitter:image"]').forEach((meta) => meta.remove())
+    return
+  }
+  setMetaContent(doc, 'meta[property="og:image"]', { property: 'og:image' }, previewImagePath)
+  setMetaContent(doc, 'meta[name="twitter:image"]', { name: 'twitter:image' }, previewImagePath)
+}
+
+function getLayoutPreviewFile(layoutFile) {
+  return layoutFile.replace(/\.html$/i, '.jpg')
+}
+
+async function addPreviewImage(zip, previewFile) {
+  try {
+    const response = await fetch(new URL(`./previews/${previewFile}`, window.location.href))
+    if (!response.ok) return false
+    zip.file(`public/previews/${previewFile}`, await response.arrayBuffer())
+    return true
+  } catch {
+    return false
+  }
+}
+
+function rewriteRootHtml(html, { keepCustomizer, storageKey, theme, previewImagePath }) {
   const parser = new DOMParser()
   const doc = parser.parseFromString(html, 'text/html')
   const currentLayoutMessage = 'This export includes only the current layout.'
@@ -176,6 +210,7 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
 
   doc.documentElement.setAttribute('data-era', theme.era)
   doc.documentElement.setAttribute('data-prefs-key', storageKey)
+  updateSocialPreviewMeta(doc, previewImagePath)
 
   const bootScript = Array.from(doc.head.querySelectorAll('script'))
     .find((script) => {
@@ -208,6 +243,10 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
         link.textContent = singleLayoutTexts.get(label)
       }
     }
+  })
+
+  doc.querySelectorAll('[data-demo-message]').forEach((element) => {
+    element.removeAttribute('data-demo-message')
   })
 
   if (keepCustomizer) {
@@ -315,8 +354,11 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
 
   const storageKey = buildStorageKey(slug)
   const zip = new JSZip()
+  const previewFile = getLayoutPreviewFile(selectedLayout.file)
+  const hasPreviewImage = await addPreviewImage(zip, previewFile)
+  const previewImagePath = hasPreviewImage ? `./previews/${previewFile}` : ''
 
-  zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme }))
+  zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme, previewImagePath }))
   zip.file('package.json', rewritePackageJson(slug, { keepCustomizer }))
   zip.file('vite.config.js', buildViteConfig())
   zip.file('.gitignore', EXPORT_GITIGNORE)

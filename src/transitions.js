@@ -348,18 +348,30 @@ export function initSectionJumpTransitions() {
 export function initFAQ() {
   const items = document.querySelectorAll('.chr-faq-trigger')
 
+  const getBody = (trigger) => trigger.nextElementSibling
+
+  const closeItem = (trigger) => {
+    const body = getBody(trigger)
+    trigger.setAttribute('aria-expanded', 'false')
+    if (!body) return
+    body.style.maxHeight = '0px'
+    body.classList.remove('open')
+  }
+
+  const openItem = (trigger) => {
+    const body = getBody(trigger)
+    trigger.setAttribute('aria-expanded', 'true')
+    if (!body) return
+    body.classList.add('open')
+    body.style.maxHeight = `${body.scrollHeight}px`
+  }
+
   items.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const isOpen = trigger.getAttribute('aria-expanded') === 'true'
-      // Close all
-      items.forEach(t => {
-        t.setAttribute('aria-expanded', 'false')
-        t.nextElementSibling?.classList.remove('open')
-      })
-      // Open current if was closed
+      items.forEach(closeItem)
       if (!isOpen) {
-        trigger.setAttribute('aria-expanded', 'true')
-        trigger.nextElementSibling?.classList.add('open')
+        openItem(trigger)
       }
     })
 
@@ -370,8 +382,16 @@ export function initFAQ() {
         trigger.click()
       }
       if (e.key === 'Escape') {
-        trigger.setAttribute('aria-expanded', 'false')
-        trigger.nextElementSibling?.classList.remove('open')
+        closeItem(trigger)
+      }
+    })
+  })
+
+  window.addEventListener('resize', () => {
+    items.forEach((trigger) => {
+      if (trigger.getAttribute('aria-expanded') === 'true') {
+        const body = getBody(trigger)
+        if (body) body.style.maxHeight = `${body.scrollHeight}px`
       }
     })
   })

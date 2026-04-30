@@ -32,13 +32,35 @@ export const FONTS = {
 
 const loadedFonts = new Set()
 const loadingFonts = new Map()
+const SINGLE_WEIGHT_FONTS = new Set([
+  'Anton',
+  'Archivo Black',
+  'Audiowide',
+  'Bebas Neue',
+  'Creepster',
+  'Electrolize',
+  'Iceland',
+  'MedievalSharp',
+  'Pacifico',
+  'Press Start 2P',
+  'Sacramento',
+  'Uncial Antiqua',
+  'UnifrakturMaguntia',
+  'VT323',
+])
+
+export function getGoogleFontFamilyParam(name) {
+  const encoded = encodeURIComponent(name).replace(/%20/g, '+')
+  return SINGLE_WEIGHT_FONTS.has(name)
+    ? encoded
+    : `${encoded}:wght@400;700`
+}
 
 export function loadGoogleFont(name) {
   if (loadedFonts.has(name)) return Promise.resolve()
   if (loadingFonts.has(name)) return loadingFonts.get(name)
 
-  const encoded = name.replace(/ /g, '+')
-  const href = `https://fonts.googleapis.com/css2?family=${encoded}&display=swap`
+  const href = `https://fonts.googleapis.com/css2?family=${getGoogleFontFamilyParam(name)}&display=swap`
 
   const request = new Promise((resolve) => {
     const link = document.createElement('link')

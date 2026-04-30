@@ -1849,7 +1849,7 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
 }
 
 .chr-faq-body.open {
-  max-height: 300px;
+  max-height: var(--faq-open-height, 100vh);
 }
 
 .chr-faq-body p {
