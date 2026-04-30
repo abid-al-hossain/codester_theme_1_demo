@@ -32,7 +32,16 @@
 
     /* Ken Burns Destination Tiles */
     .destination-tile{position:relative;overflow:hidden;border-radius:24px;display:flex;align-items:flex-end;padding:34px;text-decoration:none;color:#fff;background:var(--color-surface); box-shadow:0 10px 40px rgba(0,0,0,0.15);}
-    .dest-bg {position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);opacity:0.8; z-index:1;}
+    .dest-bg {position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);opacity:0.9; z-index:1;}
+    .travel-art{position:absolute;inset:0;width:100%;height:100%;display:block;background:color-mix(in srgb,var(--color-bg-2) 70%,var(--color-primary))}
+    .travel-art .sky-a{stop-color:color-mix(in srgb,var(--color-primary) 72%,var(--color-bg))}
+    .travel-art .sky-b{stop-color:color-mix(in srgb,var(--color-secondary) 56%,var(--color-bg-2))}
+    .travel-art .land-a{fill:color-mix(in srgb,var(--color-bg) 44%,var(--color-primary))}
+    .travel-art .land-b{fill:color-mix(in srgb,var(--color-bg-2) 42%,var(--color-secondary))}
+    .travel-art .land-c{fill:color-mix(in srgb,var(--color-bg-3) 44%,var(--color-accent))}
+    .travel-art .glow{fill:color-mix(in srgb,var(--color-accent) 80%,white)}
+    .travel-art .line{stroke:color-mix(in srgb,var(--color-surface) 72%,white);stroke-width:3;stroke-linecap:round;opacity:.54}
+    .travel-art .dark{fill:color-mix(in srgb,var(--color-text) 82%,var(--color-primary))}
     .destination-tile:hover .dest-bg { transform: scale(1.1) rotate(1deg); }
     .destination-tile::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); z-index:2; transition:opacity 0.5s; opacity:0.9; }
     .destination-tile:hover::after { opacity:1; }
@@ -118,21 +127,50 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:30px;grid-auto-rows:400px" data-reveal-group="zoom">
 <a href="#" class="destination-tile" data-demo-message="Destination preview. Connect this tile to the full destination page." style="grid-column:1 / -1;background:var(--color-primary)">
-          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(18,58,95,0.25), rgba(1,19,34,0.78)), radial-gradient(circle at 28% 24%, rgba(255,255,255,0.28), transparent 18%), linear-gradient(135deg, #245c78 0%, #3ca6cb 42%, #7de3f7 100%);"></div>
+          <svg class="dest-bg travel-art" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated alpine lake and mountain scene">
+            <defs><linearGradient id="alpsSky" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient><linearGradient id="alpsLake" x1="0" y1="0" x2="1" y2="1"><stop stop-color="var(--color-secondary)" stop-opacity=".68"/><stop offset="1" stop-color="var(--color-primary)" stop-opacity=".42"/></linearGradient></defs>
+            <rect width="900" height="400" fill="url(#alpsSky)"/>
+            <circle class="glow" cx="710" cy="82" r="54" opacity=".42"/>
+            <path class="land-c" d="M-40 260 130 98l84 88 88-118 130 166 76-72 116 106 108-150 208 182v120H-40Z" opacity=".82"/>
+            <path class="land-b" d="M-30 292 94 162l94 78 82-92 122 132 112-96 92 102 98-88 230 150v92H-30Z" opacity=".88"/>
+            <path class="land-a" d="M-20 336c122-64 228-76 318-36 94 42 182 42 284-2 94-40 188-34 338 40v90H-20Z"/>
+            <path d="M0 304c132-28 246-22 342 18 106 44 228 42 354-8 78-31 144-38 204-20v106H0Z" fill="url(#alpsLake)" opacity=".86"/>
+            <path class="line" d="M96 330c90-18 174-12 252 18M514 330c90-30 174-32 252-6"/>
+            <rect class="dark" x="620" y="246" width="70" height="50" rx="6" opacity=".68"/><path class="dark" d="m610 248 45-38 48 38Z" opacity=".78"/><rect class="glow" x="646" y="262" width="16" height="20" rx="2" opacity=".7"/>
+          </svg>
           <div class="dest-content">
             <h3 style="font-size:2.8rem;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em;">Japanese Alps</h3>
             <p style="opacity:0.9;font-size:1.2rem;line-height:1.6;font-weight:300;">Winter retreats and hot springs.</p>
           </div>
         </a>
 <a href="#" class="destination-tile" data-demo-message="Destination preview. Connect this tile to the full destination page." style="background:var(--color-secondary)">
-          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(48,20,8,0.18), rgba(14,26,39,0.72)), radial-gradient(circle at 74% 28%, rgba(255,228,181,0.42), transparent 24%), linear-gradient(135deg, #52403b 0%, #8d6d52 42%, #d7a86e 100%);"></div>
+          <svg class="dest-bg travel-art" viewBox="0 0 520 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated canal city scene">
+            <defs><linearGradient id="citySky" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient></defs>
+            <rect width="520" height="400" fill="url(#citySky)"/>
+            <circle class="glow" cx="410" cy="76" r="48" opacity=".36"/>
+            <path class="land-b" d="M0 214h72v-64h42v64h38v-94h58v94h42v-52h54v52h46v-78h58v78h110v186H0Z" opacity=".82"/>
+            <path class="land-c" d="M0 254h520v146H0Z" opacity=".68"/>
+            <path d="M-20 286c74-28 142-26 204 4 66 32 138 30 216-8 46-22 92-28 140-18v136H-20Z" fill="var(--color-primary)" opacity=".38"/>
+            <path class="line" d="M74 318c74-18 148-12 222 18M298 292c52-12 102-10 150 8"/>
+            <path class="dark" d="M174 300c42-52 96-52 140 0h-24c-32-24-62-24-92 0Z" opacity=".72"/>
+            <path class="dark" d="M216 334c38 10 74 8 108-6l-24 26h-70Z" opacity=".64"/>
+          </svg>
           <div class="dest-content">
             <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Venice</h3>
             <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Canals and culture.</p>
           </div>
         </a>
 <a href="#" class="destination-tile" data-demo-message="Destination preview. Connect this tile to the full destination page." style="background:var(--color-accent)">
-          <div class="dest-bg" style="background-image:linear-gradient(160deg, rgba(22,10,32,0.16), rgba(10,18,35,0.72)), radial-gradient(circle at 32% 22%, rgba(255,205,148,0.32), transparent 20%), linear-gradient(135deg, #513a73 0%, #9571b7 45%, #e6c58a 100%);"></div>
+          <svg class="dest-bg travel-art" viewBox="0 0 520 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated desert retreat scene">
+            <defs><linearGradient id="desertSky" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient></defs>
+            <rect width="520" height="400" fill="url(#desertSky)"/>
+            <circle class="glow" cx="110" cy="92" r="54" opacity=".44"/>
+            <path class="land-c" d="M0 242c96-52 174-58 236-18 64 41 158 34 284-22v198H0Z" opacity=".86"/>
+            <path class="land-b" d="M0 292c118-44 212-42 282 6 74 50 154 48 238-8v110H0Z" opacity=".9"/>
+            <path class="line" d="M62 302c98-18 186-10 264 24M236 254c66 12 130 6 192-18"/>
+            <path class="dark" d="M296 176h34v92h-34zM346 138h42v130h-42zM404 196h30v72h-30z" opacity=".56"/>
+            <path class="dark" d="M284 268h170v20H284Z" opacity=".66"/>
+          </svg>
           <div class="dest-content">
             <h3 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;">Dubai</h3>
             <p style="opacity:0.9;font-size:1.1rem;font-weight:300;">Desert luxury.</p>
@@ -198,7 +236,7 @@
       </div>
       <div class="stories-grid" data-reveal-group="zoom">
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(7,22,38,0.3), rgba(1,19,34,0.68)), radial-gradient(circle at 24% 24%, rgba(255,255,255,0.24), transparent 18%), linear-gradient(135deg, #2d6a8d 0%, #57b5d8 48%, #a7ecff 100%);"></div></div>
+          <div class="story-img-wrap"><svg class="story-img travel-art" viewBox="0 0 420 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated coast travel guide"><defs><linearGradient id="storyCoast" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient></defs><rect width="420" height="240" fill="url(#storyCoast)"/><circle class="glow" cx="326" cy="58" r="36" opacity=".38"/><path class="land-c" d="M0 160c80-52 150-60 210-24 66 40 136 32 210-24v128H0Z" opacity=".84"/><path d="M0 178c86-18 152-10 198 24 64 46 138 42 222-10v48H0Z" fill="var(--color-primary)" opacity=".34"/><path class="line" d="M54 196c72-8 132 0 180 24"/></svg></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-primary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Guide</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">When to travel the coast</h3>
@@ -207,7 +245,7 @@
           </div>
         </article>
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(45,27,15,0.28), rgba(20,26,40,0.72)), radial-gradient(circle at 78% 26%, rgba(255,232,186,0.26), transparent 18%), linear-gradient(135deg, #745341 0%, #b6855f 44%, #f1c59d 100%);"></div></div>
+          <div class="story-img-wrap"><svg class="story-img travel-art" viewBox="0 0 420 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated city itinerary"><defs><linearGradient id="storyCity" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient></defs><rect width="420" height="240" fill="url(#storyCity)"/><path class="land-b" d="M0 128h52V78h38v50h48V58h48v70h44V92h48v36h44V66h48v62h50v112H0Z" opacity=".8"/><path d="M0 170c84-20 158-12 222 24 66 36 132 34 198-8v54H0Z" fill="var(--color-primary)" opacity=".36"/><path class="line" d="M42 198c82-18 156-12 222 18"/></svg></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-accent);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Journal</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">A three-day city map</h3>
@@ -216,7 +254,7 @@
           </div>
         </article>
         <article class="story-card travel-glass">
-          <div class="story-img-wrap"><div class="story-img" style="background-image:linear-gradient(140deg, rgba(12,25,20,0.24), rgba(11,26,22,0.72)), radial-gradient(circle at 30% 18%, rgba(229,255,235,0.2), transparent 16%), linear-gradient(135deg, #32594a 0%, #4f9c82 46%, #bce7d4 100%);"></div></div>
+          <div class="story-img-wrap"><svg class="story-img travel-art" viewBox="0 0 420 240" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrated hillside retreat"><defs><linearGradient id="storyRetreat" x1="0" y1="0" x2="1" y2="1"><stop class="sky-a"/><stop offset="1" class="sky-b"/></linearGradient></defs><rect width="420" height="240" fill="url(#storyRetreat)"/><circle class="glow" cx="94" cy="62" r="40" opacity=".36"/><path class="land-a" d="M0 152c78-34 138-34 180 0 52 42 132 34 240-24v112H0Z" opacity=".82"/><path class="land-b" d="M0 186c96-34 176-30 240 12 58 38 118 34 180-12v54H0Z" opacity=".84"/><rect class="dark" x="276" y="122" width="62" height="46" rx="4" opacity=".58"/><path class="dark" d="m266 124 42-34 42 34Z" opacity=".7"/><path class="line" d="M56 198c76-12 142-6 198 18"/></svg></div>
           <div class="story-content">
             <div style="font-size:0.85rem;color:var(--color-secondary);text-transform:uppercase;font-weight:700;letter-spacing:0.05em">Retreat</div>
             <h3 style="font-size:1.5rem;font-weight:800;line-height:1.3;letter-spacing:-0.01em;">Slow travel in the hills</h3>

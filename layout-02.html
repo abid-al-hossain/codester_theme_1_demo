@@ -29,6 +29,15 @@
     .project-img{aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;position:relative}
     .project-img-inner{width:100%;height:100%;transition:transform 0.5s var(--ease)}
     .project-item:hover .project-img-inner{transform:scale(1.05)}
+    .project-visual{width:100%;height:100%;display:block;background:linear-gradient(135deg,color-mix(in srgb,var(--color-bg-2) 88%,var(--color-primary)),color-mix(in srgb,var(--color-bg-3) 82%,var(--color-secondary)));color:var(--color-primary)}
+    .project-visual .scene-bg{fill:color-mix(in srgb,var(--color-bg) 82%,var(--color-primary))}
+    .project-visual .scene-panel{fill:color-mix(in srgb,var(--color-surface) 88%,var(--color-primary));stroke:color-mix(in srgb,var(--color-border) 72%,var(--color-primary))}
+    .project-visual .scene-primary{fill:var(--color-primary)}
+    .project-visual .scene-secondary{fill:var(--color-secondary)}
+    .project-visual .scene-accent{fill:var(--color-accent)}
+    .project-visual .scene-line{stroke:var(--color-text);stroke-width:4;stroke-linecap:round;opacity:.42}
+    .project-visual .scene-soft{fill:var(--color-text);opacity:.1}
+    .project-visual text{fill:var(--color-text);font-family:var(--font-accent);font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
     .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
     .service-tag{padding:10px 18px;border:var(--border-w) solid color-mix(in srgb,var(--color-on-primary) 32%,transparent);border-radius:var(--radius-full);color:color-mix(in srgb,var(--color-on-primary) 84%,transparent);font-size:0.82rem;font-weight:600;text-align:center}
     @media(max-width:1024px){.split-hero{grid-template-columns:1fr}.split-left{position:relative;height:auto;min-height:60vh;overflow:visible}.split-right{padding:40px 20px}.project-item{grid-template-columns:1fr}}
@@ -86,7 +95,20 @@
     <!-- Project 1 -->
     <article class="project-item" data-reveal>
       <div class="project-img">
-        <div class="project-img-inner" style="background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:var(--color-on-primary)">ECO</div>
+        <div class="project-img-inner">
+          <svg class="project-visual" viewBox="0 0 400 300" role="img" aria-label="Eco brand system illustration">
+            <rect class="scene-bg" width="400" height="300"/>
+            <circle class="scene-secondary" cx="306" cy="82" r="74" opacity=".2"/>
+            <path class="scene-primary" d="M54 230c42-92 100-138 174-138 54 0 96 22 126 66-37-18-76-20-117-6-55 19-102 57-183 78Z" opacity=".22"/>
+            <rect class="scene-panel" x="58" y="62" width="180" height="130" rx="28"/>
+            <rect class="scene-primary" x="84" y="92" width="78" height="12" rx="6" opacity=".85"/>
+            <path class="scene-line" d="M84 122h110"/>
+            <path class="scene-line" d="M84 146h78"/>
+            <circle class="scene-accent" cx="286" cy="174" r="44" opacity=".36"/>
+            <path class="scene-secondary" d="M286 130c22 20 34 42 34 64-23 0-46-12-66-34 0-14 12-30 32-30Z" opacity=".72"/>
+            <text x="72" y="240">Eco</text>
+          </svg>
+        </div>
       </div>
       <div>
         <div class="chr-heading-sm">Branding  -  Identity System</div>
@@ -105,14 +127,39 @@
 <a href="#" class="chr-btn-ghost" style="font-size:0.85rem;padding:10px 20px" data-demo-message="Case study preview. Connect this card to the full project story.">View Case Study -></a>
       </div>
       <div class="project-img" style="order:1">
-        <div class="project-img-inner" style="background:linear-gradient(135deg,#030303,#ff008040);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:#fff">NEON</div>
+        <div class="project-img-inner">
+          <svg class="project-visual" viewBox="0 0 400 300" role="img" aria-label="Neon portal interface illustration">
+            <rect class="scene-bg" width="400" height="300"/>
+            <path d="M0 54h400M0 108h400M0 162h400M0 216h400M64 0v300M128 0v300M192 0v300M256 0v300M320 0v300" stroke="var(--color-primary)" stroke-width="1.5" opacity=".16"/>
+            <rect class="scene-panel" x="62" y="70" width="276" height="152" rx="24"/>
+            <rect class="scene-primary" x="92" y="102" width="142" height="14" rx="7"/>
+            <rect class="scene-secondary" x="92" y="136" width="210" height="10" rx="5" opacity=".78"/>
+            <rect class="scene-soft" x="92" y="166" width="70" height="34" rx="10"/>
+            <rect class="scene-soft" x="174" y="166" width="70" height="34" rx="10"/>
+            <rect class="scene-accent" x="256" y="166" width="46" height="34" rx="10" opacity=".68"/>
+            <circle class="scene-primary" cx="318" cy="88" r="36" opacity=".2"/>
+            <text x="72" y="250">Neon</text>
+          </svg>
+        </div>
       </div>
     </article>
 
     <!-- Project 3 -->
     <article class="project-item" data-reveal>
       <div class="project-img">
-        <div class="project-img-inner" style="background:linear-gradient(135deg,#080808,#d4af3740);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:#fff">ARCHIVE</div>
+        <div class="project-img-inner">
+          <svg class="project-visual" viewBox="0 0 400 300" role="img" aria-label="Archive manuscript illustration">
+            <rect class="scene-bg" width="400" height="300"/>
+            <rect class="scene-panel" x="84" y="42" width="232" height="216" rx="18"/>
+            <path class="scene-primary" d="M104 78h192M104 222h192" stroke="var(--color-primary)" stroke-width="3" opacity=".55"/>
+            <rect class="scene-soft" x="130" y="96" width="140" height="12" rx="6"/>
+            <path class="scene-line" d="M116 132h168"/>
+            <path class="scene-line" d="M116 158h168"/>
+            <path class="scene-line" d="M116 184h122"/>
+            <circle class="scene-accent" cx="286" cy="90" r="24" opacity=".32"/>
+            <text x="104" y="248">Archive</text>
+          </svg>
+        </div>
       </div>
       <div>
         <div class="chr-heading-sm">Editorial - Archive System</div>
@@ -131,7 +178,19 @@
 <a href="#" class="chr-btn-ghost" style="font-size:0.85rem;padding:10px 20px" data-demo-message="Case study preview. Connect this card to the full project story.">View Case Study -></a>
       </div>
       <div class="project-img" style="order:1">
-        <div class="project-img-inner" style="background:linear-gradient(135deg,#f0f4f8,#1e3a6e40);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;letter-spacing:0.08em;color:var(--color-text)">DATA</div>
+        <div class="project-img-inner">
+          <svg class="project-visual" viewBox="0 0 400 300" role="img" aria-label="Dashboard data system illustration">
+            <rect class="scene-bg" width="400" height="300"/>
+            <rect class="scene-panel" x="50" y="54" width="300" height="192" rx="26"/>
+            <rect class="scene-soft" x="78" y="84" width="244" height="18" rx="9"/>
+            <rect class="scene-primary" x="78" y="126" width="70" height="58" rx="14" opacity=".82"/>
+            <rect class="scene-secondary" x="166" y="126" width="70" height="58" rx="14" opacity=".76"/>
+            <rect class="scene-accent" x="254" y="126" width="68" height="58" rx="14" opacity=".62"/>
+            <path class="scene-line" d="M78 212h212"/>
+            <circle class="scene-primary" cx="314" cy="214" r="13" opacity=".3"/>
+            <text x="72" y="268">Data</text>
+          </svg>
+        </div>
       </div>
     </article>
   </section>

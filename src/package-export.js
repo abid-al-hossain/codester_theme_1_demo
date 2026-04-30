@@ -222,11 +222,20 @@ function rewriteRootHtml(html, { keepCustomizer, storageKey, theme }) {
   return `<!DOCTYPE html>\n${doc.documentElement.outerHTML}`
 }
 
-function rewritePackageJson(name) {
+function rewritePackageJson(name, { keepCustomizer }) {
   const json = JSON.parse(packageJsonRaw)
   json.name = name
+  if (json.scripts?.previews) {
+    delete json.scripts.previews
+  }
+  if (json.devDependencies?.playwright) {
+    delete json.devDependencies.playwright
+  }
   if (json.dependencies?.jszip) {
     delete json.dependencies.jszip
+  }
+  if (!keepCustomizer && json.dependencies?.alpinejs) {
+    delete json.dependencies.alpinejs
   }
   return `${JSON.stringify(json, null, 2)}\n`
 }
@@ -265,7 +274,7 @@ Run these commands in your terminal:
 
 - The downloaded package runs through Vite.
 - Links to other Chronos layouts are stripped or converted because this export contains one layout only.
-- Update the exported content, links, and preview actions as needed for your own project.
+- Update the exported content, links, and placeholder actions as needed for your own project.
 `
 }
 
@@ -296,7 +305,7 @@ export async function downloadCustomizedPackage({ packageName, layoutFile, keepC
   const zip = new JSZip()
 
   zip.file('index.html', rewriteRootHtml(html, { keepCustomizer, storageKey, theme }))
-  zip.file('package.json', rewritePackageJson(slug))
+  zip.file('package.json', rewritePackageJson(slug, { keepCustomizer }))
   zip.file('vite.config.js', buildViteConfig())
   zip.file('.gitignore', EXPORT_GITIGNORE)
   zip.file('README.md', buildReadme({ packageTitle: archiveName, layoutLabel: selectedLayout.label, keepCustomizer }))
