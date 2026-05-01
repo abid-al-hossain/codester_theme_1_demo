@@ -30,6 +30,49 @@
       gap: 20px;
       min-width: 0;
     }
+    .volcanic-side {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .console-stack {
+      display: grid;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--color-text-2);
+    }
+    .console-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px dashed var(--color-border);
+      padding-bottom: 8px;
+    }
+    .magma-status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .magma-status-cell {
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      padding: 16px;
+    }
+    .magma-status-cell strong {
+      display: block;
+      font-family: var(--font-heading);
+      color: var(--color-primary);
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+    .magma-system-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 20px;
+    }
     .magma-alert-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -50,8 +93,8 @@
       align-items: stretch;
     }
     .magma-purge-row input {
-      width: min(100%, 120px);
-      flex: 1 1 120px;
+      min-width: 220px;
+      flex: 1 1 240px;
     }
     .magma-purge-row button {
       min-width: 180px;
@@ -67,6 +110,57 @@
     .magma-chart div {
       flex: 1;
       background: var(--color-primary);
+    }
+    .conduit-map {
+      min-height: 280px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid var(--color-border);
+      background:
+        linear-gradient(90deg, color-mix(in srgb,var(--color-primary) 12%,transparent) 1px, transparent 1px),
+        linear-gradient(0deg, color-mix(in srgb,var(--color-primary) 12%,transparent) 1px, transparent 1px),
+        var(--color-bg);
+      background-size: 42px 42px;
+    }
+    .conduit-node {
+      border: 1px solid var(--color-border);
+      background: color-mix(in srgb, var(--color-primary) 14%, var(--color-bg-2));
+      box-shadow: inset 0 0 22px color-mix(in srgb, var(--color-primary) 16%, transparent);
+    }
+    .conduit-node.hot {
+      background: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+    .conduit-node.warn {
+      background: var(--color-accent);
+    }
+    .magma-timeline {
+      display: grid;
+      gap: 14px;
+    }
+    .magma-timeline-row {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr) 90px;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .magma-checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .magma-check {
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      padding: 16px;
+      font-family: var(--font-mono);
+      color: var(--color-text-2);
     }
     .magma-hero h1 {
       font-family: var(--font-heading);
@@ -97,27 +191,31 @@
     }
     .volcanic-grid {
       display: grid;
-      grid-template-columns: 350px 1fr;
-      gap: 40px;
-      padding: 80px 24px;
-      max-width: 1400px;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 56px 24px 80px;
+      max-width: 1320px;
       margin: 0 auto;
     }
     @media(max-width: 900px) {
-      .volcanic-grid { grid-template-columns: 1fr; }
-      .volcanic-main { order: 1; }
-      #console { order: 2; }
+      .volcanic-side { grid-template-columns: 1fr; }
     }
     @media(max-width: 980px) {
       .magma-alert-grid { grid-template-columns: 1fr; }
       .magma-alert-grid > .magma-block:last-child { grid-column: auto; }
       .magma-metric-row { grid-template-columns: 1fr; gap: 10px; }
       .magma-metric-row > div:last-child { text-align: left !important; }
+      .magma-system-grid { grid-template-columns: 1fr; }
+      .magma-status-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .magma-timeline-row { grid-template-columns: 1fr; }
     }
     @media(max-width: 720px) {
       .volcanic-grid { padding: 60px 16px; gap: 24px; }
       .magma-block { padding: 28px 20px; }
+      .magma-status-strip,
+      .magma-checklist { grid-template-columns: 1fr; }
       .magma-purge-row { gap: 12px; }
+      .magma-purge-row input { min-width: 0; }
       .magma-purge-row button { width: 100%; }
       #purge { padding: 72px 16px; }
       #purge h2 { font-size: clamp(2.4rem, 9vw, 4rem); }
@@ -147,8 +245,9 @@
   <div class="chr-container chr-nav-inner" style="flex-wrap:wrap;gap:16px;">
     <a href="#page-top" class="chr-logo magma-text-glow" style="font-family:var(--font-heading)">CRATER ZERO</a>
     <nav id="chr-layout-19-nav" class="chr-nav-links" aria-label="Volcanic navigation">
-      <a href="#console">CONSOLE</a>
-      <a href="#metrics">METRICS</a>
+      <a href="#protocol">PROTOCOL</a>
+      <a href="#extraction">EXTRACTION</a>
+      <a href="#alerts">ALERTS</a>
       <a href="#personnel">PERSONNEL</a>
       <a href="#purge">PURGE</a>
     </nav>
@@ -157,34 +256,55 @@
 </header>
 
 <main id="main-content" class="volcanic-grid">
-  <section id="console" data-reveal="left" style="scroll-margin-top: 96px;" aria-label="Console telemetry">
+  <aside id="console" class="volcanic-side" data-reveal="left" aria-label="Console telemetry">
     <div class="magma-block" style="padding:20px;">
       <div style="font-family:var(--font-heading); color:var(--color-secondary); margin-bottom: 20px; font-weight:700;">LIVE TELEMETRY</div>
-      <div style="font-family:var(--font-mono); font-size: 1.2rem; color:var(--color-text-2); display:flex; flex-direction:column; gap:16px;">
-        <div style="display:flex; justify-content:space-between; border-bottom: 1px dashed var(--color-border); padding-bottom:8px;">
+      <div class="console-stack">
+        <div class="console-row">
           <span>SEISMIC</span> <span class="magma-text-glow">HIGH</span>
         </div>
-        <div style="display:flex; justify-content:space-between; border-bottom: 1px dashed var(--color-border); padding-bottom:8px;">
+        <div class="console-row">
           <span>PRESSURE</span> <span style="color:var(--color-accent)">4500 PSI</span>
         </div>
-        <div style="display:flex; justify-content:space-between; border-bottom: 1px dashed var(--color-border); padding-bottom:8px;">
+        <div class="console-row">
           <span>VISCOSITY</span> <span>89.2%</span>
+        </div>
+        <div class="console-row">
+          <span>CORE DEPTH</span> <span style="color:var(--color-primary)">12.8 KM</span>
+        </div>
+        <div class="console-row">
+          <span>VENT VECTOR</span> <span>N-04 / OPEN</span>
         </div>
       </div>
       <button type="button" style="width:100%; margin-top:30px; padding:16px; background:transparent; border:2px solid var(--color-primary); color:var(--color-primary); font-family:var(--font-heading); letter-spacing:0.1em; cursor:pointer;" onmouseover="this.style.background='var(--color-primary)'; this.style.color='var(--color-on-primary)'" onmouseout="this.style.background='transparent'; this.style.color='var(--color-primary)'">OVERRIDE</button>
     </div>
-  </section>
+    <div class="magma-block" style="padding:20px;">
+      <div style="font-family:var(--font-heading);color:var(--color-primary);margin-bottom:16px">MISSION ORDER</div>
+      <ol style="font-family:var(--font-mono);color:var(--color-text-2);line-height:1.9;margin:0;padding-left:20px">
+        <li>Stabilize drill head</li>
+        <li>Inspect vent array</li>
+        <li>Authorize crew deck</li>
+        <li>Hold purge until confirmed</li>
+      </ol>
+    </div>
+  </aside>
 
   <div class="volcanic-main">
-    <section id="metrics" class="magma-block magma-hero" data-reveal="bottom">
+    <section id="protocol" class="magma-block magma-hero" style="scroll-margin-top:96px" data-reveal="bottom">
       <h1 class="magma-text-glow">MAGMA DRILL PROTOCOL</h1>
       <p style="font-family:var(--font-body); font-size:1.2rem; line-height:1.7; color:var(--color-text-2);">
         Built for high-pressure extraction zones, this console balances blackout surfaces, warning glows, and hard-edged telemetry designed to stay legible in the middle of a live event.
       </p>
+      <div class="magma-status-strip">
+        <div class="magma-status-cell"><strong>3,240K</strong><span style="font-family:var(--font-mono);color:var(--color-text-3)">Chamber heat</span></div>
+        <div class="magma-status-cell"><strong>92%</strong><span style="font-family:var(--font-mono);color:var(--color-text-3)">Sector A yield</span></div>
+        <div class="magma-status-cell"><strong>04</strong><span style="font-family:var(--font-mono);color:var(--color-text-3)">Active vents</span></div>
+        <div class="magma-status-cell"><strong>11M</strong><span style="font-family:var(--font-mono);color:var(--color-text-3)">Evacuation hold</span></div>
+      </div>
     </section>
 
     <!-- Live Geothermic Extraction Metric List -->
-    <section class="magma-block" data-reveal="left">
+    <section id="extraction" class="magma-block" style="scroll-margin-top:96px" data-reveal="left">
       <h2 style="font-family:var(--font-heading); color:var(--color-primary); font-size:2rem; margin-bottom:30px; letter-spacing:0.1em; border-bottom:1px solid var(--color-border); padding-bottom:10px;">CORE EXTRACTION METRICS</h2>
       <div style="display:flex; flex-direction:column; gap:24px;">
         <div class="magma-metric-row">
@@ -206,20 +326,33 @@
     </section>
 
     <!-- Alert Blocks Grid -->
-    <div class="magma-alert-grid">
-      <div class="magma-block" data-reveal="bottom" style="transition-delay:0.1s;">
-        <h3 style="font-family:var(--font-heading); color:var(--color-secondary); font-size:1.5rem; margin-bottom:10px;">VENT 1 STATUS</h3>
-        <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Opening aperture to 40%. Magma flow stabilizing. Awaiting pressure release from the secondary valve core. Do not exceed flow limit of 500 liters/second.</p>
+    <section id="alerts" class="magma-system-grid" style="scroll-margin-top:96px">
+      <div class="magma-alert-grid">
+        <div class="magma-block" data-reveal="bottom" style="transition-delay:0.1s;">
+          <h3 style="font-family:var(--font-heading); color:var(--color-secondary); font-size:1.5rem; margin-bottom:10px;">VENT 1 STATUS</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Opening aperture to 40%. Magma flow stabilizing. Awaiting pressure release from the secondary valve core. Do not exceed flow limit of 500 liters/second.</p>
+        </div>
+        <div class="magma-block" data-reveal="bottom" style="transition-delay:0.2s;">
+          <h3 style="font-family:var(--font-heading); color:var(--color-primary-2); font-size:1.5rem; margin-bottom:10px; animation: flash 2s infinite alternate;">VENT 2 STATUS</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Warning: Lava tube obstruction detected. Thermal readings rising rapidly above 3,200K. Evacuation protocols on standby. Immediate cooling flush required.</p>
+        </div>
+        <div class="magma-block" data-reveal="bottom" style="transition-delay:0.3s; grid-column: span 2;">
+          <h3 style="font-family:var(--font-heading); color:var(--color-accent); font-size:1.5rem; margin-bottom:10px;">COOLANT RESERVOIR</h3>
+          <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Levels currently nominal at 85%. Pumping nitrogen mix into Vent 2 access tube. Estimated temperature drop 300K over the next 4 minutes. Awaiting manual override.</p>
+        </div>
       </div>
-      <div class="magma-block" data-reveal="bottom" style="transition-delay:0.2s;">
-        <h3 style="font-family:var(--font-heading); color:var(--color-primary-2); font-size:1.5rem; margin-bottom:10px; animation: flash 2s infinite alternate;">VENT 2 STATUS</h3>
-        <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Warning: Lava tube obstruction detected. Thermal readings rising rapidly above 3,200K. Evacuation protocols on standby. Immediate cooling flush required.</p>
+      <div class="magma-block" data-reveal="right">
+        <h2 style="font-family:var(--font-heading);color:var(--color-primary);font-size:1.7rem;margin-bottom:18px">CONDUIT HEAT MAP</h2>
+        <div class="conduit-map" aria-label="Volcanic conduit heat map">
+          <div class="conduit-node"></div><div class="conduit-node hot"></div><div></div><div class="conduit-node"></div><div></div>
+          <div></div><div class="conduit-node"></div><div class="conduit-node warn"></div><div class="conduit-node"></div><div></div>
+          <div class="conduit-node"></div><div></div><div class="conduit-node hot"></div><div></div><div class="conduit-node"></div>
+          <div></div><div class="conduit-node"></div><div></div><div class="conduit-node warn"></div><div></div>
+          <div class="conduit-node"></div><div></div><div class="conduit-node"></div><div class="conduit-node hot"></div><div></div>
+        </div>
+        <p style="font-family:var(--font-body);color:var(--color-text-3);line-height:1.7;margin-top:18px">The map turns abstract telemetry into a visible volcanic field: hot nodes, warning chambers, and cooled routes remain legible across era changes.</p>
       </div>
-      <div class="magma-block" data-reveal="bottom" style="transition-delay:0.3s; grid-column: span 2;">
-        <h3 style="font-family:var(--font-heading); color:var(--color-accent); font-size:1.5rem; margin-bottom:10px;">COOLANT RESERVOIR</h3>
-        <p style="font-family:var(--font-body); color:var(--color-text-3); font-size:0.95rem; line-height:1.6;">Levels currently nominal at 85%. Pumping nitrogen mix into Vent 2 access tube. Estimated temperature drop 300K over the next 4 minutes. Awaiting manual override.</p>
-      </div>
-    </div>
+    </section>
 
     <!-- New Content Section: Personnel Registry -->
     <section id="personnel" class="magma-block" data-reveal="bottom">
@@ -240,30 +373,45 @@
       </div>
     </section>
 
-    <!-- New Content Section: Pressure History -->
-    <section class="magma-block" data-reveal="bottom">
-      <h2 style="font-family:var(--font-heading); color:var(--color-primary); font-size:2rem; margin-bottom:20px; border-bottom:1px solid var(--color-border); padding-bottom:10px;">PRESSURE HISTORY</h2>
-      <div class="magma-chart">
-        <div style="height:40%; opacity:0.6;"></div>
-        <div style="height:60%; opacity:0.7;"></div>
-        <div style="height:90%; opacity:0.8; animation: flash 1s infinite alternate;"></div>
-        <div style="height:50%; opacity:0.6;"></div>
-        <div style="height:75%; opacity:0.7;"></div>
-        <div style="height:85%; opacity:0.8;"></div>
-        <div style="height:100%; opacity:1; box-shadow:var(--shadow-glow);"></div>
+    <section id="timeline" class="magma-system-grid" style="scroll-margin-top:96px">
+      <div class="magma-block" data-reveal="left">
+        <h2 style="font-family:var(--font-heading); color:var(--color-primary); font-size:2rem; margin-bottom:20px; border-bottom:1px solid var(--color-border); padding-bottom:10px;">PRESSURE HISTORY</h2>
+        <div class="magma-chart">
+          <div style="height:40%; opacity:0.6;"></div>
+          <div style="height:60%; opacity:0.7;"></div>
+          <div style="height:90%; opacity:0.8; animation: flash 1s infinite alternate;"></div>
+          <div style="height:50%; opacity:0.6;"></div>
+          <div style="height:75%; opacity:0.7;"></div>
+          <div style="height:85%; opacity:0.8;"></div>
+          <div style="height:100%; opacity:1; box-shadow:var(--shadow-glow);"></div>
+        </div>
+        <div style="text-align:center; font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-3);">LAST 24 HOURS (ATMOSPHERIC PSI)</div>
       </div>
-      <div style="text-align:center; font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-3);">LAST 24 HOURS (ATMOSPHERIC PSI)</div>
+      <div class="magma-block" data-reveal="right">
+        <h2 style="font-family:var(--font-heading);color:var(--color-secondary);font-size:1.7rem;margin-bottom:18px">INCIDENT TIMELINE</h2>
+        <div class="magma-timeline">
+          <div class="magma-timeline-row"><strong style="font-family:var(--font-mono);color:var(--color-primary)">00:12</strong><span style="color:var(--color-text-2);line-height:1.6">Drill collar entered basalt pocket and pressure rose beyond nominal operating band.</span><span style="color:var(--color-accent);font-family:var(--font-mono)">WATCH</span></div>
+          <div class="magma-timeline-row"><strong style="font-family:var(--font-mono);color:var(--color-primary)">00:18</strong><span style="color:var(--color-text-2);line-height:1.6">Vent 2 obstruction detected. Cooling reservoir routed to secondary exhaust channel.</span><span style="color:var(--color-secondary);font-family:var(--font-mono)">ROUTE</span></div>
+          <div class="magma-timeline-row"><strong style="font-family:var(--font-mono);color:var(--color-primary)">00:24</strong><span style="color:var(--color-text-2);line-height:1.6">Manual purge remains locked until personnel, vent aperture, and coolant checks clear.</span><span style="color:var(--color-primary);font-family:var(--font-mono)">HOLD</span></div>
+        </div>
+      </div>
     </section>
 
     <!-- Warning / Interlock Screen -->
     <section id="purge" class="magma-block" data-reveal="scale" style="text-align:center; padding:100px 20px; border:4px solid var(--color-primary);">
-      <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--color-accent); margin-bottom:20px;">INITIATE PURGE SEQUENCE</h2>
+      <h2 style="font-family:var(--font-heading); font-size:clamp(2.4rem,5vw,4.6rem); line-height:1.02; color:var(--color-accent); margin-bottom:20px; overflow-wrap:anywhere;">INITIATE PURGE SEQUENCE</h2>
       <p style="font-family:var(--font-body); font-size:1.2rem; color:var(--color-text-2); margin-bottom:40px;">ENTER EMERGENCY OVERRIDE CODE TO RELEASE PRESSURE EXHAUST TO SURFACE.</p>
-      <div class="magma-purge-row">
-        <input type="text" name="override_code_alpha" aria-label="Enter first override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
-        <input type="text" name="override_code_beta" aria-label="Enter second override code segment" placeholder="XXXX" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
-                            <button type="button" style="padding:16px 40px; background:var(--color-primary); border:none; color:var(--color-on-primary); font-family:var(--font-heading); font-size:1.5rem; cursor:pointer; box-shadow:var(--shadow-glow);">CONFIRM</button>
+      <div class="magma-checklist" aria-label="Purge readiness checklist">
+        <div class="magma-check">[OK] Sector A drill collar locked</div>
+        <div class="magma-check">[OK] Coolant reservoir above 80%</div>
+        <div class="magma-check">[HOLD] Vent 2 aperture below limit</div>
+        <div class="magma-check">[OK] Crew deck cleared</div>
       </div>
+      <form class="magma-purge-row" data-demo-message="Purge confirmation preview. Connect this control to your own emergency workflow.">
+        <input type="text" name="override_code_alpha" aria-label="Enter first override code segment" placeholder="XXXX" autocomplete="off" inputmode="text" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
+        <input type="text" name="override_code_beta" aria-label="Enter second override code segment" placeholder="XXXX" autocomplete="off" inputmode="text" style="padding:16px; background:transparent; border:2px solid var(--color-border); color:var(--color-text); text-align:center; font-family:var(--font-mono); font-size:1.5rem;">
+        <button type="submit" style="padding:16px 40px; background:var(--color-primary); border:none; color:var(--color-on-primary); font-family:var(--font-heading); font-size:1.5rem; cursor:pointer; box-shadow:var(--shadow-glow);">CONFIRM</button>
+      </form>
     </section>
   </div>
 </main>

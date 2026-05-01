@@ -180,6 +180,80 @@ function getSectionMotionProfile() {
   return 'default'
 }
 
+function getStickyNavOffset() {
+  const nav = document.querySelector('.chr-nav')
+  if (!(nav instanceof HTMLElement)) return 0
+
+  const style = window.getComputedStyle(nav)
+  if (style.position !== 'sticky' && style.position !== 'fixed') return 0
+
+  return nav.getBoundingClientRect().height
+}
+
+function getAnchorLandingElement(target) {
+  if (target.classList.contains('split-right')) {
+    return target
+  }
+
+  const firstChild = target.firstElementChild
+  if (firstChild instanceof HTMLElement) {
+    return firstChild
+  }
+
+  return target
+}
+
+function getVerticalTransformOffset(element, boundary) {
+  let offset = 0
+  let node = element
+
+  while (node instanceof HTMLElement && node !== boundary.parentElement) {
+    const transform = window.getComputedStyle(node).transform
+
+    if (transform && transform !== 'none') {
+      const matrix = new DOMMatrixReadOnly(transform)
+      offset += matrix.m42
+    }
+
+    if (node === boundary) break
+    node = node.parentElement
+  }
+
+  return offset
+}
+
+function getAnchorLandingY(target) {
+  const viewportGap = 24
+  const landingElement = getAnchorLandingElement(target)
+  const transformOffset = getVerticalTransformOffset(landingElement, target)
+  const landingTop = landingElement.getBoundingClientRect().top + window.scrollY - transformOffset
+
+  return Math.max(0, landingTop - getStickyNavOffset() - viewportGap)
+}
+
+function getMaxScrollY() {
+  return Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
+}
+
+function ensureAnchorScrollRoom(landingY) {
+  let spacer = document.getElementById('chr-anchor-scroll-room')
+
+  if (!spacer) {
+    spacer = document.createElement('div')
+    spacer.id = 'chr-anchor-scroll-room'
+    spacer.setAttribute('aria-hidden', 'true')
+    spacer.style.cssText = 'height:0;pointer-events:none;visibility:hidden;'
+    document.body.appendChild(spacer)
+  }
+
+  spacer.style.height = '0px'
+
+  const shortfall = landingY - getMaxScrollY()
+  if (shortfall > 0) {
+    spacer.style.height = `${Math.ceil(shortfall + 24)}px`
+  }
+}
+
 export function initSectionJumpTransitions() {
   const sectionList = Array.from(document.querySelectorAll('section[id]'))
   const links = Array.from(document.querySelectorAll('a[href^="#"]')).filter((link) => {
@@ -329,6 +403,8 @@ export function initSectionJumpTransitions() {
       const currentIndex = getCurrentSectionIndex(sectionList)
       const targetIndex = sectionList.findIndex((section) => section.id === target.id)
       const direction = targetIndex >= currentIndex ? 'forward' : 'backward'
+      const landingY = getAnchorLandingY(target)
+      ensureAnchorScrollRoom(landingY)
 
       triggerSectionJump(target, direction)
 
@@ -336,10 +412,46 @@ export function initSectionJumpTransitions() {
         history.pushState(null, '', href)
       }
 
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.scrollTo({
+        top: landingY,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      })
       focusTargetWhenVisible(target)
     })
   })
+
+  function scrollToHashTarget() {
+    const hash = window.location.hash
+    if (!hash || hash === '#main-content' || hash === '#page-top') return
+
+    const target = document.querySelector(hash)
+    if (!(target instanceof HTMLElement)) return
+
+    const landingY = getAnchorLandingY(target)
+    ensureAnchorScrollRoom(landingY)
+
+    window.scrollTo({
+      top: landingY,
+      behavior: 'auto',
+    })
+  }
+
+  function scheduleHashCorrection() {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(scrollToHashTarget)
+    })
+    window.setTimeout(scrollToHashTarget, 0)
+    window.setTimeout(scrollToHashTarget, 120)
+    window.setTimeout(scrollToHashTarget, 420)
+  }
+
+  window.addEventListener('hashchange', scrollToHashTarget)
+  window.addEventListener('load', scheduleHashCorrection)
+  window.addEventListener('pageshow', scheduleHashCorrection)
+
+  if (window.location.hash) {
+    scheduleHashCorrection()
+  }
 }
 
 /**
