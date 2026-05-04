@@ -190,43 +190,13 @@ function getStickyNavOffset() {
   return nav.getBoundingClientRect().height
 }
 
-function getAnchorLandingElement(target) {
-  if (target.classList.contains('split-right')) {
-    return target
-  }
-
-  const firstChild = target.firstElementChild
-  if (firstChild instanceof HTMLElement) {
-    return firstChild
-  }
-
-  return target
-}
-
-function getVerticalTransformOffset(element, boundary) {
-  let offset = 0
-  let node = element
-
-  while (node instanceof HTMLElement && node !== boundary.parentElement) {
-    const transform = window.getComputedStyle(node).transform
-
-    if (transform && transform !== 'none') {
-      const matrix = new DOMMatrixReadOnly(transform)
-      offset += matrix.m42
-    }
-
-    if (node === boundary) break
-    node = node.parentElement
-  }
-
-  return offset
-}
-
 function getAnchorLandingY(target) {
   const viewportGap = 24
-  const landingElement = getAnchorLandingElement(target)
-  const transformOffset = getVerticalTransformOffset(landingElement, target)
-  const landingTop = landingElement.getBoundingClientRect().top + window.scrollY - transformOffset
+  // Use the section element itself as the landing anchor.
+  // getBoundingClientRect() already includes all CSS transforms, so no
+  // manual transform correction is needed — subtracting it again would
+  // double-count and push the scroll position too far up.
+  const landingTop = target.getBoundingClientRect().top + window.scrollY
 
   return Math.max(0, landingTop - getStickyNavOffset() - viewportGap)
 }
@@ -246,7 +216,11 @@ function ensureAnchorScrollRoom(landingY) {
     document.body.appendChild(spacer)
   }
 
+  // Reset first, then force a layout read so getMaxScrollY() reflects the
+  // updated (shorter) page height before we compute the shortfall.
+  // Reading spacer.offsetHeight forces a synchronous reflow.
   spacer.style.height = '0px'
+  void spacer.offsetHeight
 
   const shortfall = landingY - getMaxScrollY()
   if (shortfall > 0) {
