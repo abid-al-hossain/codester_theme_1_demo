@@ -191,23 +191,22 @@ function getStickyNavOffset() {
 }
 
 function getAnchorLandingY(target) {
-  const viewportGap = 24
-  // Land at the first content child to skip the section's own padding (120px
-  // on .chr-section), so content appears right below the nav rather than
-  // leaving an empty padded gap at the top.
-  // Special case: split-right sections ARE the scroller, so land on themselves.
-  // Note: getBoundingClientRect() already includes CSS transforms, so no manual
-  // transform correction is applied here.
-  let landingElement = target
-  if (!target.classList.contains('split-right')) {
-    const firstChild = target.firstElementChild
-    if (firstChild instanceof HTMLElement) {
-      landingElement = firstChild
-    }
+  // Position the section's top edge right at the nav's bottom edge.
+  // The section's own CSS padding (e.g. 120px on .chr-section) provides
+  // natural spacing between the nav and the heading — no extra gap needed.
+  //
+  // If the section has a data-reveal transform (e.g. translateY(30px)),
+  // getBoundingClientRect() includes that shift. We subtract it so we
+  // scroll to the post-animation resting position, preventing the section
+  // from sliding up behind the nav when the animation fires.
+  const sectionTop = target.getBoundingClientRect().top + window.scrollY
+  const sectionTransform = window.getComputedStyle(target).transform
+  let transformCorrection = 0
+  if (sectionTransform && sectionTransform !== 'none') {
+    transformCorrection = new DOMMatrixReadOnly(sectionTransform).m42
   }
 
-  const landingTop = landingElement.getBoundingClientRect().top + window.scrollY
-  return Math.max(0, landingTop - getStickyNavOffset() - viewportGap)
+  return Math.max(0, sectionTop - transformCorrection - getStickyNavOffset())
 }
 
 function getMaxScrollY() {
