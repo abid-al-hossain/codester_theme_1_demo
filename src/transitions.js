@@ -192,12 +192,21 @@ function getStickyNavOffset() {
 
 function getAnchorLandingY(target) {
   const viewportGap = 24
-  // Use the section element itself as the landing anchor.
-  // getBoundingClientRect() already includes all CSS transforms, so no
-  // manual transform correction is needed — subtracting it again would
-  // double-count and push the scroll position too far up.
-  const landingTop = target.getBoundingClientRect().top + window.scrollY
+  // Land at the first content child to skip the section's own padding (120px
+  // on .chr-section), so content appears right below the nav rather than
+  // leaving an empty padded gap at the top.
+  // Special case: split-right sections ARE the scroller, so land on themselves.
+  // Note: getBoundingClientRect() already includes CSS transforms, so no manual
+  // transform correction is applied here.
+  let landingElement = target
+  if (!target.classList.contains('split-right')) {
+    const firstChild = target.firstElementChild
+    if (firstChild instanceof HTMLElement) {
+      landingElement = firstChild
+    }
+  }
 
+  const landingTop = landingElement.getBoundingClientRect().top + window.scrollY
   return Math.max(0, landingTop - getStickyNavOffset() - viewportGap)
 }
 
