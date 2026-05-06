@@ -236,6 +236,17 @@ function ensureAnchorScrollRoom(landingY) {
   }
 }
 
+function resolveAnchorLandingY(target) {
+  const landingY = getAnchorLandingY(target)
+
+  if (target.dataset.anchorScrollRoom === 'false') {
+    return Math.min(landingY, getMaxScrollY())
+  }
+
+  ensureAnchorScrollRoom(landingY)
+  return landingY
+}
+
 export function initSectionJumpTransitions() {
   const sectionList = Array.from(document.querySelectorAll('section[id]'))
   const links = Array.from(document.querySelectorAll('a[href^="#"]')).filter((link) => {
@@ -306,6 +317,23 @@ export function initSectionJumpTransitions() {
       cleanup()
       moveFocusToTarget(target)
     }, 900)
+  }
+
+  function correctSettledAnchorLanding(target) {
+    if (target.dataset.anchorScrollRoom !== 'false') return
+
+    const correctedLandingY = resolveAnchorLandingY(target)
+    if (Math.abs(window.scrollY - correctedLandingY) < 2) return
+
+    window.scrollTo({
+      top: correctedLandingY,
+      behavior: 'auto',
+    })
+  }
+
+  function scheduleSettledAnchorCorrection(target) {
+    window.setTimeout(() => correctSettledAnchorLanding(target), 760)
+    window.setTimeout(() => correctSettledAnchorLanding(target), 1320)
   }
 
   function triggerSectionJump(target, direction) {
@@ -385,8 +413,7 @@ export function initSectionJumpTransitions() {
       const currentIndex = getCurrentSectionIndex(sectionList)
       const targetIndex = sectionList.findIndex((section) => section.id === target.id)
       const direction = targetIndex >= currentIndex ? 'forward' : 'backward'
-      const landingY = getAnchorLandingY(target)
-      ensureAnchorScrollRoom(landingY)
+      const landingY = resolveAnchorLandingY(target)
 
       triggerSectionJump(target, direction)
 
@@ -398,6 +425,7 @@ export function initSectionJumpTransitions() {
         top: landingY,
         behavior: reduceMotion ? 'auto' : 'smooth',
       })
+      scheduleSettledAnchorCorrection(target)
       focusTargetWhenVisible(target)
     })
   })
@@ -409,8 +437,7 @@ export function initSectionJumpTransitions() {
     const target = document.querySelector(hash)
     if (!(target instanceof HTMLElement)) return
 
-    const landingY = getAnchorLandingY(target)
-    ensureAnchorScrollRoom(landingY)
+    const landingY = resolveAnchorLandingY(target)
 
     window.scrollTo({
       top: landingY,
@@ -425,6 +452,8 @@ export function initSectionJumpTransitions() {
     window.setTimeout(scrollToHashTarget, 0)
     window.setTimeout(scrollToHashTarget, 120)
     window.setTimeout(scrollToHashTarget, 420)
+    window.setTimeout(scrollToHashTarget, 900)
+    window.setTimeout(scrollToHashTarget, 1500)
   }
 
   window.addEventListener('hashchange', scrollToHashTarget)

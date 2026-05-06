@@ -180,8 +180,8 @@
         <div style="font-family:var(--font-mono);font-size:1rem;color:var(--color-on-primary);background:var(--color-primary);padding:12px 24px;display:inline-block;box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 40%, transparent);">// CONNECTION ENCRYPTED</div>
       </div>
       <div data-reveal="right" style="border:1px solid var(--color-primary);padding:50px;background:var(--color-bg);position:relative;box-shadow: inset 0 0 30px color-mix(in srgb, var(--color-primary) 10%, transparent), 0 20px 40px rgba(0,0,0,0.4);">
-        <div style="position:absolute;top:-2px;left:-2px;width:16px;height:16px;background:var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>
-        <div style="position:absolute;bottom:-2px;right:-2px;width:16px;height:16px;background:var(--color-secondary);box-shadow:0 0 15px var(--color-secondary)"></div>
+        <div style="position:absolute;top:0;left:0;width:16px;height:16px;background:var(--color-primary);box-shadow:0 0 15px var(--color-primary)"></div>
+        <div style="position:absolute;bottom:0;right:0;width:16px;height:16px;background:var(--color-secondary);box-shadow:0 0 15px var(--color-secondary)"></div>
         <form style="display:flex;flex-direction:column;gap:30px" aria-label="Uplink form">
           <div>
             <input type="text" name="id_token" aria-label="ID token" placeholder="ID_TOKEN" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;transition:all 0.3s;" autocomplete="name">
@@ -189,7 +189,7 @@
           <div>
             <textarea rows="4" name="transmission" aria-label="Transmission" placeholder="TRANSMISSION" style="width:100%;padding:20px;background:var(--color-bg-2);border:none;border-bottom:2px solid color-mix(in srgb, var(--color-primary) 40%, transparent);color:var(--color-text);font-family:var(--font-mono);font-size:1.1rem;outline:none;resize:vertical;transition:all 0.3s;"></textarea>
           </div>
-          <button type="submit" class="chr-btn-primary neon-box" style="font-family:var(--font-mono);justify-content:center;padding:24px;font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border-radius:0;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);cursor:pointer;">&gt; TRANSMIT()</button>
+          <button type="submit" class="chr-btn-primary neon-box" style="font-family:var(--font-mono);justify-content:center;width:100%;box-sizing:border-box;padding:24px;font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;line-height:1.2;max-width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;text-align:center;border-radius:0;background:color-mix(in srgb, var(--color-primary) 10%, transparent);color:var(--color-primary);cursor:pointer;">&gt; TRANSMIT()</button>
         </form>
       </div>
     </div>

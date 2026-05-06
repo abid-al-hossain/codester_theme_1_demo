@@ -41,9 +41,10 @@
 
     .care-panel { padding: 32px; border-radius: 24px; }
     .care-block { padding: 24px 32px; cursor: pointer; border-radius: 16px; margin-bottom: 12px; }
-    .dept-summary { font-size: 1.3rem; font-weight: 600; outline: none; display: flex; justify-content: space-between; align-items: center; color: var(--color-text); }
-    .dept-icon { width: 36px; height: 36px; border-radius: 50%; background: color-mix(in srgb, var(--color-primary) 15%, transparent); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: transform 0.3s; }
-        .care-block[open] .dept-icon { transform: rotate(45deg); background: var(--color-primary); color: var(--color-on-primary); }
+    .dept-summary { font-size: 1.3rem; font-weight: 600; outline: none; display: flex; justify-content: space-between; align-items: center; gap:16px; min-width:0; list-style:none; color: var(--color-text); overflow-wrap:anywhere; }
+    .dept-summary::-webkit-details-marker { display:none; }
+    .dept-icon { flex:0 0 36px; width: 36px; height: 36px; border-radius: 50%; background: color-mix(in srgb, var(--color-primary) 15%, transparent); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: transform 0.3s; }
+        .care-block[open] .dept-icon { background: var(--color-primary); color: var(--color-on-primary); }
 
     .doctor-row{padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
     .doctor-card { background: color-mix(in srgb, var(--color-bg) 85%, transparent); backdrop-filter: blur(12px); border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent); border-radius: 20px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
