@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs'
-import { FONTS, loadGoogleFont, ERA_DEFAULT_FONTS, getGoogleFontFamilyParam } from './fonts.js'
+import { FONTS, FONT_STYLE_GROUPS, loadGoogleFont, ERA_DEFAULT_FONTS, getGoogleFontFamilyParam } from './fonts.js'
 import { CUSTOMIZER_HTML } from './customizer-html.js'
 import { sanitizePackageName, sanitizeArchiveName } from './package-name-utils.js'
 
@@ -596,6 +596,12 @@ function clearCustomColorVars() {
   })
 }
 
+function clearCustomFontVars() {
+  FONT_ROLE_OPTIONS.forEach((option) => {
+    document.documentElement.style.removeProperty(`--font-${option.id}`)
+  })
+}
+
 function cloneThemePreset(preset = DEFAULT_THEME) {
   return {
     era: preset.era,
@@ -678,6 +684,60 @@ if (INITIAL_PREFS) {
 }
 
 const ALL_FONTS_FLAT = [...new Set(Object.values(FONTS).flat())].sort()
+
+function uniqueFonts(fonts) {
+  return [...new Set((fonts || []).filter((font) => ALL_FONTS_FLAT.includes(font)))]
+}
+
+const FONT_ROLE_FALLBACK_POOLS = {
+  heading: uniqueFonts([
+    ...FONTS['Sans-Serif'],
+    ...FONTS.Serif,
+    ...FONTS.Display,
+    ...FONTS['Gothic / Historic'],
+    ...FONTS['Futuristic / Tech'],
+  ]),
+  body: uniqueFonts([
+    ...FONTS['Sans-Serif'],
+    ...FONTS.Serif,
+  ]),
+  accent: uniqueFonts([
+    ...FONTS['Sans-Serif'],
+    ...FONTS.Serif,
+    ...FONTS.Display,
+    ...FONTS['Gothic / Historic'],
+    ...FONTS['Futuristic / Tech'],
+    ...FONTS.Handwriting,
+  ]),
+  mono: uniqueFonts(FONTS.Monospace),
+}
+
+function pickFontFromPools(primaryPool, fallbackPool, excluded = []) {
+  const blocked = new Set((Array.isArray(excluded) ? excluded : [excluded]).filter(Boolean))
+  const primaryCandidates = uniqueFonts(primaryPool).filter((font) => !blocked.has(font))
+  if (primaryCandidates.length) return pickRandom(primaryCandidates)
+
+  const fallbackCandidates = uniqueFonts(fallbackPool).filter((font) => !blocked.has(font))
+  if (fallbackCandidates.length) return pickRandom(fallbackCandidates)
+
+  return fallbackPool[0] || ALL_FONTS_FLAT[0]
+}
+
+function pickSurpriseFonts(exclusions) {
+  const normalized = normalizeSurpriseSettings({ fonts: exclusions }).fonts
+  const group = pickRandom(FONT_STYLE_GROUPS)
+  const nextHeading = pickFontFromPools(group.heading, FONT_ROLE_FALLBACK_POOLS.heading, normalized.heading)
+  const nextBody = pickFontFromPools(group.body, FONT_ROLE_FALLBACK_POOLS.body, [...normalized.body, nextHeading])
+  const nextAccent = pickFontFromPools(group.accent, FONT_ROLE_FALLBACK_POOLS.accent, [...normalized.accent, nextHeading, nextBody])
+  const nextMono = pickFontFromPools(group.mono, FONT_ROLE_FALLBACK_POOLS.mono, normalized.mono)
+
+  return {
+    heading: nextHeading,
+    body: nextBody,
+    accent: nextAccent,
+    mono: nextMono,
+  }
+}
 
 Alpine.store('chr', {
   open: false,
@@ -817,9 +877,7 @@ Alpine.store('chr', {
 
     clearCustomColorVars()
 
-    ;['heading', 'body', 'mono', 'accent'].forEach((role) => {
-      document.documentElement.style.removeProperty(`--font-${role}`)
-    })
+    clearCustomFontVars()
 
     const defaults = ERA_DEFAULT_FONTS[era]
     if (defaults) this.fonts = { ...defaults }
@@ -904,21 +962,13 @@ Alpine.store('chr', {
   },
 
   surpriseMe() {
-    const nextHeading = pickRandom(ALL_FONTS_FLAT, this.surpriseSettings.fonts.heading)
-    const nextBody = pickRandom(ALL_FONTS_FLAT, [...this.surpriseSettings.fonts.body, nextHeading])
-    const nextAccent = pickRandom(ALL_FONTS_FLAT, [...this.surpriseSettings.fonts.accent, nextHeading, nextBody])
-    const nextMono = pickRandom(ALL_FONTS_FLAT, this.surpriseSettings.fonts.mono)
+    const nextFonts = pickSurpriseFonts(this.surpriseSettings.fonts)
     const nextColors = generateSurpriseColorsWithExclusions(this.surpriseSettings.colors)
 
     this.hasCustomFonts = true
     this.hasCustomColors = true
     this.activePalette = 'custom'
-    this.fonts = {
-      heading: nextHeading,
-      body: nextBody,
-      accent: nextAccent,
-      mono: nextMono,
-    }
+    this.fonts = { ...nextFonts }
     this.colors = {
       ...this.colors,
       ...nextColors,
@@ -1098,7 +1148,8 @@ Alpine.store('chr', {
       text: preset.colors.text,
     }
 
-    document.documentElement.removeAttribute('style')
+    clearCustomColorVars()
+    clearCustomFontVars()
     document.documentElement.setAttribute('data-era', this.era)
     applyEra(this.era)
 

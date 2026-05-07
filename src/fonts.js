@@ -30,6 +30,100 @@ export const FONTS = {
   ]
 }
 
+export const FONT_STYLE_GROUPS = [
+  {
+    id: 'clean',
+    heading: [
+      'DM Sans', 'Figtree', 'Geist', 'Inter', 'Josefin Sans', 'Karla', 'Lexend',
+      'Manrope', 'Mulish', 'Nunito', 'Outfit', 'Plus Jakarta Sans', 'Poppins',
+      'Public Sans', 'Raleway', 'Rubik', 'Sora', 'Space Grotesk', 'Work Sans',
+    ],
+    body: [
+      'DM Sans', 'Figtree', 'Geist', 'Inter', 'Josefin Sans', 'Karla', 'Lexend',
+      'Manrope', 'Mulish', 'Nunito', 'Outfit', 'Plus Jakarta Sans', 'Poppins',
+      'Public Sans', 'Raleway', 'Rubik', 'Sora', 'Work Sans',
+    ],
+    accent: [
+      'DM Sans', 'Exo 2', 'Figtree', 'Josefin Sans', 'Lexend', 'Outfit',
+      'Readex Pro', 'Rubik', 'Sora', 'Space Grotesk', 'Syne', 'Unbounded',
+    ],
+    mono: ['DM Mono', 'Fira Code', 'IBM Plex Mono', 'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'Space Mono'],
+  },
+  {
+    id: 'editorial',
+    heading: [
+      'Bitter', 'Cormorant Garamond', 'Crimson Pro', 'Domine', 'EB Garamond',
+      'Libre Baskerville', 'Lora', 'Merriweather', 'Noto Serif', 'Playfair Display',
+      'Source Serif 4', 'Spectral',
+    ],
+    body: [
+      'Bitter', 'Crimson Pro', 'Domine', 'EB Garamond', 'Libre Baskerville',
+      'Lora', 'Merriweather', 'Noto Serif', 'Source Serif 4', 'Spectral',
+    ],
+    accent: [
+      'Barlow Condensed', 'Bebas Neue', 'Big Shoulders Display', 'Cinzel',
+      'Cormorant Garamond', 'Oswald', 'Playfair Display', 'Teko',
+    ],
+    mono: ['Courier Prime', 'DM Mono', 'IBM Plex Mono', 'Inconsolata', 'Source Code Pro'],
+  },
+  {
+    id: 'tech',
+    heading: [
+      'Audiowide', 'Changa', 'Electrolize', 'Exo', 'Exo 2', 'Iceland', 'Orbitron',
+      'Rajdhani', 'Readex Pro', 'Space Grotesk', 'Tektur', 'Unbounded',
+    ],
+    body: [
+      'Changa', 'Electrolize', 'Exo', 'Exo 2', 'Geist', 'Inter', 'Plus Jakarta Sans',
+      'Public Sans', 'Rajdhani', 'Readex Pro', 'Tektur',
+    ],
+    accent: [
+      'Audiowide', 'Changa', 'Electrolize', 'Iceland', 'Orbitron',
+      'Rajdhani', 'Silkscreen', 'Tektur',
+    ],
+    mono: ['Fira Code', 'IBM Plex Mono', 'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'Space Mono'],
+  },
+  {
+    id: 'bold',
+    heading: [
+      'Anton', 'Archivo Black', 'Barlow Condensed', 'Bebas Neue', 'Big Shoulders Display',
+      'Changa', 'Oswald', 'Syne', 'Teko', 'Unbounded',
+    ],
+    body: ['Barlow Condensed', 'Changa', 'DM Sans', 'Inter', 'Manrope', 'Public Sans', 'Teko'],
+    accent: ['Anton', 'Archivo Black', 'Bebas Neue', 'Big Shoulders Display', 'Oswald', 'Syne', 'Teko'],
+    mono: ['Fira Code', 'IBM Plex Mono', 'JetBrains Mono', 'Roboto Mono', 'Source Code Pro'],
+  },
+  {
+    id: 'historic',
+    heading: [
+      'Almendra', 'Cinzel', 'Cormorant Garamond', 'EB Garamond',
+      'MedievalSharp', 'Playfair Display', 'Uncial Antiqua', 'UnifrakturMaguntia',
+    ],
+    body: [
+      'Almendra', 'Cormorant Garamond', 'Crimson Pro', 'EB Garamond',
+      'Libre Baskerville', 'Lora', 'Merriweather', 'Spectral',
+    ],
+    accent: [
+      'Almendra', 'Cinzel', 'Dancing Script', 'MedievalSharp',
+      'Uncial Antiqua', 'UnifrakturMaguntia',
+    ],
+    mono: ['Courier Prime', 'Inconsolata', 'Space Mono'],
+  },
+  {
+    id: 'playful',
+    heading: ['Caveat', 'Creepster', 'Dancing Script', 'Pacifico', 'Sacramento', 'Syne', 'Unbounded'],
+    body: ['DM Sans', 'Figtree', 'Karla', 'Nunito', 'Outfit', 'Poppins'],
+    accent: ['Caveat', 'Creepster', 'Dancing Script', 'Pacifico', 'Sacramento'],
+    mono: ['DM Mono', 'IBM Plex Mono', 'JetBrains Mono', 'Space Mono'],
+  },
+  {
+    id: 'pixel',
+    heading: ['Press Start 2P', 'Silkscreen', 'VT323'],
+    body: ['IBM Plex Mono', 'Inconsolata', 'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'VT323'],
+    accent: ['Press Start 2P', 'Silkscreen', 'VT323'],
+    mono: ['Fira Code', 'IBM Plex Mono', 'JetBrains Mono', 'Roboto Mono', 'Source Code Pro', 'VT323'],
+  },
+]
+
 const loadedFonts = new Set()
 const loadingFonts = new Map()
 const SINGLE_WEIGHT_FONTS = new Set([
