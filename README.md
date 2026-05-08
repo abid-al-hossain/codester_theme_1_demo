@@ -66,6 +66,6 @@ Because the project uses Vite module entrypoints, use it through the development
 
 - This demo keeps package export disabled for public preview. The source project includes the one-layout Vite package export workflow.
 - Single-layout exported ZIPs from the source project do not include the preview generator, Playwright dependency, or `npm run previews`; those are only for maintaining the full source/demo directory thumbnails.
-- Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or exact color swatches from future surprises.
+- Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or per-color HEX ranges from future surprises.
 - Shared mobile-nav behavior now supports the layout-specific nav shells used by the dashboard, archive, and social layouts.
 - Countdown blocks use either the layout-provided launch date or a rolling future fallback date, and switch to a neutral completed state once the launch window has passed.

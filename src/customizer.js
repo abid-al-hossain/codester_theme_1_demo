@@ -878,6 +878,7 @@ Alpine.store('chr', {
   colorRoleOptions: COLOR_ROLE_OPTIONS,
   surpriseSettings: createEmptySurpriseSettings(),
   surpriseSettingsOpen: false,
+  surpriseSettingsView: 'fonts',
   lastSurpriseFocus: null,
   surpriseFontDrafts: { ...DEFAULT_FONTS },
   surpriseColorRangeDrafts: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '000000-000000'])),
@@ -1117,7 +1118,7 @@ Alpine.store('chr', {
 
   getSurpriseDialogFocusables() {
     return [...document.querySelectorAll('#chr-surprise-dialog button, #chr-surprise-dialog input, #chr-surprise-dialog select, #chr-surprise-dialog textarea, #chr-surprise-dialog [href], #chr-surprise-dialog [tabindex]:not([tabindex="-1"])')]
-      .filter((element) => !element.hasAttribute('disabled'))
+      .filter((element) => !element.hasAttribute('disabled') && element.offsetParent !== null)
   },
 
   handleSurpriseDialogTab(event) {
@@ -1153,6 +1154,11 @@ Alpine.store('chr', {
   removeSurpriseFontExclusion(role, font) {
     this.surpriseSettings.fonts[role] = this.surpriseSettings.fonts[role].filter((item) => item !== font)
     this.save()
+  },
+
+  setSurpriseSettingsView(view) {
+    if (!['fonts', 'colors'].includes(view)) return
+    this.surpriseSettingsView = view
   },
 
   setSurpriseColorRangeDraft(token, value) {
@@ -1222,9 +1228,15 @@ Alpine.store('chr', {
   },
 
   getSurpriseExclusionCount() {
-    const fontCount = Object.values(this.surpriseSettings.fonts).reduce((total, list) => total + list.length, 0)
-    const colorCount = Object.values(this.surpriseSettings.colors).reduce((total, list) => total + list.length, 0)
-    return fontCount + colorCount
+    return this.getSurpriseFontExclusionCount() + this.getSurpriseColorExclusionCount()
+  },
+
+  getSurpriseFontExclusionCount() {
+    return Object.values(this.surpriseSettings.fonts).reduce((total, list) => total + list.length, 0)
+  },
+
+  getSurpriseColorExclusionCount() {
+    return Object.values(this.surpriseSettings.colors).reduce((total, list) => total + list.length, 0)
   },
 
   resetSurpriseExclusions() {

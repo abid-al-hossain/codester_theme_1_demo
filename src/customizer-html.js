@@ -425,19 +425,30 @@ export const CUSTOMIZER_HTML = /* html */ `
       <div class="surprise-settings-head">
         <div>
           <div class="cust-label" id="chr-surprise-title" style="margin:0 0 4px">Surprise Me Settings</div>
-          <div class="surprise-settings-note">Exclude exact fonts and global HEX ranges from future surprises.</div>
+          <div class="surprise-settings-note">Choose what Surprise Me should avoid.</div>
+        </div>
+        <button type="button" data-surprise-initial-focus="true" @click="$store.chr.closeSurpriseSettings()" aria-label="Close surprise settings" class="surprise-close-btn">X</button>
+      </div>
+
+      <div class="surprise-settings-toolbar">
+        <div class="surprise-view-tabs" role="tablist" aria-label="Surprise exclusion categories">
+          <button type="button" class="surprise-view-tab" :class="$store.chr.surpriseSettingsView === 'fonts' ? 'active' : ''" @click="$store.chr.setSurpriseSettingsView('fonts')" role="tab" :aria-selected="$store.chr.surpriseSettingsView === 'fonts' ? 'true' : 'false'">
+            Fonts <span x-text="$store.chr.getSurpriseFontExclusionCount()"></span>
+          </button>
+          <button type="button" class="surprise-view-tab" :class="$store.chr.surpriseSettingsView === 'colors' ? 'active' : ''" @click="$store.chr.setSurpriseSettingsView('colors')" role="tab" :aria-selected="$store.chr.surpriseSettingsView === 'colors' ? 'true' : 'false'">
+            Colors <span x-text="$store.chr.getSurpriseColorExclusionCount()"></span>
+          </button>
         </div>
         <div class="surprise-settings-actions">
           <button type="button" class="surprise-reset-btn" @click="$store.chr.resetSurpriseExclusions()" :disabled="$store.chr.getSurpriseExclusionCount() === 0">
             Reset All
           </button>
           <div class="surprise-settings-count" x-text="$store.chr.getSurpriseExclusionCount() + ' exclusions'"></div>
-          <button type="button" data-surprise-initial-focus="true" @click="$store.chr.closeSurpriseSettings()" aria-label="Close surprise settings" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text);font-size:0.9rem;cursor:pointer">X</button>
         </div>
       </div>
 
       <div class="surprise-modal-body">
-        <div class="surprise-settings-section">
+        <div class="surprise-settings-section" x-show="$store.chr.surpriseSettingsView === 'fonts'">
           <div class="cust-label" style="margin-top:0">Font Exclusions</div>
           <template x-for="role in $store.chr.fontRoleOptions" :key="'surprise-font-' + role.id">
             <div class="surprise-setting-block">
@@ -468,7 +479,7 @@ export const CUSTOMIZER_HTML = /* html */ `
           </template>
         </div>
 
-        <div class="surprise-settings-section">
+        <div class="surprise-settings-section" x-show="$store.chr.surpriseSettingsView === 'colors'">
           <div class="cust-label" style="margin-top:0">Color Range Exclusions</div>
           <template x-for="slot in $store.chr.colorRoleOptions" :key="'surprise-color-range-' + slot.id">
             <div class="surprise-setting-block surprise-range-block">
