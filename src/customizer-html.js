@@ -425,9 +425,12 @@ export const CUSTOMIZER_HTML = /* html */ `
       <div class="surprise-settings-head">
         <div>
           <div class="cust-label" id="chr-surprise-title" style="margin:0 0 4px">Surprise Me Settings</div>
-          <div class="surprise-settings-note">Exclude exact fonts and swatches from future surprises.</div>
+          <div class="surprise-settings-note">Exclude exact fonts and global HEX ranges from future surprises.</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
+        <div class="surprise-settings-actions">
+          <button type="button" class="surprise-reset-btn" @click="$store.chr.resetSurpriseExclusions()" :disabled="$store.chr.getSurpriseExclusionCount() === 0">
+            Reset All
+          </button>
           <div class="surprise-settings-count" x-text="$store.chr.getSurpriseExclusionCount() + ' exclusions'"></div>
           <button type="button" data-surprise-initial-focus="true" @click="$store.chr.closeSurpriseSettings()" aria-label="Close surprise settings" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:999px;border:1px solid var(--color-border);background:var(--color-bg);color:var(--color-text);font-size:0.9rem;cursor:pointer">X</button>
         </div>
@@ -466,29 +469,42 @@ export const CUSTOMIZER_HTML = /* html */ `
         </div>
 
         <div class="surprise-settings-section">
-          <div class="cust-label" style="margin-top:0">Color Exclusions</div>
-          <template x-for="slot in $store.chr.colorRoleOptions" :key="'surprise-color-' + slot.id">
-            <div class="surprise-setting-block">
+          <div class="cust-label" style="margin-top:0">Color Range Exclusions</div>
+          <template x-for="slot in $store.chr.colorRoleOptions" :key="'surprise-color-range-' + slot.id">
+            <div class="surprise-setting-block surprise-range-block">
               <div class="surprise-setting-title" x-text="slot.label"></div>
-              <div class="surprise-setting-row">
+              <div class="surprise-range-preview" :style="$store.chr.getSurpriseColorRangePreviewStyle($store.chr.surpriseColorRangeDrafts[slot.id])" aria-hidden="true"></div>
+              <div class="surprise-range-row">
                 <input
-                  class="surprise-color-input"
-                  type="color"
-                  :aria-label="'Choose a ' + slot.label + ' color to exclude'"
-                  :value="$store.chr.surpriseColorDrafts[slot.id]"
-                  @input="$store.chr.setSurpriseColorDraft(slot.id, $event.target.value)"
+                  class="surprise-range-input"
+                  type="text"
+                  inputmode="text"
+                  autocomplete="off"
+                  spellcheck="false"
+                  placeholder="000000-EEEEEE"
+                  :aria-label="'HEX range to exclude from Surprise Me ' + slot.label + ' colors'"
+                  :value="$store.chr.surpriseColorRangeDrafts[slot.id]"
+                  @input="$store.chr.setSurpriseColorRangeDraft(slot.id, $event.target.value)"
+                  @keydown.enter.prevent="$store.chr.addSurpriseColorRangeExclusion(slot.id)"
                 >
-                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseColorExclusion(slot.id)">Exclude</button>
+                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseColorRangeExclusion(slot.id)">Exclude</button>
               </div>
-              <div class="surprise-chip-list">
-                <template x-for="color in $store.chr.surpriseSettings.colors[slot.id]" :key="slot.id + '-chip-' + color">
-                  <button type="button" class="surprise-chip surprise-color-chip" @click="$store.chr.removeSurpriseColorExclusion(slot.id, color)">
-                    <span class="surprise-color-swatch" :style="'background:' + color"></span>
-                    <span x-text="color.toUpperCase()"></span>
+              <div class="surprise-range-meta">
+                <span x-text="$store.chr.getSurpriseColorRangeDraftLabel(slot.id)"></span>
+                <span x-text="$store.chr.getSurpriseColorRangeDraftCoverage(slot.id)"></span>
+              </div>
+              <div x-show="$store.chr.getSurpriseColorRangeDraftWarning(slot.id)" class="surprise-range-warning" x-text="$store.chr.getSurpriseColorRangeDraftWarning(slot.id)"></div>
+              <div x-show="$store.chr.surpriseColorRangeErrors[slot.id]" class="surprise-range-error" x-text="$store.chr.surpriseColorRangeErrors[slot.id]"></div>
+              <div class="surprise-chip-list surprise-range-chip-list">
+                <template x-for="range in $store.chr.surpriseSettings.colors[slot.id]" :key="slot.id + '-' + range.start + '-' + range.end">
+                  <button type="button" class="surprise-chip surprise-range-chip" @click="$store.chr.removeSurpriseColorRangeExclusion(slot.id, range)">
+                    <span class="surprise-range-chip-swatch" :style="$store.chr.getSurpriseColorRangePreviewStyle(range)"></span>
+                    <span x-text="$store.chr.getSurpriseColorRangeLabel(range)"></span>
+                    <span class="surprise-range-chip-meta" x-text="$store.chr.getSurpriseColorRangeCoverage(range)"></span>
                     <span aria-hidden="true">x</span>
                   </button>
                 </template>
-                <div x-show="$store.chr.surpriseSettings.colors[slot.id].length === 0" class="surprise-empty">Nothing excluded</div>
+                <div x-show="$store.chr.surpriseSettings.colors[slot.id].length === 0" class="surprise-empty">No ranges excluded for this color</div>
               </div>
             </div>
           </template>

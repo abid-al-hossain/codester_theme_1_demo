@@ -170,6 +170,21 @@ function normalizeHex(value, fallback = '#000000') {
   return fallback
 }
 
+function normalizeRangeHex(value) {
+  const raw = String(value || '').trim().replace(/^#/, '')
+  if (/^[0-9a-f]{6}$/i.test(raw)) return `#${raw.toLowerCase()}`
+  if (/^[0-9a-f]{3}$/i.test(raw)) {
+    const [a, b, c] = raw
+    return `#${a}${a}${b}${b}${c}${c}`.toLowerCase()
+  }
+  return ''
+}
+
+function hexToNumber(value) {
+  const hex = normalizeRangeHex(value)
+  return hex ? Number.parseInt(hex.slice(1), 16) : Number.NaN
+}
+
 function hexToRgb(value) {
   const hex = normalizeHex(value)
   return {
@@ -620,8 +635,115 @@ function createEmptySurpriseSettings() {
   }
 }
 
+function normalizeColorRange(value) {
+  if (typeof value === 'string') {
+    const [rawStart, rawEnd] = value.split('-').map((part) => part.trim())
+    if (!rawStart || !rawEnd) return null
+    return normalizeColorRange({ start: rawStart, end: rawEnd })
+  }
+
+  const start = normalizeRangeHex(value?.start)
+  const end = normalizeRangeHex(value?.end)
+  if (!start || !end) return null
+
+  const startNumber = hexToNumber(start)
+  const endNumber = hexToNumber(end)
+  if (!Number.isFinite(startNumber) || !Number.isFinite(endNumber)) return null
+
+  return startNumber <= endNumber
+    ? { start, end }
+    : { start: end, end: start }
+}
+
+function normalizeColorRanges(values) {
+  const ranges = Array.isArray(values) ? values : []
+    .map((value) => normalizeColorRange(value))
+    .filter(Boolean)
+    .sort((a, b) => hexToNumber(a.start) - hexToNumber(b.start))
+
+  const merged = []
+
+  ranges.forEach((range) => {
+    const last = merged[merged.length - 1]
+    if (!last) {
+      merged.push(range)
+      return
+    }
+
+    const rangeStart = hexToNumber(range.start)
+    const lastEnd = hexToNumber(last.end)
+    if (rangeStart <= lastEnd + 1) {
+      if (hexToNumber(range.end) > lastEnd) last.end = range.end
+      return
+    }
+
+    merged.push(range)
+  })
+
+  return merged
+}
+
+function normalizeColorExclusionsByRole(rawColors) {
+  const fallback = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, []]))
+  if (!rawColors) return fallback
+
+  if (Array.isArray(rawColors.ranges)) {
+    const globalRanges = normalizeColorRanges(rawColors.ranges)
+    return Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, globalRanges]))
+  }
+
+  return Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => {
+    const values = Array.isArray(rawColors[option.id]) ? rawColors[option.id] : []
+    const ranges = normalizeColorRanges(values.map((value) => {
+      if (typeof value === 'string') {
+        const color = normalizeRangeHex(value)
+        return color ? { start: color, end: color } : value
+      }
+      return value
+    }))
+    return [option.id, ranges]
+  }))
+}
+
+function colorInRange(color, range) {
+  const colorNumber = hexToNumber(color)
+  return Number.isFinite(colorNumber)
+    && colorNumber >= hexToNumber(range.start)
+    && colorNumber <= hexToNumber(range.end)
+}
+
+function colorInRanges(color, ranges) {
+  return ranges.some((range) => colorInRange(color, range))
+}
+
+function getColorRangeLabel(range) {
+  const normalized = normalizeColorRange(range)
+  return normalized ? `${normalized.start.slice(1).toUpperCase()}-${normalized.end.slice(1).toUpperCase()}` : ''
+}
+
+function getColorRangeCoverage(range) {
+  const normalized = normalizeColorRange(range)
+  if (!normalized) return ''
+  const total = 0xffffff + 1
+  const count = hexToNumber(normalized.end) - hexToNumber(normalized.start) + 1
+  const percent = (count / total) * 100
+  return percent < 0.1 ? '<0.1% of RGB' : `${percent.toFixed(1)}% of RGB`
+}
+
+function getColorRangeCoveragePercent(range) {
+  const normalized = normalizeColorRange(range)
+  if (!normalized) return 0
+  return ((hexToNumber(normalized.end) - hexToNumber(normalized.start) + 1) / (0xffffff + 1)) * 100
+}
+
+function colorRangesCoverAll(ranges) {
+  const normalized = normalizeColorRanges(ranges)
+  return normalized.length === 1
+    && normalized[0].start === '#000000'
+    && normalized[0].end === '#ffffff'
+}
+
 function normalizeSurpriseSettings(settings) {
-  const fallback = createEmptySurpriseSettings()
   const rawFonts = settings?.fonts || {}
   const rawColors = settings?.colors || {}
 
@@ -630,13 +752,7 @@ function normalizeSurpriseSettings(settings) {
       const values = Array.isArray(rawFonts[option.id]) ? rawFonts[option.id] : []
       return [option.id, [...new Set(values.filter(Boolean))]]
     })),
-    colors: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => {
-      const values = Array.isArray(rawColors[option.id]) ? rawColors[option.id] : []
-      const normalized = values
-        .map((value) => normalizeHex(value, ''))
-        .filter(Boolean)
-      return [option.id, normalized.length ? [...new Set(normalized)] : fallback.colors[option.id]]
-    })),
+    colors: normalizeColorExclusionsByRole(rawColors),
   }
 }
 
@@ -647,12 +763,20 @@ function pickRandom(list, excluded = []) {
   return pool[Math.floor(Math.random() * pool.length)]
 }
 
-function generateSurpriseColorsWithExclusions(exclusions) {
+function generateSurpriseColorsWithExclusions(exclusions, currentColors = {}) {
   const normalized = normalizeSurpriseSettings({ colors: exclusions }).colors
 
   for (let attempt = 0; attempt < 80; attempt += 1) {
     const candidate = generateSurpriseColors()
-    const matchesExcluded = COLOR_ROLE_OPTIONS.some((option) => normalized[option.id].includes(normalizeHex(candidate[option.id], '')))
+    COLOR_ROLE_OPTIONS.forEach((option) => {
+      if (colorRangesCoverAll(normalized[option.id]) && currentColors[option.id]) {
+        candidate[option.id] = currentColors[option.id]
+      }
+    })
+    const matchesExcluded = COLOR_ROLE_OPTIONS.some((option) => (
+      !colorRangesCoverAll(normalized[option.id])
+      && colorInRanges(candidate[option.id], normalized[option.id])
+    ))
     if (!matchesExcluded) return candidate
   }
 
@@ -756,7 +880,8 @@ Alpine.store('chr', {
   surpriseSettingsOpen: false,
   lastSurpriseFocus: null,
   surpriseFontDrafts: { ...DEFAULT_FONTS },
-  surpriseColorDrafts: { ...DEFAULT_COLORS },
+  surpriseColorRangeDrafts: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '000000-000000'])),
+  surpriseColorRangeErrors: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, ''])),
   // DOWNLOAD_FEATURE_START
   currentLayout: getCurrentLayoutFile(),
   downloadAvailable: DOWNLOAD_ENABLED && Boolean(getCurrentLayoutFile()),
@@ -799,15 +924,8 @@ Alpine.store('chr', {
     this.activePalette = preset.activePalette
     this.surpriseSettings = normalizeSurpriseSettings(storedPrefs?.surpriseSettings)
     this.surpriseFontDrafts = { ...this.fonts }
-    this.surpriseColorDrafts = {
-      primary: this.colors.primary,
-      secondary: this.colors.secondary,
-      accent: this.colors.accent,
-      bg: this.colors.bg,
-      bg2: this.colors.bg2,
-      surface: this.colors.surface,
-      text: this.colors.text,
-    }
+    this.surpriseColorRangeDrafts = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '000000-000000']))
+    this.surpriseColorRangeErrors = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '']))
 
     // DOWNLOAD_FEATURE_START
     const currentLayoutMeta = getLayoutMeta(this.currentLayout)
@@ -905,15 +1023,6 @@ Alpine.store('chr', {
       surface: colorValueToHex(style.getPropertyValue('--color-surface'), this.colors.surface || this.colors.bg2),
       text: colorValueToHex(style.getPropertyValue('--color-text'), this.colors.text),
     }
-    this.surpriseColorDrafts = {
-      primary: this.colors.primary,
-      secondary: this.colors.secondary,
-      accent: this.colors.accent,
-      bg: this.colors.bg,
-      bg2: this.colors.bg2,
-      surface: this.colors.surface,
-      text: this.colors.text,
-    }
   },
 
   applyColorTheme() {
@@ -927,7 +1036,6 @@ Alpine.store('chr', {
     this.hasCustomColors = true
     this.activePalette = 'custom'
     this.colors[token] = value
-    this.surpriseColorDrafts[token] = value
     this.applyColorTheme()
     this.save()
   },
@@ -939,16 +1047,6 @@ Alpine.store('chr', {
     this.hasCustomColors = true
     this.activePalette = name
     this.colors = { ...this.colors, ...palette, surface: palette.bg2 }
-    this.surpriseColorDrafts = {
-      ...this.surpriseColorDrafts,
-      primary: this.colors.primary,
-      secondary: this.colors.secondary,
-      accent: this.colors.accent,
-      bg: this.colors.bg,
-      bg2: this.colors.bg2,
-      surface: this.colors.surface,
-      text: this.colors.text,
-    }
     this.applyColorTheme()
     this.save()
   },
@@ -963,7 +1061,7 @@ Alpine.store('chr', {
 
   surpriseMe() {
     const nextFonts = pickSurpriseFonts(this.surpriseSettings.fonts)
-    const nextColors = generateSurpriseColorsWithExclusions(this.surpriseSettings.colors)
+    const nextColors = generateSurpriseColorsWithExclusions(this.surpriseSettings.colors, this.colors)
 
     this.hasCustomFonts = true
     this.hasCustomColors = true
@@ -974,15 +1072,6 @@ Alpine.store('chr', {
       ...nextColors,
     }
     this.surpriseFontDrafts = { ...this.fonts }
-    this.surpriseColorDrafts = {
-      primary: this.colors.primary,
-      secondary: this.colors.secondary,
-      accent: this.colors.accent,
-      bg: this.colors.bg,
-      bg2: this.colors.bg2,
-      surface: this.colors.surface,
-      text: this.colors.text,
-    }
 
     Object.entries(this.fonts).forEach(([role, font]) => {
       applyFont(role, font)
@@ -1066,29 +1155,84 @@ Alpine.store('chr', {
     this.save()
   },
 
-  addSurpriseColorExclusion(token) {
-    const value = normalizeHex(this.surpriseColorDrafts[token], this.colors[token])
-    if (!value) return
-    if (!this.surpriseSettings.colors[token].includes(value)) {
-      this.surpriseSettings.colors[token] = [...this.surpriseSettings.colors[token], value]
-      this.save()
-    }
+  setSurpriseColorRangeDraft(token, value) {
+    this.surpriseColorRangeDrafts[token] = value
+    this.surpriseColorRangeErrors[token] = ''
   },
 
-  removeSurpriseColorExclusion(token, value) {
-    const normalized = normalizeHex(value, '')
-    this.surpriseSettings.colors[token] = this.surpriseSettings.colors[token].filter((item) => item !== normalized)
+  addSurpriseColorRangeExclusion(token) {
+    const range = normalizeColorRange(this.surpriseColorRangeDrafts[token])
+    if (!range) {
+      this.surpriseColorRangeErrors[token] = 'Use HEX-HEX, for example 000000-EEEEEE.'
+      return
+    }
+
+    const current = normalizeSurpriseSettings(this.surpriseSettings).colors[token] || []
+    const key = `${range.start}-${range.end}`
+    if (!current.some((item) => `${item.start}-${item.end}` === key)) {
+      this.surpriseSettings.colors[token] = normalizeColorRanges([...current, range])
+      this.save()
+    }
+    this.surpriseColorRangeDrafts[token] = getColorRangeLabel(range)
+    this.surpriseColorRangeErrors[token] = ''
+  },
+
+  removeSurpriseColorRangeExclusion(token, range) {
+    const normalized = normalizeColorRange(range)
+    if (!normalized) return
+    const key = `${normalized.start}-${normalized.end}`
+    this.surpriseSettings.colors[token] = this.surpriseSettings.colors[token].filter((item) => `${item.start}-${item.end}` !== key)
     this.save()
   },
 
-  setSurpriseColorDraft(token, value) {
-    this.surpriseColorDrafts[token] = value
+  getSurpriseColorRangePreviewStyle(range) {
+    const normalized = normalizeColorRange(range)
+    if (!normalized) {
+      return 'background:linear-gradient(135deg, var(--color-bg-2), var(--color-bg));'
+    }
+    return `background:linear-gradient(90deg, ${normalized.start}, ${normalized.end});`
+  },
+
+  getSurpriseColorRangeDraftLabel(token) {
+    const range = normalizeColorRange(this.surpriseColorRangeDrafts[token])
+    return range ? getColorRangeLabel(range) : 'Waiting for a valid range'
+  },
+
+  getSurpriseColorRangeDraftCoverage(token) {
+    const range = normalizeColorRange(this.surpriseColorRangeDrafts[token])
+    return range ? getColorRangeCoverage(range) : ''
+  },
+
+  getSurpriseColorRangeDraftWarning(token) {
+    const range = normalizeColorRange(this.surpriseColorRangeDrafts[token])
+    if (range?.start === '#000000' && range?.end === '#ffffff') {
+      return 'This covers every RGB color; Surprise Me will keep this slot unchanged.'
+    }
+    return getColorRangeCoveragePercent(range) > 80
+      ? 'This range is very broad; Surprise Me may keep contrast-safe colors if no readable palette remains.'
+      : ''
+  },
+
+  getSurpriseColorRangeLabel(range) {
+    return getColorRangeLabel(range)
+  },
+
+  getSurpriseColorRangeCoverage(range) {
+    return getColorRangeCoverage(range)
   },
 
   getSurpriseExclusionCount() {
     const fontCount = Object.values(this.surpriseSettings.fonts).reduce((total, list) => total + list.length, 0)
     const colorCount = Object.values(this.surpriseSettings.colors).reduce((total, list) => total + list.length, 0)
     return fontCount + colorCount
+  },
+
+  resetSurpriseExclusions() {
+    this.surpriseSettings = createEmptySurpriseSettings()
+    this.surpriseFontDrafts = { ...this.fonts }
+    this.surpriseColorRangeDrafts = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '000000-000000']))
+    this.surpriseColorRangeErrors = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '']))
+    this.save()
   },
 
   syncToggle() {
@@ -1138,15 +1282,8 @@ Alpine.store('chr', {
     this.colors = { ...preset.colors }
     this.fonts = { ...preset.fonts }
     this.surpriseFontDrafts = { ...preset.fonts }
-    this.surpriseColorDrafts = {
-      primary: preset.colors.primary,
-      secondary: preset.colors.secondary,
-      accent: preset.colors.accent,
-      bg: preset.colors.bg,
-      bg2: preset.colors.bg2,
-      surface: preset.colors.surface,
-      text: preset.colors.text,
-    }
+    this.surpriseColorRangeDrafts = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '000000-000000']))
+    this.surpriseColorRangeErrors = Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, '']))
 
     clearCustomColorVars()
     clearCustomFontVars()

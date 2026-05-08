@@ -1330,6 +1330,12 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   line-height: 1.5;
 }
 
+.surprise-settings-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .surprise-settings-count {
   font-size: 0.68rem;
   color: var(--color-primary);
@@ -1337,6 +1343,29 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: nowrap;
+}
+
+.surprise-reset-btn {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-bg) 88%, var(--color-bg-2));
+  color: var(--color-text);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.surprise-reset-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.surprise-reset-btn:not(:disabled):hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .surprise-settings-section {
@@ -1384,14 +1413,75 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   outline: none;
 }
 
-.surprise-color-input {
+.surprise-range-block {
+  gap: 10px;
+}
+
+.surprise-range-preview {
   width: 100%;
-  height: 38px;
-  padding: 4px;
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+.surprise-range-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.surprise-range-input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  cursor: pointer;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.surprise-range-input::placeholder {
+  color: var(--color-text-3);
+}
+
+.surprise-range-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.surprise-range-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--color-text-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.surprise-range-error {
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.surprise-range-warning {
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-bg));
+  color: var(--color-text);
+  font-size: 0.72rem;
+  line-height: 1.45;
 }
 
 .surprise-add-btn {
@@ -1404,6 +1494,10 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.surprise-range-row .surprise-add-btn {
+  width: 100%;
 }
 
 .surprise-chip-list {
@@ -1430,16 +1524,22 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   color: var(--color-primary);
 }
 
-.surprise-color-chip {
+.surprise-range-chip {
   font-family: var(--font-mono);
+  max-width: 100%;
 }
 
-.surprise-color-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.surprise-range-chip-swatch {
+  width: 36px;
+  height: 14px;
+  border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
+}
+
+.surprise-range-chip-meta {
+  color: var(--color-text-3);
+  font-size: 0.64rem;
 }
 
 .surprise-empty {
@@ -2101,7 +2201,22 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
     flex-direction: column;
     align-items: stretch;
   }
+  .surprise-settings-actions {
+    justify-content: space-between;
+  }
   .surprise-setting-row {
     grid-template-columns: 1fr;
+  }
+  .surprise-range-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .surprise-range-chip {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .surprise-range-chip-swatch {
+    width: 44px;
   }
 }
