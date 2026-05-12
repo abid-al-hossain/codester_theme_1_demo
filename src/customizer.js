@@ -310,12 +310,84 @@ function hueDistance(a, b) {
 }
 
 const HARMONY_RECIPES = [
-  { secondary: [18, 34], accent: [-28, -14] },
-  { secondary: [-34, -18], accent: [14, 30] },
-  { secondary: [28, 48], accent: [172, 194] },
-  { secondary: [-48, -28], accent: [166, 188] },
-  { secondary: [112, 132], accent: [228, 248] },
+  { secondary: [18, 38], accent: [-48, -22], neutral: [82, 122] },
+  { secondary: [-38, -18], accent: [22, 48], neutral: [-122, -82] },
+  { secondary: [40, 68], accent: [168, 196], neutral: [-84, -54] },
+  { secondary: [-68, -40], accent: [164, 192], neutral: [54, 84] },
+  { secondary: [104, 132], accent: [224, 252], neutral: [-38, 38] },
+  { secondary: [132, 164], accent: [-152, -118], neutral: [76, 112] },
+  { secondary: [172, 188], accent: [28, 58], neutral: [-96, -64] },
+  { secondary: [-188, -172], accent: [-58, -28], neutral: [64, 96] },
+  { secondary: [74, 104], accent: [-116, -84], neutral: [146, 184] },
+  { secondary: [-104, -74], accent: [84, 116], neutral: [-184, -146] },
 ]
+
+const SURPRISE_TONE_PROFILES = [
+  {
+    theme: 'light',
+    primary: { l: [0.42, 0.56], c: [0.12, 0.24] },
+    secondary: { l: [0.44, 0.62], c: [0.08, 0.2] },
+    accent: { l: [0.56, 0.74], c: [0.14, 0.28] },
+    bg: { l: [0.94, 0.99], c: [0.004, 0.024] },
+    bg2Shift: [-0.075, -0.03],
+    surfaceShift: [-0.045, 0.005],
+    text: { l: [0.15, 0.25], c: [0.006, 0.04] },
+  },
+  {
+    theme: 'light',
+    primary: { l: [0.36, 0.5], c: [0.08, 0.19] },
+    secondary: { l: [0.42, 0.58], c: [0.06, 0.16] },
+    accent: { l: [0.54, 0.7], c: [0.1, 0.24] },
+    bg: { l: [0.9, 0.97], c: [0.018, 0.055] },
+    bg2Shift: [-0.08, -0.025],
+    surfaceShift: [-0.04, 0.015],
+    text: { l: [0.13, 0.23], c: [0.012, 0.05] },
+  },
+  {
+    theme: 'light',
+    primary: { l: [0.46, 0.6], c: [0.16, 0.3] },
+    secondary: { l: [0.5, 0.66], c: [0.1, 0.22] },
+    accent: { l: [0.62, 0.78], c: [0.18, 0.32] },
+    bg: { l: [0.95, 1], c: [0.002, 0.018] },
+    bg2Shift: [-0.065, -0.02],
+    surfaceShift: [-0.035, 0.01],
+    text: { l: [0.1, 0.2], c: [0.004, 0.032] },
+  },
+  {
+    theme: 'dark',
+    primary: { l: [0.66, 0.8], c: [0.11, 0.24] },
+    secondary: { l: [0.6, 0.76], c: [0.08, 0.2] },
+    accent: { l: [0.72, 0.86], c: [0.12, 0.28] },
+    bg: { l: [0.2, 0.36], c: [0.006, 0.04] },
+    bg2Shift: [0.055, 0.11],
+    surfaceShift: [0.09, 0.16],
+    text: { l: [0.88, 0.97], c: [0.006, 0.035] },
+  },
+  {
+    theme: 'dark',
+    primary: { l: [0.58, 0.74], c: [0.15, 0.3] },
+    secondary: { l: [0.56, 0.72], c: [0.1, 0.24] },
+    accent: { l: [0.7, 0.84], c: [0.18, 0.34] },
+    bg: { l: [0.17, 0.3], c: [0.018, 0.06] },
+    bg2Shift: [0.06, 0.13],
+    surfaceShift: [0.11, 0.18],
+    text: { l: [0.9, 0.99], c: [0.004, 0.028] },
+  },
+  {
+    theme: 'dark',
+    primary: { l: [0.64, 0.78], c: [0.06, 0.18] },
+    secondary: { l: [0.58, 0.74], c: [0.04, 0.14] },
+    accent: { l: [0.68, 0.84], c: [0.08, 0.2] },
+    bg: { l: [0.24, 0.39], c: [0.004, 0.032] },
+    bg2Shift: [0.045, 0.1],
+    surfaceShift: [0.075, 0.14],
+    text: { l: [0.88, 0.96], c: [0.004, 0.03] },
+  },
+]
+
+const SURPRISE_HUE_BUCKET_SIZE = 30
+const SURPRISE_RECENT_HUE_LIMIT = 5
+const recentSurpriseHueBuckets = []
 
 function improveContrast(color, background, minRatio) {
   if (contrastRatio(color, background) >= minRatio) return color
@@ -359,43 +431,124 @@ function mixReadableText(text, background, weight, minRatio) {
   return improveContrast(text, background, minRatio)
 }
 
-function generateSurpriseColors() {
-  const darkTheme = Math.random() < 0.5
-  const primaryHue = randomInt(0, 359)
+function randomFloat(min, max) {
+  return min + (Math.random() * (max - min))
+}
+
+function randomInRange(range) {
+  return randomFloat(range[0], range[1])
+}
+
+function offsetHue(baseHue, range) {
+  return wrapHue(baseHue + randomInt(range[0], range[1]))
+}
+
+function linearSrgbToDisplay(value) {
+  const channel = clamp(value, 0, 1)
+  return channel <= 0.0031308
+    ? channel * 12.92
+    : (1.055 * (channel ** (1 / 2.4))) - 0.055
+}
+
+function oklchToLinearSrgb(lightness, chroma, hue) {
+  const radians = (wrapHue(hue) * Math.PI) / 180
+  const a = chroma * Math.cos(radians)
+  const b = chroma * Math.sin(radians)
+  const lPrime = lightness + (0.3963377774 * a) + (0.2158037573 * b)
+  const mPrime = lightness - (0.1055613458 * a) - (0.0638541728 * b)
+  const sPrime = lightness - (0.0894841775 * a) - (1.291485548 * b)
+  const l = lPrime ** 3
+  const m = mPrime ** 3
+  const s = sPrime ** 3
+
+  return {
+    r: (4.0767416621 * l) - (3.3077115913 * m) + (0.2309699292 * s),
+    g: (-1.2684380046 * l) + (2.6097574011 * m) - (0.3413193965 * s),
+    b: (-0.0041960863 * l) - (0.7034186147 * m) + (1.707614701 * s),
+  }
+}
+
+function oklchToHex(lightness, chroma, hue) {
+  const rgb = oklchToLinearSrgb(lightness, chroma, hue)
+  return rgbToHex({
+    r: linearSrgbToDisplay(rgb.r) * 255,
+    g: linearSrgbToDisplay(rgb.g) * 255,
+    b: linearSrgbToDisplay(rgb.b) * 255,
+  })
+}
+
+function oklchToHexInGamut(lightness, chroma, hue) {
+  const l = clamp(lightness, 0, 1)
+  let c = Math.max(0, chroma)
+
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    const rgb = oklchToLinearSrgb(l, c, hue)
+    if (rgb.r >= 0 && rgb.r <= 1 && rgb.g >= 0 && rgb.g <= 1 && rgb.b >= 0 && rgb.b <= 1) {
+      return oklchToHex(l, c, hue)
+    }
+    c *= 0.82
+  }
+
+  return oklchToHex(l, 0, hue)
+}
+
+function sampleOklchColor(hue, tone) {
+  return oklchToHexInGamut(randomInRange(tone.l), randomInRange(tone.c), hue)
+}
+
+function getSurpriseHueBucket(hue) {
+  return Math.floor(wrapHue(hue) / SURPRISE_HUE_BUCKET_SIZE)
+}
+
+function rememberSurpriseHue(hue) {
+  recentSurpriseHueBuckets.push(getSurpriseHueBucket(hue))
+  if (recentSurpriseHueBuckets.length > SURPRISE_RECENT_HUE_LIMIT) {
+    recentSurpriseHueBuckets.splice(0, recentSurpriseHueBuckets.length - SURPRISE_RECENT_HUE_LIMIT)
+  }
+}
+
+function surpriseHueWasRecentlyUsed(hue) {
+  return recentSurpriseHueBuckets.includes(getSurpriseHueBucket(hue))
+}
+
+function pickSurprisePrimaryHue() {
+  const bucketCount = Math.ceil(360 / SURPRISE_HUE_BUCKET_SIZE)
+  const blocked = new Set(recentSurpriseHueBuckets.slice(-Math.min(SURPRISE_RECENT_HUE_LIMIT, bucketCount - 1)))
+  const availableBuckets = Array.from({ length: bucketCount }, (_, bucket) => bucket)
+    .filter((bucket) => !blocked.has(bucket))
+  const bucket = pickRandom(availableBuckets)
+  const minHue = bucket * SURPRISE_HUE_BUCKET_SIZE
+  const maxHue = Math.min(359, minHue + SURPRISE_HUE_BUCKET_SIZE - 1)
+
+  return randomInt(minHue, maxHue)
+}
+
+function generateSurpriseColors(primaryHue = randomInt(0, 359)) {
+  const profile = pickRandom(SURPRISE_TONE_PROFILES)
+  const darkTheme = profile.theme === 'dark'
   const recipe = HARMONY_RECIPES[randomInt(0, HARMONY_RECIPES.length - 1)]
-  const secondaryHue = wrapHue(primaryHue + randomInt(recipe.secondary[0], recipe.secondary[1]))
-  const accentHue = wrapHue(primaryHue + randomInt(recipe.accent[0], recipe.accent[1]))
-  const backgroundOffset = pickRandom([-90, -76, -62, 62, 76, 90])
-  const neutralHue = wrapHue(primaryHue + backgroundOffset + randomInt(-5, 5))
+  const secondaryHue = offsetHue(primaryHue, recipe.secondary)
+  const accentHue = offsetHue(primaryHue, recipe.accent)
+  const neutralHue = offsetHue(primaryHue, recipe.neutral)
+  const bgLightness = randomInRange(profile.bg.l)
+  const bgChroma = randomInRange(profile.bg.c)
 
-  const primarySaturation = darkTheme ? randomInt(62, 78) : randomInt(58, 74)
-  const secondarySaturation = Math.max(42, primarySaturation - randomInt(8, 18))
-  const accentSaturation = Math.min(82, primarySaturation + randomInt(4, 12))
-  const backgroundSaturation = darkTheme ? randomInt(10, 18) : randomInt(4, 10)
+  const bg = oklchToHexInGamut(bgLightness, bgChroma, neutralHue + randomInt(-6, 6))
+  const bg2 = oklchToHexInGamut(
+    bgLightness + randomInRange(profile.bg2Shift),
+    bgChroma * randomFloat(0.82, 1.35),
+    neutralHue + randomInt(-10, 10)
+  )
+  const surface = oklchToHexInGamut(
+    bgLightness + randomInRange(profile.surfaceShift),
+    bgChroma * randomFloat(0.7, 1.18),
+    neutralHue + randomInt(-8, 8)
+  )
 
-  const bg = darkTheme
-    ? hslToHex(neutralHue, backgroundSaturation, randomInt(30, 38))
-    : hslToHex(neutralHue, backgroundSaturation, randomInt(94, 98))
-  const bg2 = darkTheme
-    ? hslToHex(neutralHue + randomInt(-4, 4), backgroundSaturation + randomInt(-4, 6), randomInt(38, 46))
-    : hslToHex(neutralHue + randomInt(-4, 4), backgroundSaturation + randomInt(-3, 4), randomInt(90, 96))
-  const surface = darkTheme
-    ? hslToHex(neutralHue + randomInt(-3, 3), backgroundSaturation + randomInt(-6, 4), randomInt(42, 52))
-    : hslToHex(neutralHue + randomInt(-3, 3), backgroundSaturation + randomInt(-4, 3), randomInt(92, 98))
-
-  let primary = darkTheme
-    ? hslToHex(primaryHue, primarySaturation, randomInt(58, 66))
-    : hslToHex(primaryHue, primarySaturation, randomInt(42, 50))
-  let secondary = darkTheme
-    ? hslToHex(secondaryHue, secondarySaturation, randomInt(54, 64))
-    : hslToHex(secondaryHue, secondarySaturation, randomInt(38, 48))
-  let accent = darkTheme
-    ? hslToHex(accentHue, accentSaturation, randomInt(68, 78))
-    : hslToHex(accentHue, accentSaturation, randomInt(56, 66))
-
-  let text = darkTheme
-    ? hslToHex(neutralHue + randomInt(-4, 4), randomInt(10, 18), randomInt(94, 98))
-    : hslToHex(neutralHue + randomInt(-4, 4), randomInt(18, 30), randomInt(8, 14))
+  let primary = sampleOklchColor(primaryHue, profile.primary)
+  let secondary = sampleOklchColor(secondaryHue, profile.secondary)
+  let accent = sampleOklchColor(accentHue, profile.accent)
+  let text = sampleOklchColor(neutralHue + randomInt(-8, 8), profile.text)
 
   text = improveContrastAcross(text, [bg, bg2, surface], 7)
   primary = improveContrastAcross(primary, [bg, bg2, surface], 4.5)
@@ -456,9 +609,9 @@ function buildDerivedColorTokens(colors) {
   const bg = tuneBackgroundTone(rawBg, rawPrimary, darkTheme, { darkMin: 30, darkMax: 40, lightMin: 94, lightMax: 98 })
   const bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULT_COLORS.bg2), rawPrimary, darkTheme, { darkMin: 38, darkMax: 48, lightMin: 90, lightMax: 96 })
   const surface = tuneBackgroundTone(normalizeHex(colors.surface || colors.bg2, bg2), rawPrimary, darkTheme, { darkMin: 42, darkMax: 54, lightMin: 92, lightMax: 98 })
-  const primary = softenExtremeAccent(improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5), bg, darkTheme)
-  const secondary = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5), bg, darkTheme)
-  const accent = softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5), bg, darkTheme)
+  const primary = improveContrastAcross(softenExtremeAccent(improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5), bg, darkTheme), [bg, bg2, surface], 4.5)
+  const secondary = improveContrastAcross(softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5), bg, darkTheme), [bg, bg2, surface], 3.5)
+  const accent = improveContrastAcross(softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5), bg, darkTheme), [bg, bg2, surface], 3.5)
   const text = improveContrastAcross(normalizeHex(colors.text, DEFAULT_COLORS.text), [bg, bg2, surface], 7)
   const shadeTarget = darkTheme ? '#ffffff' : '#000000'
   const secondaryText = mixReadableText(text, bg, darkTheme ? 0.16 : 0.22, 5.2)
@@ -767,7 +920,8 @@ function generateSurpriseColorsWithExclusions(exclusions, currentColors = {}) {
   const normalized = normalizeSurpriseSettings({ colors: exclusions }).colors
 
   for (let attempt = 0; attempt < 80; attempt += 1) {
-    const candidate = generateSurpriseColors()
+    const primaryHue = pickSurprisePrimaryHue()
+    const candidate = generateSurpriseColors(primaryHue)
     COLOR_ROLE_OPTIONS.forEach((option) => {
       if (colorRangesCoverAll(normalized[option.id]) && currentColors[option.id]) {
         candidate[option.id] = currentColors[option.id]
@@ -777,10 +931,19 @@ function generateSurpriseColorsWithExclusions(exclusions, currentColors = {}) {
       !colorRangesCoverAll(normalized[option.id])
       && colorInRanges(candidate[option.id], normalized[option.id])
     ))
-    if (!matchesExcluded) return candidate
+    const visiblePrimaryHue = hexToHsl(candidate.primary).h
+    const repeatsVisibleHue = !colorRangesCoverAll(normalized.primary)
+      && surpriseHueWasRecentlyUsed(visiblePrimaryHue)
+    if (!matchesExcluded && !repeatsVisibleHue) {
+      rememberSurpriseHue(visiblePrimaryHue)
+      return candidate
+    }
   }
 
-  return generateSurpriseColors()
+  const primaryHue = pickSurprisePrimaryHue()
+  const fallback = generateSurpriseColors(primaryHue)
+  rememberSurpriseHue(hexToHsl(fallback.primary).h)
+  return fallback
 }
 
 // DOWNLOAD_FEATURE_START
