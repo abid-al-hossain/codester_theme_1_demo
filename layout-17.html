@@ -138,6 +138,25 @@
     @media (max-width: 720px) {
       .retro-content {
         padding: 22px;
+        overflow-x: auto;
+      }
+      .retro-window {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .retro-titlebar {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      #task-manager table {
+        min-width: 520px;
+      }
+      #network h2,
+      #terminal h2 {
+        font-size: clamp(1.15rem, 7vw, 2rem) !important;
+        overflow-wrap: anywhere;
       }
     }
     @keyframes blink {

@@ -358,9 +358,9 @@ const SURPRISE_TONE_PROFILES = [
     primary: { l: [0.66, 0.8], c: [0.11, 0.24] },
     secondary: { l: [0.6, 0.76], c: [0.08, 0.2] },
     accent: { l: [0.72, 0.86], c: [0.12, 0.28] },
-    bg: { l: [0.2, 0.36], c: [0.006, 0.04] },
-    bg2Shift: [0.055, 0.11],
-    surfaceShift: [0.09, 0.16],
+    bg: { l: [0.16, 0.3], c: [0.006, 0.036] },
+    bg2Shift: [0.035, 0.07],
+    surfaceShift: [0.055, 0.095],
     text: { l: [0.88, 0.97], c: [0.006, 0.035] },
   },
   {
@@ -368,9 +368,9 @@ const SURPRISE_TONE_PROFILES = [
     primary: { l: [0.58, 0.74], c: [0.15, 0.3] },
     secondary: { l: [0.56, 0.72], c: [0.1, 0.24] },
     accent: { l: [0.7, 0.84], c: [0.18, 0.34] },
-    bg: { l: [0.17, 0.3], c: [0.018, 0.06] },
-    bg2Shift: [0.06, 0.13],
-    surfaceShift: [0.11, 0.18],
+    bg: { l: [0.14, 0.27], c: [0.014, 0.05] },
+    bg2Shift: [0.04, 0.08],
+    surfaceShift: [0.06, 0.105],
     text: { l: [0.9, 0.99], c: [0.004, 0.028] },
   },
   {
@@ -378,9 +378,9 @@ const SURPRISE_TONE_PROFILES = [
     primary: { l: [0.64, 0.78], c: [0.06, 0.18] },
     secondary: { l: [0.58, 0.74], c: [0.04, 0.14] },
     accent: { l: [0.68, 0.84], c: [0.08, 0.2] },
-    bg: { l: [0.24, 0.39], c: [0.004, 0.032] },
-    bg2Shift: [0.045, 0.1],
-    surfaceShift: [0.075, 0.14],
+    bg: { l: [0.18, 0.31], c: [0.004, 0.03] },
+    bg2Shift: [0.03, 0.065],
+    surfaceShift: [0.05, 0.09],
     text: { l: [0.88, 0.96], c: [0.004, 0.03] },
   },
 ]
@@ -606,9 +606,9 @@ function buildDerivedColorTokens(colors) {
   const rawPrimary = normalizeHex(colors.primary, DEFAULT_COLORS.primary)
   const rawBg = normalizeHex(colors.bg, DEFAULT_COLORS.bg)
   const darkTheme = isDarkColor(rawBg)
-  const bg = tuneBackgroundTone(rawBg, rawPrimary, darkTheme, { darkMin: 30, darkMax: 40, lightMin: 94, lightMax: 98 })
-  const bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULT_COLORS.bg2), rawPrimary, darkTheme, { darkMin: 38, darkMax: 48, lightMin: 90, lightMax: 96 })
-  const surface = tuneBackgroundTone(normalizeHex(colors.surface || colors.bg2, bg2), rawPrimary, darkTheme, { darkMin: 42, darkMax: 54, lightMin: 92, lightMax: 98 })
+  const bg = tuneBackgroundTone(rawBg, rawPrimary, darkTheme, { darkMin: 20, darkMax: 30, lightMin: 94, lightMax: 98 })
+  const bg2 = tuneBackgroundTone(normalizeHex(colors.bg2, DEFAULT_COLORS.bg2), rawPrimary, darkTheme, { darkMin: 24, darkMax: 30, lightMin: 90, lightMax: 96 })
+  const surface = tuneBackgroundTone(normalizeHex(colors.surface || colors.bg2, bg2), rawPrimary, darkTheme, { darkMin: 26, darkMax: 30, lightMin: 92, lightMax: 98 })
   const primary = improveContrastAcross(softenExtremeAccent(improveContrastAcross(rawPrimary, [bg, bg2, surface], 4.5), bg, darkTheme), [bg, bg2, surface], 4.5)
   const secondary = improveContrastAcross(softenExtremeAccent(improveContrastAcross(normalizeHex(colors.secondary, DEFAULT_COLORS.secondary), [bg, bg2, surface], 3.5), bg, darkTheme), [bg, bg2, surface], 3.5)
   const accent = improveContrastAcross(softenExtremeAccent(improveContrastAcross(normalizeHex(colors.accent, DEFAULT_COLORS.accent), [bg, bg2, surface], 3.5), bg, darkTheme), [bg, bg2, surface], 3.5)
@@ -1267,8 +1267,18 @@ Alpine.store('chr', {
   openSurpriseSettings() {
     this.lastSurpriseFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
     this.surpriseSettingsOpen = true
+    const focusInitialControl = () => {
+      const initialControl = document.querySelector('[data-surprise-initial-focus="true"]')
+      const dialog = document.getElementById('chr-surprise-dialog')
+      const focusTarget = initialControl || dialog
+      focusTarget?.focus({ preventScroll: true })
+    }
+    Alpine.nextTick(focusInitialControl)
     window.requestAnimationFrame(() => {
-      document.querySelector('[data-surprise-initial-focus="true"]')?.focus()
+      focusInitialControl()
+      window.requestAnimationFrame(() => {
+        focusInitialControl()
+      })
     })
   },
 
@@ -1446,7 +1456,7 @@ Alpine.store('chr', {
     })
   },
 
-  reset() {
+  reset({ persist = true } = {}) {
     const preset = cloneThemePreset(DEFAULT_THEME)
 
     this.era = preset.era
@@ -1476,12 +1486,12 @@ Alpine.store('chr', {
     }
 
     this.syncColorInputsFromComputed()
-    this.save()
+    if (persist) this.save()
   },
 
   clearAllSavedThemeData() {
     clearAllPrefs()
-    this.reset()
+    this.reset({ persist: false })
   },
 })
 
