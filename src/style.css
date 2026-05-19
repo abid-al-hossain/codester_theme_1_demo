@@ -1044,6 +1044,49 @@ body[data-section-motion="cyber"] section.chr-section-jump-target.chr-section-ju
   font-family: var(--cust-ui-font);
 }
 
+.chr-smart-tooltip {
+  position: fixed;
+  z-index: 100000;
+  inline-size: max-content;
+  max-inline-size: min(280px, calc(100vw - 32px));
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 42%, var(--color-border));
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--color-surface) 94%, var(--color-primary) 6%),
+      color-mix(in srgb, var(--color-bg) 92%, var(--color-secondary) 8%)
+    );
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--color-text) 18%, transparent);
+  color: var(--color-text);
+  font-family: var(--cust-ui-font);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(0, 6px, 0) scale(0.98);
+  transition: opacity 140ms var(--ease), transform 140ms var(--ease);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+
+.chr-smart-tooltip::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline: 12px;
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.75;
+}
+
+.chr-smart-tooltip.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
 #chr-customizer.open {
   transform: translateX(0);
 }

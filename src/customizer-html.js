@@ -198,8 +198,8 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <label class="cust-label">Customizer in download</label>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button type="button" class="era-card" :class="$store.chr.downloadMode==='without-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='without-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='without-customizer'" disabled aria-disabled="true">Without</button>
-        <button type="button" class="era-card" :class="$store.chr.downloadMode==='with-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='with-customizer' ? 'true' : 'false'" @click="$store.chr.downloadMode='with-customizer'" disabled aria-disabled="true">With</button>
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='without-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='without-customizer' ? 'true' : 'false'" data-tooltip="In the source product, this exports a lean single-layout package without the live customizer panel." @click="$store.chr.downloadMode='without-customizer'" disabled aria-disabled="true">Without</button>
+        <button type="button" class="era-card" :class="$store.chr.downloadMode==='with-customizer' ? 'active' : ''" :aria-pressed="$store.chr.downloadMode==='with-customizer' ? 'true' : 'false'" data-tooltip="In the source product, this exports the current layout with the live customizer included." @click="$store.chr.downloadMode='with-customizer'" disabled aria-disabled="true">With</button>
       </div>
 
       <div style="margin-top:16px;padding:12px;background:var(--color-bg-2);border:1px solid var(--color-border);border-radius:var(--radius-md);display:grid;gap:6px">
@@ -215,7 +215,7 @@ export const CUSTOMIZER_HTML = /* html */ `
 
       <p x-show="$store.chr.downloadError" x-text="$store.chr.downloadError" style="margin:12px 0 0;color:#dc2626;font-size:0.78rem;line-height:1.5"></p>
 
-      <button type="button" class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px;opacity:.62;cursor:not-allowed" :disabled="true" aria-disabled="true" @click="$store.chr.downloadPackage()">
+      <button type="button" class="chr-btn-primary" style="width:100%;justify-content:center;font-size:0.84rem;padding:12px 16px;margin-top:16px;opacity:.62;cursor:not-allowed" :disabled="true" aria-disabled="true" data-tooltip="Package export is disabled in this public demo and available in the source product." @click="$store.chr.downloadPackage()">
         <span>Download Disabled In Demo</span>
       </button>
     </div>
@@ -381,17 +381,17 @@ export const CUSTOMIZER_HTML = /* html */ `
 
   <div class="cust-footer" style="padding:16px;border-top:1px solid var(--color-border);background:var(--color-bg);flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
     <div class="surprise-action-row">
-      <button type="button" class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;justify-content:center;flex:1" @click="$store.chr.surpriseMe()">
+      <button type="button" class="chr-btn-primary" style="font-size:0.75rem;padding:10px 16px;justify-content:center;flex:1" data-tooltip="Generate contrast-aware colors and compatible font choices for this layout." @click="$store.chr.surpriseMe()">
         Surprise Me
       </button>
-      <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 14px;justify-content:center;min-width:98px" @click="$store.chr.toggleSurpriseSettings()">
+      <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 14px;justify-content:center;min-width:98px" data-tooltip="Choose fonts and color ranges that Surprise Me should avoid in future clicks." @click="$store.chr.toggleSurpriseSettings()">
         Settings
       </button>
     </div>
-    <button type="button" class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.reset()">
+    <button type="button" class="chr-btn-ghost" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" data-tooltip="Reset the current layout back to its default era, colors, and fonts." @click="$store.chr.reset()">
       Reset Theme
     </button>
-    <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" @click="$store.chr.clearAllSavedThemeData()">
+    <button class="chr-btn-ghost" type="button" style="font-size:0.75rem;padding:10px 16px;width:100%;justify-content:center" data-tooltip="Remove all saved Chronos theme preferences from this browser." @click="$store.chr.clearAllSavedThemeData()">
       Clear Saved Theme Data
     </button>
   </div>
@@ -442,7 +442,7 @@ export const CUSTOMIZER_HTML = /* html */ `
           </button>
         </div>
         <div class="surprise-settings-actions">
-          <button type="button" class="surprise-reset-btn" @click="$store.chr.resetSurpriseExclusions()" :disabled="$store.chr.getSurpriseExclusionCount() === 0">
+          <button type="button" class="surprise-reset-btn" data-tooltip="Clear all font and color range exclusions at once." @click="$store.chr.resetSurpriseExclusions()" :disabled="$store.chr.getSurpriseExclusionCount() === 0">
             Reset All
           </button>
           <div class="surprise-settings-count" x-text="$store.chr.getSurpriseExclusionCount() + ' exclusions'"></div>
@@ -466,7 +466,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                     <option :value="font" x-text="font"></option>
                   </template>
                 </select>
-                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseFontExclusion(role.id)">Exclude</button>
+                <button type="button" class="surprise-add-btn" data-tooltip="Prevent this font from being selected for this role by future Surprise Me clicks." @click="$store.chr.addSurpriseFontExclusion(role.id)">Exclude</button>
               </div>
               <div class="surprise-chip-list">
                 <template x-for="font in $store.chr.surpriseSettings.fonts[role.id]" :key="role.id + '-chip-' + font">
@@ -486,7 +486,7 @@ export const CUSTOMIZER_HTML = /* html */ `
           <template x-for="slot in $store.chr.colorRoleOptions" :key="'surprise-color-range-' + slot.id">
             <div class="surprise-setting-block surprise-range-block">
               <div class="surprise-setting-title" x-text="slot.label"></div>
-              <div class="surprise-range-preview" :style="$store.chr.getSurpriseColorRangePreviewStyle($store.chr.surpriseColorRangeDrafts[slot.id])" aria-hidden="true"></div>
+              <div class="surprise-range-preview" :style="$store.chr.getSurpriseColorRangePreviewStyle($store.chr.surpriseColorRangeDrafts[slot.id])" data-tooltip="Preview of the HEX range that will be excluded for this color role." aria-hidden="true"></div>
               <div class="surprise-range-row">
                 <input
                   class="surprise-range-input"
@@ -500,7 +500,7 @@ export const CUSTOMIZER_HTML = /* html */ `
                   @input="$store.chr.setSurpriseColorRangeDraft(slot.id, $event.target.value)"
                   @keydown.enter.prevent="$store.chr.addSurpriseColorRangeExclusion(slot.id)"
                 >
-                <button type="button" class="surprise-add-btn" @click="$store.chr.addSurpriseColorRangeExclusion(slot.id)">Exclude</button>
+                <button type="button" class="surprise-add-btn" data-tooltip="Exclude this HEX range from future Surprise Me results for this color role." @click="$store.chr.addSurpriseColorRangeExclusion(slot.id)">Exclude</button>
               </div>
               <div class="surprise-range-meta">
                 <span x-text="$store.chr.getSurpriseColorRangeDraftLabel(slot.id)"></span>

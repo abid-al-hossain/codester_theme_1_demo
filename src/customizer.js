@@ -758,6 +758,81 @@ function syncCustomizerToggle(open) {
   toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false')
 }
 
+function setupChronosTooltips() {
+  let activeTarget = null
+  let hideTimer = 0
+  const tooltip = document.createElement('div')
+  tooltip.className = 'chr-smart-tooltip'
+  tooltip.setAttribute('role', 'tooltip')
+  tooltip.hidden = true
+  document.body.appendChild(tooltip)
+
+  const hideTooltip = () => {
+    activeTarget = null
+    window.clearTimeout(hideTimer)
+    tooltip.classList.remove('visible')
+    hideTimer = window.setTimeout(() => {
+      if (!activeTarget) tooltip.hidden = true
+    }, 160)
+  }
+
+  const positionTooltip = () => {
+    if (!activeTarget || tooltip.hidden) return
+    const rect = activeTarget.getBoundingClientRect()
+    const tipRect = tooltip.getBoundingClientRect()
+    const gap = 10
+    const margin = 12
+    let top = rect.top - tipRect.height - gap
+    if (top < margin) top = rect.bottom + gap
+    const left = Math.min(
+      window.innerWidth - tipRect.width - margin,
+      Math.max(margin, rect.left + (rect.width / 2) - (tipRect.width / 2)),
+    )
+    tooltip.style.left = `${Math.round(left)}px`
+    tooltip.style.top = `${Math.round(top)}px`
+  }
+
+  const showTooltip = (target) => {
+    const text = target?.getAttribute('data-tooltip')
+    if (!text) return
+    activeTarget = target
+    window.clearTimeout(hideTimer)
+    tooltip.textContent = text
+    tooltip.hidden = false
+    tooltip.classList.remove('visible')
+    requestAnimationFrame(() => {
+      positionTooltip()
+      tooltip.classList.add('visible')
+    })
+  }
+
+  document.addEventListener('pointerover', (event) => {
+    const target = event.target.closest?.('[data-tooltip]')
+    if (!target || !document.getElementById('chr-customizer')?.contains(target)) return
+    showTooltip(target)
+  })
+
+  document.addEventListener('pointerout', (event) => {
+    if (!activeTarget) return
+    const nextTarget = event.relatedTarget
+    if (nextTarget instanceof Node && activeTarget.contains(nextTarget)) return
+    hideTooltip()
+  })
+
+  document.addEventListener('focusin', (event) => {
+    const target = event.target.closest?.('[data-tooltip]')
+    if (!target || !document.getElementById('chr-customizer')?.contains(target)) return
+    showTooltip(target)
+  })
+
+  document.addEventListener('focusout', hideTooltip)
+  window.addEventListener('resize', positionTooltip)
+  document.addEventListener('scroll', positionTooltip, true)
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') hideTooltip()
+  })
+}
+
 function clearCustomColorVars() {
   CUSTOM_COLOR_VARS.forEach((token) => {
     document.documentElement.style.removeProperty(`--${token}`)
@@ -1662,5 +1737,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Alpine.start()
   if (CUSTOMIZER_ENABLED) {
     syncCustomizerToggle(false)
+    setupChronosTooltips()
   }
 })
