@@ -62,10 +62,27 @@ Because the project uses Vite module entrypoints, use it through the development
 - `public/previews/` - included hero preview images used by the full layout directory and customizer layout list
 - `scripts/generate-layout-previews.js` - optional source-only Playwright tool for regenerating the directory thumbnails after hero edits
 
+## Surprise Me behavior
+
+Surprise Me is not a small list of hidden preset palettes. It generates a fresh theme for the current layout by sampling color roles algorithmically, then repairing them against readability constraints before applying them.
+
+- Color generation uses OKLCH-based sampling, harmony offsets, tone profiles, and contrast checks so primary, secondary, accent, background, section, surface, and text colors stay visually related instead of becoming random noise.
+- The generator avoids repeating very recent hue buckets, which helps repeated clicks feel broader than cycling through a fixed palette list.
+- Text and key foreground colors are checked against the generated background, section, and surface colors before the palette is accepted.
+- Font randomization uses compatible style groups from `src/fonts.js`, so heading, body, accent, and mono choices are picked as a designed set instead of four unrelated fonts.
+- Surprise Me settings can exclude exact fonts and per-token HEX ranges such as `000000-111111`; reversed ranges such as `111111-000000` are normalized automatically.
+- If an exclusion is so broad that no readable replacement can be found for a role, the customizer keeps a safe existing value rather than forcing an unreadable palette.
+
+Developer entry points:
+
+- `src/customizer.js` contains the Surprise Me color generator, exclusion handling, contrast checks, persistence, and reset behavior.
+- `src/fonts.js` contains the Google Font catalog, era defaults, and compatible `FONT_STYLE_GROUPS`.
+- `public/theme-boot.js` applies saved theme state before the app scripts load, reducing default-theme flash.
+
 ## Notes
 
 - This demo keeps package export disabled for public preview. The source project includes the one-layout Vite package export workflow.
 - Single-layout exported ZIPs from the source project do not include the preview generator, Playwright dependency, or `npm run previews`; those are only for maintaining the full source/demo directory thumbnails.
-- Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or per-color HEX ranges from future surprises.
+- Surprise Me can randomize fonts and colors for the current layout, and its settings panel can exclude specific font choices or per-token HEX ranges from future surprises.
 - Shared mobile-nav behavior now supports the layout-specific nav shells used by the dashboard, archive, and social layouts.
 - Countdown blocks use either the layout-provided launch date or a rolling future fallback date, and switch to a neutral completed state once the launch window has passed.
