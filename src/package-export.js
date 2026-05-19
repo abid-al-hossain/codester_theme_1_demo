@@ -44,7 +44,7 @@ dist-ssr
 export const LAYOUT_PACKAGE_OPTIONS = [
   { file: 'layout-01.html', short: 'L01', label: 'Modern SaaS Landing' },
   { file: 'layout-02.html', short: 'L02', label: 'Creative Portfolio' },
-  { file: 'layout-03.html', short: 'L03', label: 'Editorial Feed' },
+  { file: 'layout-03.html', short: 'L03', label: 'Brutalist Feed' },
   { file: 'layout-04.html', short: 'L04', label: 'Text Manuscript' },
   { file: 'layout-05.html', short: 'L05', label: 'Web App Dashboard' },
   { file: 'layout-06.html', short: 'L06', label: 'Artistic Showcase' },

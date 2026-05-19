@@ -120,7 +120,7 @@ const DEFAULT_THEME = {
 const DOWNLOAD_LAYOUT_OPTIONS = [
   { file: 'layout-01.html', short: 'L01', label: 'Modern SaaS Landing' },
   { file: 'layout-02.html', short: 'L02', label: 'Creative Portfolio' },
-  { file: 'layout-03.html', short: 'L03', label: 'Editorial Feed' },
+  { file: 'layout-03.html', short: 'L03', label: 'Brutalist Feed' },
   { file: 'layout-04.html', short: 'L04', label: 'Text Manuscript' },
   { file: 'layout-05.html', short: 'L05', label: 'Web App Dashboard' },
   { file: 'layout-06.html', short: 'L06', label: 'Artistic Showcase' },
@@ -809,7 +809,7 @@ function normalizeColorRange(value) {
 }
 
 function normalizeColorRanges(values) {
-  const ranges = Array.isArray(values) ? values : []
+  const ranges = (Array.isArray(values) ? values : [])
     .map((value) => normalizeColorRange(value))
     .filter(Boolean)
     .sort((a, b) => hexToNumber(a.start) - hexToNumber(b.start))
@@ -867,6 +867,117 @@ function colorInRange(color, range) {
 
 function colorInRanges(color, ranges) {
   return ranges.some((range) => colorInRange(color, range))
+}
+
+function numberToHex(value) {
+  return `#${clamp(Math.round(value), 0, 0xffffff).toString(16).padStart(6, '0')}`
+}
+
+function getAllowedColorSegments(ranges) {
+  const normalized = normalizeColorRanges(ranges)
+  const segments = []
+  let cursor = 0
+
+  normalized.forEach((range) => {
+    const start = hexToNumber(range.start)
+    const end = hexToNumber(range.end)
+    if (cursor < start) segments.push([cursor, start - 1])
+    cursor = Math.max(cursor, end + 1)
+  })
+
+  if (cursor <= 0xffffff) segments.push([cursor, 0xffffff])
+  return segments.filter(([start, end]) => start <= end)
+}
+
+function pickColorFromSegments(segments) {
+  const total = segments.reduce((sum, [start, end]) => sum + (end - start + 1), 0)
+  if (total <= 0) return ''
+
+  let offset = Math.floor(Math.random() * total)
+  for (const [start, end] of segments) {
+    const length = end - start + 1
+    if (offset < length) return numberToHex(start + offset)
+    offset -= length
+  }
+
+  return numberToHex(segments[segments.length - 1][1])
+}
+
+function contrastsAcross(color, backgrounds, minRatio) {
+  return backgrounds.every((background) => contrastRatio(color, background) >= minRatio)
+}
+
+function findReadableColorOutsideRanges(ranges, backgrounds, minRatio) {
+  const segments = getAllowedColorSegments(ranges)
+  if (!segments.length) return ''
+
+  for (let attempt = 0; attempt < 260; attempt += 1) {
+    const color = pickColorFromSegments(segments)
+    if (!colorInRanges(color, ranges) && contrastsAcross(color, backgrounds, minRatio)) {
+      return color
+    }
+  }
+
+  return ''
+}
+
+function surpriseCandidateHasReadableContrast(candidate) {
+  const backgrounds = [candidate.bg, candidate.bg2, candidate.surface]
+  return contrastsAcross(candidate.text, backgrounds, 7)
+    && contrastsAcross(candidate.primary, backgrounds, 4.5)
+    && contrastsAcross(candidate.secondary, backgrounds, 3.5)
+    && contrastsAcross(candidate.accent, backgrounds, 3.5)
+}
+
+function findBackgroundColorOutsideRanges(ranges, candidate, token) {
+  const segments = getAllowedColorSegments(ranges)
+  if (!segments.length) return ''
+
+  for (let attempt = 0; attempt < 260; attempt += 1) {
+    const color = pickColorFromSegments(segments)
+    const nextCandidate = { ...candidate, [token]: color }
+    if (!colorInRanges(color, ranges) && surpriseCandidateHasReadableContrast(nextCandidate)) {
+      return color
+    }
+  }
+
+  return ''
+}
+
+function repairSurpriseCandidateAgainstExclusions(candidate, normalized) {
+  const repaired = { ...candidate }
+  const readableRoles = [
+    ['text', 7],
+    ['primary', 4.5],
+    ['secondary', 3.5],
+    ['accent', 3.5],
+  ]
+
+  for (const token of ['bg', 'bg2', 'surface']) {
+    const ranges = normalized[token] || []
+    if (!ranges.length || colorRangesCoverAll(ranges) || !colorInRanges(repaired[token], ranges)) continue
+
+    const replacement = findBackgroundColorOutsideRanges(ranges, repaired, token)
+    if (!replacement) return null
+    repaired[token] = replacement
+  }
+
+  for (const [token, minRatio] of readableRoles) {
+    const ranges = normalized[token] || []
+    const backgrounds = [repaired.bg, repaired.bg2, repaired.surface]
+    if (
+      (!ranges.length || colorRangesCoverAll(ranges) || !colorInRanges(repaired[token], ranges))
+      && contrastsAcross(repaired[token], backgrounds, minRatio)
+    ) {
+      continue
+    }
+
+    const replacement = findReadableColorOutsideRanges(ranges, backgrounds, minRatio)
+    if (!replacement) return null
+    repaired[token] = replacement
+  }
+
+  return surpriseCandidateHasReadableContrast(repaired) ? repaired : null
 }
 
 function getColorRangeLabel(range) {
@@ -927,17 +1038,25 @@ function generateSurpriseColorsWithExclusions(exclusions, currentColors = {}) {
         candidate[option.id] = currentColors[option.id]
       }
     })
+    const repairedCandidate = repairSurpriseCandidateAgainstExclusions(candidate, normalized)
+    if (!repairedCandidate) continue
+
     const matchesExcluded = COLOR_ROLE_OPTIONS.some((option) => (
       !colorRangesCoverAll(normalized[option.id])
-      && colorInRanges(candidate[option.id], normalized[option.id])
+      && colorInRanges(repairedCandidate[option.id], normalized[option.id])
     ))
-    const visiblePrimaryHue = hexToHsl(candidate.primary).h
+    const visiblePrimaryHue = hexToHsl(repairedCandidate.primary).h
     const repeatsVisibleHue = !colorRangesCoverAll(normalized.primary)
       && surpriseHueWasRecentlyUsed(visiblePrimaryHue)
     if (!matchesExcluded && !repeatsVisibleHue) {
       rememberSurpriseHue(visiblePrimaryHue)
-      return candidate
+      return repairedCandidate
     }
+  }
+
+  const currentFallback = { ...currentColors }
+  if (COLOR_ROLE_OPTIONS.every((option) => /^#[0-9a-f]{6}$/i.test(currentFallback[option.id] || ''))) {
+    return currentFallback
   }
 
   const primaryHue = pickSurprisePrimaryHue()

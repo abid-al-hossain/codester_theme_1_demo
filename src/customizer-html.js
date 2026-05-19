@@ -244,9 +244,9 @@ export const CUSTOMIZER_HTML = /* html */ `
           </div>
         </a>
         <a href="layout-03.html" class="layout-list-link">
-          <div class="layout-thumb-frame layout-mini-thumb"><img src="/previews/layout-03.jpg" alt="Editorial Feed hero preview" loading="lazy" decoding="async" class="layout-preview-img"></div>
+          <div class="layout-thumb-frame layout-mini-thumb"><img src="/previews/layout-03.jpg" alt="Brutalist Feed hero preview" loading="lazy" decoding="async" class="layout-preview-img"></div>
           <div style="display:flex;flex-direction:column;gap:2px">
-            <div class="layout-link-title">Editorial Feed</div>
+            <div class="layout-link-title">Brutalist Feed</div>
             <div class="layout-link-meta">Layout 03</div>
           </div>
         </a>
