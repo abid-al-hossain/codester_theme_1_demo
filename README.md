@@ -79,6 +79,14 @@ Developer entry points:
 - `src/fonts.js` contains the Google Font catalog, era defaults, and compatible `FONT_STYLE_GROUPS`.
 - `public/theme-boot.js` applies saved theme state before the app scripts load, reducing default-theme flash.
 
+## Known intentional behavior
+
+- This public demo keeps package export disabled. Layout pages still show a disabled Download preview so buyers can see that the source product includes export controls.
+- The demo repository keeps the source structure close to the product repository for parity, while the production demo build excludes the package export chunk.
+- `theme-boot.js` is loaded as a classic script instead of a Vite module so saved theme state can apply before the main app bundle loads. Vite may warn that it cannot bundle this file without `type="module"`; that warning is expected for this architecture.
+- Downloaded packages from the source product are single-layout Vite projects. They include the selected layout, active era, colors, fonts, runtime files, and optional customizer, but they do not include the full 20-layout directory.
+- The optional preview generator and Playwright dependency are source-maintenance tools for this full project, not required files inside exported one-layout packages.
+
 ## Notes
 
 - This demo keeps package export disabled for public preview. The source project includes the one-layout Vite package export workflow.
