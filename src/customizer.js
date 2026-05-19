@@ -1167,7 +1167,9 @@ Alpine.store('chr', {
   surpriseColorRangeErrors: Object.fromEntries(COLOR_ROLE_OPTIONS.map((option) => [option.id, ''])),
   // DOWNLOAD_FEATURE_START
   currentLayout: getCurrentLayoutFile(),
-  downloadAvailable: DOWNLOAD_ENABLED && Boolean(getCurrentLayoutFile()),
+  // Demo keeps the package builder visible as a disabled preview, while
+  // downloadPackage() below still blocks actual package export.
+  downloadAvailable: Boolean(getCurrentLayoutFile()),
   currentLayoutLabel: '',
   downloadPackageName: '',
   downloadMode: 'without-customizer',
