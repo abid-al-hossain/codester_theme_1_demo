@@ -1193,24 +1193,58 @@ const FONT_ROLE_FALLBACK_POOLS = {
   mono: uniqueFonts(FONTS.Monospace),
 }
 
-function pickFontFromPools(primaryPool, fallbackPool, excluded = []) {
-  const blocked = new Set((Array.isArray(excluded) ? excluded : [excluded]).filter(Boolean))
-  const primaryCandidates = uniqueFonts(primaryPool).filter((font) => !blocked.has(font))
-  if (primaryCandidates.length) return pickRandom(primaryCandidates)
-
-  const fallbackCandidates = uniqueFonts(fallbackPool).filter((font) => !blocked.has(font))
-  if (fallbackCandidates.length) return pickRandom(fallbackCandidates)
-
-  return fallbackPool[0] || ALL_FONTS_FLAT[0]
+function normalizeBlockedFonts(fonts) {
+  return new Set((Array.isArray(fonts) ? fonts : [fonts]).filter((font) => ALL_FONTS_FLAT.includes(font)))
 }
 
-function pickSurpriseFonts(exclusions) {
+function pickFontFromPools(primaryPool, fallbackPool, options = {}) {
+  const hardBlocked = normalizeBlockedFonts(options.hardExcluded)
+  const softBlocked = normalizeBlockedFonts(options.softExcluded)
+  const withSoftBlocks = (font) => !hardBlocked.has(font) && !softBlocked.has(font)
+  const withoutSoftBlocks = (font) => !hardBlocked.has(font)
+  const fallbackFont = ALL_FONTS_FLAT.includes(options.fallbackFont) ? options.fallbackFont : ''
+  const primaryCandidates = uniqueFonts(primaryPool).filter(withSoftBlocks)
+  if (primaryCandidates.length) return pickRandom(primaryCandidates)
+
+  const fallbackCandidates = uniqueFonts(fallbackPool).filter(withSoftBlocks)
+  if (fallbackCandidates.length) return pickRandom(fallbackCandidates)
+
+  const globalCandidates = ALL_FONTS_FLAT.filter(withSoftBlocks)
+  if (globalCandidates.length) return pickRandom(globalCandidates)
+
+  const primaryHardCandidates = uniqueFonts(primaryPool).filter(withoutSoftBlocks)
+  if (primaryHardCandidates.length) return pickRandom(primaryHardCandidates)
+
+  const fallbackHardCandidates = uniqueFonts(fallbackPool).filter(withoutSoftBlocks)
+  if (fallbackHardCandidates.length) return pickRandom(fallbackHardCandidates)
+
+  const globalHardCandidates = ALL_FONTS_FLAT.filter(withoutSoftBlocks)
+  if (globalHardCandidates.length) return pickRandom(globalHardCandidates)
+
+  return fallbackFont || fallbackPool[0] || ALL_FONTS_FLAT[0]
+}
+
+function pickSurpriseFonts(exclusions, currentFonts = {}) {
   const normalized = normalizeSurpriseSettings({ fonts: exclusions }).fonts
   const group = pickRandom(FONT_STYLE_GROUPS)
-  const nextHeading = pickFontFromPools(group.heading, FONT_ROLE_FALLBACK_POOLS.heading, normalized.heading)
-  const nextBody = pickFontFromPools(group.body, FONT_ROLE_FALLBACK_POOLS.body, [...normalized.body, nextHeading])
-  const nextAccent = pickFontFromPools(group.accent, FONT_ROLE_FALLBACK_POOLS.accent, [...normalized.accent, nextHeading, nextBody])
-  const nextMono = pickFontFromPools(group.mono, FONT_ROLE_FALLBACK_POOLS.mono, normalized.mono)
+  const nextHeading = pickFontFromPools(group.heading, FONT_ROLE_FALLBACK_POOLS.heading, {
+    hardExcluded: normalized.heading,
+    fallbackFont: currentFonts.heading,
+  })
+  const nextBody = pickFontFromPools(group.body, FONT_ROLE_FALLBACK_POOLS.body, {
+    hardExcluded: normalized.body,
+    softExcluded: nextHeading,
+    fallbackFont: currentFonts.body,
+  })
+  const nextAccent = pickFontFromPools(group.accent, FONT_ROLE_FALLBACK_POOLS.accent, {
+    hardExcluded: normalized.accent,
+    softExcluded: [nextHeading, nextBody],
+    fallbackFont: currentFonts.accent,
+  })
+  const nextMono = pickFontFromPools(group.mono, FONT_ROLE_FALLBACK_POOLS.mono, {
+    hardExcluded: normalized.mono,
+    fallbackFont: currentFonts.mono,
+  })
 
   return {
     heading: nextHeading,
@@ -1446,7 +1480,7 @@ Alpine.store('chr', {
   },
 
   surpriseMe() {
-    const nextFonts = pickSurpriseFonts(this.surpriseSettings.fonts)
+    const nextFonts = pickSurpriseFonts(this.surpriseSettings.fonts, this.fonts)
     const nextColors = generateSurpriseColorsWithExclusions(this.surpriseSettings.colors, this.colors)
 
     this.hasCustomFonts = true
