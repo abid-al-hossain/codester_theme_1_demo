@@ -1232,6 +1232,18 @@ function scheduleCustomizerBodyScrollReset() {
   })
 }
 
+function resetSurpriseModalBodyScroll() {
+  const body = document.querySelector('#chr-surprise-dialog .surprise-modal-body')
+  if (!body) return
+  body.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+}
+
+function scheduleSurpriseModalBodyScrollReset() {
+  Alpine.nextTick(() => {
+    window.requestAnimationFrame(resetSurpriseModalBodyScroll)
+  })
+}
+
 Alpine.store('chr', {
   open: false,
   activeTab: 'era',
@@ -1541,7 +1553,9 @@ Alpine.store('chr', {
 
   setSurpriseSettingsView(view) {
     if (!['fonts', 'colors'].includes(view)) return
+    if (this.surpriseSettingsView === view) return
     this.surpriseSettingsView = view
+    scheduleSurpriseModalBodyScrollReset()
   },
 
   setSurpriseColorRangeDraft(token, value) {
