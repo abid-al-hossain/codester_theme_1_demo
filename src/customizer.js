@@ -1220,6 +1220,18 @@ function pickSurpriseFonts(exclusions) {
   }
 }
 
+function resetCustomizerBodyScroll() {
+  const body = document.querySelector('#chr-customizer .cust-body')
+  if (!body) return
+  body.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+}
+
+function scheduleCustomizerBodyScrollReset() {
+  Alpine.nextTick(() => {
+    window.requestAnimationFrame(resetCustomizerBodyScroll)
+  })
+}
+
 Alpine.store('chr', {
   open: false,
   activeTab: 'era',
@@ -1311,7 +1323,9 @@ Alpine.store('chr', {
 
   setActiveTab(tab) {
     if (tab === 'download' && !this.downloadAvailable) return
+    if (this.activeTab === tab) return
     this.activeTab = tab
+    scheduleCustomizerBodyScrollReset()
   },
 
   getAvailableTabs() {
